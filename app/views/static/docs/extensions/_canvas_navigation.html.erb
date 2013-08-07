@@ -1,3 +1,73 @@
 <div class="header clearfix">
-  <h3 class="page-header">Canvas: Navigation</h3>
+  <h3 class="page-header">Canvas: Navigation Extension</h3>
+</div>
+
+<p>
+  In Canvas you can configure an LTI tool to have a link in the navigation for a course, account, or user.See Canvas documentation for more details <a href="https://canvas.instructure.com/doc/api/navigation_tools.html#account_navigation">more information</a>.
+</p>
+<p>
+  The examples are very basic, really just enough to get the point of the extension across. If you are interested in seeing more advanced or practical implementations, check out <a href="/index.html">the list of LTI apps on the home page</a>.
+</p>
+<hr>
+<h3>Course Navigation Demo</h3>
+<div class="row">
+  <span class="col-sm-8">
+    <p>
+        This is an example of a standard configuration for adding a link to
+        course navigation. This link is available to anyone with access to
+        the course. If it's configured at the account level, the link will
+        be added to all courses within that account. Permissions can be set
+        to determine which user types have access to the app, and whether
+        the app is enabled by default for all applicable courses, or if
+        it needs to be configured manually for each course.
+    </p>
+    <a class="label label-info" href="/config/course_navigation.xml">xml
+        configuration</a>
+    <a class="label" href="https://canvas.instructure.com/doc/api/navigation_tools.html#course_navigation">more
+        information</a>
+  </span>
+  <span class="col-sm-4">
+    <%= image_tag "course_navigation_example.png", class: "preview img-thumbnail" %>
+  </span>
+</div>
+<hr>
+<h3>Account Navigation Demo</h3>
+<div class="row">
+  <span class="col-sm-8">
+    <p>
+        This is an example of a standard configuration for adding a link to
+        account navigation. This link is available to anyone with access to
+        the account. The link will appear in the current account and any
+        sub-accounts of that account. Remember that app launches will send
+        all role types associated with a user, which in the case of
+        account-level links should always include at least the admin role,
+        <code>urn:lti:instrole:ims/lis/Administrator</code>.
+    </p>
+    <a class="label label-info" href="/config/account_navigation.xml">xml
+        configuration</a>
+    <a class="label" href="https://canvas.instructure.com/doc/api/navigation_tools.html#account_navigation">more
+        information</a>
+  </span>
+  <span class="col-sm-4">
+  </span>
+</div>
+<hr>
+<h3>User Navigation Demo</h3>
+<div class="row">
+  <span class="col-sm-8">
+      <p>
+          This is an example of a standard configuration for adding a link
+          to
+          user navigation. This link is available to anyone with access to
+          the institution, and will appear as a navigation item whey they
+          click their profile or user information link.
+      </p>
+    <a class="label label-info" href="/config/user_navigation.xml">xml
+        configuration</a>
+    <a class="label" href="https://canvas.instructure.com/doc/api/navigation_tools.html#user_navigation">more
+        information</a>
+  </span>
+  <span class="col-sm-4">
+    <%= image_tag "user_navigation_example.png", class: "preview img-thumbnail" %>
+  </span>
 </div>

@@ -1,3 +1,67 @@
 <div class="header clearfix">
   <h3 class="page-header">Contributing Reviews</h3>
 </div>
+
+<p>
+  Allows adding ratings and reviews from a registered platform or app. Required/optional fields are listed below. For more information on registering an app, please <a href="https://twitter.com/whitmer">contact @whitmer</a>.
+</p>
+
+<code>POST /api/v1/apps/:app_id/reviews</code>
+<pre>{
+"user_avatar_url": "http://example.com/user/avatar/50x50.png",
+"source_name": "Human-readable name of platform/app where user posted",
+// Same as above
+}</pre>
+
+<h3>Required/optional parameters</h3>
+<table class="table table-bordered table-striped">
+  <tbody><tr>
+    <td><code>access_token</code></td>
+    <td><span class="label label-success">required</span></td>
+    <td>This is the access token provided by this site to
+    the platform/app after registration. This should be kept secret
+    (i.e. server-side only -- don't put it in your JavaScript), 
+    otherwise anyone can post comments and ratings as if they were
+    your platform/app.
+    </td>
+  </tr>
+  <tr>
+    <td><code>rating</code></td>
+    <td><span class="label label-success">required</span></td>
+    <td>This is an integer from 1 to 5.
+    </td>
+  </tr>
+  <tr>
+    <td><code>user_name</code></td>
+    <td><span class="label label-success">required</span></td>
+    <td>This is the human-readable name for the commenting
+    user within
+    your platform/app.
+    </td>
+  </tr>
+  <tr>
+    <td><code>user_id</code></td>
+    <td><span class="label label-success">required</span></td>
+    <td>This is the unique identifier for the user.
+    </td>
+  </tr>
+  <tr>
+    <td><code>user_url</code></td>
+    <td><span class="label">optional</span></td>
+    <td>This is the public profile URL for the user, if any.
+    </td>
+  </tr>
+  <tr>
+    <td><code>user_avatar_url</code></td>
+    <td><span class="label">optional</span></td>
+    <td>This is the URL to a public avatar image for the
+    commenting user, if any.
+    </td>
+  </tr>
+  <tr>
+    <td><code>comments</code></td>
+    <td><span class="label">optional</span></td>
+    <td>This is the plaintext comments provided by the user.
+    </td>
+  </tr>
+</tbody></table>

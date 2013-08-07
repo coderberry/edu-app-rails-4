@@ -21,8 +21,10 @@
     <div class="nav-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav pull-right">
         <li<% if controller_name == 'lti_apps' %> class="active"<% end %>><%= link_to "Apps", "#" %></li>
-        <li<% if controller_name == 'tutorials' %> class="active"<% end %>><%= link_to "Tutorials", "#" %></li>
-        <li<% if ['api','basics','extensions'].include? controller_name %> class="active"<% end %>><%= link_to "Docs", "#" %></li>
+        <li<% if controller_name == 'static' && action_name == 'tutorials' %> class="active"<% end %>>
+          <%= link_to "Tutorials", tutorials_path("canvas") %></li>
+        <li<% if controller_name == 'static' && action_name == 'docs' %> class="active"<% end %>>
+          <%= link_to "Docs", docs_path(section: "basics", page: "index") %></li>
         <li<% if controller_name == 'na' %> class="active"<% end %>><a href="#">Submit</a></li>
 
         <% if current_user %>

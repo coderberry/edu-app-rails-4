@@ -1,5 +1,27 @@
-#docs-nav {
+#alt-nav {
+  li {
+    a {
+      padding: 2px 2px 2px 15px;
+    }
+    h4 {
+      font-weight: bold;
+
+      a {
+        font-size: 0.8em;
+        text-transform: uppercase;
+        color: #000;
+        padding: 0px;
+        margin: 0px;
+      }
+    }
+  }
+}
+ul.sub-nav {
   li.active {
-    color: red;
+    border-left: 2px solid $brand-danger;
+    a {
+      padding-left: 13px;
+      color: $brand-danger;
+    }
   }
 }

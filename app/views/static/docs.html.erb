@@ -1,62 +1,66 @@
 <div class="row padded">
+  <div class="col-sm-9">
+    <div class="main-content" style="min-height: 550px;">
+      <%= render partial: "/static/docs/#{@section}/#{@page}" %>
+    </div>
+  </div>
   <div class="col-sm-3">
-    <ul class="nav" id="docs-nav">
+    <ul class="nav" id="alt-nav">
       
-      <li<% if @section == "basics" %> class="active"<% end %>><%= link_to "Basics", docs_path("basics", "index") %>
-        <ul class="nav">
-          <li<% if @page == "index" %> class="active"<% end %>>
+      <li class="<% if @section == "basics" %>active<% end %>">
+        <h4><%= link_to "Basics", docs_path("basics", "index") %></h4>
+        <ul class="nav sub-nav">
+          <li<% if @section == "basics" && @page == "index" %> class="active"<% end %>>
             <%= link_to "Introduction", docs_path({section: "basics", page: "index"}) %></li>
-          <li<% if @page == "building_an_lti_app" %> class="active"<% end %>>
+          <li<% if @section == "basics" && @page == "building_an_lti_app" %> class="active"<% end %>>
             <%= link_to "Building an LTI App", docs_path({section: "basics", page: "building_an_lti_app"}) %></li>
-          <li<% if @page == "post_parameters" %> class="active"<% end %>>
+          <li<% if @section == "basics" && @page == "post_parameters" %> class="active"<% end %>>
             <%= link_to "POST Parameters", docs_path({section: "basics", page: "post_parameters"}) %></li>
-          <li<% if @page == "other_resources" %> class="active"<% end %>>
+          <li<% if @section == "basics" && @page == "other_resources" %> class="active"<% end %>>
             <%= link_to "Other Resources", docs_path({section: "basics", page: "other_resources"}) %></li>
         </ul>
       </li>
 
-      <li<% if @section == "extensions" %> class="active"<% end %>><%= link_to "Extensions", docs_path("extensions", "index") %>
-        <ul class="nav">
-          <li<% if @page == "index" %> class="active"<% end %>>
+      <li class="<% if @section == "extensions" %>active<% end %>">
+        <h4><%= link_to "Extensions", docs_path("extensions", "index") %></h4>
+        <ul class="nav sub-nav">
+          <li<% if @section == "extensions" && @page == "index" %> class="active"<% end %>>
             <%= link_to "Introduction", docs_path({section: "extensions", page: "index"}) %></li>
-          <li<% if @page == "content" %> class="active"<% end %>>
+          <li<% if @section == "extensions" && @page == "content" %> class="active"<% end %>>
             <%= link_to "Content", docs_path({section: "extensions", page: "content"}) %></li>
-          <li<% if @page == "result_data" %> class="active"<% end %>>
+          <li<% if @section == "extensions" && @page == "result_data" %> class="active"<% end %>>
             <%= link_to "Result Data", docs_path({section: "extensions", page: "result_data"}) %></li>
-          <li<% if @page == "canvas_navigation" %> class="active"<% end %>>
+          <li<% if @section == "extensions" && @page == "canvas_navigation" %> class="active"<% end %>>
             <%= link_to "Canvas: Navigation", docs_path({section: "extensions", page: "canvas_navigation"}) %></li>
-          <li<% if @page == "canvas_wysiwyg" %> class="active"<% end %>>
+          <li<% if @section == "extensions" && @page == "canvas_wysiwyg" %> class="active"<% end %>>
             <%= link_to "Canvas: WYSIWYG", docs_path({section: "extensions", page: "canvas_wysiwyg"}) %></li>
-          <li<% if @page == "canvas_link_selection" %> class="active"<% end %>>
+          <li<% if @section == "extensions" && @page == "canvas_link_selection" %> class="active"<% end %>>
             <%= link_to "Canvas: Link Selection", docs_path({section: "extensions", page: "canvas_link_selection"}) %></li>
-          <li<% if @page == "canvas_homework_submission" %> class="active"<% end %>>
+          <li<% if @section == "extensions" && @page == "canvas_homework_submission" %> class="active"<% end %>>
             <%= link_to "Canvas: Homework Submission", docs_path({section: "extensions", page: "canvas_homework_submission"}) %></li>
         </ul>
       </li>
 
-      <li<% if @section == "api" %> class="active"<% end %>><%= link_to "API", docs_path("api", "index") %>
-        <ul class="nav">
-          <li<% if @page == "index" %> class="active"<% end %>>
+      <li class="<% if @section == "api" %>active<% end %>">
+        <h4><%= link_to "API", docs_path("api", "index") %></h4>
+
+        <ul class="nav sub-nav">
+          <li<% if @section == "api" && @page == "index" %> class="active"<% end %>>
             <%= link_to "Introduction", docs_path({section: "api", page: "index"}) %></li>
-          <li<% if @page == "app_list" %> class="active"<% end %>>
+          <li<% if @section == "api" && @page == "app_list" %> class="active"<% end %>>
             <%= link_to "App List", docs_path({section: "api", page: "app_list"}) %></li>
-          <li<% if @page == "app_details" %> class="active"<% end %>>
+          <li<% if @section == "api" && @page == "app_details" %> class="active"<% end %>>
             <%= link_to "App Details", docs_path({section: "api", page: "app_details"}) %></li>
-          <li<% if @page == "app_reviews" %> class="active"<% end %>>
+          <li<% if @section == "api" && @page == "app_reviews" %> class="active"<% end %>>
             <%= link_to "App Reviews", docs_path({section: "api", page: "app_reviews"}) %></li>
-          <li<% if @page == "contributing_reviews" %> class="active"<% end %>>
+          <li<% if @section == "api" && @page == "contributing_reviews" %> class="active"<% end %>>
             <%= link_to "Contributing Reviews", docs_path({section: "api", page: "contributing_reviews"}) %></li>
-          <li<% if @page == "retrieving_reviews" %> class="active"<% end %>>
+          <li<% if @section == "api" && @page == "retrieving_reviews" %> class="active"<% end %>>
             <%= link_to "Retrieving Reviews", docs_path({section: "api", page: "retrieving_reviews"}) %></li>
         </ul>
       </li>
 
     </ul>
-  </div>
-  <div class="col-sm-9">
-    <div class="main-content">
-      <%= render partial: "/static/docs/#{@section}/#{@page}" %>
-    </div>
   </div>
 </div>
 
