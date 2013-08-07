@@ -1,0 +1,3 @@
+<% user.social_links.each do |provider, data| %>
+  <a href="<%= data[:url] %>" target="_blank"><i class="<%= data[:icon] %> <%= provider %> icon-large"></i></a>
+<% end %>

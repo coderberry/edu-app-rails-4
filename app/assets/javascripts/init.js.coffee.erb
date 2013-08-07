@@ -1,0 +1,9 @@
+$ ->
+  flash = $('#flash-view #message')
+  if flash
+    flash.delay(3000).fadeToggle(1000)
+
+  clip = new ZeroClipboard($(".copy-button"), { moviePath: "<%= asset_path('ZeroClipboard.swf') %>" })
+
+  clip.on 'complete', (client, args) ->
+    alert("Copied text to clipboard:\n\n" + args.text );

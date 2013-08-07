@@ -1,0 +1,2 @@
+module Settings::MembershipsHelper
+end

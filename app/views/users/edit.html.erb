@@ -1,0 +1,51 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <h3 class="page-header">Profile</h3>
+  </div>
+
+  <%= form_for @user do |f| %>
+    <div class="form-group <% if @user.errors.include? :name %>has-error<% end %>">
+      <%= f.label :name, "Full Name", class: "control-label" %>
+      <%= f.text_field :name, placeholder: "Full Name", class: "form-control" %>
+      <% if @user.errors.include? :name %>
+        <small class="help-block"><%= @user.errors.full_messages_for(:name).first %></small>
+      <% end %>
+    </div>
+
+    <div class="form-group <% if @user.errors.include? :url %>has-error<% end %>">
+      <%= f.label :url, "Website URL", class: "control-label" %>
+      <%= f.text_field :url, placeholder: "http://", class: "form-control" %>
+      <% if @user.errors.include? :url %>
+        <small class="help-block"><%= @user.errors.full_messages_for(:url).first %></small>
+      <% end %>
+    </div>
+
+    <% if @user.authentications.present? %>
+      <div class="form-group">
+        <div style="margin-bottom: 10px;">Which avatar would you like to use?</div>
+        <div class="row">
+          <% @user.authentications.each do |auth| %>
+            <div class="col-1 text-center">
+              <label>
+                <img src="<%= auth.data['image'] %>" class="img-circle" style="width: 50px; display: block;" />
+                <input type="radio" name="user[avatar_url]" value="<%= auth.data['image'] %>" <% if @user.avatar_url == auth.data['image'] %>checked<% end %> />
+              </label>
+            </div>
+          <% end %>
+          <div class="col-1 text-center">
+            <label>
+              <img src="<%= @user.gravatar_url(s: 50) %>" class="img-circle" style="width: 50px; display: block;" />
+              <input type="radio" name="user[avatar_url]" value="<%= @user.gravatar_url(s: 50) %>" <% if @user.avatar_url == @user.gravatar_url(s: 50) %>checked<% end %>/>
+            </label>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="control-group clearfix">
+      <div class="controls">
+        <button class="btn btn-primary pull-right" type="submit">Save Changes</button>
+      </div>
+    </div>
+  <% end %>
+</div>

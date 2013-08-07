@@ -1,0 +1,2 @@
+module Settings::OrganizationsHelper
+end

@@ -1,0 +1,16 @@
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  database: ea_development
+  pool: 5
+  username: postgres
+  password:
+
+test:
+  <<: *default
+  database: ea_test
+
+production:
+  <<: *default
+  database: ea_production

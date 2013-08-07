@@ -1,0 +1,27 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <%= link_to raw("<i class='icon-plus'></i> Add New Organization"), new_settings_membership_path, class: "btn btn-link pull-right" %>
+    <h3 class="page-header">Organizations</h3>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th># Members</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @memberships.each do |membership| %>
+      <tr>
+        <td><%= link_to membership.organization.name, [:settings, membership] %></td>
+        <td><%= membership.is_admin? ? "Administrator" : "Member" %></td>
+        <td><%= membership.organization.memberships.count %></td>
+        <td><%= link_to raw("<i class='icon-unlock-alt'></i> Leave"), "#", method: :delete, class: "btn btn-danger btn-xs pull-right" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

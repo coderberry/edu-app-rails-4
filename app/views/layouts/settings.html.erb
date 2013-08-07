@@ -1,0 +1,17 @@
+<% content_for :content do %>
+  <div class="row padded">
+    <div class="col-sm-3">
+      <ul class="nav nav-pills nav-stacked">
+        <%= nav_link "Profile", edit_profile_path %>
+        <%= nav_link "Account Settings", edit_password_path %>
+        <%= nav_link "Linked Accounts", settings_authentications_path %>
+        <li<% if ["memberships"].include? controller_name %> class="active"<% end %>><%= link_to "Organizations", settings_memberships_path %></li>
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

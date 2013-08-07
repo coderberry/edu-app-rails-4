@@ -1,0 +1,23 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <h3 class="page-header">Organizations</h3>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @organizations.each do |organization| %>
+      <tr>
+        <td><%= organization.name %></td>
+        <td><%= link_to raw("<i class='icon-unlock-alt'></i> Leave"), "#", method: :delete, class: "btn btn-danger btn-xs pull-right" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-8 col-lg-6 col-sm-offset-2 col-lg-offset-3">
+    <h2 class="text-center padded">Login</h2>
+
+    <div class="row">
+      <div class="col-6">
+        <%= link_to raw("<i class='icon-twitter icon-large'></i> Login with Twitter"), "/auth/twitter", class: "btn btn-lg btn-info btn-block" %>
+        <%= link_to raw("<i class='icon-github icon-large'></i> Login with Github"), "/auth/github", class: "btn btn-lg btn-info btn-block" %>
+      </div>
+      <div class="col-6">
+        <%= link_to raw("<i class='icon-facebook icon-large'></i> Login with Facebook"), "/auth/facebook", class: "btn btn-lg btn-info btn-block" %>
+        <%= link_to raw("<i class='icon-google-plus icon-large'></i> Login with Google"), "/auth/google_oauth2", class: "btn btn-lg btn-info btn-block" %>
+      </div>
+    </div>
+
+    <h5 class="text-center" style="margin-top: 30px;">or using your email and password below</h5>
+
+    <%= form_tag sessions_path, class: "chunky-form" do %>
+      <p>
+        <%= text_field_tag :email, "", class: "form-control input-lg", placeholder: "Email Address" %>
+      </p>
+      <p>
+        <%= password_field_tag :password, "", class: "form-control input-lg", placeholder: "Password" %>
+      </p>
+      <p>
+        <button type="submit" class="btn btn-lg btn-info pull-right">Login</button>
+        Not registered yet? <%= link_to "Create an account", new_user_path %>
+      </p>
+    <% end %>
+  </div>
+</div>
