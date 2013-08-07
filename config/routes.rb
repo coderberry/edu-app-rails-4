@@ -1,4 +1,12 @@
 EduApps::Application.routes.draw do
+  get "static/page"
+
+  get "/tutorials/:page" => "static#tutorials", as: :tutorials
+  get "/tutorials" => "static#tutorials"
+  get "/docs/:section/:page" => "static#docs", as: :docs
+  get "/docs" => "static#docs"
+
+
   get "/auth/:provider/callback" => "sessions#create"
   get "/login" => "sessions#new", as: :login
   get "/logout" => "sessions#destroy", as: :logout

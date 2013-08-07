@@ -1,0 +1,230 @@
+<div class="header clearfix">
+  <h3 class="page-header">POST Parameters</h3>
+</div>
+
+<p>
+  These are all of the known values that can be passed from the <span class="label label-warning">consumer</span> to the <span class="label label-info">provider</span> when a user clicks a link to launch the app.
+</p>
+<h3>Most Common Parameters</h3>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>lti_message_type</code></td>
+      <td><span class="label label-success">required</span></td>
+      <td>set to <code>basic-lti-launch-request</code></td>
+    </tr>
+    <tr>
+      <td><code>lti_version</code></td>
+      <td><span class="label label-success">required</span></td>
+      <td>set to <code>LTI-1p0</code></td>
+    </tr>
+    <tr>
+      <td><code>resource_link_id</code></td>
+      <td><span class="label label-success">required</span></td>
+      <td>
+      unique id referencing the link, or "placement", of the app in the
+      <span class="label label-warning">consumer</span>. If an app was added twice
+      to the same class, each placement would send a different id, and
+      should be considered a unique "launch". For example, if the
+      <span class="label label-info">provider</span> were a chat room
+      app, then each <code>resource_link_id</code> would be a separate
+      room.
+      </td>
+    </tr>
+    <tr>
+      <td><code>user_id</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>
+      unique id referencing the user accessing the
+      app. <span class="label label-info">providers</span> should
+      consider this id an opaque identifier.
+      </td>
+    </tr>
+    <tr>
+      <td><code>user_image</code></td>
+      <td><span class="label">optional</span></td>
+      <td>if provided, this would be a url to an avatar image for
+      the current user. We recommend that these urls be 50px wide
+      and tall, and don't expire for at least 3 months.</td>
+    </tr>
+    <tr>
+      <td><code>roles</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>
+        <p>there's a long list of possible roles, but here's the
+        most common ones:</p>
+        <ul>
+          <li><code>Learner</code></li>
+          <li><code>Instructor</code></li>
+          <li><code>ContentDeveloper</code></li>
+          <li><code>urn:lti:instrole:ims/lis/Observer</code></li>
+          <li><code>urn:lti:instrole:ims/lis/Administrator</code></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>lis_person_name_full</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>Full name of the user accessing the app. This won't be sent if apps are configured to launch users anonymously or with minimal information.</td>
+    </tr>
+    <tr>
+      <td><code>lis_outcome_service_url</code></td>
+      <td><span class="label">optional</span></td>
+      <td>If this url is passed to the <span class="label label-info">provider</span> then it means the app is authorized to send grade values back to the <span class="label label-warning">consumer</span> gradebook for any students that access the app. There's more information available in the <a href="https://canvas.instructure.com/doc/api/assignment_tools.html">Canvas API documentation</a>.</td>
+    </tr>
+    <tr>
+      <td><code>selection_directive</code></td>
+      <td><span class="label">optional</span></td>
+      <td>If this parameter is passed to the <span class="label label-info">provider</span> then it means the <span class="label label-warning">consumer</span> is expecting the <span class="label label-info">provider</span> to return some piece of information such as a url, an html snippet, etc. There's more information available in the <a href="https://canvas.instructure.com/doc/api/tools_intro.html">Canvas API documentation</a>.</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Additional Parameters</h3>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>lis_person_name_given</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>First name of the user accessing the app. This won't be sent if apps are configured to launch users anonymously or with minimal information.</td>
+    </tr>
+    <tr>
+      <td><code>lis_person_name_family</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>Last name of the user accessing the app. This won't be sent if apps are configured to launch users anonymously or with minimal information.</td>
+    </tr>
+    <tr>
+      <td><code>lis_person_contact_email_primary</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>Email address of the user accessing the app. This won't be sent if apps are configured to launch users anonymously or with minimal information.</td>
+    </tr>
+    <tr>
+      <td><code>resource_link_title</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>name of the link that launched the app</td>
+    </tr>
+    <tr>
+      <td><code>resource_link_description</code></td>
+      <td><span class="label">optional</span></td>
+      <td>description of the link that launched the app</td>
+    </tr>
+    <tr>
+      <td><code>context_id</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>unique id of the course from which the user is accessing the app. If a app were added multiple times to the same course, this id would be the same regardless of which link was used to launch the app.</td>
+    </tr>
+    <tr>
+      <td><code>context_type</code></td>
+      <td><span class="label">optional</span></td>
+      <td>this is the type of context from which the user is accessing the app. If it's provided, this will most likely be <code>CourseSection</code></td>
+    </tr>
+    <tr>
+      <td><code>context_title</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>name of the course from which the user is accessing the app</td>
+    </tr>
+    <tr>
+      <td><code>context_label</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>short name or course code of the course from which the user is accessing the app</td>
+    </tr>
+    <tr>
+      <td><code>launch_presentation_locale</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>locale (i.e. <code>en-US</code>) for the user accessing the app</td>
+    </tr>
+    <tr>
+      <td><code>launch_presentation_document_target</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>if provided, this value will be either <code<window< code=""> (if the app has been launched in a new window) or <code>iframe</code>.</code<window<></td>
+    </tr>
+    <tr>
+      <td><code>launch_presentation_css_url</code></td>
+      <td><span class="label">optional</span></td>
+      <td>css file that could be included by the <span class="label label-info">provider</span> to help its styling better match the <span class="label label-warning">consumer</span> styling. This isn't well-documented, so I typically pretend it doesn't exist.</td>
+    </tr>
+    <tr>
+      <td><code>launch_presentation_width</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>width of the frame or window in which the app is launched. This is only a starting point, since the frame could change if the user resizes their window.</td>
+    </tr>
+    <tr>
+      <td><code>launch_presentation_height</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>height of the frame or window in which the app is launched. This is only a starting point, since the frame could change if the user resizes their window.</td>
+    </tr>
+    <tr>
+      <td><code>launch_presentation_return_url</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>
+        <p>url to send the user to when they're finished with the <span class="label label-info">provider</span>. The <span class="label label-info">provider</span> can optionally send one of four values as query parameters appended to the url:</p>
+        <ul>
+          <li><code>lti_errormsg</code> - error message to show to the user</li>
+          <li><code>lti_errorlog</code> - error message for the <span class="label label-warning">consumer</span> to optionally store without showing the user</li>
+          <li><code>lti_msg</code> - success message to show to the user</li>
+          <li><code>lti_log</code> - success message for the <span class="label label-warning">consumer</span> to optionally store without showing the user</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td><code>tool_consumer_info_product_family_code</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>product name for the <span class="label label-warning">consumer</span>. This could
+      be something like <code>moodle</code>, <code>sakai</code> or <code>canvas</code></td>
+    </tr>
+    <tr>
+      <td><code>tool_consumer_info_version</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>version number of the <span class="label label-warning">consumer</span> product.</td>
+    </tr>
+    <tr>
+      <td><code>tool_consumer_instance_guid</code></td>
+      <td><span class="label">strongly recommended</span></td>
+      <td>unique id referencing the instance from which the user is accessing the app. This mostly makes sense only in a multi-tenant environment.</td>
+    </tr>
+    <tr>
+      <td><code>tool_consumer_instance_name</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>name of the instance from which the user is accessing the app.</td>
+    </tr>
+    <tr>
+      <td><code>tool_consumer_instance_description</code></td>
+      <td><span class="label">optional</span></td>
+      <td>description of the instance from which the user is accessing the app.</td>
+    </tr>
+    <tr>
+      <td><code>tool_consumer_instance_url</code></td>
+      <td><span class="label">optional</span></td>
+      <td>url of the instance from which the user is accessing the app.</td>
+    </tr>
+    <tr>
+      <td><code>tool_consumer_instance_contact_email</code></td>
+      <td><span class="label">recommended</span></td>
+      <td>email address of a contact at the instance from which the user is accessing the app.</td>
+    </tr>
+    <tr>
+      <td><code>custom_*</code></td>
+      <td><span class="label">optional</span></td>
+      <td>
+        any number of custom values can optionally be sent across. The key
+        for any custom values should start with <code>custom_</code> and should
+        be in snake case. Custom values can optionally be defined on the 
+        <span class="label label-warning">consumer</span> side as part of the app configuration
+        process.
+      </td>
+    </tr>
+  </tbody>
+</table>

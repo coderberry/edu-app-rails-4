@@ -1,0 +1,17 @@
+<div class="row padded">
+  <div class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li<% if @page == "canvas" %> class="active"<% end %>><%= link_to "Canvas", tutorials_path("canvas") %></li>
+      <li<% if @page == "moodle" %> class="active"<% end %>><%= link_to "Moodle", tutorials_path("moodle") %></li>
+      <li<% if @page == "blackboard" %> class="active"<% end %>><%= link_to "Blackboard", tutorials_path("blackboard") %></li>
+      <li<% if @page == "sakai" %> class="active"<% end %>><%= link_to "Sakai", tutorials_path("sakai") %></li>
+      <li<% if @page == "desire2learn" %> class="active"<% end %>><%= link_to "Desire2Learn", tutorials_path("desire2learn") %></li>
+    </ul>
+  </div>
+  <div class="col-sm-9">
+    <div class="main-content">
+      <%= render partial: "/static/tutorials/#{@page}" %>
+    </div>
+  </div>
+</div>
+
