@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Welcome #{@user.name.split.first}!"
     else
-      flash.now[:error] = @user.errors.full_messages.join(', ')
+      flash.now[:error] = "Please fix the errors below and try again"
       render action: 'new'
     end
   end

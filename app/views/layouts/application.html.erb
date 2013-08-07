@@ -28,7 +28,7 @@
         <li<% if controller_name == 'na' %> class="active"<% end %>><a href="#">Submit</a></li>
 
         <% if current_user %>
-          <li<% if ['profile'].include? controller_name %> class="active"<% end %>><%= link_to "Settings", edit_profile_path %></li>
+          <li<% if request.env["REQUEST_PATH"] =~ /\/settings\// %> class="active"<% end %>><%= link_to "Settings", edit_profile_path %></li>
           <li><%= link_to "Logout", logout_path %></li>
         <% else %>
           <li<% if controller_name == 'session' %> class="active"<% end %>><%= link_to "Login", new_session_path %></li>
