@@ -1,0 +1,31 @@
+{
+  "tags": [
+    { "short_name": "editor_button",       "name": "Editor Button",       "context": "extension" },
+    { "short_name": "resource_selection",  "name": "Resource Selection",  "context": "extension" },
+    { "short_name": "course_nav",          "name": "Course Nav",          "context": "extension" },
+    { "short_name": "user_nav",            "name": "User Nav",            "context": "extension" },
+    { "short_name": "account_nav",         "name": "Account Nav",         "context": "extension" },
+    { "short_name": "homework_submission", "name": "Homework Submission", "context": "extension" },
+    { "short_name": "assessment",          "name": "Assessment",          "context": "category" },
+    { "short_name": "community",           "name": "Community",           "context": "category" },
+    { "short_name": "content",             "name": "Content",             "context": "category" },
+    { "short_name": "math",                "name": "Math",                "context": "category" },
+    { "short_name": "media",               "name": "Media",               "context": "category" },
+    { "short_name": "open_content",        "name": "Open Content",        "context": "category" },
+    { "short_name": "science",             "name": "Science",             "context": "category" },
+    { "short_name": "study_helps",         "name": "Study Helps",         "context": "category" },
+    { "short_name": "textbooks",           "name": "Textbooks/eBooks",    "context": "category" },
+    { "short_name": "web_20",              "name": "Web 2.0",             "context": "category" },
+    { "short_name": "free",                "name": "Completely Free",     "context": "category" },
+    { "short_name": "beta",                "name": "Beta",                "context": "category" },
+    { "short_name": "K-6",                 "name": "K-6th Grade",         "context": "education_level" },
+    { "short_name": "7-12",                "name": "7th-12th Grade",      "context": "education_level" },
+    { "short_name": "postsecondary",       "name": "Postsecondary",       "context": "education_level" },
+    { "short_name": "public",              "name": "Public",              "context": "privacy_level" },
+    { "short_name": "name_only",           "name": "Name Only",           "context": "privacy_level" },
+    { "short_name": "email_only",          "name": "Email Only",          "context": "privacy_level" },
+    { "short_name": "anonymous",           "name": "Anonymous",           "context": "privacy_level" },
+    { "short_name": "open_launch",         "name": "Open Launch",         "context": "app_type" },
+    { "short_name": "data",                "name": "Data",                "context": "app_type" }
+  ]
+}

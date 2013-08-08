@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808192010) do
+ActiveRecord::Schema.define(version: 20130808204711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,40 @@ ActiveRecord::Schema.define(version: 20130808192010) do
     t.datetime "updated_at"
   end
 
+  create_table "lti_apps", force: true do |t|
+    t.integer  "user_id"
+    t.string   "short_name",                                            null: false
+    t.string   "name",                                                  null: false
+    t.string   "short_description"
+    t.text     "description"
+    t.string   "status",                            default: "pending", null: false
+    t.text     "testing_instructions"
+    t.string   "support_url",          limit: 1000
+    t.string   "author_name"
+    t.boolean  "is_public",                         default: false
+    t.string   "app_type"
+    t.string   "ims_cert_url",         limit: 1000
+    t.string   "preview_url",          limit: 1000
+    t.string   "config_url",           limit: 1000
+    t.string   "data_url",             limit: 1000
+    t.string   "banner_image_url",     limit: 1000
+    t.string   "logo_image_url",       limit: 1000
+    t.string   "icon_image_url",       limit: 1000
+    t.json     "cartridge"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lti_apps", ["short_name"], name: "index_lti_apps_on_short_name", unique: true, using: :btree
+  add_index "lti_apps", ["user_id"], name: "index_lti_apps_on_user_id", using: :btree
+
+  create_table "lti_apps_tags", force: true do |t|
+    t.integer "lti_app_id"
+    t.integer "tag_id"
+  end
+
+  add_index "lti_apps_tags", ["lti_app_id", "tag_id"], name: "index_lti_apps_tags", unique: true, using: :btree
+
   create_table "memberships", force: true do |t|
     t.integer  "organization_id"
     t.integer  "user_id"
@@ -55,6 +89,30 @@ ActiveRecord::Schema.define(version: 20130808192010) do
     t.boolean  "is_list_apps_without_approval",              default: false
     t.string   "url",                           limit: 1000
   end
+
+  create_table "reviews", force: true do |t|
+    t.integer  "membership_id"
+    t.integer  "user_id"
+    t.integer  "lti_app_id"
+    t.integer  "rating"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["lti_app_id"], name: "index_reviews_on_lti_app_id", using: :btree
+  add_index "reviews", ["membership_id"], name: "index_reviews_on_membership_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "short_name"
+    t.string   "name"
+    t.string   "context"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags", ["short_name"], name: "index_tags_on_short_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -1,0 +1,23 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <h3 class="page-header">Applications</h3>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @lti_apps.each do |lti_app| %>
+        <tr>
+          <td><%= link_to lti_app.name, lti_app_path(lti_app.short_name) %></td>
+          <td><%= lti_app.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

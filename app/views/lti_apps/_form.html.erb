@@ -1,0 +1,89 @@
+<%= form_for(@lti_app) do |f| %>
+  <% if @lti_app.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lti_app.errors.count, "error") %> prohibited this lti_app from being saved:</h2>
+
+      <ul>
+      <% @lti_app.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.text_field :user %>
+  </div>
+  <div class="field">
+    <%= f.label :short_name %><br>
+    <%= f.text_field :short_name %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :testing_instructions %><br>
+    <%= f.text_area :testing_instructions %>
+  </div>
+  <div class="field">
+    <%= f.label :support_url %><br>
+    <%= f.text_field :support_url %>
+  </div>
+  <div class="field">
+    <%= f.label :author_name %><br>
+    <%= f.text_field :author_name %>
+  </div>
+  <div class="field">
+    <%= f.label :is_public %><br>
+    <%= f.check_box :is_public %>
+  </div>
+  <div class="field">
+    <%= f.label :app_type %><br>
+    <%= f.text_field :app_type %>
+  </div>
+  <div class="field">
+    <%= f.label :ims_cert_url %><br>
+    <%= f.text_field :ims_cert_url %>
+  </div>
+  <div class="field">
+    <%= f.label :preview_url %><br>
+    <%= f.text_field :preview_url %>
+  </div>
+  <div class="field">
+    <%= f.label :config_url %><br>
+    <%= f.text_field :config_url %>
+  </div>
+  <div class="field">
+    <%= f.label :data_url %><br>
+    <%= f.text_field :data_url %>
+  </div>
+  <div class="field">
+    <%= f.label :cartridge %><br>
+    <%= f.text_field :cartridge %>
+  </div>
+  <div class="field">
+    <%= f.label :banner_image_url %><br>
+    <%= f.text_field :banner_image_url %>
+  </div>
+  <div class="field">
+    <%= f.label :logo_image_url %><br>
+    <%= f.text_field :logo_image_url %>
+  </div>
+  <div class="field">
+    <%= f.label :short_description %><br>
+    <%= f.text_field :short_description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

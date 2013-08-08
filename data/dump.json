@@ -4941,7 +4941,7 @@
     },
     {
       "name": "NBC Learn",
-      "id": "",
+      "id": "nbc_learn",
       "categories": [
         "Content",
         "Math",
@@ -4987,19 +4987,19 @@
       "id": 1,
       "username": "@whitmer",
       "apps": "any",
-      "organization_id": 1,
+      "organization_id": 1
     },
     {
       "id": 3,
       "username": "@wbhumphrey",
       "apps": "any",
-      "organization_id": 1,
+      "organization_id": 1
     },
     {
       "id": 4,
       "username": "@mikezack",
       "apps": "any",
-      "organization_id": 1,
+      "organization_id": 1
     },
     {
       "id": 7,
@@ -5045,19 +5045,19 @@
       "id": 16,
       "username": "@cavneb",
       "apps": "any",
-      "organization_id": 1,
+      "organization_id": 1
     },
     {
       "id": 17,
       "username": "@jstein",
       "apps": "any",
-      "organization_id": 1,
+      "organization_id": 1
     },
     {
       "id": 18,
       "username": "@jbuckh",
       "apps": "any",
-      "organization_id": 1,
+      "organization_id": 1
     },
     {
       "id": 19,
@@ -5073,7 +5073,7 @@
       "id": 21,
       "username": "@kdlloyd01",
       "apps": "any",
-      "organization_id": 1,
+      "organization_id": 1
     },
     {
       "id": 22,

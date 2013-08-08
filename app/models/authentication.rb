@@ -2,7 +2,7 @@ class Authentication < ActiveRecord::Base
   # relationships .............................................................
   belongs_to :user
 
-  # scopes
+  # scopes ....................................................................
   scope :twitter,       -> { where( provider: "twitter") }
   scope :facebook,      -> { where( provider: "facebook") }
   scope :github,        -> { where( provider: "github") }

@@ -20,7 +20,7 @@
 
     <div class="nav-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav pull-right">
-        <li<% if controller_name == 'lti_apps' %> class="active"<% end %>><%= link_to "Apps", "#" %></li>
+        <li<% if controller_name == 'lti_apps' %> class="active"<% end %>><%= link_to "Apps", lti_apps_path %></li>
         <li<% if controller_name == 'static' && action_name == 'tutorials' %> class="active"<% end %>>
           <%= link_to "Tutorials", tutorials_path("canvas") %></li>
         <li<% if controller_name == 'static' && action_name == 'docs' %> class="active"<% end %>>
