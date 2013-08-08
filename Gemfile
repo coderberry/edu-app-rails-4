@@ -32,7 +32,8 @@ group :development do
 end
 
 group :test do
-   gem 'shoulda-matchers'
+   gem 'shoulda-matchers', git: 'git@github.com:thoughtbot/shoulda-matchers.git', branch: 'dp-rails-four'
+   gem 'capybara'
 end
 
 group :development, :test do
@@ -40,4 +41,5 @@ group :development, :test do
   gem 'pry-debugger'
   gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'guard-bundler'
 end

@@ -76,6 +76,6 @@ class Settings::MembershipsController < ApplicationController
   private
 
   def organization_params
-    params.require(:organization).permit(:name)
+    params.require(:organization).permit(:name, :is_list_anonymous_only, :is_list_apps_without_approval, :url)
   end
 end

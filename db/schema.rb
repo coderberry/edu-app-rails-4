@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130807160035) do
+ActiveRecord::Schema.define(version: 20130808192010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,16 +51,22 @@ ActiveRecord::Schema.define(version: 20130807160035) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_list_anonymous_only",                     default: false
+    t.boolean  "is_list_apps_without_approval",              default: false
+    t.string   "url",                           limit: 1000
   end
 
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.string   "avatar_url",      limit: 1000
-    t.string   "url",             limit: 1000
+    t.string   "avatar_url",       limit: 1000
+    t.string   "url",              limit: 1000
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "twitter_nickname"
   end
+
+  add_index "users", ["twitter_nickname"], name: "index_users_on_twitter_nickname", unique: true, using: :btree
 
 end

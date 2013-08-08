@@ -12,6 +12,26 @@
       <% end %>
     </div>
 
+    <div class="form-group <% if @organization.errors.include? :name %>has-error<% end %>">
+      <%= f.label :url, "Website", class: "control-label" %>
+      <%= f.text_field :url, placeholder: "http://", class: "form-control" %>
+      <% if @organization.errors.include? :url %>
+        <small class="help-block"><%= @organization.errors.full_messages_for(:url).first %></small>
+      <% end %>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :is_list_apps_without_approval %> List newly-added apps without explicit approval
+      </label>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :is_list_anonymous_only %> Restrict listing to only apps with privacy level "anonymous"
+      </label>
+    </div>
+
     <div class="control-group clearfix">
       <div class="controls">
         <button class="btn btn-primary pull-right" type="submit">Create Organization</button>

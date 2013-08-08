@@ -14,6 +14,6 @@ class Organization < ActiveRecord::Base
   end
 
   def current_api_key
-    api_keys.active.first
+    api_keys.active.first || api_keys.create
   end
 end
