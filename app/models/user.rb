@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
   has_many :api_keys, as: :tokenable
+  has_many :reviews, dependent: :destroy
 
   # security (i.e. attr_accessible) ...........................................
   attr_accessor :is_registering, :is_omniauthing, :force_require_email, :force_require_password
@@ -63,6 +64,41 @@ class User < ActiveRecord::Base
   def gravatar_url(options = {})
     options[:gravatar_id] = Digest::MD5.hexdigest(self.email)
     return "http://www.gravatar.com/avatar.php?" + options.to_param
+  end
+
+  def merge(user)
+    keys = []
+    self.as_json.each_pair{|k,v| keys << k if v == nil}
+    keys.delete('twitter_nickname')
+    self.update_attributes(user.as_json.slice(*keys)) if keys.count > 0
+
+    user.memberships.each do |m|
+      membership = self.memberships.find{|membership| m.organization == membership.organization}
+      if membership && !membership.is_admin && m.is_admin
+        membership.destroy!
+        m.update_attribute(:user, self)
+      elsif !membership
+        m.update_attribute(:user, self)
+      end
+    end
+
+    reviews = {}
+    self.reviews.each{|r| reviews[r.lti_app_id] = r}
+    user.reviews.each do |r|
+      if !reviews[r.lti_app_id] || reviews[r.lti_app_id].updated_at < r.updated_at
+        reviews[r.lti_app_id].destroy! if reviews[r.lti_app_id]
+        self.reviews << r
+      end
+    end
+
+    auths = {}
+    self.authentications.each{|a| auths[a.provider] = a}
+    user.authentications.each do |a|
+      self.authentications << a if !auths[a.provider]
+    end
+
+    user.reload
+    user.destroy!
   end
 
   # private instance methods ..................................................

@@ -14,20 +14,35 @@ class Authentication < ActiveRecord::Base
     self.data['image_url'] || nil
   end
 
-  def self.from_omniauth(auth, email=nil, user=nil)
-    where(auth.slice("provider", "uid")).first || create_from_omniauth(auth, email, user)
+  def self.from_omniauth(omniauth, email=nil, user=nil)
+    if auth = where(omniauth.slice("provider", "uid")).first
+      user.merge(auth.user) if user && auth.user != user
+      auth.user.update_attribute(:email, email) if email && auth.user.email == nil
+      auth.update_attribute(:data,  omniauth['info'].to_json)
+    else
+      auth = create_from_omniauth(omniauth, email, user)
+    end
+
+    # dedupe twitter users from the old app
+    if auth.provider == 'twitter' && old_user = User.where(twitter_nickname: omniauth["info"]["nickname"]).first
+      auth.user.merge(old_user)
+    end
+    auth
   end
 
-  def self.create_from_omniauth(auth, email=nil, user=nil)
-    user ||= User.where(email: email).first_or_create!(
+  def self.create_from_omniauth(omniauth, email=nil, user=nil)
+    user ||= User.where(email: email).first if email
+    user ||= User.create!(
       is_omniauthing: true,
-      name: auth["info"]["name"],
-      avatar_url: auth["info"]["image"])
+      name: omniauth["info"]["name"],
+      avatar_url: omniauth["info"]["image"],
+      email: email
+    )
 
     authentication = create!(
-      provider: auth["provider"],
-      uid: auth["uid"],
-      data: auth["info"].to_json)
+      provider: omniauth["provider"],
+      uid: omniauth["uid"],
+      data: omniauth["info"].to_json)
 
     user.authentications << authentication
     return authentication

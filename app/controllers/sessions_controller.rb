@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
   def create
     if params[:provider]
       email = parse_email(env["omniauth.auth"], params[:provider])
-      current_user.update_attribute(:email, email) if (current_user.present? && email.present?)
       authentication = Authentication.from_omniauth(env["omniauth.auth"], email, current_user)
 
       if current_user.present?
