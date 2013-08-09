@@ -1,4 +1,7 @@
 EduApps::Application.routes.draw do
+
+  get "/api/lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
+  
   resources :reviews
   resources :tags
   resources :lti_apps, path: '/apps'
@@ -30,7 +33,7 @@ EduApps::Application.routes.draw do
   resources :users
   resources :sessions
 
-  root "users#new"
+  root "lti_apps#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

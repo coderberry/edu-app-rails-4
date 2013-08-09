@@ -60,5 +60,22 @@
   </p>
 </footer>
 
+<% if Rails.env =~ /dev/ %>
+<ul class="responsive-utilities-test visible-on">
+  <li>
+    <span class="hidden-sm">Small</span>
+    <span class="visible-sm">✔ Small</span>
+  </li>
+  <li>
+    <span class="hidden-md">Medium</span>
+    <span class="visible-md">✔ Medium</span>
+  </li>
+  <li>
+    <span class="hidden-lg">Large</span>
+    <span class="visible-lg">✔ Large</span>
+  </li>
+</ul>
+<% end %>
+
 </body>
 </html>

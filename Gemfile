@@ -29,6 +29,7 @@ end
 group :development do
   gem 'guard-rspec'
   gem 'quiet_assets'
+  gem 'guard-embertools', '~> 0.2.1'
 end
 
 group :test do

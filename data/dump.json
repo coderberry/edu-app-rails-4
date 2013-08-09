@@ -30,7 +30,21 @@
       "added": "2012-03-27T00:00:00Z",
       "uses": 40,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/twitter/banner.png",
+      "logo_url": "/tools/twitter/logo.png",
+      "icon_url": "/tools/twitter/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/twitter/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/twitter/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=twitter"
     },
     {
       "name": "Public Collections",
@@ -64,7 +78,21 @@
       "added": "2012-02-20T00:00:00Z",
       "uses": 50,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/public_collections/banner.png",
+      "logo_url": "/tools/public_collections/logo.png",
+      "icon_url": "/tools/public_collections/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/public_collections/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html",
+        "height": 550
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=public_collections"
     },
     {
       "name": "Graph Builder",
@@ -95,7 +123,21 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 40,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 3.0,
+      "banner_url": "/tools/graph_builder/banner.png",
+      "logo_url": "/tools/graph_builder/logo.png",
+      "icon_url": "/tools/graph_builder/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/graph_builder/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/graph_builder/index.html",
+        "height": 770
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=graph_builder"
     },
     {
       "name": "OCW Search",
@@ -121,7 +163,21 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/ocw_search/banner.png",
+      "logo_url": "/tools/ocw_search/logo.png",
+      "icon_url": "/tools/ocw_search/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/ocw_search/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/ocw_search/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=ocw_search"
     },
     {
       "name": "Status.net",
@@ -158,7 +214,15 @@
       "added": "2012-05-04T00:00:00Z",
       "uses": null,
       "pending": null,
-      "author_name": "Learning Apps"
+      "author_name": "Learning Apps",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/status_net/banner.png",
+      "logo_url": "/tools/status_net/logo.png",
+      "icon_url": "/tools/status_net/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/status_net/config.xml"
     },
     {
       "name": "Question2Answer",
@@ -202,7 +266,15 @@
           "name": "Status.net",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 0,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/question2answer/banner.png",
+      "logo_url": "/tools/question2answer/logo.png",
+      "icon_url": "/tools/question2answer/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/question2answer/config.xml"
     },
     {
       "name": "Wikispaces Private Label",
@@ -239,7 +311,15 @@
       "added": "2012-03-21T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/wikispaces/banner.png",
+      "logo_url": "/tools/wikispaces/logo.png",
+      "icon_url": "/tools/wikispaces/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/wikispaces/config.xml"
     },
     {
       "name": "Wiktionary",
@@ -273,7 +353,21 @@
       "added": "2012-04-23T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/wiktionary/banner.png",
+      "logo_url": "/tools/wiktionary/logo.png",
+      "icon_url": "/tools/wiktionary/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/wiktionary/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/wiktionary/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=wiktionary"
     },
     {
       "name": "Mahara",
@@ -339,7 +433,15 @@
           "name": "Via Response",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/mahara/banner.png",
+      "logo_url": "/tools/mahara/logo.png",
+      "icon_url": "/tools/mahara/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/mahara/config.xml"
     },
     {
       "name": "WordPress",
@@ -382,7 +484,15 @@
       "added": "2012-05-04T00:00:00Z",
       "uses": 80,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/wordpress/banner.png",
+      "logo_url": "/tools/wordpress/logo.png",
+      "icon_url": "/tools/wordpress/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/wordpress/config.xml"
     },
     {
       "name": "Khan Academy",
@@ -417,7 +527,21 @@
       "added": "2012-01-13T00:00:00Z",
       "uses": 110,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 7,
+      "comments_count": 5,
+      "avg_rating": 3.57142857142857,
+      "banner_url": "/tools/khan_academy/banner.png",
+      "logo_url": "/tools/khan_academy/logo.png",
+      "icon_url": "/tools/khan_academy/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/khan_academy/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/khan_academy/index.html",
+        "height": 475
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=khan_academy"
     },
     {
       "name": "Piazza",
@@ -452,7 +576,15 @@
       "added": "2012-02-01T00:00:00Z",
       "uses": 50,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/piazza/banner.png",
+      "logo_url": "/tools/piazza/logo.png",
+      "icon_url": "/tools/piazza/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/piazza/config.xml"
     },
     {
       "name": "TED Ed",
@@ -485,7 +617,21 @@
       "added": "2012-03-13T00:00:00Z",
       "uses": 30,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/ted_ed/banner.png",
+      "logo_url": "/tools/ted_ed/logo.png",
+      "icon_url": "/tools/ted_ed/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/ted_ed/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/ted_ed/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=ted_ed"
     },
     {
       "name": "Mathalicious",
@@ -509,7 +655,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/mathalicious/banner.png",
+      "logo_url": "/tools/mathalicious/logo.png",
+      "icon_url": "/tools/mathalicious/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/mathalicious/config.xml",
+      "data_url": "/tools/mathalicious/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=mathalicious",
+        "height": 475
+      },
+      "open_launch_url": "/tools/mathalicious/index.html"
     },
     {
       "name": "Slideshare",
@@ -542,7 +707,21 @@
       "added": "2012-03-06T00:00:00Z",
       "uses": 10,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 4.5,
+      "banner_url": "/tools/slideshare/banner.png",
+      "logo_url": "/tools/slideshare/logo.png",
+      "icon_url": "/tools/slideshare/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/slideshare/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/slideshare/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=slideshare"
     },
     {
       "name": "TitanPad",
@@ -569,7 +748,15 @@
       "added": "2012-03-24T00:00:00Z",
       "uses": 10,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 4.0,
+      "banner_url": "/tools/titanpad/banner.png",
+      "logo_url": "/tools/titanpad/logo.png",
+      "icon_url": "/tools/titanpad/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/titanpad/config.xml"
     },
     {
       "name": "YouTube",
@@ -601,7 +788,21 @@
       "added": "2012-03-22T00:00:00Z",
       "uses": 120,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 3,
+      "comments_count": 2,
+      "avg_rating": 4.0,
+      "banner_url": "/tools/youtube/banner.png",
+      "logo_url": "/tools/youtube/logo.png",
+      "icon_url": "/tools/youtube/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/youtube/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/youtube/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=youtube"
     },
     {
       "name": "Quizlet Flash Cards",
@@ -634,7 +835,21 @@
       "added": "2012-02-11T00:00:00Z",
       "uses": 30,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/quizlet/banner.png",
+      "logo_url": "/tools/quizlet/logo.png",
+      "icon_url": "/tools/quizlet/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/quizlet/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/quizlet/index.html",
+        "height": 510
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=quizlet"
     },
     {
       "name": "Internet Archive",
@@ -667,7 +882,21 @@
       "added": "2012-03-30T00:00:00Z",
       "uses": 10,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 4.0,
+      "banner_url": "/tools/archive/banner.png",
+      "logo_url": "/tools/archive/logo.png",
+      "icon_url": "/tools/archive/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/archive/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/archive/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=archive"
     },
     {
       "name": "CK-12",
@@ -704,7 +933,17 @@
       "added": "2012-05-16T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/ck12/banner.png",
+      "logo_url": "/tools/ck12/logo.png",
+      "icon_url": "/tools/ck12/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/ck12/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/ck12/index.html"
     },
     {
       "name": "McGraw Hill Tegrity",
@@ -734,7 +973,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 40,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/tegrity/banner.png",
+      "logo_url": "/tools/tegrity/logo.png",
+      "icon_url": "/tools/tegrity/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/tegrity/config.xml"
     },
     {
       "name": "Nook Study",
@@ -786,7 +1033,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/nook_study/banner.png",
+      "logo_url": "/tools/nook_study/logo.png",
+      "icon_url": "/tools/nook_study/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/nook_study/config.xml"
     },
     {
       "name": "Campus Pack",
@@ -880,7 +1135,15 @@
           "name": "Mediasite",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/campus_pack/banner.png",
+      "logo_url": "/tools/campus_pack/logo.png",
+      "icon_url": "/tools/campus_pack/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/campus_pack/config.xml"
     },
     {
       "name": "Courseload",
@@ -940,7 +1203,15 @@
           "name": "McGraw Hill Campus",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 1.0,
+      "banner_url": "/tools/courseload/banner.png",
+      "logo_url": "/tools/courseload/logo.png",
+      "icon_url": "/tools/courseload/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/courseload/config.xml"
     },
     {
       "name": "MyOpenMath",
@@ -973,7 +1244,13 @@
       "added": "2012-02-01T00:00:00Z",
       "uses": 30,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "logo_url": "/tools/my_open_math/logo.png",
+      "icon_url": "/tools/my_open_math/icon.png",
+      "new": false
     },
     {
       "name": "ChemVantage",
@@ -1002,7 +1279,15 @@
       "uses": 0,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": null
+      "pending": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/chem_vantage/banner.png",
+      "logo_url": "/tools/chem_vantage/logo.png",
+      "icon_url": "/tools/chem_vantage/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/chem_vantage/config.xml"
     },
     {
       "name": "Panopto",
@@ -1044,7 +1329,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 20,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/panopto/banner.png",
+      "logo_url": "/tools/panopto/logo.png",
+      "icon_url": "/tools/panopto/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/panopto/config.xml"
     },
     {
       "name": "Sage",
@@ -1070,7 +1363,15 @@
       "added": "2012-05-02T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/sage_cell/banner.png",
+      "logo_url": "/tools/sage_cell/logo.png",
+      "icon_url": "/tools/sage_cell/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/sage_cell/config.xml"
     },
     {
       "name": "SchoolTube",
@@ -1103,7 +1404,21 @@
       "added": "2012-04-07T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/schooltube/banner.png",
+      "logo_url": "/tools/schooltube/logo.png",
+      "icon_url": "/tools/schooltube/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/schooltube/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/schooltube/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=schooltube"
     },
     {
       "name": "Noteflight",
@@ -1136,7 +1451,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 5,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/noteflight/banner.png",
+      "logo_url": "/tools/noteflight/logo.png",
+      "icon_url": "/tools/noteflight/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/noteflight/config.xml"
     },
     {
       "name": "CourseSmart",
@@ -1169,7 +1492,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 70,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 0,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/coursesmart/banner.png",
+      "logo_url": "/tools/coursesmart/logo.png",
+      "icon_url": "/tools/coursesmart/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/coursesmart/config.xml"
     },
     {
       "name": "Storify",
@@ -1202,7 +1533,21 @@
       "added": "2012-04-12T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/storify/banner.png",
+      "logo_url": "/tools/storify/logo.png",
+      "icon_url": "/tools/storify/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/storify/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/storify/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=storify"
     },
     {
       "name": "Cengage Learning",
@@ -1226,7 +1571,15 @@
       "added": "2012-04-13T00:00:00Z",
       "uses": 20,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/cengage/banner.png",
+      "logo_url": "/tools/cengage/logo.png",
+      "icon_url": "/tools/cengage/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/cengage/config.xml"
     },
     {
       "name": "Elgg",
@@ -1297,7 +1650,15 @@
           "name": "Speeqe Chat",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/elgg/banner.png",
+      "logo_url": "/tools/elgg/logo.png",
+      "icon_url": "/tools/elgg/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/elgg/config.xml"
     },
     {
       "name": "PlaceKitten",
@@ -1327,7 +1688,21 @@
       "added": "2012-01-20T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/place_kitten/banner.png",
+      "logo_url": "/tools/place_kitten/logo.png",
+      "icon_url": "/tools/place_kitten/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/place_kitten/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/place_kitten/index.html",
+        "height": 475
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=place_kitten"
     },
     {
       "name": "Wikipedia",
@@ -1360,7 +1735,21 @@
       "added": "2012-03-22T00:00:00Z",
       "uses": 30,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/wikipedia/banner.png",
+      "logo_url": "/tools/wikipedia/logo.png",
+      "icon_url": "/tools/wikipedia/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/wikipedia/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/wikipedia/index.html",
+        "height": 450
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=wikipedia"
     },
     {
       "name": "Merlot",
@@ -1396,7 +1785,17 @@
       "uses": 0,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/merlot/banner.png",
+      "logo_url": "/tools/merlot/logo.png",
+      "icon_url": "/tools/merlot/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/merlot/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/merlot/index.html"
     },
     {
       "name": "Inigral Schools App",
@@ -1434,7 +1833,15 @@
       "uses": null,
       "pending": null,
       "author_name": "Inigral Schools App",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/inigral/banner.png",
+      "logo_url": "/tools/inigral/logo.png",
+      "icon_url": "/tools/inigral/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/inigral/config.xml"
     },
     {
       "name": "Hoot.me",
@@ -1462,7 +1869,14 @@
       "added": "2012-04-28T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/hoot_me/banner.png",
+      "logo_url": "/tools/hoot_me/logo.png",
+      "icon_url": "/tools/hoot_me/icon.png",
+      "new": false
     },
     {
       "name": "Smarterer",
@@ -1483,7 +1897,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/smarterer/banner.png",
+      "logo_url": "/tools/smarterer/logo.png",
+      "icon_url": "/tools/smarterer/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/smarterer/config.xml",
+      "data_url": "/tools/smarterer/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=smarterer",
+        "height": 475
+      },
+      "open_launch_url": "/tools/smarterer/index.html"
     },
     {
       "name": "Hooda Math",
@@ -1515,7 +1948,26 @@
           "name": "MyOpenMath",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/hooda_math/banner.png",
+      "logo_url": "/tools/hooda_math/logo.png",
+      "icon_url": "/tools/hooda_math/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/hooda_math/config.xml",
+      "data_url": "/tools/hooda_math/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=hooda_math",
+        "height": 475
+      },
+      "open_launch_url": "/tools/hooda_math/index.html"
     },
     {
       "name": "educreations",
@@ -1552,7 +2004,17 @@
       "added": "2012-02-23T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/educreations/banner.png",
+      "logo_url": "/tools/educreations/logo.png",
+      "icon_url": "/tools/educreations/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/educreations/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/educreations/index.html"
     },
     {
       "name": "College Board",
@@ -1587,7 +2049,17 @@
       "added": "2012-05-23T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/college_board/banner.png",
+      "logo_url": "/tools/college_board/logo.png",
+      "icon_url": "/tools/college_board/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/college_board/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/college_board/index.html"
     },
     {
       "name": "StudyEgg",
@@ -1607,7 +2079,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 1.0,
+      "banner_url": "/tools/studyegg/banner.png",
+      "logo_url": "/tools/studyegg/logo.png",
+      "icon_url": "/tools/studyegg/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/studyegg/config.xml",
+      "data_url": "/tools/studyegg/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=studyegg",
+        "height": 475
+      },
+      "open_launch_url": "/tools/studyegg/index.html"
     },
     {
       "name": "Google Art Project",
@@ -1644,7 +2135,17 @@
       "uses": 0,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/google_art/banner.png",
+      "logo_url": "/tools/google_art/logo.png",
+      "icon_url": "/tools/google_art/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/google_art/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/google_art/index.html"
     },
     {
       "name": "Codecademy",
@@ -1679,7 +2180,17 @@
       "added": "2012-02-21T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/codecademy/banner.png",
+      "logo_url": "/tools/codecademy/logo.png",
+      "icon_url": "/tools/codecademy/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/codecademy/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/codecademy/index.html"
     },
     {
       "name": "MIT OCW",
@@ -1713,7 +2224,17 @@
       "added": "2012-03-15T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/mit_ocw/banner.png",
+      "logo_url": "/tools/mit_ocw/logo.png",
+      "icon_url": "/tools/mit_ocw/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/mit_ocw/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/mit_ocw/index.html"
     },
     {
       "name": "Flat World Knowledge",
@@ -1739,7 +2260,26 @@
       "privacy_level": "anonymous",
       "related": [
 
-      ]
+      ],
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/flat_world_knowledge/banner.png",
+      "logo_url": "/tools/flat_world_knowledge/logo.png",
+      "icon_url": "/tools/flat_world_knowledge/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/flat_world_knowledge/config.xml",
+      "data_url": "/tools/flat_world_knowledge/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=flat_world_knowledge",
+        "height": 475
+      },
+      "open_launch_url": "/tools/flat_world_knowledge/index.html"
     },
     {
       "name": "Funbrain",
@@ -1759,7 +2299,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/funbrain/banner.png",
+      "logo_url": "/tools/funbrain/logo.png",
+      "icon_url": "/tools/funbrain/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/funbrain/config.xml",
+      "data_url": "/tools/funbrain/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=funbrain",
+        "height": 475
+      },
+      "open_launch_url": "/tools/funbrain/index.html"
     },
     {
       "name": "BrainPOP",
@@ -1789,7 +2348,26 @@
           "name": "Mathalicious",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 0,
+      "avg_rating": 3.0,
+      "banner_url": "/tools/brainpop/banner.png",
+      "logo_url": "/tools/brainpop/logo.png",
+      "icon_url": "/tools/brainpop/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/brainpop/config.xml",
+      "data_url": "/tools/brainpop/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=brainpop",
+        "height": 475
+      },
+      "open_launch_url": "/tools/brainpop/index.html"
     },
     {
       "name": "Manga High",
@@ -1810,7 +2388,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/manga_high/banner.png",
+      "logo_url": "/tools/manga_high/logo.png",
+      "icon_url": "/tools/manga_high/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/manga_high/config.xml",
+      "data_url": "/tools/manga_high/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=manga_high",
+        "height": 475
+      },
+      "open_launch_url": "/tools/manga_high/index.html"
     },
     {
       "name": "Programr",
@@ -1831,7 +2428,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/programr/banner.png",
+      "logo_url": "/tools/programr/logo.png",
+      "icon_url": "/tools/programr/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/programr/config.xml",
+      "data_url": "/tools/programr/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=programr",
+        "height": 475
+      },
+      "open_launch_url": "/tools/programr/index.html"
     },
     {
       "name": "Spelling City",
@@ -1852,7 +2468,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/spelling_city/banner.png",
+      "logo_url": "/tools/spelling_city/logo.png",
+      "icon_url": "/tools/spelling_city/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/spelling_city/config.xml",
+      "data_url": "/tools/spelling_city/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=spelling_city",
+        "height": 475
+      },
+      "open_launch_url": "/tools/spelling_city/index.html"
     },
     {
       "name": "Elementary Paper",
@@ -1871,7 +2506,26 @@
       "pending": null,
       "author_name": "Brian Whitmer",
       "support_link": "https://twitter.com/whitmer",
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/elementary_paper/banner.png",
+      "logo_url": "/tools/elementary_paper/logo.png",
+      "icon_url": "/tools/elementary_paper/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/elementary_paper/config.xml",
+      "data_url": "/tools/elementary_paper/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=elementary_paper",
+        "height": 475
+      },
+      "open_launch_url": "/tools/elementary_paper/index.html"
     },
     {
       "name": "Filament Games",
@@ -1918,7 +2572,26 @@
           "name": "DropBox",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/filament_games/banner.png",
+      "logo_url": "/tools/filament_games/logo.png",
+      "icon_url": "/tools/filament_games/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/filament_games/config.xml",
+      "data_url": "/tools/filament_games/data.json",
+      "extensions": [
+        "editor_button",
+        "resource_selection"
+      ],
+      "any_key": true,
+      "preview": {
+        "url": "/tools/public_collections/index.html?tool=filament_games",
+        "height": 475
+      },
+      "open_launch_url": "/tools/filament_games/index.html"
     },
     {
       "name": "SoftChalk Cloud Open",
@@ -1957,7 +2630,14 @@
       "added": "2012-02-28T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/softchalk_cloud_open/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/softchalk_cloud_open/index.html"
     },
     {
       "name": "YouTube For Schools",
@@ -1989,7 +2669,21 @@
       "added": "2012-03-22T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 3.0,
+      "banner_url": "/tools/youtube_edu/banner.png",
+      "logo_url": "/tools/youtube_edu/logo.png",
+      "icon_url": "/tools/youtube_edu/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/youtube_edu/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/youtube_edu/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=youtube_edu"
     },
     {
       "name": "Open Tapestry",
@@ -2028,7 +2722,14 @@
       "added": "2012-12-18T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/open_tapestry/banner.png",
+      "logo_url": "/tools/open_tapestry/logo.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/open_tapestry/config.xml"
     },
     {
       "name": "USA Today",
@@ -2060,7 +2761,21 @@
       "added": "2012-02-25T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 4.5,
+      "banner_url": "/tools/usa_today/banner.png",
+      "logo_url": "/tools/usa_today/logo.png",
+      "icon_url": "/tools/usa_today/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/usa_today/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/usa_today/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=usa_today"
     },
     {
       "name": "Speeqe Chat",
@@ -2091,7 +2806,15 @@
       "added": "2012-11-17T00:00:00Z",
       "uses": 40,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/speeqe/banner.png",
+      "logo_url": "/tools/speeqe/logo.png",
+      "icon_url": "/tools/speeqe/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/speeqe/config.xml"
     },
     {
       "name": "Wolfram Alpha",
@@ -2125,7 +2848,21 @@
       "uses": 0,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/wolfram/banner.png",
+      "logo_url": "/tools/wolfram/logo.png",
+      "icon_url": "/tools/wolfram/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/wolfram/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/wolfram/index.html",
+        "height": 150
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=wolfram"
     },
     {
       "name": "Blackboard Collaborate",
@@ -2179,7 +2916,15 @@
       "added": "2012-11-20T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/bb_collaborate/banner.png",
+      "logo_url": "/tools/bb_collaborate/logo.png",
+      "icon_url": "/tools/bb_collaborate/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/bb_collaborate/config.xml"
     },
     {
       "name": "Redirect Tool",
@@ -2246,7 +2991,15 @@
       "added": "2012-11-28T00:00:00Z",
       "uses": 100,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 5,
+      "comments_count": 5,
+      "avg_rating": 4.2,
+      "banner_url": "/tools/redirect/banner.png",
+      "logo_url": "/tools/redirect/logo.png",
+      "icon_url": "/tools/redirect/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/redirect/config.xml"
     },
     {
       "name": "YouTube Channel",
@@ -2300,7 +3053,17 @@
       "added": "2012-03-22T00:00:00Z",
       "uses": 40,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/youtube_user/banner.png",
+      "logo_url": "/tools/youtube_user/logo.png",
+      "icon_url": "/tools/youtube_user/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/youtube_user/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/public_collections/index.html?tool=youtube_user"
     },
     {
       "name": "Chalk and Wire",
@@ -2326,7 +3089,15 @@
       "uses": 0,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": null
+      "pending": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/chalk_and_wire/banner.png",
+      "logo_url": "/tools/chalk_and_wire/logo.png",
+      "icon_url": "/tools/chalk_and_wire/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/chalk_and_wire/config.xml"
     },
     {
       "name": "ALEKS",
@@ -2351,7 +3122,15 @@
       "added": "2012-12-01T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/aleks/banner.png",
+      "logo_url": "/tools/aleks/logo.png",
+      "icon_url": "/tools/aleks/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/aleks/config.xml"
     },
     {
       "name": "SCORM Cloud",
@@ -2375,7 +3154,15 @@
       "added": "2012-12-18T00:00:00Z",
       "uses": 30,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/scorm_cloud/banner.png",
+      "logo_url": "/tools/scorm_cloud/logo.png",
+      "icon_url": "/tools/scorm_cloud/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/scorm_cloud/config.xml"
     },
     {
       "name": "WebPA",
@@ -2408,7 +3195,15 @@
       "added": "2012-12-18T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/web_pa/banner.png",
+      "logo_url": "/tools/web_pa/logo.png",
+      "icon_url": "/tools/web_pa/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/web_pa/config.xml"
     },
     {
       "name": "VoiceThread",
@@ -2433,7 +3228,15 @@
       "added": "2012-12-18T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 0,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/voice_thread/banner.png",
+      "logo_url": "/tools/voice_thread/logo.png",
+      "icon_url": "/tools/voice_thread/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/voice_thread/config.xml"
     },
     {
       "name": "Vanilla Forums",
@@ -2476,7 +3279,15 @@
       "uses": 0,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": null
+      "pending": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/vanilla/banner.png",
+      "logo_url": "/tools/vanilla/logo.png",
+      "icon_url": "/tools/vanilla/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/vanilla/config.xml"
     },
     {
       "name": "New York Times",
@@ -2508,7 +3319,21 @@
       "added": "2013-01-08T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/nytimes/banner.png",
+      "logo_url": "/tools/nytimes/logo.png",
+      "icon_url": "/tools/nytimes/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/nytimes/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/nytimes/index.html",
+        "height": 530
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=nytimes"
     },
     {
       "name": "Drupal",
@@ -2552,7 +3377,15 @@
       "added": "2013-01-08T00:00:00Z",
       "uses": null,
       "pending": null,
-      "author_name": "jzornig"
+      "author_name": "jzornig",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/drupal/banner.png",
+      "logo_url": "/tools/drupal/logo.png",
+      "icon_url": "/tools/drupal/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/drupal/config.xml"
     },
     {
       "name": "QuestionMark",
@@ -2582,7 +3415,15 @@
       "uses": 0,
       "author_name": "QuestionMark",
       "author_url": null,
-      "pending": null
+      "pending": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/question_mark/banner.png",
+      "logo_url": "/tools/question_mark/logo.png",
+      "icon_url": "/tools/question_mark/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/question_mark/config.xml"
     },
     {
       "name": "PLATO",
@@ -2615,7 +3456,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/plato/banner.png",
+      "logo_url": "/tools/plato/logo.png",
+      "icon_url": "/tools/plato/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/plato/config.xml"
     },
     {
       "name": "McGraw Hill Campus",
@@ -2670,7 +3519,15 @@
           "name": "Mediasite",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/mh_campus/banner.png",
+      "logo_url": "/tools/mh_campus/logo.png",
+      "icon_url": "/tools/mh_campus/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/mh_campus/config.xml"
     },
     {
       "name": "Pinterest",
@@ -2699,7 +3556,21 @@
       "uses": 0,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/pinterest/banner.png",
+      "logo_url": "/tools/pinterest/logo.png",
+      "icon_url": "/tools/pinterest/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/pinterest/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/pinterest/index.html",
+        "height": 510
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=pinterest"
     },
     {
       "name": "Gooru Learning",
@@ -2731,7 +3602,21 @@
       "uses": 30,
       "submitter_name": null,
       "submitter_url": null,
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/gooru/banner.png",
+      "logo_url": "/tools/gooru/logo.png",
+      "icon_url": "/tools/gooru/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/gooru/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/gooru/index.html",
+        "height": 550
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=gooru"
     },
     {
       "name": "Pathbrite",
@@ -2764,7 +3649,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/pathbrite/banner.png",
+      "logo_url": "/tools/pathbrite/logo.png",
+      "icon_url": "/tools/pathbrite/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/pathbrite/config.xml"
     },
     {
       "name": "PebblePad",
@@ -2797,7 +3690,15 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/pebble_pad/banner.png",
+      "logo_url": "/tools/pebble_pad/logo.png",
+      "icon_url": "/tools/pebble_pad/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/pebble_pad/config.xml"
     },
     {
       "name": "Mediasite",
@@ -2817,6 +3718,7 @@
       "ims_link": "http://www.imsglobal.org/cc/detail.cfm?ID=90",
       "author_name": "Mediasite",
       "privacy_level": "anonymous",
+      "banner_url": "http://www.sonicfoundry.com/sites/default/files/sonic_theme_logo.png",
       "launch_url": "{{ launch_url }}",
       "config_options": [
         {
@@ -2830,7 +3732,14 @@
       "added": "2012-01-10T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "logo_url": "/tools/mediasite/logo.png",
+      "icon_url": "/tools/mediasite/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/mediasite/config.xml"
     },
     {
       "name": "YouTube Uploader",
@@ -2863,7 +3772,21 @@
       "added": "2013-01-22T00:00:00Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/youtube_upload/banner.png",
+      "logo_url": "/tools/youtube_upload/logo.png",
+      "icon_url": "/tools/youtube_upload/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/youtube_upload/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/youtube_upload/index.html",
+        "height": 400
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=youtube_upload"
     },
     {
       "name": "Prulu",
@@ -2911,7 +3834,15 @@
       "added": "2013-01-30T00:17:40Z",
       "uses": 50,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/prulu/banner.png",
+      "logo_url": "/tools/prulu/logo.png",
+      "icon_url": "/tools/prulu/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/prulu/config.xml"
     },
     {
       "name": "Via Response",
@@ -2935,7 +3866,14 @@
       "author_name": "Via Response",
       "author_url": "https://twitter.com/whitmer",
       "pending": null,
-      "privacy_level": "anonymous"
+      "privacy_level": "anonymous",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/via_response/banner.png",
+      "logo_url": "/tools/via_response/logo.png",
+      "icon_url": "/tools/via_response/icon.png",
+      "new": false
     },
     {
       "name": "Learning Catalytics",
@@ -2975,7 +3913,15 @@
       "uses": 0,
       "author_name": "Learning Catalytics",
       "author_url": "https://twitter.com/whitmer",
-      "pending": null
+      "pending": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/learning_catalytics/banner.png",
+      "logo_url": "/tools/learning_catalytics/logo.png",
+      "icon_url": "/tools/learning_catalytics/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/learning_catalytics/config.xml"
     },
     {
       "name": "Knowillage LeaP",
@@ -3007,7 +3953,15 @@
       "uses": 0,
       "author_name": "Knowillage",
       "author_url": "https://twitter.com/whitmer",
-      "pending": null
+      "pending": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/knowillage/banner.png",
+      "logo_url": "/tools/knowillage/logo.png",
+      "icon_url": "/tools/knowillage/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/knowillage/config.xml"
     },
     {
       "name": "Smarthinking",
@@ -3041,7 +3995,15 @@
       "added": "2013-02-01T00:15:40Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/smart_thinking/banner.png",
+      "logo_url": "/tools/smart_thinking/logo.png",
+      "icon_url": "/tools/smart_thinking/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/smart_thinking/config.xml"
     },
     {
       "name": "Google Charts",
@@ -3074,7 +4036,21 @@
       "added": "2013-02-15T20:43:01Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/google_chart/banner.png",
+      "logo_url": "/tools/google_chart/logo.png",
+      "icon_url": "/tools/google_chart/icon.png",
+      "new": false,
+      "config_url": "https://www.edu-apps.org/tools/google_chart/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/google_chart/index.html",
+        "height": 360
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=google_chart"
     },
     {
       "name": "EchoCenter",
@@ -3108,7 +4084,15 @@
       "added": "2013-03-01T15:05:18Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/echo_center/banner.png",
+      "logo_url": "/tools/echo_center/logo.png",
+      "icon_url": "/tools/echo_center/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/echo_center/config.xml"
     },
     {
       "name": "GitHub",
@@ -3140,7 +4124,21 @@
       "added": "2013-03-01T21:19:38Z",
       "uses": 0,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 4.0,
+      "banner_url": "/tools/github/banner.png",
+      "logo_url": "/tools/github/logo.png",
+      "icon_url": "/tools/github/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/github/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/github/index.html",
+        "height": 320
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=github"
     },
     {
       "name": "i>clicker",
@@ -3190,7 +4188,15 @@
           "name": "WebAssign",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/i_clicker/banner.png",
+      "logo_url": "/tools/i_clicker/logo.png",
+      "icon_url": "/tools/i_clicker/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/i_clicker/config.xml"
     },
     {
       "name": "Cranium Cafe",
@@ -3228,7 +4234,11 @@
       "added": "2013-03-19T03:11:53Z",
       "uses": 30,
       "submitter_name": null,
-      "submitter_url": null
+      "submitter_url": null,
+      "ratings_count": 2,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "new": true
     },
     {
       "name": "Feed The Me",
@@ -3282,7 +4292,11 @@
       "added": "2013-03-27T20:13:28Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 4.0,
+      "new": true
     },
     {
       "name": "Text Reader",
@@ -3309,7 +4323,15 @@
       "added": "2013-03-30T03:45:55Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "banner_url": "/tools/text_reader/banner.png",
+      "logo_url": "/tools/text_reader/logo.png",
+      "icon_url": "/tools/text_reader/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/text_reader/config.xml"
     },
     {
       "name": "BookShelf",
@@ -3336,7 +4358,12 @@
       "added": "2013-04-06T21:07:10Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": 0.0,
+      "icon_url": "/tools/book_shelf/icon.png",
+      "new": true
     },
     {
       "name": "Learning.com",
@@ -3366,7 +4393,15 @@
       "uses": 0,
       "submitter_name": "whitmer",
       "submitter_url": "https://twitter.com/whitmer",
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/learning_com/banner.png",
+      "logo_url": "/tools/learning_com/logo.png",
+      "icon_url": "/tools/learning_com/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/learning_com/config.xml"
     },
     {
       "name": "BadgeStack",
@@ -3401,7 +4436,15 @@
       "added": "2013-04-06T21:16:47Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/badge_stack/banner.png",
+      "logo_url": "/tools/badge_stack/logo.png",
+      "icon_url": "/tools/badge_stack/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/badge_stack/config.xml"
     },
     {
       "name": "Taskstream",
@@ -3435,7 +4478,15 @@
       "added": "2013-04-06T21:18:30Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/taskstream/banner.png",
+      "logo_url": "/tools/taskstream/logo.png",
+      "icon_url": "/tools/taskstream/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/taskstream/config.xml"
     },
     {
       "name": "Harvard Business Publishing",
@@ -3466,7 +4517,15 @@
       "added": "2013-04-06T21:20:47Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/harvard_pub/banner.png",
+      "logo_url": "/tools/harvard_pub/logo.png",
+      "icon_url": "/tools/harvard_pub/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/harvard_pub/config.xml"
     },
     {
       "name": "Toolwire",
@@ -3497,7 +4556,15 @@
       "added": "2013-04-06T21:22:39Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/toolwire/banner.png",
+      "logo_url": "/tools/toolwire/logo.png",
+      "icon_url": "/tools/toolwire/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/toolwire/config.xml"
     },
     {
       "name": "uCertify",
@@ -3543,7 +4610,15 @@
           "name": "YouTube",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 0,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/ucertify/banner.png",
+      "logo_url": "/tools/ucertify/logo.png",
+      "icon_url": "/tools/ucertify/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/ucertify/config.xml"
     },
     {
       "name": "MediaCore",
@@ -3575,7 +4650,15 @@
       "added": "2013-04-06T21:24:16Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/media_core/banner.png",
+      "logo_url": "/tools/media_core/logo.png",
+      "icon_url": "/tools/media_core/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/media_core/config.xml"
     },
     {
       "name": "Odyssey",
@@ -3609,7 +4692,15 @@
       "uses": 0,
       "submitter_name": "whitmer",
       "submitter_url": "https://twitter.com/whitmer",
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/odyssey/banner.png",
+      "logo_url": "/tools/odyssey/logo.png",
+      "icon_url": "/tools/odyssey/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/odyssey/config.xml"
     },
     {
       "name": "WebAssign",
@@ -3654,7 +4745,15 @@
           "name": "i>clicker",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 1.0,
+      "banner_url": "/tools/web_assign/banner.png",
+      "logo_url": "/tools/web_assign/logo.png",
+      "icon_url": "/tools/web_assign/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/web_assign/config.xml"
     },
     {
       "name": "SoftChalk Cloud",
@@ -3691,7 +4790,15 @@
       "added": "2013-04-11T20:55:10Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/softchalk_cloud/banner.png",
+      "logo_url": "/tools/softchalk_cloud/logo.png",
+      "icon_url": "/tools/softchalk_cloud/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/softchalk_cloud/config.xml"
     },
     {
       "name": "Learn LTI",
@@ -3723,7 +4830,11 @@
       "added": "2013-04-11T23:52:16Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "Trello",
@@ -3779,7 +4890,21 @@
           "name": "DropBox",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 3.0,
+      "banner_url": "/tools/trello/banner.png",
+      "logo_url": "/tools/trello/logo.png",
+      "icon_url": "/tools/trello/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/trello/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/trello/index.html",
+        "height": 330
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=trello"
     },
     {
       "name": "EvaluationKIT",
@@ -3821,7 +4946,12 @@
       "added": "2013-04-19T17:26:22Z",
       "uses": 0,
       "submitter_name": "EvaluationKIT",
-      "submitter_url": "https://twitter.com/EvaluationKIT"
+      "submitter_url": "https://twitter.com/EvaluationKIT",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/evaluationkit/config.xml"
     },
     {
       "name": "Pixton Comic Maker",
@@ -3886,7 +5016,11 @@
           "name": "YouTube Uploader",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 0,
+      "avg_rating": 5.0,
+      "new": true
     },
     {
       "name": "Open Badges",
@@ -3933,7 +5067,12 @@
       "added": "2013-05-07T05:52:39Z",
       "uses": 0,
       "submitter_name": "grccProf",
-      "submitter_url": "https://twitter.com/grccProf"
+      "submitter_url": "https://twitter.com/grccProf",
+      "ratings_count": 2,
+      "comments_count": 2,
+      "avg_rating": 4.5,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/dataiiOB/config.xml"
     },
     {
       "name": "StudyMate Class",
@@ -3977,7 +5116,12 @@
       "added": "2013-05-07T23:40:40Z",
       "uses": 0,
       "submitter_name": "ScottStanley20",
-      "submitter_url": "https://twitter.com/ScottStanley20"
+      "submitter_url": "https://twitter.com/ScottStanley20",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/studymateclass/config.xml"
     },
     {
       "name": "SWoRD Peer Review",
@@ -4012,7 +5156,11 @@
       "submitter_url": "https://twitter.com/PantherLearning",
       "related": [
 
-      ]
+      ],
+      "ratings_count": 2,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "new": true
     },
     {
       "name": "Dropbox",
@@ -4042,7 +5190,15 @@
       "added": "2013-05-10T22:35:40Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "banner_url": "/tools/dropbox/banner.png",
+      "logo_url": "/tools/dropbox/logo.png",
+      "icon_url": "/tools/dropbox/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/dropbox/config.xml"
     },
     {
       "name": "Study.Net",
@@ -4085,7 +5241,11 @@
           "name": "CourseSmart",
           "score": 1
         }
-      ]
+      ],
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "new": true
     },
     {
       "name": "Blue Portal Integrator",
@@ -4137,7 +5297,11 @@
       "uses": null,
       "submitter_name": "eXplorance",
       "submitter_url": "https://twitter.com/eXplorance",
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "Soft Chalk Cloud",
@@ -4183,7 +5347,14 @@
       "uses": 0,
       "submitter_name": "SoftChalk",
       "submitter_url": "https://twitter.com/SoftChalk",
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/SoftChalk%20Cloud%202012.04.01/config.xml",
+      "any_key": true,
+      "open_launch_url": "/tools/SoftChalk Cloud 2012.04.01/index.html"
     },
     {
       "name": "It's More Than A Textbook.com",
@@ -4219,7 +5390,12 @@
       "added": "2013-06-05T19:33:10Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/its_more_than_a_textbook/config.xml"
     },
     {
       "name": "The Learning Registry",
@@ -4252,7 +5428,21 @@
       "added": "2013-06-10T22:06:41Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "banner_url": "/tools/learning_registry/banner.png",
+      "logo_url": "/tools/learning_registry/logo.png",
+      "icon_url": "/tools/learning_registry/icon.png",
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/learning_registry/config.xml",
+      "any_key": true,
+      "preview": {
+        "url": "/tools/learning_registry/index.html",
+        "height": 440
+      },
+      "open_launch_url": "/tools/public_collections/index.html?tool=learning_registry"
     },
     {
       "name": "Vimeo",
@@ -4290,7 +5480,11 @@
       "added": "2013-06-13T19:45:53Z",
       "uses": 0,
       "submitter_name": "cavneb",
-      "submitter_url": "https://twitter.com/cavneb"
+      "submitter_url": "https://twitter.com/cavneb",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "ExamSoft",
@@ -4321,7 +5515,12 @@
       "added": "2013-06-25T20:55:22Z",
       "uses": 0,
       "submitter_name": "esw_markhaney",
-      "submitter_url": "https://twitter.com/esw_markhaney"
+      "submitter_url": "https://twitter.com/esw_markhaney",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/examsoft_exam_intelligence/config.xml"
     },
     {
       "name": "ExamSoft",
@@ -4350,7 +5549,12 @@
       "uses": 0,
       "submitter_name": "esw_markhaney",
       "submitter_url": "https://twitter.com/esw_markhaney",
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/examsoft_intelligence/config.xml"
     },
     {
       "name": "Starfish",
@@ -4401,7 +5605,12 @@
       "uses": 0,
       "submitter_name": "dyaskin",
       "submitter_url": "https://twitter.com/dyaskin",
-      "pending": true
+      "pending": true,
+      "ratings_count": 1,
+      "comments_count": 1,
+      "avg_rating": 5.0,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/starfish_sso/config.xml"
     },
     {
       "name": "BigBlueButton",
@@ -4440,7 +5649,12 @@
       "added": "2013-07-08T19:14:06Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/big_blue_button/config.xml"
     },
     {
       "name": "LTI Maps",
@@ -4477,7 +5691,11 @@
       "added": "2013-07-08T19:17:13Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "QuestionPress",
@@ -4509,7 +5727,12 @@
       "added": "2013-07-08T19:21:21Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/question_press/config.xml"
     },
     {
       "name": "CloudTime",
@@ -4558,7 +5781,12 @@
       "added": "2013-07-08T19:24:23Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/cloud_time/config.xml"
     },
     {
       "name": "XWiki",
@@ -4600,7 +5828,12 @@
       "added": "2013-07-08T19:26:22Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/xwiki/config.xml"
     },
     {
       "name": "ApprenNet",
@@ -4634,7 +5867,11 @@
       "uses": 0,
       "submitter_name": "whitmer",
       "submitter_url": "https://twitter.com/whitmer",
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "Concourse",
@@ -4674,7 +5911,12 @@
       "added": "2013-07-08T19:30:06Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/concourse/config.xml"
     },
     {
       "name": "Tandem",
@@ -4716,7 +5958,12 @@
       "added": "2013-07-08T19:31:44Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/tandem/config.xml"
     },
     {
       "name": "Ayamel",
@@ -4758,7 +6005,12 @@
       "added": "2013-07-08T19:34:53Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true,
+      "config_url": "https://www.edu-apps.org/tools/ayamel/config.xml"
     },
     {
       "name": "StudyRoom",
@@ -4794,7 +6046,11 @@
       "added": "2013-07-08T19:37:40Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "Flickr Search",
@@ -4832,7 +6088,11 @@
       "added": "2013-07-08T19:40:35Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "Aspire Analytics",
@@ -4870,7 +6130,11 @@
       "added": "2013-07-08T19:42:58Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "Code Embed",
@@ -4903,10 +6167,14 @@
       "added": "2013-07-08T19:44:53Z",
       "uses": 0,
       "submitter_name": "whitmer",
-      "submitter_url": "https://twitter.com/whitmer"
+      "submitter_url": "https://twitter.com/whitmer",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
-      "name": "Atomic Learning LTI",
+      "name": "Atomic Learning",
       "id": "atomiclearning_tool",
       "categories": [
         "Content",
@@ -4921,7 +6189,7 @@
       "app_type": "custom",
       "short_description": "Seamlessly integrate Atomic Learning’s online technology training video tutorials and resources into online courses without requiring staff or students to leave the LMS.",
       "preview": {
-        "url": "http://www.youtube.com/embed?v=V2-u2IOqKUU",
+        "url": "http://www.youtube.com/embed/V2-u2IOqKUU",
         "height": 360
       },
       "beta": false,
@@ -4937,11 +6205,15 @@
       "added": "2013-07-31T19:34:46Z",
       "uses": 0,
       "submitter_name": "AtomicHigherEd",
-      "submitter_url": "https://twitter.com/AtomicHigherEd"
+      "submitter_url": "https://twitter.com/AtomicHigherEd",
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "new": true
     },
     {
       "name": "NBC Learn",
-      "id": "nbc_learn",
+      "id": "",
       "categories": [
         "Content",
         "Math",
@@ -4979,7 +6251,12 @@
       "uses": null,
       "submitter_name": "nbclearn",
       "submitter_url": "https://twitter.com/nbclearn",
-      "pending": true
+      "pending": true,
+      "ratings_count": 0,
+      "comments_count": 0,
+      "avg_rating": null,
+      "logo_url": "/tools//logo.png",
+      "new": true
     }
   ],
   "permissions": [
@@ -5751,7 +7028,7 @@
         "question_mark": false,
         "plato": false,
         "mh_campus": false,
-        "pathbrite": true,
+        "pathbrite": false,
         "pebble_pad": false,
         "mediasite": false,
         "youtube_upload": true,
@@ -5764,6 +7041,7 @@
         "echo_center": false,
         "github": false,
         "i_clicker": false,
+        "cranium_cafe": true,
         "feed_the_me": false,
         "text_reader": false,
         "book_shelf": true,
@@ -5781,6 +7059,7 @@
         "dataiiOB": true,
         "studymateclass": false,
         "PLSSWoRD": false,
+        "dropbox": true,
         "study_net": false,
         "its_more_than_a_textbook": true,
         "learning_registry": false,
@@ -5791,14 +7070,14 @@
         "question_press": true,
         "cloud_time": true,
         "xwiki": true,
-        "apprennet": true,
         "concourse": true,
         "tandem": true,
         "ayamel": true,
         "study_room": true,
         "flickr_search": true,
         "aspire_analytics": true,
-        "code_embed": true
+        "code_embed": true,
+        "atomiclearning_tool": true
       },
       "anonymous_only": false,
       "allow_new": false,

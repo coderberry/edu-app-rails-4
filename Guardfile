@@ -23,3 +23,7 @@ end
 guard 'bundler' do
   watch('Gemfile')
 end
+
+# guard :embertools, debug: true, no_cleanup: false, out_file: 'public/javascripts/lti_apps.js'  do
+#   watch(%r{^ember\/lti_apps\/js\/(?!index\.js)(?!templates\.js)(?!application\.js).*})
+# end

@@ -86,10 +86,10 @@ namespace :import do
       app.config_url           = node['config_url']
       app.preview_url          = node['preview'] ? node['preview']['url'] : nil
       app.ims_cert_url         = node['ims_link']
-      app.banner_image_url     = node['banner_url']
-      app.logo_image_url       = node['logo_url']
-      app.icon_image_url       = node['icon_url']
-      app.cartridge            = node['cartridge']
+      app.banner_image_url     = "http://www.edu-apps.org#{node['banner_url']}" if node['banner_url'].present?
+      app.logo_image_url       = "http://www.edu-apps.org#{node['logo_url']}" if node['logo_url'].present?
+      app.icon_image_url       = "http://www.edu-apps.org#{node['icon_url']}" if node['icon_url'].present?
+      # app.cartridge            = node['cartridge']
       if app.save
 
         if node['extensions'].is_a? Array

@@ -60,6 +60,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    colorize (0.5.8)
     columnize (0.3.6)
     debugger (1.6.1)
       columnize (>= 0.3.1)
@@ -94,6 +95,9 @@ GEM
     guard-bundler (1.0.0)
       bundler (~> 1.0)
       guard (~> 1.1)
+    guard-embertools (0.2.1)
+      colorize
+      guard
     guard-rspec (3.0.2)
       guard (>= 1.8)
       rspec (~> 2.13)
@@ -244,6 +248,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   font-awesome-rails
   guard-bundler
+  guard-embertools (~> 0.2.1)
   guard-rspec
   jquery-rails
   omniauth-facebook

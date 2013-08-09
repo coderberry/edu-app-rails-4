@@ -3,13 +3,20 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps
   def index
-    # @lti_apps = LtiApp.all
     @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @lti_apps }
+    end
   end
 
   # GET /lti_apps/1
   def show
     @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.where(short_name: params[:id]).first
+    respond_to do |format|
+      format.html
+      format.json { render json: @lti_app }
+    end
   end
 
   # GET /lti_apps/new

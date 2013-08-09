@@ -1,0 +1,19 @@
+<div class="row padded">
+  <div class="col-sm-9">
+    <div class="main-content" style="min-height: 550px;">
+      <div id="app-sort-filters" class="row">
+        <div class="col-8">
+          {{input type="search" class="form-control col-6 pull-left" placeholder="Search..."}}
+        </div>
+        <div class="col-4 text-right">
+          <a href="#" {{action "displayAsDetails"}} data-display="details" class="btn btn-link"><i class="icon-list icon-large"></i></a>
+          <a href="#" {{action "displayAsList"}} data-display="list" class="btn btn-link selected"><i class="icon-th icon-large"></i></a>
+        </div>
+      </div>
+      {{ view "App.LtiAppListView" contentBinding=this }}
+    </div>
+  </div>
+  <div class="col-sm-3">
+    blah
+  </div>
+</div>
