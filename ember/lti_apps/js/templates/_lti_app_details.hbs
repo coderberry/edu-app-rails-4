@@ -1,11 +1,12 @@
 <div class="row details-view clearfix" style="display: none;">
-  <div class="col-sm-3">
+  <div class="col-sm-2">
     <a href="#" {{action "show" this}}>
       <img {{bindAttr src=banner_image_url alt=name}} class="img-thumbnail">
     </a>
   </div>
-  <div class="col-sm-9">
+  <div class="col-sm-10">
     <p class="title">
+      {{star-rating stars=average_rating}}
       <a href="#" {{action "show" this}}>{{name}}</a>
     </p>
     <div class="meta">

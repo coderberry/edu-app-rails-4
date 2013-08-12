@@ -86,11 +86,48 @@ namespace :import do
       app.config_url           = node['config_url']
       app.preview_url          = node['preview'] ? node['preview']['url'] : nil
       app.ims_cert_url         = node['ims_link']
-      app.banner_image_url     = "http://www.edu-apps.org#{node['banner_url']}" if node['banner_url'].present?
-      app.logo_image_url       = "http://www.edu-apps.org#{node['logo_url']}" if node['logo_url'].present?
-      app.icon_image_url       = "http://www.edu-apps.org#{node['icon_url']}" if node['icon_url'].present?
-      # app.cartridge            = node['cartridge']
+
+      if node['banner_url'].present?
+        if node['banner_url'] =~ /http/
+          app.banner_image_url = node['banner_url']
+        else
+          app.banner_image_url = "http://www.edu-apps.org#{node['banner_url']}"
+        end
+      end
+
+      if node['logo_url'].present?
+        if node['logo_url'] =~ /http/
+          app.logo_image_url = node['logo_url']
+        else
+          app.logo_image_url = "http://www.edu-apps.org#{node['logo_url']}"
+        end
+      end
+
+      if node['icon_url'].present?
+        if node['icon_url'] =~ /http/
+          app.icon_image_url = node['icon_url']
+        else
+          app.icon_image_url = "http://www.edu-apps.org#{node['icon_url']}"
+        end
+      end
+      
       if app.save
+
+        # Save the cartridge
+        puts app.config_url
+        begin
+          uri = URI.parse(app.config_url)
+          http = Net::HTTP.new(uri.host, uri.port)
+          if uri.scheme == 'https'
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          end
+          xml = http.request(Net::HTTP::Get.new(uri.request_uri)).body
+          app.cartridge = Hash.from_xml(xml).to_json
+          app.save
+        rescue => ex
+          puts ex.message
+        end
 
         if node['extensions'].is_a? Array
           node['extensions'].each do |val|

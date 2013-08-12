@@ -1,8 +1,9 @@
-<div class="thumbnail-view">
+<div class="thumbnail-view thumbnail">
   <a href="#" {{action "show" this}}>
-    <img {{bindAttr src=banner_image_url alt=name}} class="img-thumbnail">
+    <img {{bindAttr src=banner_image_url alt=name}} class="img-thumbnail" width="240" height="125" style="width: 240px; height: 125px;" />
   </a>
-  <p class="title">
+  <div class="title">
+    {{mini-star-rating stars=average_rating}}
     <a href="#" {{action "show" this}}>{{name}}</a>
-  </p>
+  </div>
 </div>

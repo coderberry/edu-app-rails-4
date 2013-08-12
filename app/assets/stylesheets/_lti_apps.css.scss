@@ -4,8 +4,23 @@ ol {
   padding: 0px;
   li {
     &.as-details {
+      div.details-view {
+        margin-bottom: 15px;
+        border-bottom: thin dotted #efefef;
+        padding-bottom: 15px;
+      }
+      p.title {
+        font-size: 1.3em;
+        margin: 0px;
+      }
     }
     &.as-list {
+      div.thumbnail-view {
+        margin-bottom: 5px;
+        span.stars {
+          margin-top: 5px; 
+        }
+      }
     }
   }
 }

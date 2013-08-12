@@ -1,8 +1,8 @@
 var LtiApp = require('../models/lti_app');
 
 var LtiAppsRoute = Ember.Route.extend({
-  model: function() {
-    return LtiApp.find();
+  setupController: function(controller, model) {
+    controller.set('lti_apps', LtiApp.find());
   },
 
   events: {

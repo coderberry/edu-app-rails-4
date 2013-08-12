@@ -15,7 +15,9 @@ var LtiApp = DS.Model.extend({
   data_url:          DS.attr('string'),
   banner_image_url:  DS.attr('string'),
   logo_image_url:    DS.attr('string'),
-  icon_image_url:    DS.attr('string')
+  icon_image_url:    DS.attr('string'),
+  average_rating:    DS.attr('number'),
+  total_ratings:     DS.attr('number')
 });
 
 module.exports = LtiApp;

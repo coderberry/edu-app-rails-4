@@ -21,3 +21,22 @@
     }
   }
 }
+
+span.stars, span.stars span {
+  display: block;
+  background: url(../images/star.png) 0 -16px repeat-x;
+  width: 80px;
+  height: 16px;
+}
+
+span.mini-stars, 
+span.mini-stars span {
+  background: url(../images/mini-star.png) 0 -10px repeat-x;
+  width: 50px;
+  height: 10px;
+}
+
+span.stars span,
+span.mini-stars span {
+  background-position: 0 0;
+}

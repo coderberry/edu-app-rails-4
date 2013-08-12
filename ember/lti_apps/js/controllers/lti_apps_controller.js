@@ -1,5 +1,21 @@
 var LtiAppsController = Ember.ArrayController.extend({
   listStyle: "thumbnails",
+  lti_apps: [],
+  sortProperties: ['name'],
+  filter: "",
+
+  content: function() {
+    var filter = this.get('filter');
+
+    if (Ember.isEmpty(filter)) {
+      return this.get('lti_apps');
+    } else {
+      return this.get('lti_apps').filter(function(item, index, enumerable){
+        return item.get('name').toLowerCase().match(filter.toLowerCase());
+      });
+    }
+    
+  }.property('filter', 'lti_apps.@each'),
 
   showDetails: function() {
     if (this.get('listStyle') === 'details') {

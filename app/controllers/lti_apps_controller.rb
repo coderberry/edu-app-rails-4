@@ -3,7 +3,7 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps
   def index
-    @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.all
+    @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.order(:name).all
     respond_to do |format|
       format.html
       format.json { render json: @lti_apps }

@@ -1,2 +1,40 @@
-<div id="ember-app"></div>
-<script type="text/javascript" src="/javascripts/lti_apps.js"></script>
+<div class="row padded">
+  <div class="col-sm-9">
+    <div class="main-content" style="min-height: 550px;">
+      <div id="app-sort-filters" class="row">
+        <div class="col-8">
+          <input type="search" id="lti-app-filter" class="form-control col-6 pull-left" placeholder="Filter Results..." />
+        </div>
+        <div class="col-4 text-right">
+          <a href="#" data-display="details" class="btn btn-link"><i class="icon-list icon-large"></i></a>
+          <a href="#" data-display="list" class="btn btn-link selected"><i class="icon-th icon-large"></i></a>
+        </div>
+      </div>
+      
+      <ol id="lti-apps-container" class="clearfix">
+        <%= render @lti_apps %>
+      </ol>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <form action="#" id="filters">
+      <ul class="nav" id="alt-nav">
+        <li><h4>Extensions</h4>
+          <ul class="nav sub-nav"><%= render partial: "tag", collection: Tag.extensions.order(:name) %></ul>
+        </li>
+        <li><h4>Categories</h4>
+          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.categories.order(:name) %></ul>
+        </li>
+        <li><h4>Education Levels</h4>
+          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.education_levels.order(:name) %></ul>
+        </li>
+        <li><h4>Privacy</h4>
+          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.privacy_levels.order(:name) %></ul>
+        </li>
+        <li><h4>App Type</h4>
+          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.app_types.order(:name) %></ul>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
