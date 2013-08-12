@@ -1,5 +1,5 @@
 class LtiAppsController < ApplicationController
-  before_action :set_lti_app, only: [:edit, :update, :destroy]
+  before_action :set_lti_app, only: [:update, :destroy]
 
   # GET /lti_apps
   def index
@@ -15,6 +15,7 @@ class LtiAppsController < ApplicationController
     @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.where(short_name: params[:id]).first
     respond_to do |format|
       format.html
+      format.xml  { render xml: @lti_app.cartridge.to_xml }
       format.json { render json: @lti_app }
     end
   end
@@ -26,6 +27,8 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps/1/edit
   def edit
+    # Inject permission check here
+    @lti_app = LtiApp.where(short_name: params[:id]).first
   end
 
   # POST /lti_apps
@@ -42,7 +45,7 @@ class LtiAppsController < ApplicationController
   # PATCH/PUT /lti_apps/1
   def update
     if @lti_app.update(lti_app_params)
-      redirect_to @lti_app, notice: 'Lti app was successfully updated.'
+      redirect_to lti_app_path(@lti_app.short_name), notice: 'Lti app was successfully updated.'
     else
       render action: 'edit'
     end

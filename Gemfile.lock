@@ -121,6 +121,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    maruku (0.6.1)
+      syntax (>= 1.0.0)
     method_source (0.8.2)
     mime-types (1.23)
     minitest (4.7.5)
@@ -222,6 +224,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    syntax (1.0.0)
     thor (0.18.1)
     thread_safe (0.1.2)
       atomic
@@ -252,6 +255,7 @@ DEPENDENCIES
   guard-embertools (~> 0.2.1)
   guard-rspec
   jquery-rails
+  maruku
   omniauth-facebook
   omniauth-github
   omniauth-google-oauth2

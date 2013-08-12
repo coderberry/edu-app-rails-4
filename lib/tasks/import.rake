@@ -87,6 +87,18 @@ namespace :import do
       app.preview_url          = node['preview'] ? node['preview']['url'] : nil
       app.ims_cert_url         = node['ims_link']
 
+      if app.config_url.present?
+        unless app.config_url =~ /http/
+          app.config_url = "http://www.edu-apps.org#{node['config_url']}"
+        end
+      end
+
+      if app.preview_url.present?
+        unless app.preview_url =~ /http/
+          app.preview_url = "http://www.edu-apps.org#{app.preview_url}"
+        end
+      end
+
       if node['banner_url'].present?
         if node['banner_url'] =~ /http/
           app.banner_image_url = node['banner_url']

@@ -1,4 +1,4 @@
-<%= form_for(@lti_app) do |f| %>
+<%= form_for @lti_app, html: { class: "form-horizontal" } do |f| %>
   <% if @lti_app.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lti_app.errors.count, "error") %> prohibited this lti_app from being saved:</h2>
@@ -11,77 +11,100 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user %><br>
-    <%= f.text_field :user %>
+  <div class="form-group">
+    <div class="col-lg-offset-3 col-lg-9">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :is_public %> This app is available to the public
+        </label>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :short_name %><br>
-    <%= f.text_field :short_name %>
+
+  <% if @lti_app.new_record? %>
+    <div class="field">
+      <%= f.label :short_name %><br>
+      <%= f.text_field :short_name %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :short_description, class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_area :short_description, rows: 3, class: "form-control", placeholder: "Short Description" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.label :description, class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_area :description, rows: 8, class: "form-control", placeholder: "Description" %>
+      <span class="help-block">You may use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a> syntax for including style, links and images</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
+  <div class="form-group">
+    <%= f.label :testing_instructions, class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_area :testing_instructions, rows: 6, class: "form-control", placeholder: "Testing Instructions" %>
+      <span class="help-block">You may use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a> syntax for including style, links and images</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :testing_instructions %><br>
-    <%= f.text_area :testing_instructions %>
+  <div class="form-group">
+    <%= f.label :support_url, "Support URL", class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :support_url, class: "form-control", placeholder: "http://" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :support_url %><br>
-    <%= f.text_field :support_url %>
+  <div class="form-group">
+    <%= f.label :ims_cert_url, "IMS Certificate URL", class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :ims_cert_url, class: "form-control", placeholder: "http://" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :author_name %><br>
-    <%= f.text_field :author_name %>
+  <div class="form-group">
+    <%= f.label :preview_url, "Preview URL", class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :preview_url, class: "form-control", placeholder: "http://" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :is_public %><br>
-    <%= f.check_box :is_public %>
+  <div class="form-group">
+    <%= f.label :config_url, "Config XML URL", class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :config_url, class: "form-control", placeholder: "http://" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :banner_image_url, class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :banner_image_url, class: "form-control", placeholder: "http://" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :logo_image_url, class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :logo_image_url, class: "form-control", placeholder: "http://" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :author_name, class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_field :author_name, class: "form-control", placeholder: "Author Name" %>
+    </div>
   </div>
   <div class="field">
     <%= f.label :app_type %><br>
     <%= f.text_field :app_type %>
   </div>
   <div class="field">
-    <%= f.label :ims_cert_url %><br>
-    <%= f.text_field :ims_cert_url %>
-  </div>
-  <div class="field">
-    <%= f.label :preview_url %><br>
-    <%= f.text_field :preview_url %>
-  </div>
-  <div class="field">
-    <%= f.label :config_url %><br>
-    <%= f.text_field :config_url %>
-  </div>
-  <div class="field">
     <%= f.label :data_url %><br>
     <%= f.text_field :data_url %>
-  </div>
-  <div class="field">
-    <%= f.label :cartridge %><br>
-    <%= f.text_field :cartridge %>
-  </div>
-  <div class="field">
-    <%= f.label :banner_image_url %><br>
-    <%= f.text_field :banner_image_url %>
-  </div>
-  <div class="field">
-    <%= f.label :logo_image_url %><br>
-    <%= f.text_field :logo_image_url %>
-  </div>
-  <div class="field">
-    <%= f.label :short_description %><br>
-    <%= f.text_field :short_description %>
   </div>
   <div class="actions">
     <%= f.submit %>

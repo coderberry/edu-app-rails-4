@@ -21,4 +21,15 @@ module ApplicationHelper
     end
   end
 
+  def star_rating(val, classes="")
+    val ||= 0
+    multiplier = (classes =~ /mini-stars/) ? 10 : 16
+    cls = "stars"
+    cls << " #{classes}" if classes.present?
+    size = [0, [5, val].min].max * multiplier
+    content_tag(:span, class: cls) do
+      content_tag(:span, "", style: "width: #{size}px;")
+    end
+  end
+
 end

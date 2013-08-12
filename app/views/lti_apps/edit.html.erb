@@ -1,6 +1,10 @@
-<h1>Editing lti_app</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @lti_app %> |
-<%= link_to 'Back', lti_apps_path %>
+<div class="row padded">
+  <div class="col-sm-9">
+    <div class="main-content" style="min-height: 550px;">
+      <div class="header clearfix">
+        <h3 class="page-header">Edit App: <%= @lti_app.name %></h3>
+      </div>
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

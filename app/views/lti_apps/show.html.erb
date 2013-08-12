@@ -1,96 +1,67 @@
-<div class="main-content">
-  <div class="header clearfix">
-    <h3 class="page-header"><%= @lti_app.name %></h3>
+<div class="row padded">
+  <div class="col-sm-9">
+    <div class="main-content" style="min-height: 550px;">
+
+      <ul class="breadcrumb">
+        <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_lti_app_path(@lti_app.short_name), class: "pull-right btn btn-info btn-xs" %>
+        <% if @lti_app.preview_url.present? %>
+          <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#preview-modal"><i class="icon-search"></i> Preview</button>
+        <% end %>
+        <li><%= link_to "Apps", root_url %></li>
+        <li class="active"><%= @lti_app.name %></li>
+      </ul>
+      
+      <div class="app-details">
+        <div class="row">
+          <div class="col-sm-4">
+            <%= image_tag @lti_app.banner_image_url, class: "img-thumbnail" %>
+          </div>
+          <div class="col-sm-8">
+            <h2><%= @lti_app.name %></h2>
+            <%= star_rating(@lti_app.average_rating, "mini") %>
+            <div class="author">by <%= @lti_app.author_name %></div>
+            <%= render partial: "tag_cloud", locals: { lti_app: @lti_app } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="description col-12">
+            <%= raw Maruku.new(@lti_app.description).to_html %>
+          </div>
+        </div>
+        
+        <hr class="dotted">
+
+        <div class="configuration-content">
+          <label>Configuration URL:</label>
+          <div class="input-group">
+            <input class="form-control" value="<%= @lti_app.config_url %>" />
+            <span class="input-group-btn">
+              <button class="copy-button btn" data-clipboard-text="<%= @lti_app.config_url %>"
+                  title="Copy to clipboard"><i class="icon-copy"></i></button>
+            </span>
+          </div><!-- /input-group -->
+        </div>
+      </div>
+    </div>
   </div>
-
-  <p>
-    <strong>User:</strong>
-    <%= @lti_app.user %>
-  </p>
-
-  <p>
-    <strong>Short name:</strong>
-    <%= @lti_app.short_name %>
-  </p>
-
-  <p>
-    <strong>Name:</strong>
-    <%= @lti_app.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @lti_app.description %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= @lti_app.status %>
-  </p>
-
-  <p>
-    <strong>Testing instructions:</strong>
-    <%= @lti_app.testing_instructions %>
-  </p>
-
-  <p>
-    <strong>Support url:</strong>
-    <%= @lti_app.support_url %>
-  </p>
-
-  <p>
-    <strong>Author name:</strong>
-    <%= @lti_app.author_name %>
-  </p>
-
-  <p>
-    <strong>Is public:</strong>
-    <%= @lti_app.is_public %>
-  </p>
-
-  <p>
-    <strong>App type:</strong>
-    <%= @lti_app.app_type %>
-  </p>
-
-  <p>
-    <strong>Ims cert url:</strong>
-    <%= @lti_app.ims_cert_url %>
-  </p>
-
-  <p>
-    <strong>Preview url:</strong>
-    <%= @lti_app.preview_url %>
-  </p>
-
-  <p>
-    <strong>Config url:</strong>
-    <%= @lti_app.config_url %>
-  </p>
-
-  <p>
-    <strong>Data url:</strong>
-    <%= @lti_app.data_url %>
-  </p>
-
-  <p>
-    <strong>Cartridge:</strong>
-    <%= @lti_app.cartridge %>
-  </p>
-
-  <p>
-    <strong>Banner image url:</strong>
-    <%= @lti_app.banner_image_url %>
-  </p>
-
-  <p>
-    <strong>Logo image url:</strong>
-    <%= @lti_app.logo_image_url %>
-  </p>
-
-  <p>
-    <strong>Short description:</strong>
-    <%= @lti_app.short_description %>
-  </p>
-
+  <div class="col-sm-3">
+    side
+  </div>
 </div>
+
+<% if @lti_app.preview_url.present? %>
+  <div class="modal fade" id="preview-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"><%= @lti_app.name %></h4>
+        </div>
+        <iframe src="<%= @lti_app.preview_url %>" frameborder="0" style="width: 100%; min-height: 450px;"></iframe>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+<% end %>

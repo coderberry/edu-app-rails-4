@@ -38,3 +38,50 @@ ol {
     }
   }
 }
+
+#filters {
+  label {
+    margin-bottom: 0px !important;
+    font-size: 0.85em;
+  }
+}
+
+.breadcrumb .btn {
+  margin: -3px -5px 0 10px;
+}
+
+ul.tags {
+  margin: 10px 0px;
+  padding: 0px;
+  list-style: none;
+
+  li {
+    display: block;
+    color: #fff;
+    background-color: red;
+    float: left;
+    margin: 0 3px 3px 0;
+    padding: 0 8px;
+    font-size: 12px;
+
+    &.extension { background-color: #d5a76f; }
+    &.tag { background-color: #6abcda;}
+    &.category { background-color: #a1ddbd;}
+    &.education-level { background-color: #fd6737;}
+    &.platform { background-color: #49509a;}
+  }
+}
+
+.app-details {
+  h2 {
+    margin: 0px;
+  }
+  div.author {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #666;
+  }
+  div.description {
+    margin-top: 20px;
+  }
+}
