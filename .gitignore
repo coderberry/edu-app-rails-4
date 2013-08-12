@@ -16,3 +16,6 @@
 /tmp
 
 .env
+
+# Ignore config files
+/config/*.yml
