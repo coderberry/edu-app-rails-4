@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :lti_app do
-    sequence(:short_name) {|n| "vimeo#{rand(10000)}" }
-    name "Vimeo"
-
     association :user, factory: :user, strategy: :create
+    sequence(:short_name) {|n| "vimeo#{rand(10000)}" }
+    name "Long App Name"
+    status "active"
   end
 end

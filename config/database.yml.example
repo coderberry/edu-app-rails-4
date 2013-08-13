@@ -4,8 +4,6 @@ development: &default
   host: localhost
   database: ea_development
   pool: 5
-  username: postgres
-  password:
 
 test:
   <<: *default
