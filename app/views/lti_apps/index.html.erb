@@ -20,7 +20,7 @@
     <form action="#" id="filters">
       <ul class="nav" id="alt-nav">
         <li><h4>Extensions</h4>
-          <ul class="nav sub-nav"><%= render partial: "tag", collection: Tag.extensions.order(:name) %></ul>
+          <ul class="nav sub-nav"><%= render partial: "tag", collection: Tag.lms_extensions.order(:name) %></ul>
         </li>
         <li><h4>Categories</h4>
           <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.categories.order(:name) %></ul>

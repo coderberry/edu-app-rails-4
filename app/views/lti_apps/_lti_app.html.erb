@@ -1,4 +1,4 @@
-<li data-name="<%= lti_app.name %>" data-tags="<%= lti_app.tags.pluck(:id).join(',') %>" class="lti-app as-list col-12 col-sm-6 col-lg-4">
+<li data-name="<%= lti_app.name %>" data-tags="<%= lti_app.tag_ids.join(',') %>" class="lti-app as-list col-12 col-sm-6 col-lg-4">
 
   <div class="row details-view clearfix" style="display: none;">
     <div class="col-sm-3">
@@ -13,7 +13,7 @@
         <p class="description">
           <%= lti_app.short_description ? lti_app.short_description : truncate(lti_app.description, length: 250) %>
         </p>
-        <%= render partial: "tag_cloud", locals: { lti_app: lti_app } %>
+        <%= render partial: "tag_cloud", locals: { tags: @tags, tag_ids: lti_app.tag_ids } %>
       </div>
     </div>
   </div>

@@ -15,12 +15,17 @@
         <div class="row">
           <div class="col-sm-4">
             <%= image_tag @lti_app.banner_image_url, class: "img-thumbnail" %>
+            <%= render partial: "/shared/add_this", locals: {options: {
+              url: lti_app_url(@lti_app),
+              title: @lti_app.name,
+              description: @lti_app.short_description
+            }} %>
           </div>
           <div class="col-sm-8">
             <h2><%= @lti_app.name %></h2>
             <%= star_rating(@lti_app.average_rating, "mini") %>
             <div class="author">by <%= @lti_app.author_name %></div>
-            <%= render partial: "tag_cloud", locals: { lti_app: @lti_app } %>
+            <%= render partial: "tag_cloud", locals: { tags: @tags, tag_ids: @lti_app.tag_ids } %>
           </div>
         </div>
         <div class="row">
@@ -42,10 +47,30 @@
           </div><!-- /input-group -->
         </div>
       </div>
+        
+      <hr class="dotted">
+
+      <section class="app-reviews">
+        <div class="well well-small">
+          <div id="app-reviews">
+            <% @lti_app.reviews.each do |review| %>
+              <div class="app-review media">
+                <a href="#" class="pull-left">
+                  <%= image_tag review.user.profile_image_url, style: "width: 50px; height: 50px; margin-bottom: 5px;" %>
+                  <%= star_rating(review.rating, "mini-stars") %>
+                </a>
+                <div class="media-body">
+                  <div class="small"><span><%= review.user.name %></span> on <span><%= review.created_at.strftime("%b %d, %Y") %></span></div>
+                  <%= review.comments %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
   <div class="col-sm-3">
-    side
   </div>
 </div>
 

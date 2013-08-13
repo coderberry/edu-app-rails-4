@@ -1,8 +1,11 @@
 EduApps::Application.routes.draw do
 
-  get "/api/lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
-  
-  resources :reviews
+  scope "api/v1" do
+    get "lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
+    get "lti_apps/:id" => "lti_apps#show", :defaults => { :format => "json" }
+    resources :reviews
+  end
+
   resources :tags
   resources :lti_apps, path: '/apps'
 

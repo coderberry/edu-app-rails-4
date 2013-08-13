@@ -1,9 +1,10 @@
 class LtiAppsController < ApplicationController
   before_action :set_lti_app, only: [:update, :destroy]
+  before_action :build_tag_list
 
   # GET /lti_apps
   def index
-    @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.order(:name).all
+    @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.order(:name).load
     respond_to do |format|
       format.html
       format.json { render json: @lti_apps }
@@ -12,7 +13,7 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps/1
   def show
-    @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.where(short_name: params[:id]).first
+    @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
     respond_to do |format|
       format.html
       format.xml  { render xml: @lti_app.cartridge.to_xml }
@@ -66,5 +67,12 @@ class LtiAppsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def lti_app_params
       params.require(:lti_app).permit(:user_id, :short_name, :name, :description, :status, :testing_instructions, :support_url, :author_name, :is_public, :app_type, :ims_cert_url, :preview_url, :config_url, :data_url, :cartridge, :banner_image_url, :logo_image_url, :short_description)
+    end
+
+    def build_tag_list
+      @tags = {}
+      Tag.all.each do |tag|
+        @tags[tag.id] = tag
+      end
     end
 end

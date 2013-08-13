@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
   has_many :api_keys, as: :tokenable
+  has_many :reviews
 
   # security (i.e. attr_accessible) ...........................................
   attr_accessor :is_registering, :is_omniauthing, :force_require_email, :force_require_password
@@ -61,8 +62,28 @@ class User < ActiveRecord::Base
   end
 
   def gravatar_url(options = {})
-    options[:gravatar_id] = Digest::MD5.hexdigest(self.email)
-    return "http://www.gravatar.com/avatar.php?" + options.to_param
+    if self.email.present?
+      options[:gravatar_id] = Digest::MD5.hexdigest(self.email)
+      return "http://www.gravatar.com/avatar.php?" + options.to_param
+    else
+      return "http://www.gravatar.com/avatar.php"
+    end
+  end
+
+  def can_manage?(organization)
+    !!memberships.where(organization_id: organization.id).where(is_admin: true).exists?
+  end
+
+  def is_member?(organization)
+    !!memberships.where(organization_id: organization.id).exists?
+  end
+
+  def as_tiny_json
+    {
+      name: self.name,
+      url: self.url,
+      avatar_url: self.profile_image_url
+    }
   end
 
   # private instance methods ..................................................

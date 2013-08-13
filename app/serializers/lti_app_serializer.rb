@@ -17,8 +17,9 @@ class LtiAppSerializer < ActiveModel::Serializer
 
   private
 
-  def trancate(string, length = 20)
-    string.size > length+5 ? string[0,length] + "..." : string
+  def trancate(str, length = 20)
+    return str if str.blank?
+    str.size > length+5 ? str[0,length] + "..." : str
   end
 
 end

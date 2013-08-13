@@ -1,7 +1,5 @@
 <ul class="tags clearfix">
-  <%= render partial: "tag_cloud_item", locals: { scope: "extension", tags: lti_app.tags.extensions } %>
-  <%= render partial: "tag_cloud_item", locals: { scope: "category", tags: lti_app.tags.categories } %>
-  <%= render partial: "tag_cloud_item", locals: { scope: "education_level", tags: lti_app.tags.education_levels } %>
-  <%= render partial: "tag_cloud_item", locals: { scope: "privacy_level", tags: lti_app.tags.privacy_levels } %>
-  <%= render partial: "tag_cloud_item", locals: { scope: "app_type", tags: lti_app.tags.app_types } %>
+  <% tag_ids.each do |tag_id| %>
+    <li class="<%= tags[tag_id].context %>"><%= tags[tag_id].name %></li>
+  <% end %>
 </ul>

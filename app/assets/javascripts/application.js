@@ -1,6 +1,11 @@
 //= require jquery
-//= require jquery_ujs
+//= require jquery.cookie
 //= require twitter/bootstrap
 //= require ZeroClipboard.min
 //= require init
 //= require lti_apps
+//= require shCore
+//= require shBrushJScript
+//= require shBrushRuby
+//= require shBrushPython
+//= require shBrushBash

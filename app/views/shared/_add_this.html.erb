@@ -1,0 +1,16 @@
+<div style="padding-top: 10px;">
+  <!-- AddThis Button BEGIN -->
+  <div class="addthis_toolbox addthis_default_style addthis_16x16_style"
+    addthis:title="<%= options[:title] %>"
+    addthis:url="<%= options[:url] %>"
+    addthis:description="<%= options[:description] %>">
+  <a class="addthis_button_facebook"></a>
+  <a class="addthis_button_twitter" addthis:title="LTI App: <%= options[:title] %> <%= options[:url] %> #lti"></a>
+  <a class="addthis_button_pinterest_share" addthis:title="LTI App: <%= options[:title] %> <%= options[:url] %> #lti"></a>
+  <a class="addthis_button_google_plusone_share" addthis:title="LTI App: <%= options[:title] %> <%= options[:url] %> #lti"></a>
+  <a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+  </div>
+  <script type="text/javascript">var addthis_config = <%= raw({ data_track_addressbar: true }.merge(options).to_json) %>;</script>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fb479f52a5f0a5c"></script>
+  <!-- AddThis Button END -->
+</div>

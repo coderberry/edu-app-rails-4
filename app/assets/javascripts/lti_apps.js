@@ -1,7 +1,9 @@
 var filter = '';
 var tagIds = [];
+var display = $.cookie('display') || 'thumbnails';
 
 var showDetails = function() {
+  $.cookie('display', 'details');
   $('a[data-display="list"]').removeClass('selected');
   $('a[data-display="details"]').addClass('selected');
   $('div.thumbnail-view').hide();
@@ -15,6 +17,7 @@ var showDetails = function() {
 }
 
 var showThumbnails = function() {
+  $.cookie('display', 'thumbnails');
   $('a[data-display="details"]').removeClass('selected');
   $('a[data-display="list"]').addClass('selected');
   $('div.details-view').hide();
@@ -40,7 +43,6 @@ var applyFilters = function() {
             return;
           }
         });
-        console.log("SHOW? " + _show);
         if (_show === true) {
           $(this).show();
         } else {
@@ -56,10 +58,12 @@ var applyFilters = function() {
 }
 
 $(function() {
-  $('a[data-display="details"]').click(function() {
+  $('a[data-display="details"]').click(function(e) {
+    e.preventDefault();
     showDetails();
   });
-  $('a[data-display="list"]').click(function() {
+  $('a[data-display="list"]').click(function(e) {
+    e.preventDefault();
     showThumbnails();
   });
   $('#lti-app-filter').bind("keyup input paste", function() {
@@ -70,4 +74,9 @@ $(function() {
     tagIds = $.map($('form#filters').serializeArray(), function(obj) { return obj["value"]; });
     applyFilters();
   });
+
+  // Set the view to details if that is the view in the cookie
+  if ($.cookie('display') == 'details') {
+    showDetails();
+  }
 });

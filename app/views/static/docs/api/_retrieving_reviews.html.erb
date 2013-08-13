@@ -2,12 +2,161 @@
   <h3 class="page-header">Retrieving Reviews</h3>
 </div>
 
-<p>
-  You can retrieve a specific review (to see for example if the current user has already reviewed the specified app) by calling. Requires the same <code>user_id</code> and <code>access_token</code> used when posting the review.
-</p>
-<code>GET /api/v1/apps/:app_id/reviews/:access_token/:user_id</code>
-<pre>{
-"user_avatar_url": "http://example.com/user/avatar/50x50.png",
-"source_name": "Human-readable name of platform/app where user posted",
-// Same as above
-}</pre>
+<table class="table table-bordered">
+  <tbody><tr>
+    <td>METHOD</td>
+    <td><code>GET</code></td>
+  </tr><tr>
+    <td>Endpoint</td>
+    <td><code><%= reviews_url %></code></td>
+  </tr></tbody>
+</table>
+
+<fieldset>
+  <legend>Required/Optional Parameters</legend>
+  <table class="table table-bordered table-striped">
+    <tbody><tr>
+      <td><code>lti_app_id</code></td>
+      <td><span class="label label-success">required</span></td>
+      <td>The is the <em>short name</em> of an LTI app which is used as an identifier. It can be found
+      in the URL when viewing any LTI app (e.g. twitter)</td>
+    </tr><tr>
+      <td><code>user_email</code></td>
+      <td><span class="label">optional</span></td>
+      <td>User's email address. If provided, the response will only include the review by the user with the email provided (if exists).</td>
+    </tr>
+  </tbody></table>
+</fieldset>
+
+<fieldset>
+  <legend>Example Code (collection)</legend>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#ruby" data-toggle="tab">Ruby</a></li>
+    <li><a href="#python" data-toggle="tab">Python</a></li>
+    <li><a href="#curl" data-toggle="tab">Curl</a></li>
+    <li class="pull-right"><a href="#json-response" data-toggle="tab">Example Response</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="ruby">
+      <pre class="brush: ruby">
+require 'net/http'
+
+url = "<%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>"
+uri = URI.parse(url)
+res = Net::HTTP.get_response(uri)
+body = res.body
+      </pre>
+    </div>
+    <div class="tab-pane" id="python">
+      <pre class="brush: python">
+import urllib
+import urllib2
+
+response = urllib2.urlopen('<%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>')
+body = response.read()
+      </pre>
+    </div>
+    <div class="tab-pane" id="curl">
+      <pre class="brush: bash">
+curl -i \
+     -H "Accept: applicaton/json" \
+     <%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>
+      </pre>
+    </div>
+    <div class="tab-pane" id="json-response">
+      <pre class="brush: js">
+{
+  "reviews": [
+    {
+      "id": 437,
+      "rating": 5,
+      "comments": "May have limited use but this LTI works well and adds value.",
+      "created_at": "2013-08-12T20:22:24.326Z",
+      "user": {
+        "name": "mkroening",
+        "url": null,
+        "avatar_url": "http://www.gravatar.com/avatar.php"
+      }
+    },
+    {
+      "id": 489,
+      "rating": 5,
+      "comments": "This is a really great app!",
+      "created_at": "2013-08-13T17:23:42.065Z",
+      "user": {
+        "name": "Jon Smith",
+        "url": "http://example.com/user",
+        "avatar_url": "http://example.com/user/avatar/50x50.png"
+      }
+    }
+  ]
+}
+    </div>
+  </div>
+
+</fieldset>
+
+<fieldset>
+  <legend>Example Code (individual)</legend>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#ruby2" data-toggle="tab">Ruby</a></li>
+    <li><a href="#python2" data-toggle="tab">Python</a></li>
+    <li><a href="#curl2" data-toggle="tab">Curl</a></li>
+    <li class="pull-right"><a href="#json-response2" data-toggle="tab">Example Response</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="ruby2">
+      <pre class="brush: ruby">
+require 'net/http'
+
+url = "<%= reviews_url %>"
+url << "?lti_app_id=<%= LtiApp.first.short_name %>"
+url << "&user_email=jon.smith@example.com"
+
+uri = URI.parse(url)
+res = Net::HTTP.get_response(uri)
+body = res.body
+      </pre>
+    </div>
+    <div class="tab-pane" id="python2">
+      <pre class="brush: python">
+import urllib
+import urllib2
+
+url = "<%= reviews_url %>"
+url += "?lti_app_id=<%= LtiApp.first.short_name %>"
+url += "&user_email=jon.smith@example.com"
+
+response = urllib2.urlopen(url)
+body = response.read()
+      </pre>
+    </div>
+    <div class="tab-pane" id="curl2">
+      <pre class="brush: bash">
+curl -i \
+     -H "Accept: applicaton/json" \
+     <%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>&user_email=jon.smith@example.com
+      </pre>
+    </div>
+    <div class="tab-pane" id="json-response2">
+      <pre class="brush: js">
+{
+  "review": {
+    "id": 489,
+    "rating": 5,
+    "comments": "This is a really great app!",
+    "created_at": "2013-08-13T17:23:42.065Z",
+    "user": {
+      "name": "Jon Smith",
+      "url": "http://example.com/user",
+      "avatar_url": "http://example.com/user/avatar/50x50.png"
+    }
+  }
+}
+    </div>
+  </div>
+</fieldset>
