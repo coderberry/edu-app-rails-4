@@ -9,3 +9,4 @@
 //= require shBrushRuby
 //= require shBrushPython
 //= require shBrushBash
+//= require shBrushXml

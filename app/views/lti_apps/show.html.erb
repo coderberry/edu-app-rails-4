@@ -65,6 +65,9 @@
                 </div>
               </div>
             <% end %>
+            <% if @lti_app.reviews.count == 0 %>
+                <h5 class="text-center">No reviews</h5>
+            <% end %>
           </div>
         </div>
       </section>

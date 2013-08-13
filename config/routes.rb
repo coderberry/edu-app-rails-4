@@ -1,4 +1,5 @@
 EduApps::Application.routes.draw do
+  resources :lti_apps, path: '/apps'
 
   scope "api/v1" do
     get "lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
@@ -7,7 +8,6 @@ EduApps::Application.routes.draw do
   end
 
   resources :tags
-  resources :lti_apps, path: '/apps'
 
   get "/tutorials/:page" => "static#tutorials", as: :tutorials
   get "/tutorials" => "static#tutorials"

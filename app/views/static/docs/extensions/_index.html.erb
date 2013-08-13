@@ -17,12 +17,12 @@
   </thead>
   <tbody>
   <tr>
-    <td>{{#linkTo 'extensions.content'}}Content{{/linkTo}}</td>
+    <td><%= link_to "Content", docs_path({section: "extensions", page: "content"}) %></td>
     <td>This extension is used to pass content to the tool consumer from the tool provider.
     </td>
   </tr>
   <tr>
-    <td>{{#linkTo 'extensions.result_data'}}Result Data{{/linkTo}}</td>
+    <td><%= link_to "Result Data", docs_path({section: "extensions", page: "result_data"}) %></td>
     <td>Add resultData in addition to resultScore in outcome services.</td>
   </tr>
   </tbody>
@@ -45,23 +45,23 @@
   <tbody>
     <tr>
       <td>Canvas</td>
-      <td>{{#linkTo 'extensions.canvas_navigation'}}Navigation{{/linkTo}}</td>
+      <td><%= link_to "Navigation", docs_path({section: "extensions", page: "canvas_navigation"}) %></td>
       <td>Add LTI links as navigation items in courses/accounts/user areas</td>
     </tr>
     <tr>
       <td>Canvas</td>
-      <td>{{#linkTo 'extensions.canvas_wysiwyg'}}WYSIWYG{{/linkTo}}</td>
-      <td>Add content to WYSIWYG editor using the {{#linkTo 'extensions.content'}}content extension{{/linkTo}}</td>
+      <td><%= link_to "WYSIWYG", docs_path({section: "extensions", page: "canvas_wysiwyg"}) %></td>
+      <td>Add content to WYSIWYG editor using the <%= link_to "content extension", docs_path({section: "extensions", page: "content"}) %></td>
     </tr>
     <tr>
       <td>Canvas</td>
-      <td>{{#linkTo 'extensions.canvas_link_selection'}}Link Selection{{/linkTo}}</td>
-      <td>Add LTI launch urls to modules using the {{#linkTo 'extensions.content'}}content extension{{/linkTo}}</td>
+      <td><%= link_to "Link Selection", docs_path({section: "extensions", page: "canvas_link_selection"}) %></td>
+      <td>Add LTI launch urls to modules using the <%= link_to "content extension", docs_path({section: "extensions", page: "content"}) %></td>
     </tr>
     <tr>
       <td>Canvas</td>
-      <td>{{#linkTo 'extensions.canvas_homework'}}Homework{{/linkTo}}</td>
-      <td>Turn in homework assignments using the {{#linkTo 'extensions.content'}}content extension{{/linkTo}}</td>
+      <td><%= link_to "Homework Submission", docs_path({section: "extensions", page: "canvas_homework"}) %></td>
+      <td>Turn in homework assignments using the <%= link_to "content extension", docs_path({section: "extensions", page: "content"}) %></td>
     </tr>
   </tbody>
 </table>

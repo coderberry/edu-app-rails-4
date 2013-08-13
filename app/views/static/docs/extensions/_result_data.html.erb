@@ -42,64 +42,68 @@
   <p>
     Add a <code>resultData</code> node with a <code>text</code> node of plain text in the same encoding as the rest of the document within it like this:
   </p>
-  <pre class="code"><code>&lt;?xml version = "1.0" encoding = "UTF-8"?&gt;
-&lt;imsx_POXEnvelopeRequest xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0"&gt;
-&lt;imsx_POXHeader&gt;
-  &lt;imsx_POXRequestHeaderInfo&gt;
-    &lt;imsx_version&gt;V1.0&lt;/imsx_version&gt;
-    &lt;imsx_messageIdentifier&gt;999999123&lt;/imsx_messageIdentifier&gt;
-  &lt;/imsx_POXRequestHeaderInfo&gt;
-&lt;/imsx_POXHeader&gt;
-&lt;imsx_POXBody&gt;
-  &lt;replaceResultRequest&gt;
-    &lt;resultRecord&gt;
-      &lt;sourcedGUID&gt;
-        &lt;sourcedId&gt;3124567&lt;/sourcedId&gt;
-      &lt;/sourcedGUID&gt;
-      &lt;result&gt;
-        &lt;resultScore&gt;
-          &lt;language&gt;en&lt;/language&gt;
-          &lt;textString&gt;0.92&lt;/textString&gt;
-        &lt;/resultScore&gt;
-        &lt;!--      Added element      --&gt;
-        &lt;resultData&gt;
-          &lt;text&gt;text data for canvas submission&lt;/text&gt;
-        &lt;/resultData&gt;
-      &lt;/result&gt;
-    &lt;/resultRecord&gt;
-  &lt;/replaceResultRequest&gt;
-&lt;/imsx_POXBody&gt;
-&lt;/imsx_POXEnvelopeRequest&gt;</code></pre>
+  <pre class="brush: xml">
+<?xml version = "1.0" encoding = "UTF-8"?>
+<imsx_POXEnvelopeRequest xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0">
+  <imsx_POXHeader>
+    <imsx_POXRequestHeaderInfo>
+      <imsx_version>V1.0</imsx_version>
+      <imsx_messageIdentifier>999999123</imsx_messageIdentifier>
+    </imsx_POXRequestHeaderInfo>
+  </imsx_POXHeader>
+  <imsx_POXBody>
+    <replaceResultRequest>
+      <resultRecord>
+        <sourcedGUID>
+          <sourcedId>3124567</sourcedId>
+        </sourcedGUID>
+        <result>
+          <resultScore>
+            <language>en</language>
+            <textString>0.92</textString>
+          </resultScore>
+          <!--      Added element      -->
+          <resultData>
+            <text>text data for canvas submission</text>
+          </resultData>
+        </result>
+      </resultRecord>
+    </replaceResultRequest>
+  </imsx_POXBody>
+</imsx_POXEnvelopeRequest>
+</pre>
 </fieldset>
 
 <fieldset>
   <legend>URL</legend>
   <p>Add a <code>resultData</code> node with a <code>url</code> node within it like this:</p>
-  <pre class="code"><code>&lt;?xml version = "1.0" encoding = "UTF-8"?&gt;
-&lt;imsx_POXEnvelopeRequest xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0"&gt;
-  &lt;imsx_POXHeader&gt;
-    &lt;imsx_POXRequestHeaderInfo&gt;
-      &lt;imsx_version&gt;V1.0&lt;/imsx_version&gt;
-      &lt;imsx_messageIdentifier&gt;999999123&lt;/imsx_messageIdentifier&gt;
-    &lt;/imsx_POXRequestHeaderInfo&gt;
-  &lt;/imsx_POXHeader&gt;
-  &lt;imsx_POXBody&gt;
-    &lt;replaceResultRequest&gt;
-      &lt;resultRecord&gt;
-        &lt;sourcedGUID&gt;
-          &lt;sourcedId&gt;3124567&lt;/sourcedId&gt;
-        &lt;/sourcedGUID&gt;
-        &lt;result&gt;
-          &lt;resultScore&gt;
-            &lt;language&gt;en&lt;/language&gt;
-            &lt;textString&gt;0.92&lt;/textString&gt;
-          &lt;/resultScore&gt;
-          &lt;!--      Added element      --&gt;
-          &lt;resultData&gt;
-            &lt;url&gt;https://www.example.com/cool_lti_link_submission&lt;/url&gt;
-          &lt;/resultData&gt;
-        &lt;/result&gt;
-      &lt;/resultRecord&gt;
-    &lt;/replaceResultRequest&gt;
-  &lt;/imsx_POXBody&gt;
-&lt;/imsx_POXEnvelopeRequest&gt;</code></pre>
+  <pre class="brush: xml">
+<?xml version = "1.0" encoding = "UTF-8"?>
+<imsx_POXEnvelopeRequest xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0">
+  <imsx_POXHeader>
+    <imsx_POXRequestHeaderInfo>
+      <imsx_version>V1.0</imsx_version>
+      <imsx_messageIdentifier>999999123</imsx_messageIdentifier>
+    </imsx_POXRequestHeaderInfo>
+  </imsx_POXHeader>
+  <imsx_POXBody>
+    <replaceResultRequest>
+      <resultRecord>
+        <sourcedGUID>
+          <sourcedId>3124567</sourcedId>
+        </sourcedGUID>
+        <result>
+          <resultScore>
+            <language>en</language>
+            <textString>0.92</textString>
+          </resultScore>
+          <!--      Added element      -->
+          <resultData>
+            <url>https://www.example.com/cool_lti_link_submission</url>
+          </resultData>
+        </result>
+      </resultRecord>
+    </replaceResultRequest>
+  </imsx_POXBody>
+</imsx_POXEnvelopeRequest>
+  </pre>

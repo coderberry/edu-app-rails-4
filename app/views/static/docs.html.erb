@@ -51,8 +51,8 @@
             <%= link_to "App List", docs_path({section: "api", page: "app_list"}) %></li>
           <li<% if @section == "api" && @page == "app_details" %> class="active"<% end %>>
             <%= link_to "App Details", docs_path({section: "api", page: "app_details"}) %></li>
-          <li<% if @section == "api" && @page == "app_reviews" %> class="active"<% end %>>
-            <%= link_to "App Reviews", docs_path({section: "api", page: "app_reviews"}) %></li>
+          <!-- <li<% if @section == "api" && @page == "app_reviews" %> class="active"<% end %>>
+            <%= link_to "App Reviews", docs_path({section: "api", page: "app_reviews"}) %></li> -->
           <li<% if @section == "api" && @page == "contributing_reviews" %> class="active"<% end %>>
             <%= link_to "Contributing Reviews", docs_path({section: "api", page: "contributing_reviews"}) %></li>
           <li<% if @section == "api" && @page == "retrieving_reviews" %> class="active"<% end %>>

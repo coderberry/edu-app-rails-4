@@ -2,14 +2,59 @@
   <h3 class="page-header">App Details</h3>
 </div>
 
-<p>
-    Returns information on a single app. This doesn't provide any additional information than what's available in the app list response.
-  </p>
+<p>Returns information on a single app. This doesn't provide any additional information than what's available in the app list response.</p>
+<p>The <code>id</code> is the unique identifier (or short name) of the LTI app (e.g. 'twitter')</p>
 
-  <code>GET /api/v1/apps/:app_id</code>
-  <pre>{
-  "id": "unique_identifier",
-  "name": "Human Readable App Name",
-  // Same as above
-},
-</pre>
+<table class="table table-bordered">
+  <tbody><tr>
+    <td>METHOD</td>
+    <td><code>GET</code></td>
+  </tr><tr>
+    <td>Endpoint</td>
+    <td><code><%= root_url %>api/v1/lti_apps/:id</code></td>
+  </tr></tbody>
+</table>
+
+
+
+<fieldset>
+  <legend>Example Code</legend>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#ruby" data-toggle="tab">Ruby</a></li>
+    <li><a href="#python" data-toggle="tab">Python</a></li>
+    <li><a href="#curl" data-toggle="tab">Curl</a></li>
+    <li class="pull-right"><a href="<%= root_url %>api/v1/lti_apps/twitter" target="_blank">Example Response</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="ruby">
+      <pre class="brush: ruby">
+require 'net/http'
+
+url = "<%= root_url %>api/v1/lti_apps/twitter"
+uri = URI.parse(url)
+res = Net::HTTP.get_response(uri)
+body = res.body
+      </pre>
+    </div>
+    <div class="tab-pane" id="python">
+      <pre class="brush: python">
+import urllib
+import urllib2
+
+url = '<%= root_url %>api/v1/lti_apps/twitter'
+response = urllib2.urlopen(url)
+body = response.read()
+      </pre>
+    </div>
+    <div class="tab-pane" id="curl">
+      <pre class="brush: bash">
+curl -i \
+     -H "Accept: applicaton/json" \
+     <%= root_url %>api/v1/lti_apps/twitter
+      </pre>
+    </div>
+  </div>
+
+</fieldset>
