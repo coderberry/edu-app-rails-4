@@ -2,9 +2,45 @@
   <h3 class="page-header">Introduction</h3>
 </div>
 
-<p>
+<p style="text-decoration: line-through;">
   All of the information on Edu-Apps.org is programmatically available. You can call the API to get the current information out. You can also help add to the magic by registering your learning platform here. Then not only can your users see the apps and ratings, but they can also post app ratings back to LTI of Magic through your platform. Find out how at the bottom of the page.
 </p>
-<p>
+<p style="text-decoration: line-through;">
   APIs are cool. This one returns paginated JSON responses. There's no auth required for anything other than posting comments and reviews. All pagination information is included in the JSON response body.
 </p>
+
+<table class="table table-bordered">
+  <thead><tr>
+    <th>Method</th>
+    <th>Endpoint</th>
+    <th>Description</th>
+    <th>&nbsp;</th>
+  </tr></thead>
+  <tbody><tr>
+    <td><code>GET</code></td>
+    <td><code><%= root_url %>api/v1/lti_apps</code></td>
+    <td>List of all LTI Apps</td>
+    <td><%= link_to "Docs", docs_path({section: "api", page: "app_list"}) %></td>
+  </tr><tr>
+    <td><code>GET</code></td>
+    <td><code><%= root_url %>api/v1/lti_apps/:id</code></td>
+    <td>Single LTI App</td>
+    <td><%= link_to "Docs", docs_path({section: "api", page: "app_details"}) %></td>
+  </tr><tr>
+    <td><code>GET</code></td>
+    <td>
+      <code><%= root_url %>api/v1/reviews?lti_app_id=[lti_app_id]</code><br>
+      <code><%= root_url %>api/v1/lti_apps/:lti_app_id/reviews</code>
+    </td>
+    <td>Reviews for an LTI App</td>
+    <td><%= link_to "Docs", docs_path({section: "api", page: "retrieving_reviews"}) %></td>
+  </tr><tr>
+    <td><code>POST</code></td>
+    <td>
+      <code><%= root_url %>api/v1/reviews</code><br>
+      <code><%= root_url %>api/v1/lti_apps/:lti_app_id/reviews</code>
+    </td>
+    <td>Submit Review</td>
+    <td><%= link_to "Docs", docs_path({section: "api", page: "contributing_reviews"}) %></td>
+  </tr></tbody>
+</table>

@@ -1,10 +1,14 @@
 EduApps::Application.routes.draw do
+  
+  get "/tools/xml_builder" => "xml_builder#index", as: :xml_builder
+  
   resources :lti_apps, path: '/apps'
 
   scope "api/v1" do
     get "lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
     get "lti_apps/:id" => "lti_apps#show", :defaults => { :format => "json" }
-    resources :reviews
+    get "lti_apps/:lti_app_id/reviews" => "reviews#index", :defaults => { :format => "json" }
+    get "reviews" => "reviews#index", :defaults => { :format => "json" }
   end
 
   resources :tags

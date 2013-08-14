@@ -1,0 +1,251 @@
+<% content_for :content do %>
+<div id="ember-app"></div>
+
+<script type="text/x-handlebars" data-template-name="_selectionForm">
+<div class="form-group">
+  <label>LTI Launch URL</label>
+  {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
+</div>
+<div class="form-group">
+  <label>Link Text</label>
+  {{input type="text" value=link_text class="form-control" placeholder=""}}
+</div>
+<div class="form-group">
+  <label>Icon URL</label>
+  {{input type="text" value=icon_image_url class="form-control"}}
+</div>
+<div class="row">
+  <div class="form-group col-6">
+    <label>Width (px)</label>
+    {{input type="text" value=selection_width class="form-control"}}
+  </div>
+  <div class="form-group col-6">
+    <label>Height (px)</label>
+    {{input type="text" value=selection_height class="form-control"}}
+  </div>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="_navigationForm">
+<div class="form-group">
+  <label>LTI Launch URL</label>
+  {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
+</div>
+<div class="form-group">
+  <label>Link Text</label>
+  {{input type="text" value=link_text class="form-control" placeholder=""}}
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="_xml">
+<pre><code>{{xml}}</code></pre>
+</script>
+
+<script type="text/x-handlebars"> <!-- Form -->
+<div class="row padded">
+  <div class="col-lg-6">
+    <div class="main-content" style="min-height: 550px;">
+      <div class="header clearfix">
+        <h3 class="page-header">XML Builder</h3>
+      </div>
+
+      <form {{action "buildXml" on="submit"}}>
+        <div class="form-group">
+          <label>Name</label>
+          {{input type="text" value=name class="form-control"}}
+        </div>
+        <div class="form-group">
+          <label>Unique Identifier</label>
+          {{input type="text" value=short_name class="form-control"}}
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          {{input type="text" value=short_description class="form-control"}}
+        </div>
+        <div class="form-group">
+          <label>LTI Launch URL</label>
+          {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
+        </div>
+        <div class="form-group">
+          <label>Link Text</label>
+          {{input type="text" value=link_text class="form-control" placeholder=""}}
+        </div>
+        <div class="form-group">
+          <label>Icon URL</label>
+          {{input type="text" value=icon_image_url class="form-control"}}
+        </div>
+        <div class="form-group">
+          <label>Launch Privacy</label>
+          {{view Ember.Select
+                 contentBinding="App.launchPrivacy"
+                 optionValuePath="content.value"
+                 optionLabelPath="content.name"
+                 valueBinding=launch_privacy
+                 class="form-control"}}
+        </div>
+        <div class="form-group">
+          <label>Domain</label>
+          {{input type="text" value=domain class="form-control" placeholder="my.domain.com"}}
+        </div>
+
+        <fieldset>
+          <legend>
+            <a href="#" {{action "addCustomField"}} class="btn btn-xs btn-info pull-right">Add Custom Field</a>
+            Custom Field(s)
+          </legend>
+          <div class="form-group">
+            <div class="well well-small">
+              {{#each cf in custom_fields}}
+                <div class="row" style="margin-bottom: 5px;">
+                  <div class="col-5">
+                    {{input type="text" value=cf.name class="form-control" placeholder="Name"}}
+                  </div>
+                  <div class="col-5">
+                    {{input type="text" value=cf.value class="form-control" placeholder="Value"}}
+                  </div>
+                  <div class="col-2">
+                    <button {{action "removeCustomField" cf}} class="btn btn-block btn-danger">X</button>
+                  </div>
+                </div>
+              {{else}}
+                <div class="text-center">There are no custom fields</div>
+              {{/each}}
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            {{input type="checkbox" checked=useEditorButton class="pull-right"}}
+            Extension: Editor Button
+          </legend>
+          <div class="well well-small">
+            {{#if useEditorButton}}
+              {{#with editorButtonSettings}}
+                {{partial "selectionForm"}}
+              {{/with}}
+            {{else}}
+              <div class="text-center">Click the checkbox above to enable this extension</div>
+            {{/if}}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            {{input type="checkbox" checked=useLinkSelection class="pull-right"}}
+            Extension: Link Selection
+          </legend>
+          <div class="well well-small">
+            {{#if useLinkSelection}}
+              {{#with linkSelectionSettings}}
+                {{partial "selectionForm"}}
+              {{/with}}
+            {{else}}
+              <div class="text-center">Click the checkbox above to enable this extension</div>
+            {{/if}}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            {{input type="checkbox" checked=useHomeworkSubmission class="pull-right"}}
+            Extension: Homework Submission
+          </legend>
+          <div class="well well-small">
+            {{#if useHomeworkSubmission}}
+              {{#with homeworkSubmissionSettings}}
+                {{partial "selectionForm"}}
+              {{/with}}
+            {{else}}
+              <div class="text-center">Click the checkbox above to enable this extension</div>
+            {{/if}}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            {{input type="checkbox" checked=useCourseNavigation class="pull-right"}}
+            Extension: Course Navigation
+          </legend>
+          <div class="well well-small">
+            {{#if useCourseNavigation}}
+              {{#with courseNavigationSettings}}
+                <div class="form-group">
+                  <label>LTI Launch URL</label>
+                  {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
+                </div>
+                <div class="form-group">
+                  <label>Link Text</label>
+                  {{input type="text" value=link_text class="form-control" placeholder=""}}
+                </div>
+                <div class="form-group">
+                  <label>Visibility</label>
+                  {{view Ember.Select
+                         contentBinding="App.visibilityOptions"
+                         optionValuePath="content.value"
+                         optionLabelPath="content.name"
+                         valueBinding=visibility
+                         class="form-control"}}
+                </div>
+                <div class="checkbox">
+                  <label>
+                    {{input type="checkbox" checked=enabledByDefault}}
+                    Enabled by default?
+                  </label>
+                </div>
+              {{/with}}
+            {{else}}
+              <div class="text-center">Click the checkbox above to enable this extension</div>
+            {{/if}}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            {{input type="checkbox" checked=useAccountNavigation class="pull-right"}}
+            Extension: Account Navigation
+          </legend>
+          <div class="well well-small">
+            {{#if useAccountNavigation}}
+              {{#with accountNavigationSettings}}
+                {{partial "navigationForm"}}
+              {{/with}}
+            {{else}}
+              <div class="text-center">Click the checkbox above to enable this extension</div>
+            {{/if}}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            {{input type="checkbox" checked=useUserNavigation class="pull-right"}}
+            Extension: User Navigation
+          </legend>
+          <div class="well well-small">
+            {{#if useUserNavigation}}
+              {{#with userNavigationSettings}}
+                {{partial "navigationForm"}}
+              {{/with}}
+            {{else}}
+              <div class="text-center">Click the checkbox above to enable this extension</div>
+            {{/if}}
+          </div>
+        </fieldset>
+
+      </div>
+    </form>
+  </div>
+  <div class="col-lg-6">
+    <div class="main-content" style="min-height: 550px;">
+      <div class="header clearfix">
+        <h3 class="page-header">Results</h3>
+      </div>
+      {{partial "xml"}}
+    </div>
+  </div>
+</div>
+</script> <!-- /Form -->
+
+
+<%= javascript_include_tag "xml_builder" %>
+<% end %>

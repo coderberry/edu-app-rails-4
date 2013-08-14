@@ -4,11 +4,20 @@
 
 <table class="table table-bordered">
   <tbody><tr>
-    <td>METHOD</td>
+    <td>Method</td>
     <td><code>GET</code></td>
   </tr><tr>
     <td>Endpoint</td>
-    <td><code><%= reviews_url %></code></td>
+    <td>
+      <div class="clearfix">
+        <a href="<%= root_url %>api/v1/reviews?lti_app_id=twitter" target="_blank" class=" pull-right btn btn-xs btn-info">Try It</a>
+        <code><%= root_url %>api/v1/reviews?lti_app_id=[:lti_app_id]</code>
+      </div>
+      <div class="clearfix" style="margin-top: 10px;">
+        <a href="<%= root_url %>api/v1/lti_apps/twitter/reviews" target="_blank" class=" pull-right btn btn-xs btn-info">Try It</a>
+        <code><%= root_url %>api/v1/lti_apps/:lti_app_id/reviews</code>
+      </div>
+    </td>
   </tr></tbody>
 </table>
 

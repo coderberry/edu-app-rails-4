@@ -4,6 +4,7 @@
 //= require ZeroClipboard.min
 //= require init
 //= require lti_apps
+//= require lti_app_form
 //= require shCore
 //= require shBrushJScript
 //= require shBrushRuby
