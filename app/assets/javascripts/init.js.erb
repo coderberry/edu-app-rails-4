@@ -6,7 +6,7 @@ $(function() {
 
   var clip = new ZeroClipboard($(".copy-button"), { moviePath: "<%= asset_path('ZeroClipboard.swf') %>" });
   clip.on('complete', function(client, args) {
-    alert("Copied text to clipboard:\n\n" + args.text );
+    alert("Copied!");
   });
 
   SyntaxHighlighter.all();

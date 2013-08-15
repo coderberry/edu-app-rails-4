@@ -1,0 +1,2 @@
+module CartridgesHelper
+end

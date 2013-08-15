@@ -9,6 +9,8 @@ EduApps::Application.routes.draw do
     get "lti_apps/:id" => "lti_apps#show", :defaults => { :format => "json" }
     get "lti_apps/:lti_app_id/reviews" => "reviews#index", :defaults => { :format => "json" }
     get "reviews" => "reviews#index", :defaults => { :format => "json" }
+    get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
+    get "cartridges/:id" => "cartridges#show", :defaults => { :format => "json" }
   end
 
   resources :tags

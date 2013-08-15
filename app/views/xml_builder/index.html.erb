@@ -1,45 +1,10 @@
 <% content_for :content do %>
 <div id="ember-app"></div>
 
-<script type="text/x-handlebars" data-template-name="_selectionForm">
-<div class="form-group">
-  <label>LTI Launch URL</label>
-  {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
-</div>
-<div class="form-group">
-  <label>Link Text</label>
-  {{input type="text" value=link_text class="form-control" placeholder=""}}
-</div>
-<div class="form-group">
-  <label>Icon URL</label>
-  {{input type="text" value=icon_image_url class="form-control"}}
-</div>
-<div class="row">
-  <div class="form-group col-6">
-    <label>Width (px)</label>
-    {{input type="text" value=selection_width class="form-control"}}
-  </div>
-  <div class="form-group col-6">
-    <label>Height (px)</label>
-    {{input type="text" value=selection_height class="form-control"}}
-  </div>
-</div>
-</script>
-
-<script type="text/x-handlebars" data-template-name="_navigationForm">
-<div class="form-group">
-  <label>LTI Launch URL</label>
-  {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
-</div>
-<div class="form-group">
-  <label>Link Text</label>
-  {{input type="text" value=link_text class="form-control" placeholder=""}}
-</div>
-</script>
-
-<script type="text/x-handlebars" data-template-name="_xml">
-<pre><code>{{xml}}</code></pre>
-</script>
+<%= render partial: "emClipboard" %>
+<%= render partial: "selectionForm" %>
+<%= render partial: "navigationForm" %>
+<%= render partial: "xml" %>
 
 <script type="text/x-handlebars"> <!-- Form -->
 <div class="row padded">
@@ -73,6 +38,16 @@
         <div class="form-group">
           <label>Icon URL</label>
           {{input type="text" value=icon_image_url class="form-control"}}
+        </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Default Width (px)</label>
+            {{input type="text" value=selection_width class="form-control"}}
+          </div>
+          <div class="form-group col-6">
+            <label>Default Height (px)</label>
+            {{input type="text" value=selection_height class="form-control"}}
+          </div>
         </div>
         <div class="form-group">
           <label>Launch Privacy</label>
@@ -238,14 +213,16 @@
   <div class="col-lg-6">
     <div class="main-content" style="min-height: 550px;">
       <div class="header clearfix">
-        <h3 class="page-header">Results</h3>
+        <h3 class="page-header">
+          {{em-clipboard text=xml label="Copy to Clipboard"}}
+          Results
+        </h3>
       </div>
       {{partial "xml"}}
     </div>
   </div>
 </div>
 </script> <!-- /Form -->
-
 
 <%= javascript_include_tag "xml_builder" %>
 <% end %>
