@@ -1,12 +1,23 @@
-App.Cartridge = Ember.Model.extend({
-  data       : Ember.attr(),
-  name       : Ember.attr(),
-  created_at : Ember.attr(),
-  updated_at : Ember.attr()
+// App.Cartridge = Ember.Model.extend({
+//   cartridge  : Ember.attr(),
 
-}).reopenClass({
-  rootKey       : 'cartridge',
-  collectionKey : 'cartridges',
-  url           : '/api/v1/cartridges',
-  adapter       : Ember.RESTAdapter.create()
-});
+// }).reopenClass({
+//   rootKey       : 'cartridge',
+//   collectionKey : 'cartridges',
+//   url           : '/api/v1/cartridges',
+//   adapter       : Ember.Adapter.create({
+//     createRecord: function() {
+      
+//     },
+    
+//     save: function() {
+//       Ember.$.post({
+//         url: '/api/v1/cartridges',
+//         data: JSON.stringify(this.get('cartridge')),
+//         success: function( data ) {
+//           alert(data);
+//         }
+//       })
+//     }
+//   })
+// });

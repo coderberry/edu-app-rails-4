@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe User do
+
+  it "#with_access_token" do
+    user = User.create!(name: 'Foo Bar', email: 'foo@example.com')
+    api_key = user.current_api_key
+    User.with_access_token(api_key.access_token).id.should eq(user.id)
+  end
+
   describe "create directly (no omniauth nor via reviews)" do
     it "requires email and password" do
       user = User.new(is_registering: true)

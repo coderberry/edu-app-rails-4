@@ -1,4 +1,3 @@
 class XmlBuilderController < ApplicationController
-  def index
-  end
+  before_filter :authorize
 end

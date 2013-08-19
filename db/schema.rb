@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20130815163310) do
 
   create_table "cartridges", force: true do |t|
     t.string   "uid"
-    t.json     "data"
     t.string   "name",       null: false
+    t.text     "xml"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

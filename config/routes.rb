@@ -9,8 +9,13 @@ EduApps::Application.routes.draw do
     get "lti_apps/:id" => "lti_apps#show", :defaults => { :format => "json" }
     get "lti_apps/:lti_app_id/reviews" => "reviews#index", :defaults => { :format => "json" }
     get "reviews" => "reviews#index", :defaults => { :format => "json" }
+
     get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
-    get "cartridges/:id" => "cartridges#show", :defaults => { :format => "json" }
+    get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }
+    post "cartridges" => "cartridges#create"
+    post "cartridges/import" => "cartridges#import"
+    post "cartridges/:uid" => "cartridges#update"
+    delete "cartridges" => "cartridges#destroy"
   end
 
   resources :tags
@@ -27,6 +32,8 @@ EduApps::Application.routes.draw do
   get "/settings/profile" => "users#edit", as: :edit_profile
   get "/settings/account_settings" => "users#edit_password", as: :edit_password
   patch "/settings/account_settings" => "users#update_password", as: :update_password
+
+  get "/cartridges/:uid.xml" => "cartridges#xml"
 
   namespace :settings do
     resources :authentications

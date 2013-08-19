@@ -1,0 +1,15 @@
+.affix {
+  position: fixed;
+  top: 80px;
+  bottom: 40px;
+  width: percentage((6 / $grid-columns)); 
+}
+.affix-top {
+  background-color: green;
+}
+.affix-bottom {
+  bottom: 20px;
+}
+
+#import-form-container {
+}

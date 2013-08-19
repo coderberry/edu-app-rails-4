@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :memberships
   has_many :api_keys, as: :tokenable
   has_many :reviews, dependent: :destroy
+  has_many :cartridges, dependent: :destroy
 
   # security (i.e. attr_accessible) ...........................................
   attr_accessor :is_registering, :is_omniauthing, :force_require_email, :force_require_password
@@ -28,9 +29,15 @@ class User < ActiveRecord::Base
   # additional config .........................................................
   has_secure_password :validations => false
 
+  # class methods .............................................................
+  def self.with_access_token(token)
+    api_key = ApiKey.where(access_token: token).first
+    api_key.try(:user)
+  end
+
   # public instance methods ...................................................
-  def session_api_key
-    api_keys.create
+  def current_api_key
+    api_keys.active.first || api_keys.create
   end
 
   def clear_expired_api_keys

@@ -14,5 +14,9 @@ App.ApplicationController = Ember.ObjectController.extend({
 
   showEditorButtonSettings: function() {
     return this.get('model.useEditorButton');
-  }.observes('useEditorButton')
+  }.observes('useEditorButton'),
+
+  save: function() {
+    this.get('model').save();
+  }
 });

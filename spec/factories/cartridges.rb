@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :cartridge do
-    data ""
-    user nil
-    name "MyString"
+    association :user, factory: :user, strategy: :create
+    sequence(:name) {|n| "My Xml #{rand(10000)}" }
   end
 end

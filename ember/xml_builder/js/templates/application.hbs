@@ -1,0 +1,87 @@
+{{#view App.FlashView id="flash-view"}}
+  <div id="message">
+    {{view.content.message}}
+  </div>
+{{/view}}
+
+<div id="main-panels" class="row padded">
+  {{#if showForm}}
+    <div class="col-lg-6">
+      <div class="main-content" style="margin-bottom: 10px;">
+        <div class="header clearfix">
+          <h3 class="page-header">
+            <button {{action "save"}} class="btn btn-success btn-sm pull-right">Save</button>
+            Configure XML
+          </h3>
+        </div>
+        {{outlet}}
+      </div>
+    </div>
+  {{/if}}
+  <div {{bindAttr class=":col-lg-6 showForm::col-lg-offset-3"}}>
+
+    <div class="main-content" style="margin-bottom: 10px; display: none;" id="import-panel">
+      <div class="header clearfix">
+        <h3 class="page-header">
+          <button {{action "hideImportForm"}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
+          Import from XML Config URL
+        </h3>
+        <form {{action "import" on="submit"}} style="margin: 10px 0 0 0;">
+          <div class="row">
+            <div class="col-9">
+              {{input type="text" class="form-control" value=importUrl placeholder="https://"}}
+            </div>
+            <div class="col-3">
+              <button type="submit" class="btn btn-primary btn-block pull-right" style="margin-left: 5px;">Import</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="main-content" style="margin-bottom: 10px;">
+      <div class="header clearfix">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Create <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#" {{action "new"}}>From Scratch</a></li>
+            <li><a href="#" {{action "displayImportForm"}}>From XML Config URL</a></li>
+          </ul>
+        </div>
+        <h3 class="page-header">
+          My Saved Configurations
+        </h3>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Modified</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each controller}}
+          {{log this}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{fromNow updated_at}}</td>
+            <td class="text-right">
+              <a {{action "showXml" this}} class="btn btn-xs btn-success"><i class="icon-code"></i> XML</a>
+              {{#linkTo "cartridge" this class="btn btn-xs btn-info"}}<i class="icon-edit"></i> Edit{{/linkTo}}
+              <button {{action "delete" this}} class="btn btn-xs btn-danger"><i class="icon-trash"></i> Delete</button>
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    {{#if showForm}}
+      {{partial "xml"}}
+    {{/if}}
+  </div>
+</div>

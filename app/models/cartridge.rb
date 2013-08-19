@@ -7,6 +7,11 @@ class Cartridge < ActiveRecord::Base
 
   # validations ...............................................................
   validates :name, presence: true
+  validates :xml, presence: true
+
+  def to_xml
+    cartridge.to_xml
+  end
 
   # private instance methods ..................................................
   private
