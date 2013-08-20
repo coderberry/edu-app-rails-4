@@ -20,7 +20,8 @@ var ApplicationController = Ember.ArrayController.extend({
     var cartridgeCtrl = this.get('controllers.cartridge');
     Ember.$.post('/api/v1/cartridges/import', { url: this.get('importUrl') }).then(function(data) {
       _this.get('model').reload();
-      _this.transitionToRoute('cartridge', Cartridge.find(data['cartridge']['uid']));
+      App.FlashQueue.pushFlash('notice', 'Successfully imported ' + data['cartridge']['name']);
+      _this.transitionToRoute('/' + data['cartridge']['uid']);
       _this.hideImportForm();
     });
   },
