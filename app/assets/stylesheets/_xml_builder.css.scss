@@ -13,3 +13,16 @@
 
 #import-form-container {
 }
+
+.circle-buttons {
+  span.icon-stack {
+    cursor: pointer;
+    margin: 0px;
+    a {
+      text-decoration: none;
+    }
+    i.icon-top-layer {
+      line-height: 1.9em;
+    }
+  }
+}

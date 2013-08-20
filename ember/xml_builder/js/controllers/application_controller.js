@@ -21,6 +21,7 @@ var ApplicationController = Ember.ArrayController.extend({
     Ember.$.post('/api/v1/cartridges/import', { url: this.get('importUrl') }).then(function(data) {
       _this.get('model').reload();
       _this.transitionToRoute('cartridge', Cartridge.find(data['cartridge']['uid']));
+      _this.hideImportForm();
     });
   },
 
@@ -52,9 +53,13 @@ var ApplicationController = Ember.ArrayController.extend({
 
     var cartridgeCtrl = this.get('controllers.cartridge');
     var cartridge = cartridgeCtrl.get('model');
-    var isCurrentRecord = (cartridge.get('id') === record.get('uid'));
+    var isCurrentRecord = false;
+    if (cartridge) {
+      isCurrentRecord = (cartridge.get('id') === record.get('uid'));
+    }
 
     record.deleteRecord();
+    App.FlashQueue.pushFlash('notice', 'Cartridge has been deleted');
 
     this.get('model').reload();
     if (isCurrentRecord) {
@@ -65,9 +70,11 @@ var ApplicationController = Ember.ArrayController.extend({
   xml: function() {
     var compressed_xml = this.get('controllers.cartridge.xml');
     if (!Ember.isEmpty(compressed_xml)) {
-      return vkbeautify.xml(compressed_xml);
+      var code = vkbeautify.xml(compressed_xml, 2);
+      return code;
     }
   }.property('controllers.cartridge.xml')
+
 });
 
 module.exports = ApplicationController;

@@ -69,10 +69,19 @@
           <tr>
             <td>{{name}}</td>
             <td>{{fromNow updated_at}}</td>
-            <td class="text-right">
-              <a {{action "showXml" this}} class="btn btn-xs btn-success"><i class="icon-code"></i> XML</a>
-              {{#linkTo "cartridge" this class="btn btn-xs btn-info"}}<i class="icon-edit"></i> Edit{{/linkTo}}
-              <button {{action "delete" this}} class="btn btn-xs btn-danger"><i class="icon-trash"></i> Delete</button>
+            <td class="circle-buttons">
+              <span class="icon-stack text-danger pull-right">
+                <i class="icon-circle icon-stack-base"></i>
+                <a {{action "delete" this}} href="#"><i class="icon-top-layer icon-trash icon-light"></i></a>
+              </span>
+              <span class="icon-stack text-info pull-right">
+                <i class="icon-circle icon-stack-base"></i>
+                {{#linkTo "cartridge" this}}<i class="icon-top-layer icon-edit icon-light"></i>{{/linkTo}}
+              </span>
+              <span class="icon-stack text-success pull-right">
+                <i class="icon-circle icon-stack-base"></i>
+                <a {{action "showXml" this}}><i class="icon-top-layer icon-code icon-light"></i></a>
+              </span>
             </td>
           </tr>
         {{/each}}
