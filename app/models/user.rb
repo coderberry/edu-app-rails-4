@@ -8,23 +8,31 @@ class User < ActiveRecord::Base
   has_many :api_keys, as: :tokenable
   has_many :reviews, dependent: :destroy
   has_many :cartridges, dependent: :destroy
+  has_many :registration_codes, dependent: :destroy
 
   # security (i.e. attr_accessible) ...........................................
-  attr_accessor :is_registering, :is_omniauthing, :force_require_email, :force_require_password
+  attr_accessor :is_registering, :is_omniauthing, :force_require_email,
+                :force_require_password, :password_confirmation
 
   # validations ...............................................................
-  validates :email, 
-              uniqueness: { if: :require_email? }, 
-              format: { with: /.+@.+\..+/, if: :require_email? }, 
-              presence: { if: :require_email? }
+  validates :email,
+              uniqueness: true,
+              presence: true,
+              format: { with: /.+@.+\..+/ },
+              if: :require_email?
 
-  validates :name, 
+  validates :name,
               presence: true
 
-  validates :password, 
-              presence: { on: :create, if: :require_password? }, 
-              confirmation: { if: :require_password? }, 
-              length: { minimum: 6, if: :require_password? }
+  validates :password,
+              presence: true,
+              confirmation: true,
+              length: {minimum: 6},
+              if: :require_password?
+
+  validates :password_confirmation,
+              presence: true,
+              if: :require_password?
 
   # additional config .........................................................
   has_secure_password :validations => false
@@ -132,15 +140,7 @@ class User < ActiveRecord::Base
   private
 
   def require_email?
-    if !!self.is_registering # Standard authentication
-      true
-    elsif !!self.force_require_email
-      true
-    elsif !!self.is_omniauthing # Authenticating via Omniauth
-      false
-    else # Authenticating via Reviews
-      true
-    end
+    !!self.force_require_email || !!self.email
   end
 
   def require_password?

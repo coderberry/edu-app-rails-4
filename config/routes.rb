@@ -29,9 +29,12 @@ EduApps::Application.routes.draw do
   get "/login" => "sessions#new", as: :login
   get "/logout" => "sessions#destroy", as: :logout
 
+  resources :users
   get "/settings/profile" => "users#edit", as: :edit_profile
+  put "/settings/profile" => "users#update", as: :update_profile
   get "/settings/account_settings" => "users#edit_password", as: :edit_password
   patch "/settings/account_settings" => "users#update_password", as: :update_password
+  get "/settings/email_confirmation" => "users#update_email", as: :email_confirmation
 
   get "/cartridges/:uid.xml" => "cartridges#xml"
 
@@ -46,7 +49,6 @@ EduApps::Application.routes.draw do
     end
   end
 
-  resources :users
   resources :sessions
 
   root "lti_apps#index"

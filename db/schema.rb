@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815163310) do
+ActiveRecord::Schema.define(version: 20130815222435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,15 @@ ActiveRecord::Schema.define(version: 20130815163310) do
     t.boolean  "is_list_apps_without_approval",              default: false
     t.string   "url",                           limit: 1000
   end
+
+  create_table "registration_codes", force: true do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "code"
+    t.datetime "valid_until"
+  end
+
+  add_index "registration_codes", ["code"], name: "index_registration_codes_on_code", using: :btree
 
   create_table "reviews", force: true do |t|
     t.integer  "membership_id"

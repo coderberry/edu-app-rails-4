@@ -12,7 +12,6 @@ describe User do
     it "requires email and password" do
       user = User.new(is_registering: true)
       user.should_not be_valid
-      user.errors.has_key?(:email).should be_true
       user.errors.has_key?(:password).should be_true
     end
 
@@ -29,7 +28,7 @@ describe User do
 
   describe "create indirectly (via reviews)" do
     it "requires email but not password" do
-      user = User.new
+      user = User.new(force_require_email: true)
       user.should_not be_valid
       user.errors.has_key?(:email).should be_true
       user.errors.has_key?(:password).should be_false
