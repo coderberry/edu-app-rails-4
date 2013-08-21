@@ -14,6 +14,7 @@ EduApps::Application.routes.draw do
     get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }
     post "cartridges" => "cartridges#create"
     post "cartridges/import" => "cartridges#import"
+    post "cartridges/create_from_xml" => "cartridges#create_from_xml"
     post "cartridges/:uid" => "cartridges#update"
     delete "cartridges" => "cartridges#destroy"
   end
@@ -33,7 +34,7 @@ EduApps::Application.routes.draw do
   get "/settings/account_settings" => "users#edit_password", as: :edit_password
   patch "/settings/account_settings" => "users#update_password", as: :update_password
 
-  get "/cartridges/:uid.xml" => "cartridges#xml"
+  get "/cartridges/:uid.xml" => "cartridges#xml", as: :cartridge_xml
 
   namespace :settings do
     resources :authentications

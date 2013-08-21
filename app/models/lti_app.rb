@@ -12,6 +12,7 @@ class LtiApp < ActiveRecord::Base
   # relationships .............................................................
   belongs_to :user
   belongs_to :organization
+  belongs_to :cartridge
   has_and_belongs_to_many :tags
   has_many :reviews, dependent: :destroy
 

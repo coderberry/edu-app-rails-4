@@ -5,6 +5,7 @@ require('../vendor/vkbeautify.0.99.00.beta');
 var ApplicationController = Ember.ArrayController.extend({
   needs: ['cartridge'],
   importUrl: '',
+  pastedXml: '',
 
   sortedColumn: (function() {
     var properties = this.get('sortProperties');
@@ -39,7 +40,6 @@ var ApplicationController = Ember.ArrayController.extend({
 
   import: function() {
     _this = this;
-    var cartridgeCtrl = this.get('controllers.cartridge');
     Ember.$.post('/api/v1/cartridges/import', { url: this.get('importUrl') }).then(function(data) {
       _this.get('model').reload();
       App.FlashQueue.pushFlash('notice', 'Successfully imported ' + data['cartridge']['name']);
@@ -48,7 +48,23 @@ var ApplicationController = Ember.ArrayController.extend({
     });
   },
 
+  createFromXml: function() {
+    _this = this;
+    Ember.$.post('/api/v1/cartridges/create_from_xml', { xml: this.get('pastedXml') }).then(
+      function(data) {
+        _this.get('model').reload();
+        App.FlashQueue.pushFlash('notice', 'Successfully created ' + data['cartridge']['name']);
+        _this.transitionToRoute('/' + data['cartridge']['uid']);
+        _this.hideCreateFromXmlForm();
+      },
+      function(err) {
+        App.FlashQueue.pushFlash('error', 'Invalid XML');
+      }
+    );
+  },
+
   displayImportForm: function() {
+    this.hideCreateFromXmlForm();
     Ember.$('#import-panel').slideDown();
     Ember.$('#import-panel input[type="text"]').focus();
   },
@@ -56,6 +72,17 @@ var ApplicationController = Ember.ArrayController.extend({
   hideImportForm: function() {
     Ember.$('#import-panel').slideUp();
     Ember.$('#import-panel input[type="text"]').val('');
+  },
+
+  displayCreateFromXmlForm: function() {
+    this.hideImportForm();
+    Ember.$('#create-from-xml-panel').slideDown();
+    Ember.$('#create-from-xml-panel textarea').focus();
+  },
+
+  hideCreateFromXmlForm: function() {
+    Ember.$('#create-from-xml-panel').slideUp();
+    Ember.$('#create-from-xml-panel textarea').html('');
   },
 
   save: function() {

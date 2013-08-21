@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
 class CartridgesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
@@ -67,21 +64,27 @@ class CartridgesController < ApplicationController
   end
 
   def import
-    cartridge = current_user.cartridges.build
-    url = params[:url]
-    begin
-      doc = Nokogiri::XML(open(url)) do |config|
-        config.strict.noblanks
-      end
-      cartridge.name = doc.xpath('//blti:title').first.text 
-      cartridge.xml  = doc.to_html
-      
-      if cartridge.save
+    cartridge = current_user.cartridges.create_from_url(params[:url])
+    if cartridge
+      if !cartridge.new_record?
         render json: cartridge, status: 201
       else
         render json: { errors: cartridge.errors }, status: 422
       end
-    rescue
+    else
+      head 500
+    end
+  end
+
+  def create_from_xml
+    cartridge = current_user.cartridges.create_from_xml(params[:xml])
+    if cartridge
+      if !cartridge.new_record?
+        render json: cartridge, status: 201
+      else
+        render json: { errors: cartridge.errors }, status: 422
+      end
+    else
       head 500
     end
   end

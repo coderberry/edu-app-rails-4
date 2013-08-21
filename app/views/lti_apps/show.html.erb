@@ -39,9 +39,9 @@
         <div class="configuration-content">
           <label>Configuration URL:</label>
           <div class="input-group">
-            <input class="form-control" value="<%= @lti_app.config_url %>" />
+            <input class="form-control" value="<%= cartridge_xml_url(@lti_app.cartridge.try(:uid)) %>" />
             <span class="input-group-btn">
-              <button class="copy-button btn" data-clipboard-text="<%= @lti_app.config_url %>"
+              <button class="copy-button btn" data-clipboard-text="<%= cartridge_xml_url(@lti_app.cartridge.try(:uid)) %>"
                   title="Copy to clipboard"><i class="icon-copy"></i></button>
             </span>
           </div><!-- /input-group -->

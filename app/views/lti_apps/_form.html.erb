@@ -11,39 +11,83 @@
     </div>
   <% end %>
 
+  <% if @lti_app.new_record? %>
+    <div class="form-group">
+      <%= f.label :config_url, "IMS Cartridge", class: "col-lg-3 control-label" %>
+      <div class="col-lg-9">
+        <div class="radio">
+          <label>
+            <input type="radio" name="cartridge_source" value="cartridge_id" <%= "checked" if params[:cartridge_source] == 'cartridge_id' %>>
+            Use my cartridge:
+          </label>
+          <%= select_tag :cartridge_id, 
+                options_from_collection_for_select(current_user.cartridges, 'id', 'name', params[:cartridge_id]), 
+                include_blank: true, 
+                class: "form-control", 
+                style: (params[:cartridge_source] == 'cartridge_id' ? '' : 'display: none;'), 
+                data: { toggle: "cartridge_source", target: "cartridge_id" } %>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="cartridge_source" value="url" <%= "checked" if params[:cartridge_source] == 'url' %>>
+            Import from existing configuration xml (URL):
+          </label>
+          <%= text_field_tag :config_url, params[:config_url], 
+                class: "form-control", 
+                placeholder: "https://", 
+                style: (params[:cartridge_source] == 'url' ? '' : 'display: none;'), 
+                data: { toggle: "cartridge_source", target: "url" } %>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="cartridge_source" value="xml" <%= "checked" if params[:cartridge_source] == 'xml' %>>
+            Paste configuration xml:
+          </label>
+          <%= text_area_tag :xml, params[:xml], 
+                rows: 6, 
+                class: "form-control", 
+                placeholder: "Paste XML here", 
+                style: (params[:cartridge_source] == 'xml' ? '' : 'display: none;'), 
+                data: { toggle: "cartridge_source", target: "xml" } %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-group">
-    <div class="col-lg-offset-3 col-lg-9">
-      <div class="checkbox">
-        <label>
-          <%= f.check_box :is_public %> This app is available to the public
-        </label>
+    <label class="col-lg-3 control-label">Availability</label>
+    <div class="col-lg-9">
+      <div class="radio">
+        <label><%= f.radio_button :is_public, true %> Publicly available (appears on app center)</label>
+      </div>
+      <div class="radio">
+        <label><%= f.radio_button :is_public, false %> Private use only (unlisted)</label>
       </div>
     </div>
   </div>
 
-  
-    <div class="form-group">
-      <%= f.label :short_name, "Organization", class: "col-lg-3 control-label" %>
-      <div class="col-lg-9">
-        <% if @lti_app.new_record? || !@lti_app.organization %>
-          <%#= f.select :organization_id, current_user.organizations.all.collect { |o| [o.name, o.id] }, {}, { class: "form-control" } %>
-        <% else %>
-          <span class="form-control"><%= @lti_app.organization.try(:name) %></span>
-        <% end %>
-      </div>
+  <div class="form-group">
+    <%= f.label :short_name, "Organization", class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <% if @lti_app.new_record? || !@lti_app.organization %>
+        <%= f.select :organization_id, current_user.organizations.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
+      <% else %>
+        <span class="form-control"><%= @lti_app.organization.try(:name) %></span>
+      <% end %>
     </div>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :short_name, "Unique Identifier", class: "col-lg-3 control-label" %>
-      <div class="col-lg-9">
-        <% if @lti_app.new_record? %>
-          <%= f.text_field :short_name, class: "form-control", placeholder: "Unique Identifier", 
-            data: { toggle: 'popover', content: 'use underscore (_) for spaces and all lowercase, e.g. "khan_academy' } %>
-        <% else %>
-          <span class="form-control"><%= @lti_app.short_name %></span>
-        <% end %>
-      </div>
+  <div class="form-group">
+    <%= f.label :short_name, "Unique Identifier", class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <% if @lti_app.new_record? %>
+        <%= f.text_field :short_name, class: "form-control", placeholder: "Unique Identifier", 
+          data: { toggle: 'popover', placement: 'bottom', content: 'use underscore (_) for spaces and all lowercase, e.g. "khan_academy' } %>
+      <% else %>
+        <span class="form-control"><%= @lti_app.short_name %></span>
+      <% end %>
     </div>
+  </div>
 
   <div class="form-group">
     <%= f.label :name, class: "col-lg-3 control-label" %>
@@ -56,7 +100,7 @@
     <%= f.label :author_name, "Author Name", class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_field :author_name, class: "form-control", placeholder: "Author Name", 
-            data: { toggle: 'popover', content: 'Name which appears on the app page ( by Author Name )' } %>
+            data: { toggle: 'popover', placement: 'bottom', content: 'Name which appears on the app page ( by Author Name )' } %>
     </div>
   </div>
 
@@ -64,14 +108,14 @@
     <%= f.label :short_description, class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_area :short_description, rows: 3, class: "form-control", placeholder: "Short Description", 
-            data: { toggle: 'popover', content: 'This description will appear on the app list (details view). Max of 255 characters.' } %>
+            data: { toggle: 'popover', placement: 'bottom', content: 'This description will appear on the app list (details view). Max of 255 characters.' } %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :description, class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_area :description, rows: 8, class: "form-control", placeholder: "Description", 
-            data: { toggle: 'popover', content: 'This description will appear when viewing the individual app. You may be as descriptive as you would like. Markdown syntax is supported.' } %>
+            data: { toggle: 'popover', placement: 'bottom', content: 'This description will appear when viewing the individual app. You may be as descriptive as you would like. Markdown syntax is supported.' } %>
       <span class="help-block">You may use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a> syntax for including style, links and images</span>
     </div>
   </div>
@@ -79,7 +123,7 @@
     <%= f.label :testing_instructions, class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_area :testing_instructions, rows: 6, class: "form-control", placeholder: "Instructions for the administrator to follow in order to test the app (required for approval)", 
-            data: { toggle: 'popover', content: 'Every application must go through an approval process before appearing to the public. This is where you place instructions to the administrators on how to test the application. This can include contact information if needed.' }  %>
+            data: { toggle: 'popover', placement: 'bottom', content: 'Every application must go through an approval process before appearing to the public. This is where you place instructions to the administrators on how to test the application. This can include contact information if needed.' }  %>
       <span class="help-block">You may use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a> syntax for including style, links and images</span>
     </div>
   </div>
@@ -87,14 +131,14 @@
     <%= f.label :support_url, "Support URL", class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_field :support_url, class: "form-control", placeholder: "http://", 
-            data: { toggle: 'popover', content: 'Website in which the user can get support for this app.' } %>
+            data: { toggle: 'popover', placement: 'bottom', content: 'Website in which the user can get support for this app.' } %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :ims_cert_url, "IMS Certificate URL", class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_field :ims_cert_url, class: "form-control", placeholder: "http://", 
-            data: { toggle: 'popover', content: 'IMS provides certification of LTI apps. If your app is certified, you can place the link here.' } %>
+            data: { toggle: 'popover', placement: 'bottom', content: 'IMS provides certification of LTI apps. If your app is certified, you can place the link here.' } %>
       <span class="help-block">Paste the link listed <a href="http://www.imsglobal.org/cc/alltools.cfm">here</a> if certified</span>
     </div>
   </div>
@@ -102,7 +146,7 @@
     <%= f.label :preview_url, "Preview URL", class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_field :preview_url, class: "form-control", placeholder: "http://", 
-            data: { toggle: 'popover', content: 'This URL will be iframed in a modal window when PREVIEW is clicked. Provide this if you want the user to have a preview of the app.' } %>
+            data: { toggle: 'popover', placement: 'bottom', content: 'This URL will be iframed in a modal window when PREVIEW is clicked. Provide this if you want the user to have a preview of the app.' } %>
     </div>
   </div>
 
@@ -113,6 +157,8 @@
       <span class="help-block">240x125 pixels. Either gif, png or jpg.</span>
     </div>
   </div>
+
+  <!--
 
   <div class="form-group">
     <%= f.label :logo_image_url, "Logo Image URL", class: "col-lg-3 control-label" %>
@@ -130,13 +176,7 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :config_url, "Import from Config XML URL", class: "col-lg-3 control-label" %>
-    <div class="col-lg-9">
-      <%= f.text_field :config_url, class: "form-control", placeholder: "https://" %>
-    </div>
-  </div>
-
+  -->
   
   <div class="field">
     <%= f.label :app_type %><br>

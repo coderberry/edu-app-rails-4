@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815163310) do
+ActiveRecord::Schema.define(version: 20130821220400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,12 +66,13 @@ ActiveRecord::Schema.define(version: 20130815163310) do
     t.string   "banner_image_url",     limit: 1000
     t.string   "logo_image_url",       limit: 1000
     t.string   "icon_image_url",       limit: 1000
-    t.json     "cartridge"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
+    t.integer  "cartridge_id"
   end
 
+  add_index "lti_apps", ["cartridge_id"], name: "index_lti_apps_on_cartridge_id", using: :btree
   add_index "lti_apps", ["organization_id"], name: "index_lti_apps_on_organization_id", using: :btree
   add_index "lti_apps", ["short_name"], name: "index_lti_apps_on_short_name", unique: true, using: :btree
   add_index "lti_apps", ["user_id"], name: "index_lti_apps_on_user_id", using: :btree

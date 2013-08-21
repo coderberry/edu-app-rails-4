@@ -36,8 +36,35 @@ class LtiAppsController < ApplicationController
   def create
     @lti_app = LtiApp.new(lti_app_params)
 
+    case params[:cartridge_source]
+    when 'cartridge_id'
+      cartridge = current_user.cartridges.where(id: params[:cartridge_id]).first
+      if !cartridge
+        flash.now[:error] = "You must select a cartridge"
+      end
+    when 'url'
+      cartridge = current_user.cartridges.create_from_url(params[:config_url])
+      if !cartridge
+        flash.now[:error] = "Invalid XML from URL"
+      end
+    when 'xml'
+      cartridge = current_user.cartridges.create_from_xml(params[:xml])
+      if !cartridge
+        flash.now[:error] = "Invalid XML"
+      end
+    else
+      flash.now[:error] = "You must enter/select an IMS Cartridge"
+    end
+
+    unless cartridge
+      render action: 'new'
+      return
+    end
+
+    @lti_app.cartridge = cartridge
+
     if @lti_app.save
-      redirect_to @lti_app, notice: 'Lti app was successfully created.'
+      redirect_to lti_app_path(@lti_app.short_name), notice: 'Lti app was successfully created.'
     else
       render action: 'new'
     end
@@ -46,6 +73,9 @@ class LtiAppsController < ApplicationController
   # PATCH/PUT /lti_apps/1
   def update
     if @lti_app.update(lti_app_params)
+
+      binding.pry
+
       redirect_to lti_app_path(@lti_app.short_name), notice: 'Lti app was successfully updated.'
     else
       render action: 'edit'

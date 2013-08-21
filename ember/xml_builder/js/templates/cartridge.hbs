@@ -1,37 +1,83 @@
 <form {{action "buildXml" on="submit"}}>
   <div {{bindAttr class=":form-group errors.name:has-error"}}>
     <label>Name</label>
-    {{input type="text" value=name class="form-control"}}
+    {{input type="text" 
+            value=name 
+            class="form-control" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
     <span class="help-block">{{errors.name}}</span>
   </div>
-  <div class="form-group">
-    <label>Unique Identifier</label>
-    {{input type="text" value=short_name class="form-control"}}
-  </div>
-  <div class="form-group">
-    <label>Description</label>
-    {{input type="text" value=short_description class="form-control"}}
-  </div>
-  <div class="form-group">
-    <label>Icon URL</label>
-    {{input type="text" value=icon_image_url class="form-control"}}
-  </div>
-  <div class="form-group">
+  <div {{bindAttr class=":form-group errors.lti_launch_url:has-error"}}>
     <label>LTI Launch URL</label>
-    {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
+    {{input type="text" 
+            value=lti_launch_url 
+            class="form-control" 
+            placeholder="https://" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
+    <span class="help-block">{{errors.lti_launch_url}}</span>
+  </div>
+  <div class="form-group">
+    <small class="text-muted pull-right">lowercase, alphanumeric + underscore</small>
+    <label>Unique Identifier</label>
+    {{input type="text" 
+            value=short_name 
+            class="form-control" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content='use underscore (_) for spaces and all lowercase, e.g. khan_academy'}}
+  </div>
+  <div class="form-group">
+    <small class="text-muted pull-right">250 char max</small>
+    <label>Description</label>
+    {{input type="text" 
+            value=short_description 
+            class="form-control" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
+  </div>
+  <div class="form-group">
+    <small class="text-muted pull-right">(16x16 PNG, GIF or JPG)</small>
+    <label>Icon URL</label>
+    {{input type="text" 
+            value=icon_image_url 
+            class="form-control" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
   </div>
   <div class="form-group">
     <label>Link Text</label>
-    {{input type="text" value=link_text class="form-control" placeholder=""}}
+    {{input type="text" 
+            value=link_text 
+            class="form-control" 
+            placeholder="" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
   </div>
   <div class="row">
     <div class="form-group col-6">
       <label>Default Width (px)</label>
-      {{input type="text" value=selection_width class="form-control"}}
+      {{input type="text" 
+              value=selection_width 
+              class="form-control" 
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
     </div>
     <div class="form-group col-6">
       <label>Default Height (px)</label>
-      {{input type="text" value=selection_height class="form-control"}}
+      {{input type="text" 
+              value=selection_height 
+              class="form-control" 
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
     </div>
   </div>
   <div class="form-group">
@@ -41,11 +87,20 @@
            optionValuePath="content.value"
            optionLabelPath="content.name"
            valueBinding=launch_privacy
-           class="form-control"}}
+           class="form-control"
+           data-placement="bottom"
+           data-toggle="popover" 
+           data-content="CONTENT NEEDED"}}
   </div>
   <div class="form-group">
     <label>Domain</label>
-    {{input type="text" value=domain class="form-control" placeholder="my.domain.com"}}
+    {{input type="text" 
+            value=domain 
+            class="form-control" 
+            placeholder="my.domain.com" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
   </div>
 
   <fieldset>
@@ -71,23 +126,44 @@
             </div>
             <div class="row" style="margin-bottom: 5px;">
               <div class="col-4">
-                {{input type="text" value=cf.name class="form-control" placeholder="Param Name"}}
+                {{input type="text" 
+                        value=cf.name 
+                        class="form-control" 
+                        placeholder="Param Name" 
+                        data-placement="bottom"
+                        data-toggle="popover" 
+                        data-content="CONTENT NEEDED"}}
               </div>
               <div class="col-3">
                 {{view Ember.Select
-                  contentBinding="App.fieldTypes"
-                  optionValuePath="content.value"
-                  optionLabelPath="content.name"
-                  valueBinding=cf.type
-                  class="form-control"}}
+                        contentBinding="App.fieldTypes"
+                        optionValuePath="content.value"
+                        optionLabelPath="content.name"
+                        valueBinding=cf.type
+                        class="form-control"
+                        data-placement="bottom"
+                        data-toggle="popover" 
+                        data-content="CONTENT NEEDED"}}
               </div>
               <div class="col-5">
-                {{input type="text" value=cf.value class="form-control" placeholder="Default value"}}
+                {{input type="text" 
+                        value=cf.value 
+                        class="form-control" 
+                        placeholder="Default value"
+                        data-placement="bottom"
+                        data-toggle="popover" 
+                        data-content="CONTENT NEEDED"}}
               </div>
             </div>
             <div class="row">
               <div class="col-12">
-                {{input type="text" value=cf.description class="form-control" placeholder="Description"}}
+                {{input type="text" 
+                        value=cf.description 
+                        class="form-control" 
+                        placeholder="Description" 
+                        data-placement="bottom"
+                        data-toggle="popover" 
+                        data-content="CONTENT NEEDED"}}
               </div>
             </div>
           </div>
@@ -99,7 +175,9 @@
 
   <fieldset>
     <legend>
-      {{input type="checkbox" checked=useEditorButton class="pull-right"}}
+      <label class="extension-checkbox pull-right">
+        {{input type="checkbox" checked=useEditorButton}} Enabled?
+      </label>
       Extension: Editor Button
     </legend>
     <div class="well well-small">
@@ -115,7 +193,9 @@
 
   <fieldset>
     <legend>
-      {{input type="checkbox" checked=useLinkSelection class="pull-right"}}
+      <label class="extension-checkbox pull-right">
+        {{input type="checkbox" checked=useLinkSelection}} Enabled?
+      </label>
       Extension: Resource Selection
     </legend>
     <div class="well well-small">
@@ -131,7 +211,9 @@
 
   <fieldset>
     <legend>
-      {{input type="checkbox" checked=useHomeworkSubmission class="pull-right"}}
+      <label class="extension-checkbox pull-right">
+        {{input type="checkbox" checked=useHomeworkSubmission}} Enabled?
+      </label>
       Extension: Homework Submission
     </legend>
     <div class="well well-small">
@@ -147,7 +229,9 @@
 
   <fieldset>
     <legend>
-      {{input type="checkbox" checked=useCourseNavigation class="pull-right"}}
+      <label class="extension-checkbox pull-right">
+        {{input type="checkbox" checked=useCourseNavigation}} Enabled?
+      </label>
       Extension: Course Navigation
     </legend>
     <div class="well well-small">
@@ -190,7 +274,9 @@
 
   <fieldset>
     <legend>
-      {{input type="checkbox" checked=useAccountNavigation class="pull-right"}}
+      <label class="extension-checkbox pull-right">
+        {{input type="checkbox" checked=useAccountNavigation}} Enabled?
+      </label>
       Extension: Account Navigation
     </legend>
     <div class="well well-small">
@@ -206,7 +292,9 @@
 
   <fieldset>
     <legend>
-      {{input type="checkbox" checked=useUserNavigation class="pull-right"}}
+      <label class="extension-checkbox pull-right">
+        {{input type="checkbox" checked=useUserNavigation}} Enabled?
+      </label>
       Extension: User Navigation
     </legend>
     <div class="well well-small">

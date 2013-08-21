@@ -39,6 +39,19 @@
       </div>
     </div>
 
+    <div class="main-content" style="margin-bottom: 10px; display: none;" id="create-from-xml-panel">
+      <div class="header clearfix">
+        <h3 class="page-header">
+          <button {{action "hideCreateFromXmlForm"}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
+          Create from XML
+        </h3>
+        <form {{action "createFromXml" on="submit"}} style="margin: 10px 0 0 0;">
+          {{view Ember.TextArea valueBinding="pastedXml" class="form-control" rows="10"}}
+          <button type="submit" class="btn btn-primary pull-right" style="margin-top: 5px;">Create</button>
+        </form>
+      </div>
+    </div>
+
     <div class="main-content" style="margin-bottom: 10px;">
       <div class="header clearfix">
         <div class="btn-group pull-right">
@@ -47,6 +60,7 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#" {{action "new"}}>From Scratch</a></li>
+            <li><a href="#" {{action "displayCreateFromXmlForm"}}>Paste XML Code</a></li>
             <li><a href="#" {{action "displayImportForm"}}>From XML Config URL</a></li>
           </ul>
         </div>
@@ -72,7 +86,13 @@
         {{#each controller}}
           {{log this}}
           <tr>
-            <td>{{name}}</td>
+            <td>
+              {{#if icon_image_url}}
+                <img {{bindAttr src="icon_image_url"}} width="16" height="16" />
+              {{/if}}
+
+              {{name}}
+            </td>
             <td>{{fromNow updated_at}}</td>
             <td class="circle-buttons">
               <span class="icon-stack text-danger pull-right">

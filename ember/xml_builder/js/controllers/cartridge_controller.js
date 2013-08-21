@@ -6,6 +6,16 @@ var CartridgeController = Ember.ObjectController.extend({
     this.get('model').get('custom_fields').pushObject(customField);
   },
 
+  popoverObserver: function() {
+    Ember.run.next(this, function() {
+      Em.$('*[data-toggle="popover"]').popover({
+        container: 'body', 
+        trigger: 'focus'
+      });
+    });
+  }.observes('useEditorButton', 'useLinkSelection', 'useHomeworkSubmission', 'useCourseNavigation', 
+             'useAccountNavigation', 'useUserNavigation', 'custom_fields.@each'),
+
   removeCustomField: function(cf) {
     this.get('model').get('custom_fields').removeObject(cf);
   }

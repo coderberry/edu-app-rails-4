@@ -25,6 +25,13 @@ var App = window.App = Ember.Application.create({
   ]
 });
 
+Ember.TextSupport.reopen({
+  attributeBindings: ["data-toggle", "data-content", "data-placement"]
+});
+Ember.Select.reopen({
+  attributeBindings: ["data-toggle", "data-content", "data-placement"]
+});
+
 require('../lib/flash');
 
 module.exports = App;
