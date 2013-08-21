@@ -13,4 +13,9 @@ class ApplicationController < ActionController::Base
   def authorize
     redirect_to login_url, alert: "You must login first" if current_user.nil?
   end
+
+  def login_user(user)
+    @current_user = user
+    session[:user_id] = user.id
+  end
 end

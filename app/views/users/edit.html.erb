@@ -20,6 +20,30 @@
       <% end %>
     </div>
 
+    <div class="row">
+      <div class="col-lg-<%= @confirmation_required ? '6' : '12' %>">
+        <div class="form-group <% if @user.errors.include? :email %>has-error<% end %>">
+          <%= f.label :email, "Email Address", class: "control-label" %>
+          <%= f.text_field :email, placeholder: "http://", class: "form-control" %>
+          <% if @user.errors.include? :email %>
+            <small class="help-block"><%= @user.errors.full_messages_for(:email).first %></small>
+          <% end %>
+        </div>
+      </div>
+
+      <% if @confirmation_required %>
+      <div class="col-lg-6">
+        <div class="form-group <% if @user.errors.include? :code %>has-error<% end %>">
+          <%= label_tag :code, "Confirmation Code", class: "control-label" %>
+          <%= text_field :user, :code, {value: @code, class: "form-control"} %>
+          <% if @user.errors.include? :code %>
+            <small class="help-block"><%= @user.errors.full_messages_for(:code).first %></small>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
     <% if @user.authentications.present? %>
       <div class="form-group">
         <div style="margin-bottom: 10px;">Which avatar would you like to use?</div>

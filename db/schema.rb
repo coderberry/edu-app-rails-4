@@ -105,6 +105,15 @@ ActiveRecord::Schema.define(version: 20130821220400) do
     t.string   "url",                           limit: 1000
   end
 
+  create_table "registration_codes", force: true do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "code"
+    t.datetime "valid_until"
+  end
+
+  add_index "registration_codes", ["code"], name: "index_registration_codes_on_code", using: :btree
+
   create_table "reviews", force: true do |t|
     t.integer  "membership_id"
     t.integer  "user_id"
