@@ -92,7 +92,23 @@ class CartridgesController < ApplicationController
   def xml
     cartridge = Cartridge.where(uid: params[:uid]).first
     if cartridge
-      tool_config = IMS::LTI::ToolConfig.create_from_xml(cartridge.xml)
+      tool_config = cartridge.tool_config
+
+      # remove optional extensions that aren't requested
+      cartridge.extensions.each do |k,v|
+        if !params[k] && v["optional"] == "true"
+          tool_config.get_ext_params("canvas.instructure.com").delete(k)
+        end
+      end
+
+      cartridge.custom_params.each do |k,v|
+        if params[k]
+          tool_config.set_custom_param(k, params[k])
+        elsif v["required"] == "true"
+          return render text: "#{k} is a required field"
+        end
+      end
+
       render xml: tool_config.to_xml
     else
       head 404

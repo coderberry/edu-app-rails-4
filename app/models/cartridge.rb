@@ -48,6 +48,40 @@ class Cartridge < ActiveRecord::Base
     IMS::LTI::ToolConfig.create_from_xml(self.xml)
   end
 
+  def to_xml
+    self.xml
+  end
+
+  def parsed_xml
+    Nokogiri::XML(self.xml)
+  end
+
+  def extensions
+    ext = {}
+    self.parsed_xml.xpath('//blti:extensions/lticm:options').each do |e|
+      attributes = e.attributes
+      name = attributes.delete('name').value
+      ext[name] = {}
+      attributes.each do |k,v|
+        ext[name][k] = v.to_s
+      end
+    end
+    ext
+  end
+
+  def custom_params
+    params = {}
+    self.parsed_xml.xpath('//blti:custom/lticm:property').each do |e|
+      attributes = e.attributes
+      name = attributes.delete('name').value
+      params[name] = {}
+      attributes.each do |k,v|
+        params[name][k] = v.to_s
+      end
+    end
+    params
+  end
+
   # private instance methods ..................................................
   private
 
@@ -64,5 +98,4 @@ class Cartridge < ActiveRecord::Base
       self.uid = rand(36**len).to_s(36)
     end while self.class.exists?(uid: uid)
   end
-  
 end
