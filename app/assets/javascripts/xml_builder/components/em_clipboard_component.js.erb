@@ -1,7 +1,0 @@
-App.EmClipboardComponent = Ember.Component.extend({
-  didInsertElement: function () {
-    var clip = new ZeroClipboard(this.$('button'), {
-      moviePath: '<%= asset_path("ZeroClipboard.swf") %>'
-    });
-  }
-});

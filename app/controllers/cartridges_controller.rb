@@ -29,11 +29,9 @@ class CartridgesController < ApplicationController
 
   # This method accepts a JSON post and will extract the title out from the JSON
   def create
-    xml = params[:xml]
-    name = params[:name]
     cartridge = current_user.cartridges.build({
-      name: name,
-      xml: xml
+      name: params[:name],
+      xml: params[:xml]
     })
     if cartridge.save
       render json: cartridge, status: 201
@@ -43,13 +41,10 @@ class CartridgesController < ApplicationController
   end
 
   def update
-    xml = params[:xml]
-    name = params[:name]
     cartridge = current_user.cartridges.where(uid: params[:uid]).first
-    
     if cartridge
-      cartridge.name = name
-      cartridge.xml = xml
+      cartridge.name = params[:name]
+      cartridge.xml = params[:xml]
       if cartridge.save
         render json: cartridge, status: 200
       else
@@ -94,7 +89,8 @@ class CartridgesController < ApplicationController
   def xml
     cartridge = Cartridge.where(uid: params[:uid]).first
     if cartridge
-      render xml: cartridge.xml
+      tool_config = IMS::LTI::ToolConfig.create_from_xml(cartridge.xml)
+      render xml: tool_config.to_xml
     else
       head 404
     end

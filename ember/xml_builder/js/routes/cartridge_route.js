@@ -2,7 +2,6 @@ var Cartridge = require('../models/cartridge');
 
 var CartridgeRoute = Ember.Route.extend({
   model: function(params) {
-    // console.log("MODEL");
     var _this = this;
     if (params.uid === 'new') {
       var c = Cartridge.create({ uid: 'new', custom_fields: [] });
@@ -24,7 +23,6 @@ var CartridgeRoute = Ember.Route.extend({
   },
 
   setupController: function(controller, model) {
-    // console.log("SETUP CONTROLLER");
     var uid = model.get('uid');
     if (uid === 'new') {
       controller.set('model', Cartridge.create({ custom_fields: [] }));

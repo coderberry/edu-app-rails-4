@@ -54,23 +54,46 @@
       Custom Field(s)
     </legend>
     <div class="form-group">
-      <div class="well well-small">
         {{#each cf in custom_fields}}
-          <div class="row" style="margin-bottom: 5px;">
-            <div class="col-5">
-              {{input type="text" value=cf.name class="form-control" placeholder="Name"}}
+          <div class="well well-small" style="padding-top: 5px; margin-bottom: 5px;">
+            <div class="row">
+              <div class="col-8">
+                <div class="checkbox">
+                  <label>
+                    {{input type="checkbox" checked=cf.required}}
+                    Is this a required field?
+                  </label>
+                </div>
+              </div>
+              <div class="col-4">
+                <button {{action "removeCustomField" cf}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
+              </div>
             </div>
-            <div class="col-5">
-              {{input type="text" value=cf.value class="form-control" placeholder="Default Value"}}
+            <div class="row" style="margin-bottom: 5px;">
+              <div class="col-4">
+                {{input type="text" value=cf.name class="form-control" placeholder="Param Name"}}
+              </div>
+              <div class="col-3">
+                {{view Ember.Select
+                  contentBinding="App.fieldTypes"
+                  optionValuePath="content.value"
+                  optionLabelPath="content.name"
+                  valueBinding=cf.type
+                  class="form-control"}}
+              </div>
+              <div class="col-5">
+                {{input type="text" value=cf.value class="form-control" placeholder="Default value"}}
+              </div>
             </div>
-            <div class="col-2">
-              <button {{action "removeCustomField" cf}} class="btn btn-block btn-danger"><i class="icon-remove"></i></button>
+            <div class="row">
+              <div class="col-12">
+                {{input type="text" value=cf.description class="form-control" placeholder="Description"}}
+              </div>
             </div>
           </div>
         {{else}}
           <div class="text-center">There are no custom fields</div>
         {{/each}}
-      </div>
     </div>
   </fieldset>
 
@@ -151,6 +174,11 @@
             <label>
               {{input type="checkbox" checked=enabledByDefault}}
               Enabled by default?
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              {{input type="checkbox" checked=is_optional}} Is this extension optional?
             </label>
           </div>
         {{/with}}

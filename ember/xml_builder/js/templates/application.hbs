@@ -58,8 +58,13 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Modified</th>
+            {{#each columns itemController="columnItem"}}
+              <th class="sortable" {{action toggleSort name}}>
+                {{label}}
+                {{#if sortedAsc}}<i class="icon-chevron-up"></i>{{/if}}
+                {{#if sortedDesc}}<i class="icon-chevron-down"></i>{{/if}}
+              </th>
+            {{/each}}
             <th>&nbsp;</th>
           </tr>
         </thead>

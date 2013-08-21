@@ -18,6 +18,10 @@ var App = window.App = Ember.Application.create({
     Ember.Object.create({name: "Public", value: "public"}),
     Ember.Object.create({name: "Members Only", value: "members"}),
     Ember.Object.create({name: "Admins Only", value: "admins"})
+  ],
+  fieldTypes: [
+    Ember.Object.create({name: "Text", value: "text"}),
+    Ember.Object.create({name: "Checkbox", value: "checkbox"})
   ]
 });
 

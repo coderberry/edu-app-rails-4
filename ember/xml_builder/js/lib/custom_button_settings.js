@@ -1,4 +1,5 @@
 var CustomButtonSettings = Ember.Object.extend({
+  is_optional: false,
   lti_launch_url: null,
   link_text: null,
   icon_image_url: null,
@@ -7,7 +8,7 @@ var CustomButtonSettings = Ember.Object.extend({
 
   modifiedAt: function() {
     return new Date();
-  }.property('lti_launch_url', 'link_text', 'icon_image_url', 'selection_width', 'selection_height')
+  }.property('is_optional', 'lti_launch_url', 'link_text', 'icon_image_url', 'selection_width', 'selection_height')
 });
 
 module.exports = CustomButtonSettings;

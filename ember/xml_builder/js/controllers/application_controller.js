@@ -6,6 +6,28 @@ var ApplicationController = Ember.ArrayController.extend({
   needs: ['cartridge'],
   importUrl: '',
 
+  sortedColumn: (function() {
+    var properties = this.get('sortProperties');
+    if(!properties) return undefined;
+    return properties.get('firstObject');
+  }).property('sortProperties.[]'),
+
+  columns: (function() {
+   return [
+     Ember.Object.create({name: 'name', label: 'Name'}),
+     Ember.Object.create({name: 'updated_at', label: 'Modified'})
+    ];
+  }).property(),
+
+  toggleSort: function(column) {
+    if(this.get('sortedColumn') == column) {
+      this.toggleProperty('sortAscending');
+    } else {
+      this.set('sortProperties', [column]);
+      this.set('sortAscending', true);
+    }
+  },
+
   showForm: function() {
     var cartridgeCtrl = this.get('controllers.cartridge');
     return !Ember.isEmpty(cartridgeCtrl.get('model'));
