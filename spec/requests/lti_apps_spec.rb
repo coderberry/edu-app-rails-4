@@ -7,7 +7,7 @@ describe "LtiApps" do
     end
 
     it "gets list" do
-      get lti_apps_path
+      get '/api/v1/lti_apps'
       response.status.should be(200)
       json = JSON.parse(response.body)
       json['lti_apps'].size.should > 0

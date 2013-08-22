@@ -6,7 +6,7 @@ describe ApiKey do
   describe "#user" do
     it "with the tokenable as a User" do
       user = FactoryGirl.create(:user)
-      api_key = user.session_api_key
+      api_key = user.current_api_key
       api_key.user.should == user
     end
 
