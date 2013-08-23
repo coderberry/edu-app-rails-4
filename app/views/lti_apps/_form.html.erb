@@ -11,14 +11,23 @@
     </div>
   <% end %>
 
+  <% unless @lti_app.new_record? %>
+    <div class="form-group">
+      <dl class="dl-horizontal">
+        <dt>Status</dt>
+        <dd><%= status_label(@lti_app.status) %></dd>
+      </dl>
+    </div>
+  <% end %>
+
   <% if @lti_app.new_record? %>
     <div class="form-group">
-      <%= f.label :config_url, "IMS Cartridge", class: "col-lg-3 control-label" %>
+      <%= f.label :config_url, "App Configuration", class: "col-lg-3 control-label" %>
       <div class="col-lg-9">
         <div class="radio">
           <label>
             <input type="radio" name="cartridge_source" value="cartridge_id" <%= "checked" if params[:cartridge_source] == 'cartridge_id' %>>
-            Use my cartridge:
+            Use a configuration I have already built
           </label>
           <%= select_tag :cartridge_id, 
                 options_from_collection_for_select(current_user.cartridges, 'id', 'name', params[:cartridge_id]), 
@@ -30,7 +39,7 @@
         <div class="radio">
           <label>
             <input type="radio" name="cartridge_source" value="url" <%= "checked" if params[:cartridge_source] == 'url' %>>
-            Import from existing configuration xml (URL):
+            Import from existing configuration xml (URL)
           </label>
           <%= text_field_tag :config_url, params[:config_url], 
                 class: "form-control", 
@@ -41,7 +50,7 @@
         <div class="radio">
           <label>
             <input type="radio" name="cartridge_source" value="xml" <%= "checked" if params[:cartridge_source] == 'xml' %>>
-            Paste configuration xml:
+            Paste configuration xml
           </label>
           <%= text_area_tag :xml, params[:xml], 
                 rows: 6, 
@@ -50,7 +59,19 @@
                 style: (params[:cartridge_source] == 'xml' ? '' : 'display: none;'), 
                 data: { toggle: "cartridge_source", target: "xml" } %>
         </div>
+        <div class="radio">
+          <label>
+            or <%= link_to "create a new configuration using the XML Tools", xml_builder_url %>
+          </label>
+        </div>
       </div>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <dl class="dl-horizontal">
+        <dt>XML Configuration</dt>
+        <dd><%= link_to raw('<i class="icon-pencil"></i> Click to edit the XML configuration'), "#" %></dd>
+      </dl>
     </div>
   <% end %>
 
@@ -120,6 +141,14 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :installation_instructions, "Installation Instructions", class: "col-lg-3 control-label" %>
+    <div class="col-lg-9">
+      <%= f.text_area :installation_instructions, rows: 8, class: "form-control", placeholder: "Installation Instructions", 
+            data: { toggle: 'popover', placement: 'bottom', content: '.... Markdown syntax is supported.' } %>
+      <span class="help-block">You may use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a> syntax for including style, links and images</span>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :testing_instructions, class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <%= f.text_area :testing_instructions, rows: 6, class: "form-control", placeholder: "Instructions for the administrator to follow in order to test the app (required for approval)", 
@@ -177,16 +206,10 @@
   </div>
 
   -->
-  
-  <div class="field">
-    <%= f.label :app_type %><br>
-    <%= f.text_field :app_type %>
-  </div>
-  <div class="field">
-    <%= f.label :data_url %><br>
-    <%= f.text_field :data_url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-3 col-lg-9">
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
   </div>
 <% end %>

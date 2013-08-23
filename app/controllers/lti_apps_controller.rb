@@ -1,6 +1,7 @@
 class LtiAppsController < ApplicationController
   before_action :set_lti_app, only: [:update, :destroy]
   before_action :build_tag_list
+  before_filter :authorize, except: [:index, :show]
 
   # GET /lti_apps
   def index

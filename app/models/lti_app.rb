@@ -13,6 +13,7 @@ class LtiApp < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   belongs_to :cartridge
+  belongs_to :lti_app_configuration
   has_and_belongs_to_many :tags
   has_many :reviews, dependent: :destroy
 

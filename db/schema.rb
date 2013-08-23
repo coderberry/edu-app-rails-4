@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821220400) do
+ActiveRecord::Schema.define(version: 20130823212611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,32 +47,46 @@ ActiveRecord::Schema.define(version: 20130821220400) do
   add_index "cartridges", ["uid"], name: "index_cartridges_on_uid", unique: true, using: :btree
   add_index "cartridges", ["user_id"], name: "index_cartridges_on_user_id", using: :btree
 
+  create_table "lti_app_configurations", force: true do |t|
+    t.string   "short_name", null: false
+    t.json     "config"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lti_app_configurations", ["short_name"], name: "index_lti_app_configurations_on_short_name", unique: true, using: :btree
+  add_index "lti_app_configurations", ["user_id"], name: "index_lti_app_configurations_on_user_id", using: :btree
+
   create_table "lti_apps", force: true do |t|
     t.integer  "user_id"
-    t.string   "short_name",                                            null: false
-    t.string   "name",                                                  null: false
+    t.string   "short_name",                                                 null: false
+    t.string   "name",                                                       null: false
     t.string   "short_description"
     t.text     "description"
-    t.string   "status",                            default: "pending", null: false
+    t.string   "status",                                 default: "pending", null: false
     t.text     "testing_instructions"
-    t.string   "support_url",          limit: 1000
+    t.string   "support_url",               limit: 1000
     t.string   "author_name"
-    t.boolean  "is_public",                         default: false
+    t.boolean  "is_public",                              default: false
     t.string   "app_type"
-    t.string   "ims_cert_url",         limit: 1000
-    t.string   "preview_url",          limit: 1000
-    t.string   "config_url",           limit: 1000
-    t.string   "data_url",             limit: 1000
-    t.string   "banner_image_url",     limit: 1000
-    t.string   "logo_image_url",       limit: 1000
-    t.string   "icon_image_url",       limit: 1000
+    t.string   "ims_cert_url",              limit: 1000
+    t.string   "preview_url",               limit: 1000
+    t.string   "config_url",                limit: 1000
+    t.string   "data_url",                  limit: 1000
+    t.string   "banner_image_url",          limit: 1000
+    t.string   "logo_image_url",            limit: 1000
+    t.string   "icon_image_url",            limit: 1000
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
     t.integer  "cartridge_id"
+    t.text     "installation_instructions"
+    t.integer  "lti_app_configuration_id"
   end
 
   add_index "lti_apps", ["cartridge_id"], name: "index_lti_apps_on_cartridge_id", using: :btree
+  add_index "lti_apps", ["lti_app_configuration_id"], name: "index_lti_apps_on_lti_app_configuration_id", using: :btree
   add_index "lti_apps", ["organization_id"], name: "index_lti_apps_on_organization_id", using: :btree
   add_index "lti_apps", ["short_name"], name: "index_lti_apps_on_short_name", unique: true, using: :btree
   add_index "lti_apps", ["user_id"], name: "index_lti_apps_on_user_id", using: :btree

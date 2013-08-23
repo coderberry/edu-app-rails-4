@@ -14,6 +14,78 @@ namespace :import do
     Review.destroy_all
   end
 
+  task :test => :environment do
+    json = JSON.parse(File.read("#{Rails.root}/data/dump.json"))
+
+    json['apps'].each do |data|
+
+      lti_app_configuration = LtiAppConfiguration.new(user_id: 1, short_name: data['id'])
+
+      cartridge = EA::Cartridge.new
+      cartridge.title       = data['name']
+      cartridge.description = data['short_description'].present? ? data['short_description'] : data['description']
+      cartridge.icon_url    = data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url']
+
+      if cartridge.icon_url.present? && cartridge.icon_url =~ /^\//
+        cartridge.icon_url = "http://www.edu-apps.org#{cartridge.icon_url}"
+      end
+
+      cartridge.launch_url  = data['open_launch_url'] || data['launch_url']
+      if cartridge.launch_url.present? && cartridge.launch_url =~ /^\//
+        cartridge.launch_url = "http://www.edu-apps.org#{cartridge.launch_url}"
+      end
+
+      # Custom Fields
+      data['custom_fields'].each do |k, v|
+        cartridge.custom_fields << EA::CustomField.new( name: k, value: v )
+      end if data['custom_fields'].present?
+
+      canvas_extension = EA::Extension.new
+      canvas_extension.platform                 = 'canvas.instructure.com'
+      canvas_extension.tool_id                  = data['id']
+      canvas_extension.privacy_level            = data['privacy_level']
+      canvas_extension.domain                   = data['domain']
+      canvas_extension.default_link_text        = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
+      canvas_extension.default_selection_width  = data['width'].to_i if data['width'].present?
+      canvas_extension.default_selection_height = data['height'].to_i if data['height'].present?
+
+      optional_extensions = []
+
+      # Config Options
+      data['config_options'].each do |opt|
+        name = opt['name']
+        if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav'].include? name
+          optional_extensions << name
+        else
+          cartridge.config_options << EA::ConfigOption.new( name:          name, 
+                                                            default_value: opt['value'], 
+                                                            is_required:   opt['required'], 
+                                                            description:   opt['description'], 
+                                                            type:          opt['type'] )
+        end
+      end if data['config_options'].present?
+
+      # Canvas Extensions
+      data['extensions'].each do |extension|
+        if ['editor_button', 'resource_selection', 'homework_submission'].include? extension
+          canvas_extension.options << EA::ModalExtension.new( name: extension, is_optional: (optional_extensions.include? extension) )
+        elsif ['course_nav', 'account_nav', 'user_nav'].include? extension
+          canvas_extension.options << EA::NavigationExtension.new( name: extension, is_optional: (optional_extensions.include? extension) )
+        end
+      end if data['extensions'].present?
+
+      cartridge.extensions << canvas_extension
+
+      lti_app_configuration.config = cartridge.as_json
+      unless lti_app_configuration.save
+        puts lti_app_configuration.errors.inspect
+      end
+
+      puts "------------------------------------------------------------------------------------------------"
+
+    end
+  end
+
   task :organizations => :environment do
     json = JSON.parse(File.read("#{Rails.root}/data/dump.json"))
 

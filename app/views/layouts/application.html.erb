@@ -9,7 +9,7 @@
 <body>
 
 <div id="header" class="navbar navbar-fixed-top">
-  <%= link_to "Edu Apps", root_url, class: "navbar-brand" %>
+  <%= link_to raw("<i class='icon-cog'></i> Edu Apps"), root_url, class: "navbar-brand" %>
 
   <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -26,7 +26,7 @@
         <li<% if controller_name == 'static' && action_name == 'docs' %> class="active"<% end %>>
           <%= link_to "Docs", docs_path(section: "basics", page: "index") %></li>
         <li<% if controller_name == 'lti_apps' && (['new', 'create'].include? action_name) %> class="active"<% end %>><%= link_to "Submit", new_lti_app_path %></li>
-        <li<% if controller_name == 'xml_builder' %> class="active"<% end %>><%= link_to "XML Tools", xml_builder_path %></li>
+        <li<% if controller_name == 'xml_builder' %> class="active"<% end %>><%= link_to "My Configurations", xml_builder_path %></li>
 
         <% if current_user %>
           <li<% if request.env["REQUEST_PATH"] =~ /\/settings\// %> class="active"<% end %>><%= link_to "Settings", edit_profile_path %></li>
@@ -60,23 +60,6 @@
     Also check out IMS's <a href="http://www.imsglobal.org/lti">LTI Directory</a> and details on <a href="http://www.imscert.org">LTI Conformance</a>.
   </p>
 </footer>
-
-<% if Rails.env =~ /foo/ %>
-<ul class="responsive-utilities-test visible-on">
-  <li>
-    <span class="hidden-sm">Small</span>
-    <span class="visible-sm">✔ Small</span>
-  </li>
-  <li>
-    <span class="hidden-md">Medium</span>
-    <span class="visible-md">✔ Medium</span>
-  </li>
-  <li>
-    <span class="hidden-lg">Large</span>
-    <span class="visible-lg">✔ Large</span>
-  </li>
-</ul>
-<% end %>
 
 </body>
 </html>

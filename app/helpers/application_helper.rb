@@ -32,4 +32,17 @@ module ApplicationHelper
     end
   end
 
+  def status_label(status)
+    classes = ['label']
+    case status
+    when 'pending'
+      classes << 'label-primary'
+    when 'active'
+      classes << 'label-success'
+    when 'disabled'
+      classes << 'label-default'
+    end
+    content_tag(:span, status.upcase, class: classes.join(' '))
+  end
+
 end
