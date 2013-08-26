@@ -1,0 +1,2 @@
+module LtiAppConfigurationsHelper
+end

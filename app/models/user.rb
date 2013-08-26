@@ -138,6 +138,10 @@ class User < ActiveRecord::Base
     user.destroy!
   end
 
+  def is_admin?
+    true
+  end
+
   # private instance methods ..................................................
   private
 

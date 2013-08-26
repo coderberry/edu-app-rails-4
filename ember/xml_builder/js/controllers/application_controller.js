@@ -1,9 +1,9 @@
-var Cartridge = require('../models/cartridge');
+var LtiAppConfiguration = require('../models/lti_app_configuration');
 var X2JS = require('../vendor/xml2json');
 require('../vendor/vkbeautify.0.99.00.beta');
 
 var ApplicationController = Ember.ArrayController.extend({
-  needs: ['cartridge'],
+  needs: ['lti_app_configuration'],
   importUrl: '',
   pastedXml: '',
 
@@ -15,7 +15,7 @@ var ApplicationController = Ember.ArrayController.extend({
 
   columns: (function() {
    return [
-     Ember.Object.create({name: 'name', label: 'Name'}),
+     Ember.Object.create({name: 'title', label: 'Name'}),
      Ember.Object.create({name: 'updated_at', label: 'Modified'})
     ];
   }).property(),
@@ -30,12 +30,12 @@ var ApplicationController = Ember.ArrayController.extend({
   },
 
   showForm: function() {
-    var cartridgeCtrl = this.get('controllers.cartridge');
-    return !Ember.isEmpty(cartridgeCtrl.get('model'));
-  }.property('controllers.cartridge.model'),
+    var ctrl = this.get('controllers.lti_app_configuration');
+    return !Ember.isEmpty(ctrl.get('model'));
+  }.property('controllers.lti_app_configuration.model'),
 
   showXml: function(record) {
-    window.open('/cartridges/' + record.get('uid') + '.xml', '_blank');
+    window.open('/configurations/' + record.get('uid') + '.xml', '_blank');
   },
 
   import: function() {
@@ -101,15 +101,15 @@ var ApplicationController = Ember.ArrayController.extend({
   delete: function(record) {
     if (!confirm("Are you sure?")) return;
 
-    var cartridgeCtrl = this.get('controllers.cartridge');
-    var cartridge = cartridgeCtrl.get('model');
+    var ctrl = this.get('controllers.lti_app_configuration');
+    var lti_app_configuration = ctrl.get('model');
     var isCurrentRecord = false;
-    if (cartridge) {
-      isCurrentRecord = (cartridge.get('id') === record.get('uid'));
+    if (lti_app_configuration) {
+      isCurrentRecord = (lti_app_configuration.get('id') === record.get('uid'));
     }
 
     record.deleteRecord();
-    App.FlashQueue.pushFlash('notice', 'Cartridge has been deleted');
+    App.FlashQueue.pushFlash('notice', 'Configuration has been deleted');
 
     this.get('model').reload();
     if (isCurrentRecord) {
@@ -118,12 +118,12 @@ var ApplicationController = Ember.ArrayController.extend({
   },
 
   xml: function() {
-    var compressed_xml = this.get('controllers.cartridge.xml');
+    var compressed_xml = this.get('controllers.lti_app_configuration.xml');
     if (!Ember.isEmpty(compressed_xml)) {
       var code = vkbeautify.xml(compressed_xml, 2);
       return code;
     }
-  }.property('controllers.cartridge.xml')
+  }.property('controllers.lti_app_configuration.xml')
 
 });
 

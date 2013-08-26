@@ -1,5 +1,9 @@
-var CourseNavigationSettings = Ember.Object.extend({
+var Jsonable = require('../mixins/jsonable');
+
+var CourseNavigationSettings = Ember.Object.extend(Jsonable, {
+  is_enabled: false,
   is_optional: false,
+  name: null,
   lti_launch_url: null,
   link_text: null,
   visibility: 'public',
@@ -7,7 +11,7 @@ var CourseNavigationSettings = Ember.Object.extend({
 
   modifiedAt: function() {
     return new Date();
-  }.property('is_optional', 'lti_launch_url', 'link_text', 'visibility', 'enabledByDefault')
+  }.property('is_enabled', 'is_optional', 'lti_launch_url', 'link_text', 'visibility', 'enabledByDefault')
 });
 
 module.exports = CourseNavigationSettings;

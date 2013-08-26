@@ -1,5 +1,7 @@
 EduApps::Application.routes.draw do
   
+  get "lti_app_configurations/index"
+  get "lti_app_configurations/show"
   get "/tools/xml_builder" => "xml_builder#index", as: :xml_builder
   
   resources :lti_apps, path: '/apps'
@@ -10,6 +12,12 @@ EduApps::Application.routes.draw do
     get "lti_apps/:lti_app_id/reviews" => "reviews#index", :defaults => { :format => "json" }
     get "reviews" => "reviews#index", :defaults => { :format => "json" }
     post "reviews" => "reviews#create", :defaults => { :format => "json" }
+
+    get "json_to_xml" => "lti_app_configurations#json_to_xml"
+
+    get "lti_app_configurations" => "lti_app_configurations#index", :defaults => { :format => "json" }
+    get "lti_app_configurations/:uid" => "lti_app_configurations#show", :defaults => { :format => "json" }
+    get "lti_app_configurations/dump" => "lti_app_configurations#dump", :defaults => { :format => "json" }
 
     get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
     get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }

@@ -91,7 +91,11 @@
     <%= f.label :short_name, "Organization", class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
       <% if @lti_app.new_record? || !@lti_app.organization %>
-        <%= f.select :organization_id, current_user.organizations.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
+        <% if current_user.is_admin? %>
+          <%= f.select :organization_id, Organization.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
+        <% else %>
+          <%= f.select :organization_id, current_user.organizations.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
+        <% end %>
       <% else %>
         <span class="form-control"><%= @lti_app.organization.try(:name) %></span>
       <% end %>

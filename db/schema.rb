@@ -48,14 +48,14 @@ ActiveRecord::Schema.define(version: 20130823212611) do
   add_index "cartridges", ["user_id"], name: "index_cartridges_on_user_id", using: :btree
 
   create_table "lti_app_configurations", force: true do |t|
-    t.string   "short_name", null: false
+    t.string   "uid",        null: false
     t.json     "config"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "lti_app_configurations", ["short_name"], name: "index_lti_app_configurations_on_short_name", unique: true, using: :btree
+  add_index "lti_app_configurations", ["uid"], name: "index_lti_app_configurations_on_uid", unique: true, using: :btree
   add_index "lti_app_configurations", ["user_id"], name: "index_lti_app_configurations_on_user_id", using: :btree
 
   create_table "lti_apps", force: true do |t|

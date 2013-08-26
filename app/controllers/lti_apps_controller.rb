@@ -22,6 +22,11 @@ class LtiAppsController < ApplicationController
     end
   end
 
+  def export_as_json
+    @lti_apps = LtiApp.load
+    render json: LtiApp.all.map(&:as_json)
+  end
+
   # GET /lti_apps/new
   def new
     @lti_app = LtiApp.new

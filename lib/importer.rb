@@ -18,6 +18,14 @@ class Importer
         puts "APP: #{app.id}"
       end
     end
+
+    @json['app_review'].each do |data|
+      review = import_review(data)
+    end
+
+    self.reassign_lti_apps
+
+    puts "DONE"
   end
 
   def wipeout
@@ -70,11 +78,11 @@ class Importer
   end
 
   def import_lti_app_configuration(user, data)
-    lti_app_configuration = LtiAppConfiguration.new(user_id: user.id, short_name: data['id'])
+    lti_app_configuration = LtiAppConfiguration.new(user_id: user.id)
 
     cartridge = EA::Cartridge.new
     cartridge.title       = data['name']
-    cartridge.description = data['short_description'].present? ? data['short_description'] : data['description']
+    cartridge.description = ReverseMarkdown.parse(data['short_description'].present? ? data['short_description'] : data['description'])
     cartridge.icon_url    = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
     cartridge.launch_url  = edu_appify_link(data['open_launch_url'] || data['launch_url'])
 
@@ -100,10 +108,10 @@ class Importer
       if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav'].include? name
         optional_extensions << name
       else
-        cartridge.config_options << EA::ConfigOption.new( name:          name, 
-                                                          default_value: opt['value'], 
-                                                          is_required:   opt['required'], 
-                                                          description:   opt['description'], 
+        cartridge.config_options << EA::ConfigOption.new( name:          name,
+                                                          default_value: opt['value'],
+                                                          is_required:   opt['required'],
+                                                          description:   ReverseMarkdown.parse(opt['description']),
                                                           type:          opt['type'] )
       end
     end if data['config_options'].present?
@@ -133,8 +141,8 @@ class Importer
     app.name                     = data['name']
     app.status                   = data['pending'] == true ? 'pending' : 'active'
     app.short_name               = data['id']
-    app.short_description        = data['short_description']
-    app.description              = data['description']
+    app.short_description        = ReverseMarkdown.parse(data['short_description'])
+    app.description              = ReverseMarkdown.parse(data['description'])
     app.testing_instructions     = data['test_instructions']
     app.author_name              = data['author_name']
     app.app_type                 = data['app_type']
@@ -170,6 +178,57 @@ class Importer
     end
 
     return app
+  end
+
+  def import_review(data)
+    organizations = {
+      1 => Organization.where(name: "LTI-Examples").first,
+      6 => Organization.where(name: "Canvas Cloud").first
+    }
+
+    app = LtiApp.where(short_name: data["tool_id"]).first
+    user = User.where(twitter_nickname: data["user_id"]).first_or_create({
+        name: data["user_id"],
+        is_omniauthing: true
+    })
+    membership = Membership.where(organization_id: organizations[data["external_access_token_id"]], user_id: user.id).first_or_create({
+      is_admin: true
+    })
+
+    review = app.reviews.build({
+      rating: data["rating"],
+      comments: data["comments"],
+      lti_app_id: app.id,
+      user_id: user.id,
+      membership_id: membership.id
+    })
+
+    if review.save
+      puts "REVIEW: #{review.id}"
+    else
+      puts "ERROR: #{data['tool_id']} - #{review.errors.full_messages.inspect}"
+    end
+    review
+  end
+
+  def reassign_lti_apps
+    @json["permissions"].each do |perm|
+      apps = perm["apps"]
+      if apps.present? && apps != 'any'
+        user = User.where(twitter_nickname: perm["username"][1..-1]).first
+        if user
+          apps.split(',').each do |short_name|
+            app = LtiApp.where(short_name: short_name).first
+            if app
+              app.user_id = user.id
+              app.organization_id = user.organizations.first.try(:id)
+              app.save
+              puts "Changed ownership of #{short_name} to #{user.id}"
+            end
+          end
+        end
+      end
+    end
   end
 
   def maps

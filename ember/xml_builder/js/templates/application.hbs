@@ -84,14 +84,13 @@
         </thead>
         <tbody>
         {{#each controller}}
-          {{log this}}
           <tr>
             <td>
-              {{#if icon_image_url}}
-                <img {{bindAttr src="icon_image_url"}} width="16" height="16" />
+              {{#if icon_url}}
+                <img {{bindAttr src="icon_url"}} width="16" height="16" />
               {{/if}}
 
-              {{name}}
+              {{config.title}}
             </td>
             <td>{{fromNow updated_at}}</td>
             <td class="circle-buttons">
@@ -101,7 +100,7 @@
               </span>
               <span class="icon-stack text-info pull-right">
                 <i class="icon-circle icon-stack-base"></i>
-                {{#linkTo "cartridge" this}}<i class="icon-top-layer icon-edit icon-light"></i>{{/linkTo}}
+                {{#linkTo "lti_app_configuration" this}}<i class="icon-top-layer icon-edit icon-light"></i>{{/linkTo}}
               </span>
               <span class="icon-stack text-success pull-right">
                 <i class="icon-circle icon-stack-base"></i>

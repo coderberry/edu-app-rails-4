@@ -1,14 +1,14 @@
-var Cartridge = require('../models/cartridge');
+var LtiAppConfiguration = require('../models/lti_app_configuration');
 
 var ApplicationRoute = Ember.Route.extend({
   model: function() {
-    return Cartridge.findAll();
+    return LtiAppConfiguration.findAll();
   },
 
   events: {
     new: function() {
-      var cartridge = Cartridge.create({ uid: 'new', custom_fields: [] });
-      this.transitionTo('cartridge', cartridge);
+      var lti_app_configuration = LtiAppConfiguration.create({ uid: 'new' });
+      this.transitionTo('lti_app_configuration', lti_app_configuration);
     }
   }
 });

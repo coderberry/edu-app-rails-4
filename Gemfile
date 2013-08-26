@@ -32,6 +32,7 @@ group :development do
   gem 'guard-rspec'
   gem 'quiet_assets'
   gem 'guard-embertools', '~> 0.2.1'
+  gem 'reverse_markdown'
 end
 
 group :test do

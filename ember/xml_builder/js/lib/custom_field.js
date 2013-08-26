@@ -1,13 +1,12 @@
-var CustomField = Ember.Object.extend({ 
+var Jsonable = require('../mixins/jsonable');
+
+var CustomField = Ember.Object.extend(Jsonable, { 
   name        : '',
-  description : '',
-  type        : 'text',
   value       : '',
-  required    : false,
 
   modifiedAt: function() {
     return new Date();
-  }.property('name', 'description', 'type', 'value', 'required')
+  }.property('name', 'value')
 });
 
 module.exports = CustomField;

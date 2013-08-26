@@ -1,26 +1,44 @@
 <form {{action "buildXml" on="submit"}}>
-  
-
   <div {{bindAttr class=":form-group errors.name:has-error"}}>
     <label>Name</label>
     {{input type="text" 
-            value=name 
+            value=title
             class="form-control" 
             data-placement="bottom"
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
     <span class="help-block">{{errors.name}}</span>
   </div>
-  <div {{bindAttr class=":form-group errors.lti_launch_url:has-error"}}>
+  <div {{bindAttr class=":form-group errors.launch_url:has-error"}}>
     <label>LTI Launch URL</label>
     {{input type="text" 
-            value=lti_launch_url 
+            value=launch_url 
             class="form-control" 
             placeholder="https://" 
             data-placement="bottom"
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
-    <span class="help-block">{{errors.lti_launch_url}}</span>
+    <span class="help-block">{{errors.launch_url}}</span>
+  </div>
+  <div class="form-group">
+    <small class="text-muted pull-right">250 char max</small>
+    <label>Description</label>
+    {{input type="text" 
+            value=description 
+            class="form-control" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
+  </div>
+  <div class="form-group">
+    <small class="text-muted pull-right">(16x16 PNG, GIF or JPG)</small>
+    <label>Icon URL</label>
+    {{input type="text" 
+            value=icon_url 
+            class="form-control" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content="CONTENT NEEDED"}}
   </div>
   <div class="form-group">
     <small class="text-muted pull-right">lowercase, alphanumeric + underscore</small>
@@ -33,29 +51,9 @@
             data-content='use underscore (_) for spaces and all lowercase, e.g. khan_academy'}}
   </div>
   <div class="form-group">
-    <small class="text-muted pull-right">250 char max</small>
-    <label>Description</label>
-    {{input type="text" 
-            value=short_description 
-            class="form-control" 
-            data-placement="bottom"
-            data-toggle="popover" 
-            data-content="CONTENT NEEDED"}}
-  </div>
-  <div class="form-group">
-    <small class="text-muted pull-right">(16x16 PNG, GIF or JPG)</small>
-    <label>Icon URL</label>
-    {{input type="text" 
-            value=icon_image_url 
-            class="form-control" 
-            data-placement="bottom"
-            data-toggle="popover" 
-            data-content="CONTENT NEEDED"}}
-  </div>
-  <div class="form-group">
     <label>Link Text</label>
     {{input type="text" 
-            value=link_text 
+            value=default_link_text 
             class="form-control" 
             placeholder="" 
             data-placement="bottom"
@@ -66,7 +64,7 @@
     <div class="form-group col-6">
       <label>Default Width (px)</label>
       {{input type="text" 
-              value=selection_width 
+              value=default_selection_width 
               class="form-control" 
               data-placement="bottom"
               data-toggle="popover" 
@@ -75,7 +73,7 @@
     <div class="form-group col-6">
       <label>Default Height (px)</label>
       {{input type="text" 
-              value=selection_height 
+              value=default_selection_height 
               class="form-control" 
               data-placement="bottom"
               data-toggle="popover" 
@@ -88,7 +86,7 @@
            contentBinding="App.launchPrivacy"
            optionValuePath="content.value"
            optionLabelPath="content.name"
-           valueBinding=launch_privacy
+           valueBinding=privacy_level
            class="form-control"
            data-placement="bottom"
            data-toggle="popover" 
@@ -107,29 +105,29 @@
 
   <fieldset>
     <legend>
-      <a href="#" {{action "addCustomField"}} class="btn btn-xs btn-info pull-right"><i class="icon-plus"></i> Add Custom Field</a>
-      Custom Field(s)
+      <a href="#" {{action "addConfigOption"}} class="btn btn-xs btn-info pull-right"><i class="icon-plus"></i> Add Config Option</a>
+      Config Options(s)
     </legend>
     <div class="form-group">
-        {{#each cf in custom_fields}}
+        {{#each co in config_options}}
           <div class="well well-small" style="padding-top: 5px; margin-bottom: 5px;">
             <div class="row">
               <div class="col-8">
                 <div class="checkbox">
                   <label>
-                    {{input type="checkbox" checked=cf.required}}
+                    {{input type="checkbox" checked=co.is_required}}
                     Is this a required field?
                   </label>
                 </div>
               </div>
               <div class="col-4">
-                <button {{action "removeCustomField" cf}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
+                <button {{action "removeConfigOption" co}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
               </div>
             </div>
             <div class="row" style="margin-bottom: 5px;">
               <div class="col-4">
                 {{input type="text" 
-                        value=cf.name 
+                        value=co.name 
                         class="form-control" 
                         placeholder="Param Name" 
                         data-placement="bottom"
@@ -141,7 +139,7 @@
                         contentBinding="App.fieldTypes"
                         optionValuePath="content.value"
                         optionLabelPath="content.name"
-                        valueBinding=cf.type
+                        valueBinding=co.type
                         class="form-control"
                         data-placement="bottom"
                         data-toggle="popover" 
@@ -149,7 +147,7 @@
               </div>
               <div class="col-5">
                 {{input type="text" 
-                        value=cf.value 
+                        value=co.default_value 
                         class="form-control" 
                         placeholder="Default value"
                         data-placement="bottom"
@@ -160,9 +158,50 @@
             <div class="row">
               <div class="col-12">
                 {{input type="text" 
-                        value=cf.description 
+                        value=co.description 
                         class="form-control" 
                         placeholder="Description" 
+                        data-placement="bottom"
+                        data-toggle="popover" 
+                        data-content="CONTENT NEEDED"}}
+              </div>
+            </div>
+          </div>
+        {{else}}
+          <div class="text-center">There are no config options</div>
+        {{/each}}
+    </div>
+  </fieldset>
+
+
+  <fieldset>
+    <legend>
+      <a href="#" {{action "addCustomField"}} class="btn btn-xs btn-info pull-right"><i class="icon-plus"></i> Add Custom Field</a>
+      Custom Field(s)
+    </legend>
+    <div class="form-group">
+        {{#each cf in custom_fields}}
+          <div class="well well-small" style="padding-top: 5px; margin-bottom: 5px;">
+            <div class="row" style="margin-bottom: 5px;">
+              <div class="col-12">
+                <button {{action "removeCustomField" cf}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 5px;">
+              <div class="col-6">
+                {{input type="text" 
+                        value=cf.name
+                        class="form-control" 
+                        placeholder="Name" 
+                        data-placement="bottom"
+                        data-toggle="popover" 
+                        data-content="CONTENT NEEDED"}}
+              </div>
+              <div class="col-6">
+                {{input type="text" 
+                        value=cf.value 
+                        class="form-control" 
+                        placeholder="Value"
                         data-placement="bottom"
                         data-toggle="popover" 
                         data-content="CONTENT NEEDED"}}
@@ -178,13 +217,13 @@
   <fieldset>
     <legend>
       <label class="extension-checkbox pull-right">
-        {{input type="checkbox" checked=useEditorButton}} Enabled?
+        {{input type="checkbox" checked=editor_button.is_enabled}} Enabled?
       </label>
       Extension: Editor Button
     </legend>
     <div class="well well-small">
-      {{#if useEditorButton}}
-        {{#with editorButton}}
+      {{#if editor_button.is_enabled}}
+        {{#with editor_button}}
           {{partial "selectionForm"}}
         {{/with}}
       {{else}}
@@ -196,13 +235,13 @@
   <fieldset>
     <legend>
       <label class="extension-checkbox pull-right">
-        {{input type="checkbox" checked=useLinkSelection}} Enabled?
+        {{input type="checkbox" checked=resource_selection.is_enabled}} Enabled?
       </label>
       Extension: Resource Selection
     </legend>
     <div class="well well-small">
-      {{#if useLinkSelection}}
-        {{#with linkSelection}}
+      {{#if resource_selection.is_enabled}}
+        {{#with resource_selection}}
           {{partial "selectionForm"}}
         {{/with}}
       {{else}}
@@ -214,13 +253,13 @@
   <fieldset>
     <legend>
       <label class="extension-checkbox pull-right">
-        {{input type="checkbox" checked=useHomeworkSubmission}} Enabled?
+        {{input type="checkbox" checked=homework_submission.is_enabled}} Enabled?
       </label>
       Extension: Homework Submission
     </legend>
     <div class="well well-small">
-      {{#if useHomeworkSubmission}}
-        {{#with homeworkSubmission}}
+      {{#if homework_submission.is_enabled}}
+        {{#with homework_submission}}
           {{partial "selectionForm"}}
         {{/with}}
       {{else}}
@@ -232,13 +271,13 @@
   <fieldset>
     <legend>
       <label class="extension-checkbox pull-right">
-        {{input type="checkbox" checked=useCourseNavigation}} Enabled?
+        {{input type="checkbox" checked=course_nav.is_enabled}} Enabled?
       </label>
       Extension: Course Navigation
     </legend>
     <div class="well well-small">
-      {{#if useCourseNavigation}}
-        {{#with courseNavigation}}
+      {{#if course_nav.is_enabled}}
+        {{#with course_nav}}
           <div class="form-group">
             <label>LTI Launch URL</label>
             {{input type="text" value=lti_launch_url class="form-control" placeholder="https://"}}
@@ -277,13 +316,13 @@
   <fieldset>
     <legend>
       <label class="extension-checkbox pull-right">
-        {{input type="checkbox" checked=useAccountNavigation}} Enabled?
+        {{input type="checkbox" checked=account_nav.is_enabled}} Enabled?
       </label>
       Extension: Account Navigation
     </legend>
     <div class="well well-small">
-      {{#if useAccountNavigation}}
-        {{#with accountNavigation}}
+      {{#if account_nav.is_enabled}}
+        {{#with account_nav}}
           {{partial "navigationForm"}}
         {{/with}}
       {{else}}
@@ -295,13 +334,13 @@
   <fieldset>
     <legend>
       <label class="extension-checkbox pull-right">
-        {{input type="checkbox" checked=useUserNavigation}} Enabled?
+        {{input type="checkbox" checked=user_nav.is_enabled}} Enabled?
       </label>
       Extension: User Navigation
     </legend>
     <div class="well well-small">
-      {{#if useUserNavigation}}
-        {{#with userNavigation}}
+      {{#if user_nav.is_enabled}}
+        {{#with user_nav}}
           {{partial "navigationForm"}}
         {{/with}}
       {{else}}
@@ -309,5 +348,4 @@
       {{/if}}
     </div>
   </fieldset>
-
 </form>
