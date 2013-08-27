@@ -1,7 +1,7 @@
 module EA
   class ConfigOption
     include Hashable
-    attr_accessor :name, :description, :type, :is_required, :default_value
+    attr_accessor :name, :description, :type, :isRequired, :defaultValue
 
     def initialize(attrs={})
       attrs.each do |key,value|

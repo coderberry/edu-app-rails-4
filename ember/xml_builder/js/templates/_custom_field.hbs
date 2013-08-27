@@ -1,0 +1,31 @@
+{{#with view.content}}
+
+<div class="well well-small" style="padding-top: 5px; margin-bottom: 5px;">
+  <div class="row" style="margin-bottom: 5px;">
+    <div class="col-12">
+      <button {{action "removeCustomField" this}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 5px;">
+    <div class="col-6">
+      {{input type="text" 
+              value=name
+              class="form-control" 
+              placeholder="Name" 
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
+    </div>
+    <div class="col-6">
+      {{input type="text" 
+              value=value 
+              class="form-control" 
+              placeholder="Value"
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
+    </div>
+  </div>
+</div>
+
+{{/with}}

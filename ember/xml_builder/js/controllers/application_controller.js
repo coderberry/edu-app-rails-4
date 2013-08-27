@@ -7,28 +7,6 @@ var ApplicationController = Ember.ArrayController.extend({
   importUrl: '',
   pastedXml: '',
 
-  sortedColumn: (function() {
-    var properties = this.get('sortProperties');
-    if(!properties) return undefined;
-    return properties.get('firstObject');
-  }).property('sortProperties.[]'),
-
-  columns: (function() {
-   return [
-     Ember.Object.create({name: 'title', label: 'Name'}),
-     Ember.Object.create({name: 'updated_at', label: 'Modified'})
-    ];
-  }).property(),
-
-  toggleSort: function(column) {
-    if(this.get('sortedColumn') == column) {
-      this.toggleProperty('sortAscending');
-    } else {
-      this.set('sortProperties', [column]);
-      this.set('sortAscending', true);
-    }
-  },
-
   showForm: function() {
     var ctrl = this.get('controllers.lti_app_configuration');
     return !Ember.isEmpty(ctrl.get('model'));
@@ -85,17 +63,19 @@ var ApplicationController = Ember.ArrayController.extend({
     Ember.$('#create-from-xml-panel textarea').html('');
   },
 
+
+
   save: function() {
     var _this = this;
-    var cartridgeCtrl = this.get('controllers.cartridge');
-    var cartridge = cartridgeCtrl.get('model');
+    var ctrl = this.get('controllers.lti_app_configuration');
+    var ltiAppConfiguration = ctrl.get('model');
 
-    cartridge.on('didSaveRecord', function() {
+    ltiAppConfiguration.on('didSaveRecord', function() {
       _this.get('model').reload();
-      _this.transitionToRoute('cartridge', cartridge);
+      _this.transitionToRoute('lti_app_configuration', ltiAppConfiguration);
     });
 
-    cartridge.persist();
+    ltiAppConfiguration.persist();
   },
 
   delete: function(record) {
@@ -123,8 +103,30 @@ var ApplicationController = Ember.ArrayController.extend({
       var code = vkbeautify.xml(compressed_xml, 2);
       return code;
     }
-  }.property('controllers.lti_app_configuration.xml')
+  }.property('controllers.lti_app_configuration.xml'),
 
+  // Required functions for supporting sorting
+  sortedColumn: (function() {
+    var properties = this.get('sortProperties');
+    if(!properties) return undefined;
+    return properties.get('firstObject');
+  }).property('sortProperties.[]'),
+  
+  columns: (function() {
+   return [
+     Ember.Object.create({name: 'name', label: 'Name'}),
+     Ember.Object.create({name: 'updated_at', label: 'Modified'})
+    ];
+  }).property(),
+
+  toggleSort: function(column) {
+    if(this.get('sortedColumn') == column) {
+      this.toggleProperty('sortAscending');
+    } else {
+      this.set('sortProperties', [column]);
+      this.set('sortAscending', true);
+    }
+  },
 });
 
 module.exports = ApplicationController;

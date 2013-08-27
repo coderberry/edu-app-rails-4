@@ -2,7 +2,14 @@ var LtiAppConfiguration = require('../models/lti_app_configuration');
 
 var ApplicationRoute = Ember.Route.extend({
   model: function() {
-    return LtiAppConfiguration.findAll();
+    return LtiAppConfiguration.fetchAll().then(function(records) {
+      records.forEach(function(record) {
+        Ember.run.next(record, function() {
+          record.deserialize();
+        });
+      });
+      return records;
+    });
   },
 
   events: {

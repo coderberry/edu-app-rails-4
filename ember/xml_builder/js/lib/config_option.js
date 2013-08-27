@@ -1,15 +1,15 @@
 var Jsonable = require('../mixins/jsonable');
 
 var ConfigOption = Ember.Object.extend(Jsonable, { 
-  name                : '',
-  default_description : '',
-  type                : 'text',
-  value               : '',
-  is_required         : false,
+  name         : '',
+  description  : '',
+  type         : 'text',
+  defaultValue : '',
+  isRequired   : false,
 
   modifiedAt: function() {
     return new Date();
-  }.property('name', 'description', 'type', 'value', 'required')
+  }.property('name', 'description', 'type', 'defaultValue', 'isRequired')
 });
 
 module.exports = ConfigOption;

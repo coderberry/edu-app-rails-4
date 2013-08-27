@@ -81,24 +81,27 @@ class Importer
     lti_app_configuration = LtiAppConfiguration.new(user_id: user.id)
 
     cartridge = EA::Cartridge.new
-    cartridge.title       = data['name']
-    cartridge.description = ReverseMarkdown.parse(data['short_description'].present? ? data['short_description'] : data['description'])
-    cartridge.icon_url    = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
-    cartridge.launch_url  = edu_appify_link(data['open_launch_url'] || data['launch_url'])
+    cartridge.title              = data['name']
+    cartridge.description        = ReverseMarkdown.parse(data['short_description'].present? ? data['short_description'] : data['description'])
+    cartridge.iconUrl            = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
+    cartridge.launchUrl          = edu_appify_link(data['open_launch_url'] || data['launch_url'])
+    cartridge.toolId             = data['id']
+    cartridge.defaultLinkText    = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
+    cartridge.defaultWidth       = data['width'].to_i if data['width'].present?
+    cartridge.defaultHeight      = data['height'].to_i if data['height'].present?
+    cartridge.launchPrivacy      = data['privacy_level']
+    cartridge.domain             = data['domain']
+    cartridge.editorButton       = EA::ModalExtension.new(name: 'editor_button')
+    cartridge.resourceSelection  = EA::ModalExtension.new(name: 'resource_selection')
+    cartridge.homeworkSubmission = EA::ModalExtension.new(name: 'homework_submission')
+    cartridge.courseNav          = EA::NavigationExtension.new(name: 'course_nav')
+    cartridge.accountNav         = EA::NavigationExtension.new(name: 'account_nav')
+    cartridge.userNav            = EA::NavigationExtension.new(name: 'user_nav')
 
     # Custom Fields
     data['custom_fields'].each do |k, v|
-      cartridge.custom_fields << EA::CustomField.new( name: k, value: v )
+      cartridge.customFields << EA::CustomField.new( name: k, value: v )
     end if data['custom_fields'].present?
-
-    canvas_extension = EA::Extension.new
-    canvas_extension.platform                 = 'canvas.instructure.com'
-    canvas_extension.tool_id                  = data['id']
-    canvas_extension.privacy_level            = data['privacy_level']
-    canvas_extension.domain                   = data['domain']
-    canvas_extension.default_link_text        = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
-    canvas_extension.default_selection_width  = data['width'].to_i if data['width'].present?
-    canvas_extension.default_selection_height = data['height'].to_i if data['height'].present?
 
     optional_extensions = []
 
@@ -108,24 +111,39 @@ class Importer
       if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav'].include? name
         optional_extensions << name
       else
-        cartridge.config_options << EA::ConfigOption.new( name:          name,
-                                                          default_value: opt['value'],
-                                                          is_required:   opt['required'],
-                                                          description:   ReverseMarkdown.parse(opt['description']),
-                                                          type:          opt['type'] )
+        cartridge.configOptions << EA::ConfigOption.new( name:         name,
+                                                         defaultValue: opt['value'],
+                                                         isRequired:   opt['required'],
+                                                         description:  ReverseMarkdown.parse(opt['description']),
+                                                         type:         opt['type'] )
       end
     end if data['config_options'].present?
 
     # Canvas Extensions
     data['extensions'].each do |extension|
-      if ['editor_button', 'resource_selection', 'homework_submission'].include? extension
-        canvas_extension.options << EA::ModalExtension.new( name: extension, is_optional: (optional_extensions.include? extension) )
-      elsif ['course_nav', 'account_nav', 'user_nav'].include? extension
-        canvas_extension.options << EA::NavigationExtension.new( name: extension, is_optional: (optional_extensions.include? extension) )
+      case extension
+        when 'editor_button'
+          cartridge.editorButton.isEnabled = true
+          cartridge.editorButton.isOptional = (optional_extensions.include? extension)
+        when 'resource_selection'
+          cartridge.resourceSelection.isEnabled = true
+          cartridge.resourceSelection.isOptional = (optional_extensions.include? extension)
+        when 'homework_submission'
+          cartridge.homeworkSubmission.isEnabled = true
+          cartridge.homeworkSubmission.isOptional = (optional_extensions.include? extension)
+        when 'course_nav'
+          cartridge.courseNav.isEnabled = true
+          cartridge.courseNav.isOptional = (optional_extensions.include? extension)
+        when 'account_nav'
+          cartridge.accountNav.isEnabled = true
+          cartridge.accountNav.isOptional = (optional_extensions.include? extension)
+        when 'user_nav'
+          cartridge.userNav.isEnabled = true
+          cartridge.userNav.isOptional = (optional_extensions.include? extension)
       end
     end if data['extensions'].present?
 
-    cartridge.extensions << canvas_extension
+    puts cartridge.as_json
 
     lti_app_configuration.config = cartridge.as_json
     unless lti_app_configuration.save

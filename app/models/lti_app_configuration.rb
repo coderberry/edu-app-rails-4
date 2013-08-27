@@ -10,8 +10,31 @@ class LtiAppConfiguration < ActiveRecord::Base
   validates :user_id, presence: true
 
   # public instance methods ...................................................
-  def title
-    self.config['title']
+  def title;       self.config['title'];       end
+  def description; self.config['description']; end
+  def launch_url;  self.config['launch_url'];  end
+  def icon_url;    self.config['icon_url'];    end
+
+  def tool_config
+    tool = IMS::LTI::ToolConfig.new
+    tool.title = self.title
+    tool.description = self.description
+    tool.launch_url = self.launch_url
+    tool.icon = self.icon_url
+
+    self.config['extensions'].each do |ext|
+      platform = ext['platform']
+
+      tool.set_ext_param(platform, 'tool_id', ext['tool_id'])                           if ext['tool_id'].present?
+      tool.set_ext_param(platform, 'privacy_level', ext['privacy_level'])               if ext['privacy_level'].present?
+      tool.set_ext_param(platform, 'domain', ext['domain'])                             if ext['domain'].present?
+      tool.set_ext_param(platform, 'link_text', ext['default_link_text'])               if ext['default_link_text'].present?
+      tool.set_ext_param(platform, 'selection_width', ext['default_selection_width'])   if ext['default_selection_width'].present?
+      tool.set_ext_param(platform, 'selection_height', ext['default_selection_height']) if ext['default_selection_height'].present?
+
+    end
+
+    tool
   end
 
   # private instance methods ..................................................

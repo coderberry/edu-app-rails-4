@@ -1,7 +1,7 @@
 <div class="form-group">
   <label>LTI Launch URL</label>
   {{input type="text" 
-          value=lti_launch_url 
+          value=launchUrl 
           class="form-control" 
           placeholder="https://"
           data-placement="bottom"
@@ -11,15 +11,33 @@
 <div class="form-group">
   <label>Link Text</label>
   {{input type="text" 
-          value=link_text 
+          value=linkText 
           class="form-control" 
           placeholder=""
           data-placement="bottom"
           data-toggle="popover" 
           data-content="CONTENT NEEDED"}}
 </div>
+{{#if isCourseNav}}
+  <div class="form-group">
+    <label>Visibility</label>
+    {{view Ember.Select
+           contentBinding="App.visibilityOptions"
+           optionValuePath="content.value"
+           optionLabelPath="content.name"
+           valueBinding=visibility
+           class="form-control"}}
+  </div>
+  <div class="checkbox">
+    <label>
+      {{input type="checkbox" checked=enabledByDefault}}
+      Enabled by default?
+    </label>
+  </div>
+{{/if}}
+</div>
 <div class="checkbox">
   <label>
-    {{input type="checkbox" checked=is_optional}} Is this extension optional?
+    {{input type="checkbox" checked=isOptional}} Is this extension optional?
   </label>
 </div>

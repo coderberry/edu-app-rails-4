@@ -18,6 +18,8 @@ EduApps::Application.routes.draw do
     get "lti_app_configurations" => "lti_app_configurations#index", :defaults => { :format => "json" }
     get "lti_app_configurations/:uid" => "lti_app_configurations#show", :defaults => { :format => "json" }
     get "lti_app_configurations/dump" => "lti_app_configurations#dump", :defaults => { :format => "json" }
+    post "lti_app_configurations" => "lti_app_configurations#create"
+    post "lti_app_configurations/:uid" => "lti_app_configurations#update"
 
     get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
     get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }
@@ -46,7 +48,7 @@ EduApps::Application.routes.draw do
   patch "/settings/account_settings" => "users#update_password", as: :update_password
   get "/settings/email_confirmation" => "users#update_email", as: :email_confirmation
 
-  get "/cartridges/:uid.xml" => "cartridges#xml", as: :cartridge_xml
+  get "/configurations/:uid.xml" => "lti_app_configurations#xml", as: :lti_app_configuration_xml
 
   namespace :settings do
     resources :authentications

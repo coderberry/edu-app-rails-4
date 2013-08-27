@@ -86,11 +86,10 @@
         {{#each controller}}
           <tr>
             <td>
-              {{#if icon_url}}
-                <img {{bindAttr src="icon_url"}} width="16" height="16" />
+              {{#if icon}}
+                <img {{bindAttr src="icon"}} width="16" height="16" />
               {{/if}}
-
-              {{config.title}}
+              {{name}}
             </td>
             <td>{{fromNow updated_at}}</td>
             <td class="circle-buttons">

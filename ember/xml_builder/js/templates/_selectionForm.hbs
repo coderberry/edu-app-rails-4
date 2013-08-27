@@ -1,7 +1,7 @@
 <div class="form-group">
   <label>LTI Launch URL</label>
   {{input type="text" 
-          value=lti_launch_url 
+          value=launchUrl 
           class="form-control" 
           placeholder="https://"
           data-placement="bottom"
@@ -11,7 +11,7 @@
 <div class="form-group">
   <label>Link Text</label>
   {{input type="text" 
-          value=link_text 
+          value=linkText 
           class="form-control" 
           placeholder=""
           data-placement="bottom"
@@ -21,7 +21,7 @@
 <div class="form-group">
   <label>Icon URL</label>
   {{input type="text" 
-          value=icon_image_url 
+          value=iconUrl 
           class="form-control"
           data-placement="bottom"
           data-toggle="popover" 
@@ -31,7 +31,7 @@
   <div class="form-group col-6">
     <label>Width (px)</label>
     {{input type="text" 
-          value=selection_width 
+          value=width 
           class="form-control"
           data-placement="bottom"
           data-toggle="popover" 
@@ -40,7 +40,7 @@
   <div class="form-group col-6">
     <label>Height (px)</label>
     {{input type="text" 
-          value=selection_height 
+          value=height 
           class="form-control"
           data-placement="bottom"
           data-toggle="popover" 
@@ -49,6 +49,6 @@
 </div>
 <div class="checkbox">
   <label>
-    {{input type="checkbox" checked=is_optional}} Is this extension optional?
+    {{input type="checkbox" checked=isOptional}} Is this extension optional?
   </label>
 </div>

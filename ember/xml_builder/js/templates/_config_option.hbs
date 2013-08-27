@@ -1,0 +1,61 @@
+{{#with view.content}}
+
+<div class="well well-small" style="padding-top: 5px; margin-bottom: 5px;">
+  <div class="row">
+    <div class="col-8">
+      <div class="checkbox">
+        <label>
+          {{input type="checkbox" checked=isRequired}}
+          Is this a required field?
+        </label>
+      </div>
+    </div>
+    <div class="col-4">
+      <button {{action "removeConfigOption" this}} type="button" class="close" aria-hidden="true" style="pull-right">&times;</button>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 5px;">
+    <div class="col-4">
+      {{input type="text" 
+              value=name 
+              class="form-control" 
+              placeholder="Param Name" 
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
+    </div>
+    <div class="col-3">
+      {{view Ember.Select
+              contentBinding="App.fieldTypes"
+              optionValuePath="content.value"
+              optionLabelPath="content.name"
+              valueBinding=type
+              class="form-control"
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
+    </div>
+    <div class="col-5">
+      {{input type="text" 
+              value=defaultValue
+              class="form-control" 
+              placeholder="Default value"
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {{input type="text" 
+              value=description 
+              class="form-control" 
+              placeholder="Description" 
+              data-placement="bottom"
+              data-toggle="popover" 
+              data-content="CONTENT NEEDED"}}
+    </div>
+  </div>
+</div>
+
+{{/with}}
