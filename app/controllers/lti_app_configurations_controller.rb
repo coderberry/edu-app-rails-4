@@ -87,24 +87,29 @@ class LtiAppConfigurationsController < ApplicationController
   def xml
     lti_app_configuration = LtiAppConfiguration.where(uid: params[:uid]).first
     if lti_app_configuration
-      tool_config = lti_app_configuration.tool_config
-
-      # remove optional extensions that aren't requested
-      cartridge.extensions.each do |k,v|
-        if !params[k] && v["optional"] == "true"
-          tool_config.get_ext_params("canvas.instructure.com").delete(k)
-        end
+      begin
+        params.delete(:controller)
+        params.delete(:action)
+        tool_config = lti_app_configuration.tool_config(params)
+        render xml: tool_config.to_xml
+      rescue EA::MissingConfigOptionsError => err
+        render xml: err.errors.map { |k,v| "#{k} #{v}" }, root: :errors
       end
+      # # remove optional extensions that aren't requested
+      # cartridge.extensions.each do |k,v|
+      #   if !params[k] && v["optional"] == "true"
+      #     tool_config.get_ext_params("canvas.instructure.com").delete(k)
+      #   end
+      # end
 
-      cartridge.custom_params.each do |k,v|
-        if params[k]
-          tool_config.set_custom_param(k, params[k])
-        elsif v["required"] == "true"
-          return render text: "#{k} is a required field"
-        end
-      end
+      # cartridge.custom_params.each do |k,v|
+      #   if params[k]
+      #     tool_config.set_custom_param(k, params[k])
+      #   elsif v["required"] == "true"
+      #     return render text: "#{k} is a required field"
+      #   end
+      # end
 
-      render xml: tool_config.to_xml
     else
       head 404
     end

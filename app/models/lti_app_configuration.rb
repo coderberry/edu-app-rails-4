@@ -12,26 +12,62 @@ class LtiAppConfiguration < ActiveRecord::Base
   # public instance methods ...................................................
   def title;       self.config['title'];       end
   def description; self.config['description']; end
-  def launch_url;  self.config['launch_url'];  end
-  def icon_url;    self.config['icon_url'];    end
+  def launch_url;  self.config['launchUrl'];   end
+  def icon_url;    self.config['iconUrl'];     end
 
-  def tool_config
+  def tool_config(params={})
+    c = self.config
     tool = IMS::LTI::ToolConfig.new
-    tool.title = self.title
-    tool.description = self.description
-    tool.launch_url = self.launch_url
-    tool.icon = self.icon_url
+    platform = 'canvas.instructure.com'
 
-    self.config['extensions'].each do |ext|
-      platform = ext['platform']
+    cot = EA::ConfigOptionTool.new(c['configOptions'], params)
+    unless cot.is_valid?
+      raise EA::MissingConfigOptionsError.new("Missing required parameters", cot.errors)
+    end
 
-      tool.set_ext_param(platform, 'tool_id', ext['tool_id'])                           if ext['tool_id'].present?
-      tool.set_ext_param(platform, 'privacy_level', ext['privacy_level'])               if ext['privacy_level'].present?
-      tool.set_ext_param(platform, 'domain', ext['domain'])                             if ext['domain'].present?
-      tool.set_ext_param(platform, 'link_text', ext['default_link_text'])               if ext['default_link_text'].present?
-      tool.set_ext_param(platform, 'selection_width', ext['default_selection_width'])   if ext['default_selection_width'].present?
-      tool.set_ext_param(platform, 'selection_height', ext['default_selection_height']) if ext['default_selection_height'].present?
+    tool.title       = cot.sub(c['title'])       if c['title'].present?
+    tool.description = cot.sub(c['description']) if c['description'].present?
+    tool.launch_url  = cot.sub(c['launchUrl'])   if c['launchUrl'].present?
+    tool.icon        = cot.sub(c['iconUrl'])     if c['iconUrl'].present?
 
+    tool.set_ext_param(platform, 'tool_id', c['toolId'])                          if c['toolId'].present?
+    tool.set_ext_param(platform, 'privacy_level', c['launchPrivacy'])             if c['launchPrivacy'].present?
+    tool.set_ext_param(platform, 'domain', cot.sub(c['domain']))                  if c['domain'].present?
+    tool.set_ext_param(platform, 'link_text', cot.sub(c['defaultLinkText']))      if c['defaultLinkText'].present?
+    tool.set_ext_param(platform, 'selection_width', cot.sub(c['defaultWidth']))   if c['defaultWidth'].present?
+    tool.set_ext_param(platform, 'selection_height', cot.sub(c['defaultHeight'])) if c['defaultHeight'].present?
+
+    ['editorButton', 'resourceSelection', 'homeworkSubmission'].each do |ext_name|
+      if c[ext_name] && c[ext_name]['isEnabled']
+        ext = c[ext_name]
+        opts = {}
+        opts['enabled'] = true
+        opts['url'] = cot.sub(ext['url'])                 if ext['url'].present?
+        opts['icon_url'] = cot.sub(ext['iconUrl'])        if ext['iconUrl'].present?
+        opts['text'] = cot.sub(ext['linkText'])           if ext['linkText'].present?
+        opts['selection_width'] = cot.sub(ext['width'])   if ext['width'].present?
+        opts['selection_height'] = cot.sub(ext['height']) if ext['height'].present?
+        tool.set_ext_param(platform, ext['name'], opts)
+      end
+    end
+
+    ['courseNav', 'accountNav', 'userNav'].each do |ext_name|
+      if c[ext_name] && c[ext_name]['isEnabled']
+        ext = c[ext_name]
+        opts = {}
+        opts['enabled'] = true
+        opts['url'] = cot.sub(ext['launchUrl']) if ext['launchUrl'].present?
+        opts['text'] = cot.sub(ext['linkText']) if ext['linkText'].present?
+        if ext_name == 'course_nav'
+          opts['visibility'] = ext['visibility'] if ext['visibility'].present?
+          opts['default'] = ext['enabledByDefault'] ? 'enabled' : 'disabled'
+        end
+        tool.set_ext_param(platform, ext['name'], opts)
+      end
+    end
+
+    c['customFields'].each do |cf|
+      tool.set_custom_param(cf['name'], cot.sub(cf['value']))
     end
 
     tool
