@@ -20,6 +20,7 @@ EduApps::Application.routes.draw do
     get "lti_app_configurations/dump" => "lti_app_configurations#dump", :defaults => { :format => "json" }
     post "lti_app_configurations" => "lti_app_configurations#create"
     post "lti_app_configurations/:uid" => "lti_app_configurations#update"
+    delete "lti_app_configurations" => "lti_app_configurations#destroy"
 
     get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
     get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }

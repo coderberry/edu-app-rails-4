@@ -1,5 +1,5 @@
 <form {{action "buildXml" on="submit"}}>
-  <div {{bindAttr class=":form-group errors.title:has-error"}}>
+  {{#view "App.FormGroupView" errorBinding=cartridge.errors.title}}
     <label>Name</label>
     {{input type="text" 
             value=cartridge.title
@@ -7,9 +7,20 @@
             data-placement="bottom"
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
-    <span class="help-block">{{errors.title}}</span>
-  </div>
-  <div {{bindAttr class=":form-group errors.launchUrl:has-error"}}>
+    <span class="help-block">{{cartridge.errors.title}}</span>
+  {{/view}}
+  {{#view "App.FormGroupView" errorBinding=cartridge.errors.toolId}}
+    <small class="text-muted pull-right">lowercase letters + underscore</small>
+    <label>Unique Identifier</label>
+    {{input type="text" 
+            value=cartridge.toolId 
+            class="form-control" 
+            data-placement="bottom"
+            data-toggle="popover" 
+            data-content='use underscore (_) for spaces and all lowercase, e.g. khan_academy'}}
+    <span class="help-block">{{cartridge.errors.toolId}}</span>
+  {{/view}}
+  {{#view "App.FormGroupView" errorBinding=cartridge.errors.launchUrl}}
     <label>LTI Launch URL</label>
     {{input type="text" 
             value=cartridge.launchUrl 
@@ -18,8 +29,8 @@
             data-placement="bottom"
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
-    <span class="help-block">{{errors.launchUrl}}</span>
-  </div>
+    <span class="help-block">{{cartridge.errors.launchUrl}}</span>
+  {{/view}}
   <div class="form-group">
     <small class="text-muted pull-right">250 char max</small>
     <label>Description</label>
@@ -31,7 +42,7 @@
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
   </div>
-  <div class="form-group">
+  {{#view "App.FormGroupView" errorBinding=cartridge.errors.iconUrl}}
     <small class="text-muted pull-right">(16x16 PNG, GIF or JPG)</small>
     <label>Icon URL</label>
     {{input type="text" 
@@ -40,17 +51,8 @@
             data-placement="bottom"
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
-  </div>
-  <div class="form-group">
-    <small class="text-muted pull-right">lowercase, alphanumeric + underscore</small>
-    <label>Unique Identifier</label>
-    {{input type="text" 
-            value=cartridge.toolId 
-            class="form-control" 
-            data-placement="bottom"
-            data-toggle="popover" 
-            data-content='use underscore (_) for spaces and all lowercase, e.g. khan_academy'}}
-  </div>
+    <span class="help-block">{{cartridge.errors.iconUrl}}</span>
+  {{/view}}
   <div class="form-group">
     <label>Link Text</label>
     {{input type="text" 
@@ -62,23 +64,29 @@
             data-content="CONTENT NEEDED"}}
   </div>
   <div class="row">
-    <div class="form-group col-6">
-      <label>Default Width (px)</label>
-      {{input type="text" 
-              value=cartridge.defaultWidth
-              class="form-control" 
-              data-placement="bottom"
-              data-toggle="popover" 
-              data-content="CONTENT NEEDED"}}
+    <div class="col-6">
+      {{#view "App.FormGroupView" errorBinding=cartridge.errors.defaultWidth}}
+        <label>Default Width (px)</label>
+        {{input type="text" 
+                value=cartridge.defaultWidth
+                class="form-control" 
+                data-placement="bottom"
+                data-toggle="popover" 
+                data-content="CONTENT NEEDED"}}
+        <span class="help-block">{{cartridge.errors.defaultWidth}}</span>
+      {{/view}}
     </div>
-    <div class="form-group col-6">
-      <label>Default Height (px)</label>
-      {{input type="text" 
-              value=cartridge.defaultHeight
-              class="form-control" 
-              data-placement="bottom"
-              data-toggle="popover" 
-              data-content="CONTENT NEEDED"}}
+    <div class="col-6">
+      {{#view "App.FormGroupView" errorBinding=cartridge.errors.defaultHeight}}
+        <label>Default Height (px)</label>
+        {{input type="text" 
+                value=cartridge.defaultHeight
+                class="form-control" 
+                data-placement="bottom"
+                data-toggle="popover" 
+                data-content="CONTENT NEEDED"}}
+        <span class="help-block">{{cartridge.errors.defaultHeight}}</span>
+      {{/view}}
     </div>
   </div>
   <div class="form-group">

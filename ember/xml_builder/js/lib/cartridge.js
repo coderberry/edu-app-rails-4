@@ -4,7 +4,7 @@ var CustomField              = require('./custom_field');
 var CustomButtonSettings     = require('./custom_button_settings');
 var CustomNavigationSettings = require('./custom_navigation_settings');
 
-var Cartridge = Ember.Object.extend(Jsonable, { 
+var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   title              : null,
   description        : null,
   iconUrl            : null,
@@ -24,6 +24,28 @@ var Cartridge = Ember.Object.extend(Jsonable, {
   accountNav         : null,
   userNav            : null,
 
+  // Validations
+  validations: {
+    title: {
+      presence: true
+    },
+    launchUrl: {
+      format: { with: /^https?:\/\/.+$/, message: 'must be a valid URL (with http:// or https://)'  }
+    },
+    toolId: {
+      format: { with: /^[a-z_]{3,}$/, message: 'must be one word, all lowercase with underscores (e.g. my_app)' }
+    },
+    iconUrl: {
+      format: { with: /^https?:\/\/.+$/, allowBlank: true, message: 'must be a valid image URL (with http:// or https://)'  }
+    },
+    defaultWidth: {
+      numericality: { onlyInteger: true, greaterThan: 0, allowBlank: true }
+    },
+    defaultHeight: {
+      numericality: { onlyInteger: true, greaterThan: 0, allowBlank: true }
+    }
+  },
+
   modifiedAt: function() {
     return new Date();
   }.property(
@@ -42,19 +64,6 @@ var Cartridge = Ember.Object.extend(Jsonable, {
     this.set('userNav',            CustomNavigationSettings.create({ name: 'user_nav' }));
     this.set('customFields',       []);
     this.set('configOptions',      []);
-  },
-
-  getErrors: function() {
-    var errors = {};
-    if (Ember.isEmpty(this.get('title'))) {
-      errors['title'] = 'must be present';
-    }
-    if (Ember.isEmpty(this.get('launchUrl'))) {
-      errors['launchUrl'] = 'must be present';
-    }
-    if (!Ember.isNone(errors)) {
-      return Ember.Object.create(errors);
-    }
   },
 
   populateWith: function(stringifiedJson) {
@@ -80,15 +89,42 @@ var Cartridge = Ember.Object.extend(Jsonable, {
     this.get('accountNav').setProperties(data.get('accountNav'));
     this.get('userNav').setProperties(data.get('userNav'));
 
-    this.get('configOptions').clear();
-    data.get('configOptions').forEach(function(opt) {
-      _this.get('configOptions').pushObject(ConfigOption.create(opt));
-    });
+    this.set('configOptions', []);
+    if (!Ember.isEmpty(data.get('configOptions'))) {
+      Em.$.each(data.get('configOptions'), function(idx, opt) {
+        _this.get('configOptions').pushObject(ConfigOption.create(opt));
+      });
+    }
 
-    this.get('customFields').clear();
-    data.get('customFields').forEach(function(cf) {
-      _this.get('customFields').pushObject(CustomField.create(cf));
-    });
+    this.set('customFields', []);
+    if (!Ember.isEmpty(data.get('customFields'))) {
+      Em.$.each(data.get('customFields'), function(idx, cf) {
+        _this.get('customFields').pushObject(CustomField.create(cf));
+      });
+    }
+  },
+
+  getJson: function() {
+    return {
+      title              : this.get('title'),
+      description        : this.get('description'),
+      iconUrl            : this.get('iconUrl'),
+      launchUrl          : this.get('launchUrl'),
+      toolId             : this.get('toolId'),
+      defaultLinkText    : this.get('defaultLinkText'),
+      defaultWidth       : this.get('defaultWidth'),
+      defaultHeight      : this.get('defaultHeight'),
+      launchPrivacy      : this.get('launchPrivacy'),
+      domain             : this.get('domain'),
+      customFields       : this.get('customFields'),
+      configOptions      : this.get('configOptions'),
+      editorButton       : this.get('editorButton'),
+      resourceSelection  : this.get('resourceSelection'),
+      homeworkSubmission : this.get('homeworkSubmission'),
+      courseNav          : this.get('courseNav'),
+      accountNav         : this.get('accountNav'),
+      userNav            : this.get('userNav'),
+    };
   }
 });
 

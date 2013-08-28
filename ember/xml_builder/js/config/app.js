@@ -5,6 +5,7 @@ require('../vendor/xml2json');
 require('../vendor/handlebars');
 require('../vendor/ember');
 require('../vendor/ember-model-latest');
+require('../vendor/ember-validations');
 
 var App = window.App = Ember.Application.create({
   rootElement: '#ember-app',

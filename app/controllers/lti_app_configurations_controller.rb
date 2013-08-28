@@ -53,6 +53,18 @@ class LtiAppConfigurationsController < ApplicationController
     end
   end
 
+  def destroy
+    uid = params[:lti_app_configuration][:uid]
+    lti_app_configuration = LtiAppConfiguration.where(uid: uid).first
+    # cartridge = current_user.cartridges.where(uid: uid).first
+    if lti_app_configuration
+      lti_app_configuration.destroy
+      head 200
+    else
+      head 404
+    end
+  end
+
   def dump
     render json: LtiAppConfiguration.all
   end

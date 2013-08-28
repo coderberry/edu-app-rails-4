@@ -15,9 +15,6 @@ var LtiAppConfiguration = Ember.Model.extend({
   // cartridge object which contains all form data
   cartridge                  : null,
 
-  // container for errors when persisting
-  errors                     : {},
-
   // ensure that there is a cartridge
   init: function() {
     this._super();
@@ -33,37 +30,69 @@ var LtiAppConfiguration = Ember.Model.extend({
 
   // update the cartridge with the stringified JSON then save
   persist: function() {
-
-    var cartridgeErrors = this.get('cartridge').getErrors();
-    if (!Ember.isEmpty(cartridgeErrors)) {
-      this.set('errors', cartridgeErrors);
-      App.FlashQueue.pushFlash('error', 'Please correct the fields below');
-      return;
-    }
-
     var _this = this;
-    var url = '/api/v1/lti_app_configurations';
-    if (!Ember.isEmpty(this.get('uid')) && (this.get('uid') !== 'new')) {
-      url = '/api/v1/lti_app_configurations/' + this.get('uid');
-    }
-    var configStr = JSON.stringify(this.get('cartridge').getJson());
-    Ember.$.post(url, { config: configStr })
-    .done(function(data) {
-      if (data['lti_app_configuration']) {
-        _this.set('uid',        data['lti_app_configuration']['uid']);
-        _this.set('name',       data['lti_app_configuration']['name']);
-        _this.set('icon',       data['lti_app_configuration']['icon']);
-        _this.set('config',     data['lti_app_configuration']['config']);
-        _this.set('created_at', Date.parse(data['lti_app_configuration']['created_at']));
-        _this.set('updated_at', Date.parse(data['lti_app_configuration']['updated_at']));
-        _this.trigger('didSaveRecord');
+    var cartridge = this.get('cartridge');
+    cartridge.validate().then(
+      function() {
+        var url = '/api/v1/lti_app_configurations';
+        var uid = _this.get('uid');
+        if (!Ember.isEmpty(uid) && (uid !== 'new')) {
+          url = '/api/v1/lti_app_configurations/' + uid;
+        }
+        var configStr = JSON.stringify(_this.get('cartridge').getJson());
+        Ember.$.post(url, { config: configStr })
+        .done(function(data) {
+          if (data['lti_app_configuration']) {
+            _this.set('uid',        data['lti_app_configuration']['uid']);
+            _this.set('name',       data['lti_app_configuration']['name']);
+            _this.set('icon',       data['lti_app_configuration']['icon']);
+            _this.set('config',     data['lti_app_configuration']['config']);
+            _this.set('created_at', Date.parse(data['lti_app_configuration']['created_at']));
+            _this.set('updated_at', Date.parse(data['lti_app_configuration']['updated_at']));
+            _this.trigger('didSaveRecord');
+          }
+          App.FlashQueue.pushFlash('notice', 'Your cartridge has been saved!');
+        }, 'json')
+        .fail(function(err) {
+          App.FlashQueue.pushFlash('error', 'Please correct the fields below');
+        });
+      }, 
+      function() { 
+        App.FlashQueue.pushFlash('error', 'Please correct the fields below');
       }
-      App.FlashQueue.pushFlash('notice', 'Your cartridge has been saved!');
-    }, 'json')
-    .fail(function(err) {
-      App.FlashQueue.pushFlash('error', 'Please correct the fields below');
-      _this.set('errors', err.responseJSON['errors']);
-    });
+    );
+    // .then(
+    //   function() {
+    //     var _this = this;
+    //     var url = '/api/v1/lti_app_configurations';
+    //     if (!Ember.isEmpty(this.get('uid')) && (this.get('uid') !== 'new')) {
+    //       url = '/api/v1/lti_app_configurations/' + this.get('uid');
+    //     }
+    //     var configStr = JSON.stringify(this.get('cartridge').getJson());
+    //     Ember.$.post(url, { config: configStr })
+    //     .done(function(data) {
+    //       if (data['lti_app_configuration']) {
+    //         _this.set('uid',        data['lti_app_configuration']['uid']);
+    //         _this.set('name',       data['lti_app_configuration']['name']);
+    //         _this.set('icon',       data['lti_app_configuration']['icon']);
+    //         _this.set('config',     data['lti_app_configuration']['config']);
+    //         _this.set('created_at', Date.parse(data['lti_app_configuration']['created_at']));
+    //         _this.set('updated_at', Date.parse(data['lti_app_configuration']['updated_at']));
+    //         _this.trigger('didSaveRecord');
+    //       }
+    //       App.FlashQueue.pushFlash('notice', 'Your cartridge has been saved!');
+    //     }, 'json')
+    //     .fail(function(err) {
+    //       App.FlashQueue.pushFlash('error', 'Please correct the fields below');
+    //       _this.set('errors', err.responseJSON['errors']);
+    //     });
+    //   },
+    //   function() {
+    //     debugger;
+    //     this.set('errors', cartridge.errors);
+    //     App.FlashQueue.pushFlash('error', 'Please correct the fields below');
+    //   }
+    // );
   },
 
   // xml-formatted cartridge

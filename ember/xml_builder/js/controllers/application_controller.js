@@ -93,7 +93,8 @@ var ApplicationController = Ember.ArrayController.extend({
 
     this.get('model').reload();
     if (isCurrentRecord) {
-      this.send('new');
+      ctrl.set('model', null);
+      this.transitionToRoute('/');
     }
   },
 
