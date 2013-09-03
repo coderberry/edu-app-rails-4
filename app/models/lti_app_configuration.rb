@@ -1,3 +1,6 @@
+require 'nokogiri'
+require 'open-uri'
+
 class LtiAppConfiguration < ActiveRecord::Base
   # relationships .............................................................
   belongs_to :user
@@ -16,12 +19,14 @@ class LtiAppConfiguration < ActiveRecord::Base
   def icon_url;    self.config['iconUrl'];     end
 
   def tool_config(params={})
+    params.stringify_keys!
     c = self.config
     tool = IMS::LTI::ToolConfig.new
     platform = 'canvas.instructure.com'
 
     cot = EA::ConfigOptionTool.new(c['configOptions'], params)
     unless cot.is_valid?
+      puts cot.errors.inspect
       raise EA::MissingConfigOptionsError.new("Missing required parameters", cot.errors)
     end
 
@@ -66,11 +71,102 @@ class LtiAppConfiguration < ActiveRecord::Base
       end
     end
 
-    c['customFields'].each do |cf|
+    (c['customFields'] || []).each do |cf|
       tool.set_custom_param(cf['name'], cot.sub(cf['value']))
     end
 
     tool
+  end
+
+  # class methods .............................................................
+  class << self
+    def create_from_url(url)
+      return nil if url.blank?
+      begin
+        xml = open(url).read
+        create_from_xml(xml)
+      rescue Errno::ENOENT => ex
+        # Not a valid URL
+        nil
+      end
+    end
+
+    def create_from_xml(xml)
+      begin
+        doc = Nokogiri::XML(xml.strip) do |config|
+          config.strict.noblanks
+        end
+        cartridge = xml_to_cartridge(xml)
+        create(config: cartridge.as_json)
+      rescue => ex
+        nil
+      end
+    end
+
+    def xml_to_cartridge(xml)
+      doc = Nokogiri::XML(xml)
+      cartridge = EA::Cartridge.new
+      cartridge.title              = doc.root.xpath('//blti:title').text
+      cartridge.description        = doc.root.xpath('//blti:description').text
+      cartridge.iconUrl            = doc.root.xpath('//blti:extensions/lticm:options/lticm:property[@name="icon_url"]').first.text
+      cartridge.launchUrl          = doc.root.xpath('//blti:launch_url').text
+      cartridge.toolId             = doc.root.xpath('//blti:extensions/lticm:property[@name="tool_id"]').text
+      cartridge.defaultLinkText    = doc.root.xpath('//blti:extensions/lticm:property[@name="link_text"]').text
+      cartridge.defaultWidth       = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_width"]').text
+      cartridge.defaultHeight      = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_height"]').text
+      cartridge.launchPrivacy      = doc.root.xpath('//blti:extensions/lticm:property[@name="privacy_level"]').text
+      cartridge.domain             = doc.root.xpath('//blti:extensions/lticm:property[@name="domain"]').text
+      cartridge.editorButton       = EA::ModalExtension.new(name: 'editor_button')
+      cartridge.resourceSelection  = EA::ModalExtension.new(name: 'resource_selection')
+      cartridge.homeworkSubmission = EA::ModalExtension.new(name: 'homework_submission')
+      cartridge.courseNav          = EA::NavigationExtension.new(name: 'course_nav')
+      cartridge.accountNav         = EA::NavigationExtension.new(name: 'account_nav')
+      cartridge.userNav            = EA::NavigationExtension.new(name: 'user_nav')
+
+      # Custom Fields
+      doc.xpath('//blti:custom/lticm:property').each do |node|
+        cartridge.customFields << EA::CustomField.new( name: node['name'], value: node.text )
+      end
+
+      optional_extensions = []
+
+      cartridge.editorButton.isEnabled        = (doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.editorButton.launchUrl        =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="url"]').text
+      cartridge.editorButton.linkText         =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="text"]').text
+      cartridge.editorButton.iconUrl          =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="icon_url"]').text
+      cartridge.editorButton.width            =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="selection_width"]').text
+      cartridge.editorButton.height           =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="selection_height"]').text
+
+      cartridge.resourceSelection.isEnabled   = (doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.resourceSelection.launchUrl   =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="url"]').text
+      cartridge.resourceSelection.linkText    =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="text"]').text
+      cartridge.resourceSelection.iconUrl     =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="icon_url"]').text
+      cartridge.resourceSelection.width       =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="selection_width"]').text
+      cartridge.resourceSelection.height      =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="selection_height"]').text
+
+      cartridge.homeworkSubmission.isEnabled  = (doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.homeworkSubmission.launchUrl  =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="url"]').text
+      cartridge.homeworkSubmission.linkText   =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="text"]').text
+      cartridge.homeworkSubmission.iconUrl    =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="icon_url"]').text
+      cartridge.homeworkSubmission.width      =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="selection_width"]').text
+      cartridge.homeworkSubmission.height     =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="selection_height"]').text
+
+      cartridge.courseNav.isEnabled           = (doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.courseNav.launchUrl           =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="url"]').text
+      cartridge.courseNav.linkText            =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="text"]').text
+      cartridge.courseNav.visibility          =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="visibility"]').text
+      cartridge.courseNav.enabledByDefault    =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="default"]').text
+
+      cartridge.accountNav.isEnabled          = (doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.accountNav.launchUrl          =  doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="url"]').text
+      cartridge.accountNav.linkText           =  doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="text"]').text
+
+      cartridge.userNav.isEnabled             = (doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.userNav.launchUrl             =  doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="url"]').text
+      cartridge.userNav.linkText              =  doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="text"]').text
+
+      cartridge
+    end
   end
 
   # private instance methods ..................................................

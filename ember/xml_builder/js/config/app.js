@@ -7,12 +7,6 @@ require('../vendor/ember');
 require('../vendor/ember-model-latest');
 require('../vendor/ember-validations');
 
-Ember.reopenClass({
-  debug: function(message) {
-    Ember.Logger.debug("DEBUG: ", message);
-  }
-};
-
 var App = window.App = Ember.Application.create({
   rootElement: '#ember-app',
   LOG_TRANSITIONS: true,

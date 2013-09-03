@@ -61,44 +61,7 @@ var LtiAppConfiguration = Ember.Model.extend({
         App.FlashQueue.pushFlash('error', 'Please correct the fields below');
       }
     );
-    // .then(
-    //   function() {
-    //     var _this = this;
-    //     var url = '/api/v1/lti_app_configurations';
-    //     if (!Ember.isEmpty(this.get('uid')) && (this.get('uid') !== 'new')) {
-    //       url = '/api/v1/lti_app_configurations/' + this.get('uid');
-    //     }
-    //     var configStr = JSON.stringify(this.get('cartridge').getJson());
-    //     Ember.$.post(url, { config: configStr })
-    //     .done(function(data) {
-    //       if (data['lti_app_configuration']) {
-    //         _this.set('uid',        data['lti_app_configuration']['uid']);
-    //         _this.set('name',       data['lti_app_configuration']['name']);
-    //         _this.set('icon',       data['lti_app_configuration']['icon']);
-    //         _this.set('config',     data['lti_app_configuration']['config']);
-    //         _this.set('created_at', Date.parse(data['lti_app_configuration']['created_at']));
-    //         _this.set('updated_at', Date.parse(data['lti_app_configuration']['updated_at']));
-    //         _this.trigger('didSaveRecord');
-    //       }
-    //       App.FlashQueue.pushFlash('notice', 'Your cartridge has been saved!');
-    //     }, 'json')
-    //     .fail(function(err) {
-    //       App.FlashQueue.pushFlash('error', 'Please correct the fields below');
-    //       _this.set('errors', err.responseJSON['errors']);
-    //     });
-    //   },
-    //   function() {
-    //     debugger;
-    //     this.set('errors', cartridge.errors);
-    //     App.FlashQueue.pushFlash('error', 'Please correct the fields below');
-    //   }
-    // );
-  },
-
-  // xml-formatted cartridge
-  xml: function() {
-    return JSON.stringify(this.get('cartridge').getJson(), null, 2);
-  }.property('cartridge.modifiedAt'),
+  }
 
 }).reopenClass({
   rootKey       : 'lti_app_configuration',

@@ -29,8 +29,8 @@
             <input type="radio" name="cartridge_source" value="cartridge_id" <%= "checked" if params[:cartridge_source] == 'cartridge_id' %>>
             Use a configuration I have already built
           </label>
-          <%= select_tag :cartridge_id, 
-                options_from_collection_for_select(current_user.cartridges, 'id', 'name', params[:cartridge_id]), 
+          <%= select_tag :lti_app_configuration_id, 
+                options_from_collection_for_select(current_user.lti_app_configurations, 'id', 'title', params[:lti_app_configuration_id]), 
                 include_blank: true, 
                 class: "form-control", 
                 style: (params[:cartridge_source] == 'cartridge_id' ? '' : 'display: none;'), 

@@ -13,22 +13,24 @@ var LtiAppConfigurationController = Ember.ObjectController.extend({
   // }.observes('useEditorButton', 'useLinkSelection', 'useHomeworkSubmission', 'useCourseNavigation', 
   //            'useAccountNavigation', 'useUserNavigation', 'custom_fields.@each'),
 
-  addConfigOption: function() {
-    configOption = ConfigOption.create();
-    this.get('model').get('cartridge.configOptions').pushObject(configOption);
-  },
+  actions: {
+    addConfigOption: function() {
+      configOption = ConfigOption.create();
+      this.get('model').get('cartridge.configOptions').pushObject(configOption);
+    },
 
-  addCustomField: function() {
-    customField = CustomField.create();
-    this.get('model').get('cartridge.customFields').pushObject(customField);
-  },
+    addCustomField: function() {
+      customField = CustomField.create();
+      this.get('model').get('cartridge.customFields').pushObject(customField);
+    },
 
-  removeConfigOption: function(co) {
-    this.get('model').get('cartridge.configOptions').removeObject(co);
-  },
+    removeConfigOption: function(co) {
+      this.get('model').get('cartridge.configOptions').removeObject(co);
+    },
 
-  removeCustomField: function(cf) {
-    this.get('model').get('cartridge.customFields').removeObject(cf);
+    removeCustomField: function(cf) {
+      this.get('model').get('cartridge.customFields').removeObject(cf);
+    }
   }
 });
 

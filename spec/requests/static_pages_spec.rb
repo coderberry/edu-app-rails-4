@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "static pages" do
+  before :each do
+    FactoryGirl.create(:lti_app)
+  end
+
   describe "tutorials" do
     ["canvas", "moodle", "blackboard", "desire2learn", "sakai"].each do |page_name|
       it "/tutorials/#{page_name}" do

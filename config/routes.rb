@@ -13,14 +13,13 @@ EduApps::Application.routes.draw do
     get "reviews" => "reviews#index", :defaults => { :format => "json" }
     post "reviews" => "reviews#create", :defaults => { :format => "json" }
 
-    get "json_to_xml" => "lti_app_configurations#json_to_xml"
-
     get "lti_app_configurations" => "lti_app_configurations#index", :defaults => { :format => "json" }
     get "lti_app_configurations/:uid" => "lti_app_configurations#show", :defaults => { :format => "json" }
-    get "lti_app_configurations/dump" => "lti_app_configurations#dump", :defaults => { :format => "json" }
     post "lti_app_configurations" => "lti_app_configurations#create"
     post "lti_app_configurations/:uid" => "lti_app_configurations#update"
     delete "lti_app_configurations" => "lti_app_configurations#destroy"
+    post "lti_app_configurations/import" => "lti_app_configurations#import"
+    post "lti_app_configurations/create_from_xml" => "lti_app_configurations#create_from_xml"
 
     get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
     get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }

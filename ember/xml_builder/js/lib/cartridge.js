@@ -5,6 +5,7 @@ var CustomButtonSettings     = require('./custom_button_settings');
 var CustomNavigationSettings = require('./custom_navigation_settings');
 
 var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
+  modifiedAt         : new Date(),
   title              : null,
   description        : null,
   iconUrl            : null,
@@ -46,9 +47,9 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
     }
   },
 
-  modifiedAt: function() {
-    return new Date();
-  }.property(
+  changeObserver: function() {
+    this.set('modifiedAt', new Date());
+  }.observes(
     'title', 'description', 'iconUrl', 'launchUrl', 'toolId', 'defaultLinkText', 'defaultWidth', 
     'defaultHeight', 'launchPrivacy', 'domain', 'customFields.@each.modifiedAt', 'configOptions.@each.modifiedAt', 
     'editorButton.modifiedAt', 'resourceSelection.modifiedAt', 'homeworkSubmission.modifiedAt', 
@@ -105,7 +106,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   },
 
   getJson: function() {
-    return {
+    var json = {
       title              : this.get('title'),
       description        : this.get('description'),
       iconUrl            : this.get('iconUrl'),
@@ -116,15 +117,25 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       defaultHeight      : this.get('defaultHeight'),
       launchPrivacy      : this.get('launchPrivacy'),
       domain             : this.get('domain'),
-      customFields       : this.get('customFields'),
-      configOptions      : this.get('configOptions'),
-      editorButton       : this.get('editorButton'),
-      resourceSelection  : this.get('resourceSelection'),
-      homeworkSubmission : this.get('homeworkSubmission'),
-      courseNav          : this.get('courseNav'),
-      accountNav         : this.get('accountNav'),
-      userNav            : this.get('userNav'),
+      customFields       : [],
+      configOptions      : [],
+      editorButton       : this.get('editorButton').getJson(),
+      resourceSelection  : this.get('resourceSelection').getJson(),
+      homeworkSubmission : this.get('homeworkSubmission').getJson(),
+      courseNav          : this.get('courseNav').getJson(),
+      accountNav         : this.get('accountNav').getJson(),
+      userNav            : this.get('userNav').getJson(),
     };
+
+    this.get('customFields').forEach(function(cf) {
+      json['customFields'].push(cf.getJson());
+    });
+
+    this.get('configOptions').forEach(function(co) {
+      json['configOptions'].push(co.getJson());
+    });
+
+    return json;
   }
 });
 

@@ -3,6 +3,7 @@ module EA
     attr_accessor :config_options, :params, :errors
 
     def initialize(opts, params={})
+      opts ||= []
       @config_options = []
       @errors = {}
       @params = params
