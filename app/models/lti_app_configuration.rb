@@ -80,35 +80,34 @@ class LtiAppConfiguration < ActiveRecord::Base
 
   # class methods .............................................................
   class << self
-    def create_from_url(url)
+    def create_from_url(user_id, url)
       return nil if url.blank?
       begin
         xml = open(url).read
-        create_from_xml(xml)
+        create_from_xml(user_id, xml)
       rescue Errno::ENOENT => ex
         # Not a valid URL
         nil
       end
     end
 
-    def create_from_xml(xml)
+    def create_from_xml(user_id, xml)
       begin
-        doc = Nokogiri::XML(xml.strip) do |config|
-          config.strict.noblanks
-        end
         cartridge = xml_to_cartridge(xml)
-        create(config: cartridge.as_json)
+        create(user_id: user_id, config: cartridge.as_json)
       rescue => ex
         nil
       end
     end
 
     def xml_to_cartridge(xml)
-      doc = Nokogiri::XML(xml)
+      doc = Nokogiri::XML(xml.strip) do |config|
+        config.strict.noblanks
+      end
       cartridge = EA::Cartridge.new
       cartridge.title              = doc.root.xpath('//blti:title').text
       cartridge.description        = doc.root.xpath('//blti:description').text
-      cartridge.iconUrl            = doc.root.xpath('//blti:extensions/lticm:options/lticm:property[@name="icon_url"]').first.text
+      cartridge.iconUrl            = doc.root.xpath('//blti:extensions/lticm:options/lticm:property[@name="icon_url"]').first.try(:text)
       cartridge.launchUrl          = doc.root.xpath('//blti:launch_url').text
       cartridge.toolId             = doc.root.xpath('//blti:extensions/lticm:property[@name="tool_id"]').text
       cartridge.defaultLinkText    = doc.root.xpath('//blti:extensions/lticm:property[@name="link_text"]').text
@@ -127,8 +126,6 @@ class LtiAppConfiguration < ActiveRecord::Base
       doc.xpath('//blti:custom/lticm:property').each do |node|
         cartridge.customFields << EA::CustomField.new( name: node['name'], value: node.text )
       end
-
-      optional_extensions = []
 
       cartridge.editorButton.isEnabled        = (doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="enabled"]').text == 'true')
       cartridge.editorButton.launchUrl        =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="url"]').text

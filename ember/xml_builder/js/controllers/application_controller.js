@@ -30,8 +30,8 @@ var ApplicationController = Ember.ArrayController.extend({
     _this = this;
     Ember.$.post('/api/v1/lti_app_configurations/import', { url: this.get('importUrl') }).then(function(data) {
       _this.get('model').reload();
-      App.FlashQueue.pushFlash('notice', 'Successfully imported ' + data['cartridge']['name']);
-      _this.transitionToRoute('/' + data['cartridge']['uid']);
+      App.FlashQueue.pushFlash('notice', 'Successfully created configuration');
+      _this.transitionToRoute('/' + data['lti_app_configuration']['uid']);
       _this.hideImportForm();
     });
   },
@@ -41,8 +41,8 @@ var ApplicationController = Ember.ArrayController.extend({
     Ember.$.post('/api/v1/lti_app_configurations/create_from_xml', { xml: this.get('pastedXml') }).then(
       function(data) {
         _this.get('model').reload();
-        App.FlashQueue.pushFlash('notice', 'Successfully created ' + data['cartridge']['name']);
-        _this.transitionToRoute('/' + data['cartridge']['uid']);
+        App.FlashQueue.pushFlash('notice', 'Successfully created configuration');
+        _this.transitionToRoute('/' + data['lti_app_configuration']['uid']);
         _this.hideCreateFromXmlForm();
       },
       function(err) {

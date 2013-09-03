@@ -37,7 +37,7 @@ class LtiAppConfigurationsController < ApplicationController
   end
 
   def import
-    lti_app_configuration = current_user.lti_app_configurations.create_from_url(params[:url])
+    lti_app_configuration = LtiAppConfiguration.create_from_url(current_user.id, params[:url])
     if lti_app_configuration
       if !lti_app_configuration.new_record?
         render json: lti_app_configuration, status: 201
@@ -50,7 +50,7 @@ class LtiAppConfigurationsController < ApplicationController
   end
 
   def create_from_xml
-    lti_app_configuration = current_user.lti_app_configurations.create_from_xml(params[:xml])
+    lti_app_configuration = LtiAppConfiguration.create_from_xml(current_user.id, params[:xml])
     if lti_app_configuration
       if !lti_app_configuration.new_record?
         render json: lti_app_configuration, status: 201
