@@ -1,0 +1,24 @@
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Tokenable</th>
+      <th>Token</th>
+      <th>Created</th>
+      <th>Expires</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% api_keys.each do |api_key| %>
+    <tr>
+      <% if tokenable = api_key.user %>
+        <td><i class="canvas-icon-user"></i> <%= tokenable.name %></td>
+      <% elsif tokenable = api_key.organization %>
+        <td><i class="canvas-icon-group"></i> <%= tokenable.name %></td>
+      <% end %>
+      <td><%= api_key.access_token %></td>
+      <td><%= api_key.created_at.strftime("%b %d, %Y") %></td>
+      <td><span class="label label-<%= api_key.expired? ? 'default' : 'success' %>"><%= api_key.expired_at.strftime("%b %d, %Y") %></span></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,35 @@
+<table class="table table-condensed table-striped" id="organization-memberships">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Social</th>
+      <th>Role</th>
+      <th>Remote UID</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% memberships.each do |membership| %>
+    <tr>
+      <td style="width: 20px;">
+        <% if membership.user.is_admin? %>
+          <i class="canvas-icon-instructure" style="color: #E2402A; line-height: 24px;"></i>
+        <% else %>
+          <i class="canvas-icon-user" style="color: #eee; line-height: 24px;"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= image_tag membership.user.profile_image_url, class: "img-circle", style: "width: 28px;" %>
+        <%= membership.user.name %>
+      </td>
+      <td><%= render partial: "/shared/social_links", locals: { user: membership.user } %></td>
+      <td><%= membership.is_admin? ? "Administrator" : "Member" %></td>
+      <td><%= membership.remote_uid %></td>
+      <td>
+        <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_admin_membership_path(membership.id), class: "pull-right btn btn-info btn-xs" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

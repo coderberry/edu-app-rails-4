@@ -1,27 +1,28 @@
-<h1>Listing organizations</h1>
+<div class="main-content">
+  <div class="header clearfix">
+    <h3 class="page-header">Organizations</h3>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th># Members</th>
+        <th># Apps</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
     <% @organizations.each do |organization| %>
       <tr>
-        <td><%= organization.name %></td>
-        <td><%= link_to 'Show', organization %></td>
-        <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-        <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to organization.name, organization %></td>
+        <td><%= organization.memberships.count %></td>
+        <td><%= organization.lti_apps.count %></td>
+        <td>
+          <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_organization_path(organization.id), class: "pull-right btn btn-info btn-xs" %>
+        </td>
       </tr>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Organization', new_organization_path %>
+    </tbody>
+  </table>
+</div>

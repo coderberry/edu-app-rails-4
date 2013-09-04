@@ -4,7 +4,11 @@ EduApps::Application.routes.draw do
   get "lti_app_configurations/show"
   get "/tools/xml_builder" => "xml_builder#index", as: :xml_builder
   
-  resources :lti_apps, path: '/apps'
+  resources :lti_apps, path: '/apps' do
+    collection do
+      get 'my', as: :my
+    end
+  end
 
   scope "api/v1" do
     get "lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
@@ -49,6 +53,12 @@ EduApps::Application.routes.draw do
   get "/settings/email_confirmation" => "users#update_email", as: :email_confirmation
 
   get "/configurations/:uid.xml" => "lti_app_configurations#xml", as: :lti_app_configuration_xml
+
+  namespace :admin do
+    resources :users
+    resources :memberships
+    resources :organizations
+  end
 
   namespace :settings do
     resources :authentications

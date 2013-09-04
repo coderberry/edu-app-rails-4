@@ -45,4 +45,17 @@ module ApplicationHelper
     content_tag(:span, status.upcase, class: classes.join(' '))
   end
 
+  def icon(icon_url)
+    icon = icon_url
+    if icon_url.blank?
+      icon = asset_path('blank_icon.png')
+    end
+    image_tag(icon, class: "icon", width: 16, height: 16)
+  end
+
+  def status_badge(status)
+    status_map = { pending: 'info', active: 'success', disabled: 'default' }
+    "<span class=\"label label-#{status_map[status.to_sym]}\">#{status.capitalize}</span>"
+  end
+
 end

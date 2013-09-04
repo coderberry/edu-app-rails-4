@@ -27,4 +27,8 @@ class LtiApp < ActiveRecord::Base
   scope :include_rating,        -> { select '(select avg("rating") FROM "reviews" where "reviews"."lti_app_id" = "lti_apps"."id") as "average_rating"' }
   scope :include_total_ratings, -> { select '(select count("id") FROM "reviews" where "reviews"."lti_app_id" = "lti_apps"."id") as "total_ratings"' }
   scope :include_tag_id_array,  -> { select '(select array(select "tag_id" from "lti_apps_tags" where "lti_apps_tags"."lti_app_id" = "lti_apps"."id")) as "tag_ids"'}
+
+  def icon_url
+    lti_app_configuration.try(:icon_url)
+  end
 end

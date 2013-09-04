@@ -1,0 +1,45 @@
+<table class="table table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Social</th>
+      <th>Orgs</th>
+      <th>Keys</th>
+      <th>Revs</th>
+      <th>Apps</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% users.each do |user| %>
+    <tr>
+      <td style="width: 20px;">
+        <% if user.is_admin? %>
+          <i class="canvas-icon-instructure" style="color: #E2402A; line-height: 24px;"></i>
+        <% else %>
+          <i class="canvas-icon-user" style="color: #eee; line-height: 24px;"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= image_tag user.profile_image_url, width: 20, height: 20, class: "img-circle", style: "width: 20px; height: 20px;" %>
+        <%= link_to truncate(user.name, length: 25), [:admin, user] %>
+      </td>
+      <td><%= user.email %></td>
+      <td><%= render partial: "/shared/social_links", locals: { user: user } %></td>
+      <td><%= user.organizations.count %></td>
+      <td><%= user.api_keys.count %></td>
+      <td><%= user.reviews.count %></td>
+      <td><%= user.lti_apps.count %></td>
+      <td>
+        <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_admin_user_path(user.id), class: "pull-right btn btn-info btn-xs" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+</div>

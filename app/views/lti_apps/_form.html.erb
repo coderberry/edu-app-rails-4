@@ -13,10 +13,8 @@
 
   <% unless @lti_app.new_record? %>
     <div class="form-group">
-      <dl class="dl-horizontal">
-        <dt>Status</dt>
-        <dd><%= status_label(@lti_app.status) %></dd>
-      </dl>
+      <label class="col-lg-3 control-label">Status</label>
+      <div class="col-lg-9"><%= status_label(@lti_app.status) %></div>
     </div>
   <% end %>
 
@@ -68,10 +66,8 @@
     </div>
   <% else %>
     <div class="form-group">
-      <dl class="dl-horizontal">
-        <dt>XML Configuration</dt>
-        <dd><%= link_to raw('<i class="icon-pencil"></i> Click to edit the XML configuration'), "#" %></dd>
-      </dl>
+      <label class="col-lg-3 control-label">XML Configuration</label>
+      <div class="col-lg-9"><%= link_to raw('<i class="icon-pencil"></i> Click to edit the XML configuration'), "/tools/xml_builder#/#{@lti_app.lti_app_configuration.uid}" %></div>
     </div>
   <% end %>
 
@@ -90,14 +86,10 @@
   <div class="form-group">
     <%= f.label :short_name, "Organization", class: "col-lg-3 control-label" %>
     <div class="col-lg-9">
-      <% if @lti_app.new_record? || !@lti_app.organization %>
-        <% if current_user.is_admin? %>
-          <%= f.select :organization_id, Organization.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
-        <% else %>
-          <%= f.select :organization_id, current_user.organizations.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
-        <% end %>
+      <% if current_user.is_admin? %>
+        <%= f.select :organization_id, Organization.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
       <% else %>
-        <span class="form-control"><%= @lti_app.organization.try(:name) %></span>
+        <%= f.select :organization_id, current_user.organizations.all.collect { |o| [o.name, o.id] }, { include_blank: true }, { class: "form-control" } %>
       <% end %>
     </div>
   </div>

@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     redirect_to login_url, alert: "You must login first" if current_user.nil?
   end
 
+  def authorize_admin
+    redirect_to login_url, alert: "You must login first" unless current_user.try(:is_admin)
+  end
+
   def login_user(user)
     @current_user = user
     session[:user_id] = user.id

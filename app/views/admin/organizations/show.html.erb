@@ -1,0 +1,29 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_admin_organization_path(@organization), class: "pull-right btn btn-info btn-xs" %>
+    <h3 class="page-header">Organization: <%= @organization.name %></h3>
+  </div>
+
+  <ul class="breadcrumb">
+    <li><%= link_to "Organizations", admin_organizations_url %></li>
+    <li class="active"><%= @organization.name %></li>
+  </ul>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#" data-target="#tab-apps" data-toggle="tab"><%= pluralize @organization.lti_apps.count, "App" %></a></li>
+    <li><a href="#" data-target="#tab-members" data-toggle="tab"><%= pluralize @organization.memberships.count, "Members" %></a></li>
+    <li><a href="#" data-target="#tab-api-keys" data-toggle="tab"><%= pluralize @organization.api_keys.count, "API Key" %></a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab-apps">
+      <%= render partial: "/admin/lti_apps/table", locals: { apps: @organization.lti_apps } %>
+    </div>
+    <div class="tab-pane" id="tab-members">
+      <%= render partial: "/admin/memberships/table", locals: { memberships: @organization.memberships } %>
+    </div>
+    <div class="tab-pane" id="tab-api-keys">
+      <%= render partial: "/admin/api_keys/table", locals: { api_keys: @organization.api_keys } %>
+    </div>
+  </div>
+</div>
