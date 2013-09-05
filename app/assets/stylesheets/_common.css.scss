@@ -47,3 +47,26 @@ img.icon {
   width: 16px;
   height: 16px;
 }
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
+
+table.table-details {
+  th {
+    width: 200px;
+  }
+}
+
+table.borderless {
+  border: 0px;
+  th, tr, thead, tbody, td {
+    border: 0px !important;
+  }
+  margin: 0px;
+}
+
+.navbar .nav .dropdown-toggle .caret {
+  margin-top: 0px;
+}

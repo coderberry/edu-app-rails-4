@@ -55,6 +55,7 @@ EduApps::Application.routes.draw do
   get "/configurations/:uid.xml" => "lti_app_configurations#xml", as: :lti_app_configuration_xml
 
   namespace :admin do
+    resources :lti_apps
     resources :users
     resources :memberships
     resources :organizations

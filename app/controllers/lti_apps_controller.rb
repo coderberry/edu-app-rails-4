@@ -23,7 +23,7 @@ class LtiAppsController < ApplicationController
   end
 
   def my
-    @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.order(:name)
+    @lti_apps = current_user.lti_apps.inclusive.include_rating.include_total_ratings.order(:name)
     respond_to do |format|
       format.html
       format.json { render json: @lti_apps }
@@ -52,30 +52,30 @@ class LtiAppsController < ApplicationController
 
     case params[:cartridge_source]
     when 'cartridge_id'
-      cartridge = current_user.cartridges.where(id: params[:cartridge_id]).first
-      if !cartridge
-        flash.now[:error] = "You must select a cartridge"
+      lti_app_configuration = current_user.lti_app_configurations.where(id: params[:lti_app_configuration_id]).first
+      if !lti_app_configuration
+        flash.now[:error] = "You must select an app configuration"
       end
     when 'url'
-      cartridge = current_user.cartridges.create_from_url(params[:config_url])
-      if !cartridge
+      lti_app_configuration = current_user.lti_app_configurations.create_from_url(params[:config_url])
+      if !lti_app_configuration
         flash.now[:error] = "Invalid XML from URL"
       end
     when 'xml'
-      cartridge = current_user.cartridges.create_from_xml(params[:xml])
-      if !cartridge
+      lti_app_configuration = current_user.lti_app_configurations.create_from_xml(params[:xml])
+      if !lti_app_configuration
         flash.now[:error] = "Invalid XML"
       end
     else
-      flash.now[:error] = "You must enter/select an IMS Cartridge"
+      flash.now[:error] = "You must enter/select an App Configuration"
     end
 
-    unless cartridge
+    unless lti_app_configuration
       render action: 'new'
       return
     end
 
-    @lti_app.cartridge = cartridge
+    @lti_app.lti_app_configuration = lti_app_configuration
 
     if @lti_app.save
       redirect_to lti_app_path(@lti_app.short_name), notice: 'Lti app was successfully created.'

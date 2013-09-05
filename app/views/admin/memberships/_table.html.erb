@@ -27,7 +27,7 @@
       <td><%= membership.is_admin? ? "Administrator" : "Member" %></td>
       <td><%= membership.remote_uid %></td>
       <td>
-        <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_admin_membership_path(membership.id), class: "pull-right btn btn-info btn-xs" %>
+        <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_admin_membership_path(membership.id, params: { redir: request.fullpath }), class: "pull-right btn btn-info btn-xs" %>
       </td>
     </tr>
   <% end %>

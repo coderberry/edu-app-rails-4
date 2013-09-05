@@ -138,6 +138,12 @@ class User < ActiveRecord::Base
     user.destroy!
   end
 
+  def details
+    attributes.symbolize_keys!.slice(
+      :name, :email, :avatar_url, :url, :twitter_nickname, :is_admin, :created_at, :updated_at
+    )
+  end
+
   # private instance methods ..................................................
   private
 

@@ -19,7 +19,7 @@
 
     <div class="nav-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav pull-right">
-        <li<% if controller_name == 'lti_apps' && !(['new', 'create', 'edit', 'my'].include? action_name) %> class="active"<% end %>><%= link_to "Apps", lti_apps_path %></li>
+        <li<% if controller_name == 'lti_apps' && @active_tab != 'admin' && !(['new', 'create', 'edit', 'my'].include? action_name) %> class="active"<% end %>><%= link_to "Apps", lti_apps_path %></li>
         <li<% if controller_name == 'static' && action_name == 'tutorials' %> class="active"<% end %>>
           <%= link_to "Tutorials", tutorials_path("canvas") %></li>
         <li<% if controller_name == 'static' && action_name == 'docs' %> class="active"<% end %>>
@@ -29,8 +29,15 @@
 
         <% if current_user %>
           <% if current_user.is_admin? %>
-            <li<% if controller_name == 'organizations' %> class="active"<% end %>><%= link_to "Organizations", admin_organizations_path %></li>
-            <li<% if controller_name == 'users' %> class="active"<% end %>><%= link_to "Users", users_path %></li>
+            <li class="dropdown
+            <% if @active_tab == 'admin' %>active<% end %>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to raw('<i class="canvas-icon-standards"></i> LTI Apps'), admin_lti_apps_path %></li>
+                <li><%= link_to raw('<i class="icon-building"></i> Organizations'), admin_organizations_path %></li>
+                <li><%= link_to raw('<i class="icon-group"></i> Users'), admin_users_path %></li>
+              </ul>
+            </li>
           <% end %>
 
           <li<% if request.env["REQUEST_PATH"] =~ /\/settings\// %> class="active"<% end %>><%= link_to "Settings", edit_profile_path %></li>

@@ -1,0 +1,10 @@
+<table class="table table-striped table-details">
+  <tbody>
+  <% details.each do |k, v| %>
+  <tr>
+    <th style="width: 200px;"><%= k.to_s.humanize.titleize %></th>
+    <td><%= v %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

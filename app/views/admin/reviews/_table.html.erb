@@ -11,11 +11,11 @@
   <tbody>
   <% reviews.each do |review| %>
     <tr>
-      <td><%= icon(review.lti_app.icon_url) %> <%= link_to review.lti_app.name, review.lti_app %></td>
+      <td><%= icon(review.lti_app.icon_url) %> <%= link_to review.lti_app.name, lti_app_path(review.lti_app.short_name) %></td>
       <td><%= star_rating(review.rating, "mini") %></td>
       <td><%= review.comments %></td>
-      <td><%= review.created_at.strftime("%b %d, %Y") %></td>
-      <td><button class="btn btn-danger btn-xs"><i class="icon-remove"></i></button></td>
+      <td><%= review.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
+      <td><button class="btn btn-danger btn-xs"><i class="icon-remove"></i> Delete</button></td>
     </tr>
   <% end %>
   </tbody>

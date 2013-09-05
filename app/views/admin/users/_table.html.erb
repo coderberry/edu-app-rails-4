@@ -4,11 +4,11 @@
       <th>&nbsp;</th>
       <th>Name</th>
       <th>Email</th>
-      <th>Social</th>
-      <th>Orgs</th>
-      <th>Keys</th>
-      <th>Revs</th>
-      <th>Apps</th>
+      <th>Accounts</th>
+      <th class="text-center"><i class="icon-building" data-toggle="tooltip" title="Organizations"></i></th>
+      <th class="text-center"><i class="canvas-icon-standards" data-toggle="tooltip" title="Apps"></i></th>
+      <th class="text-center"><i class="icon-comments" data-toggle="tooltip" title="Reviews"></i></th>
+      <th class="text-center"><i class="icon-key" data-toggle="tooltip" title="API Keys"></i></th>
       <th>&nbsp;</th>
     </tr>
   </thead>
@@ -28,10 +28,10 @@
       </td>
       <td><%= user.email %></td>
       <td><%= render partial: "/shared/social_links", locals: { user: user } %></td>
-      <td><%= user.organizations.count %></td>
-      <td><%= user.api_keys.count %></td>
-      <td><%= user.reviews.count %></td>
-      <td><%= user.lti_apps.count %></td>
+      <td class="text-center"><%= user.organizations.count %></td>
+      <td class="text-center"><%= user.lti_apps.count %></td>
+      <td class="text-center"><%= user.reviews.count %></td>
+      <td class="text-center"><%= user.api_keys.count %></td>
       <td>
         <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_admin_user_path(user.id), class: "pull-right btn btn-info btn-xs" %>
       </td>

@@ -1,2 +1,2 @@
-class Admin::ApiKeysController < ApplicationController
+class Admin::ApiKeysController < AdminController
 end
