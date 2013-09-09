@@ -5,66 +5,66 @@ var CustomButtonSettings     = require('./custom_button_settings');
 var CustomNavigationSettings = require('./custom_navigation_settings');
 
 var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
-  modifiedAt         : new Date(),
-  title              : null,
-  description        : null,
-  iconUrl            : null,
-  launchUrl          : null,
-  toolId             : null,
-  defaultLinkText    : null,
-  defaultWidth       : null,
-  defaultHeight      : null,
-  launchPrivacy      : null,
-  domain             : null,
-  customFields       : null,
-  configOptions      : null,
-  editorButton       : null,
-  resourceSelection  : null,
-  homeworkSubmission : null,
-  courseNav          : null,
-  accountNav         : null,
-  userNav            : null,
+  modified_at         : new Date(),
+  title               : null,
+  description         : null,
+  icon_url            : null,
+  launch_url          : null,
+  tool_id             : null,
+  default_link_text   : null,
+  default_width       : null,
+  default_height      : null,
+  launch_privacy      : null,
+  domain              : null,
+  custom_fields       : null,
+  config_options      : null,
+  editor_button       : null,
+  resource_selection  : null,
+  homework_submission : null,
+  course_navigation   : null,
+  account_navigation  : null,
+  user_navigation     : null,
 
   // Validations
   validations: {
     title: {
       presence: true
     },
-    launchUrl: {
+    launch_url: {
       format: { with: /^https?:\/\/.+$/, message: 'must be a valid URL (with http:// or https://)'  }
     },
-    toolId: {
+    tool_id: {
       format: { with: /^[a-z_]{3,}$/, message: 'must be one word, all lowercase with underscores (e.g. my_app)' }
     },
-    iconUrl: {
+    icon_url: {
       format: { with: /^https?:\/\/.+$/, allowBlank: true, message: 'must be a valid image URL (with http:// or https://)'  }
     },
-    defaultWidth: {
+    default_width: {
       numericality: { onlyInteger: true, greaterThan: 0, allowBlank: true }
     },
-    defaultHeight: {
+    default_height: {
       numericality: { onlyInteger: true, greaterThan: 0, allowBlank: true }
     }
   },
 
   changeObserver: function() {
-    this.set('modifiedAt', new Date());
+    this.set('modified_at', new Date());
   }.observes(
-    'title', 'description', 'iconUrl', 'launchUrl', 'toolId', 'defaultLinkText', 'defaultWidth', 
-    'defaultHeight', 'launchPrivacy', 'domain', 'customFields.@each.modifiedAt', 'configOptions.@each.modifiedAt', 
-    'editorButton.modifiedAt', 'resourceSelection.modifiedAt', 'homeworkSubmission.modifiedAt', 
-    'courseNav.modifiedAt', 'accountNav.modifiedAt', 'userNav.modifiedAt'),
+    'title', 'description', 'icon_url', 'launch_url', 'tool_id', 'default_link_text', 'default_width', 
+    'default_height', 'launch_privacy', 'domain', 'custom_fields.@each.modifiedAt', 'config_options.@each.modifiedAt', 
+    'editor_button.modifiedAt', 'resource_selection.modifiedAt', 'homework_submission.modifiedAt', 
+    'course_navigation.modifiedAt', 'account_navigation.modifiedAt', 'user_navigation.modifiedAt'),
   
   init: function() {
     this._super();
-    this.set('editorButton',       CustomButtonSettings.create({ name: 'editor_button' }));
-    this.set('resourceSelection',  CustomButtonSettings.create({ name: 'resource_selection' }));
-    this.set('homeworkSubmission', CustomButtonSettings.create({ name: 'homework_submission' }));
-    this.set('courseNav',          CustomNavigationSettings.create({ name: 'course_nav' }));
-    this.set('accountNav',         CustomNavigationSettings.create({ name: 'account_nav' }));
-    this.set('userNav',            CustomNavigationSettings.create({ name: 'user_nav' }));
-    this.set('customFields',       []);
-    this.set('configOptions',      []);
+    this.set('editor_button',       CustomButtonSettings.create({ name: 'editor_button' }));
+    this.set('resource_selection',  CustomButtonSettings.create({ name: 'resource_selection' }));
+    this.set('homework_submission', CustomButtonSettings.create({ name: 'homework_submission' }));
+    this.set('course_navigation',   CustomNavigationSettings.create({ name: 'course_navigation' }));
+    this.set('account_navigation',  CustomNavigationSettings.create({ name: 'account_navigation' }));
+    this.set('user_navigation',     CustomNavigationSettings.create({ name: 'user_navigation' }));
+    this.set('custom_fields',       []);
+    this.set('config_options',      []);
   },
 
   populateWith: function(stringifiedJson) {
@@ -74,65 +74,65 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
 
     this.set('title',           data.get('title'));
     this.set('description',     data.get('description'));
-    this.set('iconUrl',         data.get('iconUrl'));
-    this.set('launchUrl',       data.get('launchUrl'));
-    this.set('toolId',          data.get('toolId'));
-    this.set('defaultLinkText', data.get('defaultLinkText'));
-    this.set('defaultWidth',    data.get('defaultWidth'));
-    this.set('defaultHeight',   data.get('defaultHeight'));
-    this.set('launchPrivacy',   data.get('launchPrivacy'));
+    this.set('icon_url',         data.get('icon_url'));
+    this.set('launch_url',       data.get('launch_url'));
+    this.set('tool_id',          data.get('tool_id'));
+    this.set('default_link_text', data.get('default_link_text'));
+    this.set('default_width',    data.get('default_width'));
+    this.set('default_height',   data.get('default_height'));
+    this.set('launch_privacy',   data.get('launch_privacy'));
     this.set('domain',          data.get('domain'));
 
-    this.get('editorButton').setProperties(data.get('editorButton'));
-    this.get('resourceSelection').setProperties(data.get('resourceSelection'));
-    this.get('homeworkSubmission').setProperties(data.get('homeworkSubmission'));
-    this.get('courseNav').setProperties(data.get('courseNav'));
-    this.get('accountNav').setProperties(data.get('accountNav'));
-    this.get('userNav').setProperties(data.get('userNav'));
+    this.get('editor_button').setProperties(data.get('editor_button'));
+    this.get('resource_selection').setProperties(data.get('resource_selection'));
+    this.get('homework_submission').setProperties(data.get('homework_submission'));
+    this.get('course_navigation').setProperties(data.get('course_navigation'));
+    this.get('account_navigation').setProperties(data.get('account_navigation'));
+    this.get('user_navigation').setProperties(data.get('user_navigation'));
 
-    this.set('configOptions', []);
-    if (!Ember.isEmpty(data.get('configOptions'))) {
-      Em.$.each(data.get('configOptions'), function(idx, opt) {
-        _this.get('configOptions').pushObject(ConfigOption.create(opt));
+    this.set('config_options', []);
+    if (!Ember.isEmpty(data.get('config_options'))) {
+      Em.$.each(data.get('config_options'), function(idx, opt) {
+        _this.get('config_options').pushObject(ConfigOption.create(opt));
       });
     }
 
-    this.set('customFields', []);
-    if (!Ember.isEmpty(data.get('customFields'))) {
-      Em.$.each(data.get('customFields'), function(idx, cf) {
-        _this.get('customFields').pushObject(CustomField.create(cf));
+    this.set('custom_fields', []);
+    if (!Ember.isEmpty(data.get('custom_fields'))) {
+      Em.$.each(data.get('custom_fields'), function(idx, cf) {
+        _this.get('custom_fields').pushObject(CustomField.create(cf));
       });
     }
   },
 
   getJson: function() {
     var json = {
-      title              : this.get('title'),
-      description        : this.get('description'),
-      iconUrl            : this.get('iconUrl'),
-      launchUrl          : this.get('launchUrl'),
-      toolId             : this.get('toolId'),
-      defaultLinkText    : this.get('defaultLinkText'),
-      defaultWidth       : this.get('defaultWidth'),
-      defaultHeight      : this.get('defaultHeight'),
-      launchPrivacy      : this.get('launchPrivacy'),
-      domain             : this.get('domain'),
-      customFields       : [],
-      configOptions      : [],
-      editorButton       : this.get('editorButton').getJson(),
-      resourceSelection  : this.get('resourceSelection').getJson(),
-      homeworkSubmission : this.get('homeworkSubmission').getJson(),
-      courseNav          : this.get('courseNav').getJson(),
-      accountNav         : this.get('accountNav').getJson(),
-      userNav            : this.get('userNav').getJson(),
+      title               : this.get('title'),
+      description         : this.get('description'),
+      icon_url            : this.get('icon_url'),
+      launch_url          : this.get('launch_url'),
+      tool_id             : this.get('tool_id'),
+      default_link_text   : this.get('default_link_text'),
+      default_width       : this.get('default_width'),
+      default_height      : this.get('default_height'),
+      launch_privacy      : this.get('launch_privacy'),
+      domain              : this.get('domain'),
+      custom_fields       : [],
+      config_options      : [],
+      editor_button       : this.get('editor_button').getJson(),
+      resource_selection  : this.get('resource_selection').getJson(),
+      homework_submission : this.get('homework_submission').getJson(),
+      course_navigation   : this.get('course_navigation').getJson(),
+      account_navigation  : this.get('account_navigation').getJson(),
+      user_navigation     : this.get('user_navigation').getJson()
     };
 
-    this.get('customFields').forEach(function(cf) {
-      json['customFields'].push(cf.getJson());
+    this.get('custom_fields').forEach(function(cf) {
+      json['custom_fields'].push(cf.getJson());
     });
 
-    this.get('configOptions').forEach(function(co) {
-      json['configOptions'].push(co.getJson());
+    this.get('config_options').forEach(function(co) {
+      json['config_options'].push(co.getJson());
     });
 
     return json;

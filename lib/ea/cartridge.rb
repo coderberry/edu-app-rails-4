@@ -1,17 +1,17 @@
 module EA
   class Cartridge
     include Hashable
-    attr_accessor :title, :description, :iconUrl, :launchUrl, :toolId, :defaultLinkText, :defaultWidth,
-                  :defaultHeight, :launchPrivacy, :domain, :editorButton, :resourceSelection,
-                  :homeworkSubmission, :courseNav, :accountNav, :userNav
-    attr_accessor :customFields, :configOptions
+    attr_accessor :title, :description, :icon_url, :launch_url, :tool_id, :default_link_text, :default_width,
+                  :default_height, :launch_privacy, :domain, :editor_button, :resource_selection,
+                  :homework_submission, :course_navigation, :account_navigation, :user_navigation
+    attr_accessor :custom_fields, :config_options
 
     def initialize(attrs={})
       attrs.each do |key,value|
         instance_variable_set("@#{key}",value)
       end
-      @customFields  ||= []
-      @configOptions ||= []
+      @custom_fields  ||= []
+      @config_options ||= []
     end
 
     def as_json

@@ -35,6 +35,7 @@ class Importer
     LtiAppConfiguration.destroy_all
     LtiApp.destroy_all
     Review.destroy_all
+    RegistrationCode.destroy_all
   end
 
   def import_tags
@@ -81,26 +82,26 @@ class Importer
     lti_app_configuration = LtiAppConfiguration.new(user_id: user.id)
 
     cartridge = EA::Cartridge.new
-    cartridge.title              = data['name']
-    cartridge.description        = ReverseMarkdown.parse(data['short_description'].present? ? data['short_description'] : data['description'])
-    cartridge.iconUrl            = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
-    cartridge.launchUrl          = edu_appify_link(data['open_launch_url'] || data['launch_url'])
-    cartridge.toolId             = data['id']
-    cartridge.defaultLinkText    = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
-    cartridge.defaultWidth       = data['width'].to_i if data['width'].present?
-    cartridge.defaultHeight      = data['height'].to_i if data['height'].present?
-    cartridge.launchPrivacy      = data['privacy_level']
-    cartridge.domain             = data['domain']
-    cartridge.editorButton       = EA::ModalExtension.new(name: 'editor_button')
-    cartridge.resourceSelection  = EA::ModalExtension.new(name: 'resource_selection')
-    cartridge.homeworkSubmission = EA::ModalExtension.new(name: 'homework_submission')
-    cartridge.courseNav          = EA::NavigationExtension.new(name: 'course_nav')
-    cartridge.accountNav         = EA::NavigationExtension.new(name: 'account_nav')
-    cartridge.userNav            = EA::NavigationExtension.new(name: 'user_nav')
+    cartridge.title               = data['name']
+    cartridge.description         = ReverseMarkdown.parse(data['short_description'].present? ? data['short_description'] : data['description'])
+    cartridge.icon_url            = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
+    cartridge.launch_url          = edu_appify_link(data['open_launch_url'] || data['launch_url'])
+    cartridge.tool_id             = data['id']
+    cartridge.default_link_text   = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
+    cartridge.default_width       = data['width'].to_i if data['width'].present?
+    cartridge.default_height      = data['height'].to_i if data['height'].present?
+    cartridge.launch_privacy      = data['privacy_level']
+    cartridge.domain              = data['domain']
+    cartridge.editor_button       = EA::ModalExtension.new(name: 'editor_button')
+    cartridge.resource_selection  = EA::ModalExtension.new(name: 'resource_selection')
+    cartridge.homework_submission = EA::ModalExtension.new(name: 'homework_submission')
+    cartridge.course_navigation   = EA::NavigationExtension.new(name: 'course_navigation')
+    cartridge.account_navigation  = EA::NavigationExtension.new(name: 'account_navigation')
+    cartridge.user_navigation     = EA::NavigationExtension.new(name: 'user_navigation')
 
     # Custom Fields
     data['custom_fields'].each do |k, v|
-      cartridge.customFields << EA::CustomField.new( name: k, value: v )
+      cartridge.custom_fields << EA::CustomField.new( name: k, value: v )
     end if data['custom_fields'].present?
 
     optional_extensions = []
@@ -108,14 +109,17 @@ class Importer
     # Config Options
     data['config_options'].each do |opt|
       name = opt['name']
-      if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav'].include? name
+      if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav', 'course_navigation', 'account_navigation', 'user_navigation'].include? name
+        name = 'course_navigation' if name == 'course_nav'
+        name = 'account_navigation' if name == 'account_nav'
+        name = 'user_navigation' if name == 'user_nav'
         optional_extensions << name
       else
-        cartridge.configOptions << EA::ConfigOption.new( name:         name,
-                                                         defaultValue: opt['value'],
-                                                         isRequired:   opt['required'],
-                                                         description:  ReverseMarkdown.parse(opt['description']),
-                                                         type:         opt['type'] )
+        cartridge.config_options << EA::ConfigOption.new( name:          name,
+                                                          default_value: opt['value'],
+                                                          is_required:   opt['required'],
+                                                          description:   ReverseMarkdown.parse(opt['description']),
+                                                          type:          opt['type'] )
       end
     end if data['config_options'].present?
 
@@ -123,23 +127,23 @@ class Importer
     data['extensions'].each do |extension|
       case extension
         when 'editor_button'
-          cartridge.editorButton.isEnabled = true
-          cartridge.editorButton.isOptional = (optional_extensions.include? extension)
+          cartridge.editor_button.is_enabled = true
+          cartridge.editor_button.is_optional = (optional_extensions.include? extension)
         when 'resource_selection'
-          cartridge.resourceSelection.isEnabled = true
-          cartridge.resourceSelection.isOptional = (optional_extensions.include? extension)
+          cartridge.resource_selection.is_enabled = true
+          cartridge.resource_selection.is_optional = (optional_extensions.include? extension)
         when 'homework_submission'
-          cartridge.homeworkSubmission.isEnabled = true
-          cartridge.homeworkSubmission.isOptional = (optional_extensions.include? extension)
+          cartridge.homework_submission.is_enabled = true
+          cartridge.homework_submission.is_optional = (optional_extensions.include? extension)
         when 'course_nav'
-          cartridge.courseNav.isEnabled = true
-          cartridge.courseNav.isOptional = (optional_extensions.include? extension)
+          cartridge.course_navigation.is_enabled = true
+          cartridge.course_navigation.is_optional = (optional_extensions.include? extension)
         when 'account_nav'
-          cartridge.accountNav.isEnabled = true
-          cartridge.accountNav.isOptional = (optional_extensions.include? extension)
+          cartridge.account_navigation.is_enabled = true
+          cartridge.account_navigation.is_optional = (optional_extensions.include? extension)
         when 'user_nav'
-          cartridge.userNav.isEnabled = true
-          cartridge.userNav.isOptional = (optional_extensions.include? extension)
+          cartridge.user_navigation.is_enabled = true
+          cartridge.user_navigation.is_optional = (optional_extensions.include? extension)
       end
     end if data['extensions'].present?
 
@@ -155,7 +159,7 @@ class Importer
 
   def import_lti_app(user, configuration, data)
     app = LtiApp.new(lti_app_configuration_id: configuration.id)
-    app.user_id                  = 1 # hardcoded for now
+    app.user_id                  = user.id
     app.name                     = data['name']
     app.status                   = data['pending'] == true ? 'pending' : 'active'
     app.short_name               = data['id']

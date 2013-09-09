@@ -24,7 +24,7 @@ class LtiAppConfiguration < ActiveRecord::Base
     tool = IMS::LTI::ToolConfig.new
     platform = 'canvas.instructure.com'
 
-    cot = EA::ConfigOptionTool.new(c['configOptions'], params)
+    cot = EA::ConfigOptionTool.new(c['config_options'], params)
     unless cot.is_valid?
       puts cot.errors.inspect
       raise EA::MissingConfigOptionsError.new("Missing required parameters", cot.errors)
@@ -32,46 +32,46 @@ class LtiAppConfiguration < ActiveRecord::Base
 
     tool.title       = cot.sub(c['title'])       if c['title'].present?
     tool.description = cot.sub(c['description']) if c['description'].present?
-    tool.launch_url  = cot.sub(c['launchUrl'])   if c['launchUrl'].present?
-    tool.icon        = cot.sub(c['iconUrl'])     if c['iconUrl'].present?
+    tool.launch_url  = cot.sub(c['launch_url'])  if c['launch_url'].present?
+    tool.icon        = cot.sub(c['icon_url'])    if c['icon_url'].present?
 
-    tool.set_ext_param(platform, 'tool_id', c['toolId'])                          if c['toolId'].present?
-    tool.set_ext_param(platform, 'privacy_level', c['launchPrivacy'])             if c['launchPrivacy'].present?
-    tool.set_ext_param(platform, 'domain', cot.sub(c['domain']))                  if c['domain'].present?
-    tool.set_ext_param(platform, 'link_text', cot.sub(c['defaultLinkText']))      if c['defaultLinkText'].present?
-    tool.set_ext_param(platform, 'selection_width', cot.sub(c['defaultWidth']))   if c['defaultWidth'].present?
-    tool.set_ext_param(platform, 'selection_height', cot.sub(c['defaultHeight'])) if c['defaultHeight'].present?
+    tool.set_ext_param(platform, 'tool_id', c['tool_id'])                          if c['tool_id'].present?
+    tool.set_ext_param(platform, 'privacy_level', c['launch_privacy'])             if c['launch_privacy'].present?
+    tool.set_ext_param(platform, 'domain', cot.sub(c['domain']))                   if c['domain'].present?
+    tool.set_ext_param(platform, 'link_text', cot.sub(c['default_link_text']))     if c['default_link_text'].present?
+    tool.set_ext_param(platform, 'selection_width', cot.sub(c['default_width']))   if c['default_width'].present?
+    tool.set_ext_param(platform, 'selection_height', cot.sub(c['default_height'])) if c['default_height'].present?
 
-    ['editorButton', 'resourceSelection', 'homeworkSubmission'].each do |ext_name|
-      if c[ext_name] && c[ext_name]['isEnabled']
+    ['editor_button', 'resource_selection', 'homework_submission'].each do |ext_name|
+      if c[ext_name] && c[ext_name]['is_enabled']
         ext = c[ext_name]
         opts = {}
         opts['enabled'] = true
         opts['url'] = cot.sub(ext['url'])                 if ext['url'].present?
-        opts['icon_url'] = cot.sub(ext['iconUrl'])        if ext['iconUrl'].present?
-        opts['text'] = cot.sub(ext['linkText'])           if ext['linkText'].present?
+        opts['icon_url'] = cot.sub(ext['icon_url'])       if ext['icon_url'].present?
+        opts['text'] = cot.sub(ext['link_text'])          if ext['link_text'].present?
         opts['selection_width'] = cot.sub(ext['width'])   if ext['width'].present?
         opts['selection_height'] = cot.sub(ext['height']) if ext['height'].present?
         tool.set_ext_param(platform, ext['name'], opts)
       end
     end
 
-    ['courseNav', 'accountNav', 'userNav'].each do |ext_name|
-      if c[ext_name] && c[ext_name]['isEnabled']
+    ['course_navigation', 'account_navigation', 'user_navigation'].each do |ext_name|
+      if c[ext_name] && c[ext_name]['is_enabled']
         ext = c[ext_name]
         opts = {}
         opts['enabled'] = true
-        opts['url'] = cot.sub(ext['launchUrl']) if ext['launchUrl'].present?
-        opts['text'] = cot.sub(ext['linkText']) if ext['linkText'].present?
-        if ext_name == 'course_nav'
+        opts['url'] = cot.sub(ext['launch_url']) if ext['launch_url'].present?
+        opts['text'] = cot.sub(ext['link_text']) if ext['link_text'].present?
+        if ext_name == 'course_navigation'
           opts['visibility'] = ext['visibility'] if ext['visibility'].present?
-          opts['default'] = ext['enabledByDefault'] ? 'enabled' : 'disabled'
+          opts['default'] = ext['enabled_by_default'] ? 'enabled' : 'disabled'
         end
         tool.set_ext_param(platform, ext['name'], opts)
       end
     end
 
-    (c['customFields'] || []).each do |cf|
+    (c['custom_fields'] || []).each do |cf|
       tool.set_custom_param(cf['name'], cot.sub(cf['value']))
     end
 
@@ -105,62 +105,62 @@ class LtiAppConfiguration < ActiveRecord::Base
         config.strict.noblanks
       end
       cartridge = EA::Cartridge.new
-      cartridge.title              = doc.root.xpath('//blti:title').text
-      cartridge.description        = doc.root.xpath('//blti:description').text
-      cartridge.iconUrl            = doc.root.xpath('//blti:extensions/lticm:options/lticm:property[@name="icon_url"]').first.try(:text)
-      cartridge.launchUrl          = doc.root.xpath('//blti:launch_url').text
-      cartridge.toolId             = doc.root.xpath('//blti:extensions/lticm:property[@name="tool_id"]').text
-      cartridge.defaultLinkText    = doc.root.xpath('//blti:extensions/lticm:property[@name="link_text"]').text
-      cartridge.defaultWidth       = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_width"]').text
-      cartridge.defaultHeight      = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_height"]').text
-      cartridge.launchPrivacy      = doc.root.xpath('//blti:extensions/lticm:property[@name="privacy_level"]').text
-      cartridge.domain             = doc.root.xpath('//blti:extensions/lticm:property[@name="domain"]').text
-      cartridge.editorButton       = EA::ModalExtension.new(name: 'editor_button')
-      cartridge.resourceSelection  = EA::ModalExtension.new(name: 'resource_selection')
-      cartridge.homeworkSubmission = EA::ModalExtension.new(name: 'homework_submission')
-      cartridge.courseNav          = EA::NavigationExtension.new(name: 'course_nav')
-      cartridge.accountNav         = EA::NavigationExtension.new(name: 'account_nav')
-      cartridge.userNav            = EA::NavigationExtension.new(name: 'user_nav')
+      cartridge.title               = doc.root.xpath('//blti:title').text
+      cartridge.description         = doc.root.xpath('//blti:description').text
+      cartridge.icon_url            = doc.root.xpath('//blti:extensions/lticm:options/lticm:property[@name="icon_url"]').first.try(:text)
+      cartridge.launch_url          = doc.root.xpath('//blti:launch_url').text
+      cartridge.tool_id             = doc.root.xpath('//blti:extensions/lticm:property[@name="tool_id"]').text
+      cartridge.default_link_text   = doc.root.xpath('//blti:extensions/lticm:property[@name="link_text"]').text
+      cartridge.default_width       = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_width"]').text
+      cartridge.default_height      = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_height"]').text
+      cartridge.launch_privacy      = doc.root.xpath('//blti:extensions/lticm:property[@name="privacy_level"]').text
+      cartridge.domain              = doc.root.xpath('//blti:extensions/lticm:property[@name="domain"]').text
+      cartridge.editor_button       = EA::ModalExtension.new(name: 'editor_button')
+      cartridge.resource_selection  = EA::ModalExtension.new(name: 'resource_selection')
+      cartridge.homework_submission = EA::ModalExtension.new(name: 'homework_submission')
+      cartridge.course_navigation   = EA::NavigationExtension.new(name: 'course_navigation')
+      cartridge.account_navigation  = EA::NavigationExtension.new(name: 'account_navigation')
+      cartridge.user_navigation     = EA::NavigationExtension.new(name: 'user_navigation')
 
       # Custom Fields
       doc.xpath('//blti:custom/lticm:property').each do |node|
-        cartridge.customFields << EA::CustomField.new( name: node['name'], value: node.text )
+        cartridge.custom_fields << EA::CustomField.new( name: node['name'], value: node.text )
       end
 
-      cartridge.editorButton.isEnabled        = (doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="enabled"]').text == 'true')
-      cartridge.editorButton.launchUrl        =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="url"]').text
-      cartridge.editorButton.linkText         =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="text"]').text
-      cartridge.editorButton.iconUrl          =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="icon_url"]').text
-      cartridge.editorButton.width            =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="selection_width"]').text
-      cartridge.editorButton.height           =  doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="selection_height"]').text
+      cartridge.editor_button.is_enabled             = (doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.editor_button.launch_url             = doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="url"]').text
+      cartridge.editor_button.link_text              = doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="text"]').text
+      cartridge.editor_button.icon_url               = doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="icon_url"]').text
+      cartridge.editor_button.width                  = doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="selection_width"]').text
+      cartridge.editor_button.height                 = doc.xpath('//blti:extensions/lticm:options[@name="editor_button"]/lticm:property[@name="selection_height"]').text
 
-      cartridge.resourceSelection.isEnabled   = (doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="enabled"]').text == 'true')
-      cartridge.resourceSelection.launchUrl   =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="url"]').text
-      cartridge.resourceSelection.linkText    =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="text"]').text
-      cartridge.resourceSelection.iconUrl     =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="icon_url"]').text
-      cartridge.resourceSelection.width       =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="selection_width"]').text
-      cartridge.resourceSelection.height      =  doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="selection_height"]').text
+      cartridge.resource_selection.is_enabled        = (doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.resource_selection.launch_url        = doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="url"]').text
+      cartridge.resource_selection.link_text         = doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="text"]').text
+      cartridge.resource_selection.icon_url          = doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="icon_url"]').text
+      cartridge.resource_selection.width             = doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="selection_width"]').text
+      cartridge.resource_selection.height            = doc.xpath('//blti:extensions/lticm:options[@name="resource_selection"]/lticm:property[@name="selection_height"]').text
 
-      cartridge.homeworkSubmission.isEnabled  = (doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="enabled"]').text == 'true')
-      cartridge.homeworkSubmission.launchUrl  =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="url"]').text
-      cartridge.homeworkSubmission.linkText   =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="text"]').text
-      cartridge.homeworkSubmission.iconUrl    =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="icon_url"]').text
-      cartridge.homeworkSubmission.width      =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="selection_width"]').text
-      cartridge.homeworkSubmission.height     =  doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="selection_height"]').text
+      cartridge.homework_submission.is_enabled       = (doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.homework_submission.launch_url       = doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="url"]').text
+      cartridge.homework_submission.link_text        = doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="text"]').text
+      cartridge.homework_submission.icon_url         = doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="icon_url"]').text
+      cartridge.homework_submission.width            = doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="selection_width"]').text
+      cartridge.homework_submission.height           = doc.xpath('//blti:extensions/lticm:options[@name="homework_submission"]/lticm:property[@name="selection_height"]').text
 
-      cartridge.courseNav.isEnabled           = (doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="enabled"]').text == 'true')
-      cartridge.courseNav.launchUrl           =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="url"]').text
-      cartridge.courseNav.linkText            =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="text"]').text
-      cartridge.courseNav.visibility          =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="visibility"]').text
-      cartridge.courseNav.enabledByDefault    =  doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="default"]').text
+      cartridge.course_navigation.is_enabled         = (doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.course_navigation.launch_url         = doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="url"]').text
+      cartridge.course_navigation.link_text          = doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="text"]').text
+      cartridge.course_navigation.visibility         = doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="visibility"]').text
+      cartridge.course_navigation.enabled_by_default = doc.xpath('//blti:extensions/lticm:options[@name="course_nav"]/lticm:property[@name="default"]').text
 
-      cartridge.accountNav.isEnabled          = (doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="enabled"]').text == 'true')
-      cartridge.accountNav.launchUrl          =  doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="url"]').text
-      cartridge.accountNav.linkText           =  doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="text"]').text
+      cartridge.account_navigation.is_enabled        = (doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.account_navigation.launch_url        = doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="url"]').text
+      cartridge.account_navigation.link_text         = doc.xpath('//blti:extensions/lticm:options[@name="account_nav"]/lticm:property[@name="text"]').text
 
-      cartridge.userNav.isEnabled             = (doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="enabled"]').text == 'true')
-      cartridge.userNav.launchUrl             =  doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="url"]').text
-      cartridge.userNav.linkText              =  doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="text"]').text
+      cartridge.user_navigation.is_enabled           = (doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="enabled"]').text == 'true')
+      cartridge.user_navigation.launch_url           = doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="url"]').text
+      cartridge.user_navigation.link_text            = doc.xpath('//blti:extensions/lticm:options[@name="user_nav"]/lticm:property[@name="text"]').text
 
       cartridge
     end

@@ -30,12 +30,12 @@ module EA
     end
 
     def required_params
-      @config_options.select {|co| co.isRequired && co.defaultValue.blank? }.map(&:name)
+      @config_options.select {|co| co.is_required && co.default_value.blank? }.map(&:name)
     end
 
     def options
       opts = {}
-      @config_options.each {|co| opts[co.name] = co.defaultValue }
+      @config_options.each {|co| opts[co.name] = co.default_value }
       opts.each do |k,v|
         opts[k] = @params[k] if @params[k].present?
       end

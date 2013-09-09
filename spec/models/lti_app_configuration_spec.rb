@@ -7,15 +7,15 @@ describe LtiAppConfiguration do
 {
   "title": "Kitchen Sink",
   "description": "This is an example LTI configuration which has every option selected for testing purposes.",
-  "iconUrl": "http://photos4.meetupstatic.com/photos/event/6/f/7/4/global_245368532.jpeg",
-  "launchUrl": "https://example.com/kitchensink",
-  "toolId": "kitchen_sink",
-  "defaultLinkText": "Click Me",
-  "defaultWidth": "500",
-  "defaultHeight": "500",
-  "launchPrivacy": "name_only",
+  "icon_url": "http://photos4.meetupstatic.com/photos/event/6/f/7/4/global_245368532.jpeg",
+  "launch_url": "https://example.com/kitchensink",
+  "tool_id": "kitchen_sink",
+  "default_link_text": "Click Me",
+  "default_width": "500",
+  "default_height": "500",
+  "launch_privacy": "name_only",
   "domain": "example.com",
-  "customFields": [
+  "custom_fields": [
     {
       "name": "req_w_def",
       "value": "{{req_w_def}}"
@@ -29,92 +29,92 @@ describe LtiAppConfiguration do
       "value": "WHOOP!"
     }
   ],
-  "configOptions": [
+  "config_options": [
     {
       "name": "req_w_def",
       "description": "This is a required field that has a default value",
       "type": "text",
-      "defaultValue": "Something",
-      "isRequired": true
+      "default_value": "Something",
+      "is_required": true
     },
     {
       "name": "req_wo_def",
       "description": "This is a required field that does NOT have a default value",
       "type": "text",
-      "defaultValue": "",
-      "isRequired": true
+      "default_value": "",
+      "is_required": true
     },
     {
       "name": "opt_w_def",
       "description": "This is an optional field with a default value",
       "type": "text",
-      "defaultValue": "Something Else",
-      "isRequired": false
+      "default_value": "Something Else",
+      "is_required": false
     },
     {
       "name": "opt_wo_def",
       "description": "This is an optional field that does NOT have a default value",
       "type": "text",
-      "defaultValue": "",
-      "isRequired": false
+      "default_value": "",
+      "is_required": false
     }
   ],
-  "editorButton": {
-    "isEnabled": true,
-    "isOptional": false,
+  "editor_button": {
+    "is_enabled": true,
+    "is_optional": false,
     "name": "editor_button",
-    "launchUrl": "https://example.com/custom_launch",
-    "linkText": "Custom Launch Link",
-    "iconUrl": "http://example.com/custom_icon.png",
+    "launch_url": "https://example.com/custom_launch",
+    "link_text": "Custom Launch Link",
+    "icon_url": "http://example.com/custom_icon.png",
     "width": "600",
     "height": "600"
   },
-  "resourceSelection": {
-    "isEnabled": true,
-    "isOptional": true,
+  "resource_selection": {
+    "is_enabled": true,
+    "is_optional": true,
     "name": "resource_selection",
-    "launchUrl": "",
-    "linkText": null,
-    "iconUrl": null,
+    "launch_url": "",
+    "link_text": null,
+    "icon_url": null,
     "width": null,
     "height": null
   },
-  "homeworkSubmission": {
-    "isEnabled": true,
-    "isOptional": false,
+  "homework_submission": {
+    "is_enabled": true,
+    "is_optional": false,
     "name": "homework_submission",
-    "launchUrl": null,
-    "linkText": null,
-    "iconUrl": null,
+    "launch_url": null,
+    "link_text": null,
+    "icon_url": null,
     "width": null,
     "height": null
   },
-  "courseNav": {
-    "isEnabled": true,
-    "isOptional": true,
-    "name": "course_nav",
-    "launchUrl": "https://example.com/kitchensink_override",
-    "linkText": "{{opt_wo_def}}",
+  "course_navigation": {
+    "is_enabled": true,
+    "is_optional": true,
+    "name": "course_navigation",
+    "launch_url": "https://example.com/kitchensink_override",
+    "link_text": "{{opt_wo_def}}",
     "visibility": "admins",
-    "enabledByDefault": false
+    "enabled_by_default": false
   },
-  "accountNav": {
-    "isEnabled": true,
-    "isOptional": false,
-    "name": "account_nav",
-    "launchUrl": null,
-    "linkText": null,
+  "account_navigation": {
+    "is_enabled": true,
+    "is_optional": false,
+    "name": "account_navigation",
+    "launch_url": null,
+    "link_text": null,
     "visibility": "public",
-    "enabledByDefault": true
+    "enabled_by_default": true
   },
-  "userNav": {
-    "isEnabled": true,
-    "isOptional": true,
-    "name": "user_nav",
-    "launchUrl": "https://example.com/user_nav",
-    "linkText": "THIS IS CUSTOM: {{opt_w_def}}",
+  "user_navigation": {
+    "is_enabled": true,
+    "is_optional": true,
+    "name": "user_navigation",
+    "launch_url": "https://example.com/user_navigation",
+    "link_text": "THIS IS CUSTOM: {{opt_w_def}}",
     "visibility": "public",
-    "enabledByDefault": true
+    "enabled_by_default": true
   }
 }
     EOS
@@ -148,12 +148,12 @@ describe LtiAppConfiguration do
       ext['editor_button']['text'].should == 'Custom Launch Link'
       ext['resource_selection']['enabled'].should be_true
       ext['homework_submission']['enabled'].should be_true
-      ext['course_nav']['enabled'].should be_true
-      ext['course_nav']['url'].should == 'https://example.com/kitchensink_override'
-      ext['account_nav']['enabled'].should be_true
-      ext['user_nav']['enabled'].should be_true
-      ext['user_nav']['url'].should == 'https://example.com/user_nav'
-      ext['user_nav']['text'].should == 'THIS IS CUSTOM: Something Else'
+      ext['course_navigation']['enabled'].should be_true
+      ext['course_navigation']['url'].should == 'https://example.com/kitchensink_override'
+      ext['account_navigation']['enabled'].should be_true
+      ext['user_navigation']['enabled'].should be_true
+      ext['user_navigation']['url'].should == 'https://example.com/user_navigation'
+      ext['user_navigation']['text'].should == 'THIS IS CUSTOM: Something Else'
     end
   end
 
@@ -210,26 +210,26 @@ describe LtiAppConfiguration do
 
     cartridge.title.should == 'Kitchen Sink'
     cartridge.description.should == 'This is an example LTI configuration which has every option selected for testing purposes.'
-    cartridge.iconUrl.should == 'http://example.com/custom_icon.png'
-    cartridge.launchUrl.should == 'https://example.com/kitchensink'
-    cartridge.toolId.should == 'kitchen_sink'
-    cartridge.defaultLinkText.should == 'Click Me'
-    cartridge.defaultWidth.should == '500'
-    cartridge.defaultHeight.should == '500'
-    cartridge.launchPrivacy.should == 'name_only'
+    cartridge.icon_url.should == 'http://example.com/custom_icon.png'
+    cartridge.launch_url.should == 'https://example.com/kitchensink'
+    cartridge.tool_id.should == 'kitchen_sink'
+    cartridge.default_link_text.should == 'Click Me'
+    cartridge.default_width.should == '500'
+    cartridge.default_height.should == '500'
+    cartridge.launch_privacy.should == 'name_only'
     cartridge.domain.should == 'example.com'
-    cartridge.editorButton.isEnabled.should be_true
-    cartridge.editorButton.iconUrl.should == 'http://example.com/custom_icon.png'
-    cartridge.editorButton.width.should == '600'
-    cartridge.editorButton.height.should == '600'
-    cartridge.editorButton.linkText.should == 'Custom Launch Link'
-    cartridge.resourceSelection.isEnabled.should be_true
-    cartridge.homeworkSubmission.isEnabled.should be_true
-    cartridge.courseNav.isEnabled.should be_true
-    cartridge.courseNav.launchUrl.should == 'https://example.com/kitchensink_override'
-    cartridge.accountNav.isEnabled.should be_true
-    cartridge.userNav.isEnabled.should be_true
-    cartridge.userNav.linkText.should == 'THIS IS CUSTOM: Something Else'
-    cartridge.userNav.launchUrl.should == 'https://example.com/user_nav'
+    cartridge.editor_button.is_enabled.should be_true
+    cartridge.editor_button.icon_url.should == 'http://example.com/custom_icon.png'
+    cartridge.editor_button.width.should == '600'
+    cartridge.editor_button.height.should == '600'
+    cartridge.editor_button.link_text.should == 'Custom Launch Link'
+    cartridge.resource_selection.is_enabled.should be_true
+    cartridge.homework_submission.is_enabled.should be_true
+    cartridge.course_navigation.is_enabled.should be_true
+    cartridge.course_navigation.launch_url.should == 'https://example.com/kitchensink_override'
+    cartridge.account_navigation.is_enabled.should be_true
+    cartridge.user_navigation.is_enabled.should be_true
+    cartridge.user_navigation.link_text.should == 'THIS IS CUSTOM: Something Else'
+    cartridge.user_navigation.launch_url.should == 'https://example.com/user_nav'
   end
 end
