@@ -157,6 +157,54 @@ describe LtiAppConfiguration do
     end
   end
 
+  it "foo" do
+    xml = <<-EOS
+
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridge_basiclti_link xmlns="http://www.imsglobal.org/xsd/imslticc_v1p0"
+    xmlns:blti = "http://www.imsglobal.org/xsd/imsbasiclti_v1p0"
+    xmlns:lticm ="http://www.imsglobal.org/xsd/imslticm_v1p0"
+    xmlns:lticp ="http://www.imsglobal.org/xsd/imslticp_v1p0"
+    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation = "http://www.imsglobal.org/xsd/imslticc_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticc_v1p0.xsd
+    http://www.imsglobal.org/xsd/imsbasiclti_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0.xsd
+    http://www.imsglobal.org/xsd/imslticm_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd
+    http://www.imsglobal.org/xsd/imslticp_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
+  <blti:title>YouTube</blti:title>
+  <blti:description>Search publicly available YouTube videos. A new icon will show up in your course rich editor letting you search YouTube and click to embed videos in your course material.</blti:description>
+  <blti:icon>http://www.edu-apps.org/tools/youtube/icon.png</blti:icon>
+  <blti:launch_url>http://www.edu-apps.org/tool_redirect?id=youtube</blti:launch_url>
+  <blti:extensions platform="canvas.instructure.com">
+    <lticm:property name="tool_id">youtube</lticm:property>
+    <lticm:property name="privacy_level">anonymous</lticm:property>
+    <lticm:options name="editor_button">
+      <lticm:property name="url">http://www.edu-apps.org/tool_redirect?id=youtube</lticm:property>
+      <lticm:property name="icon_url">http://www.edu-apps.org/tools/youtube/icon.png</lticm:property>
+      <lticm:property name="text">YouTube</lticm:property>
+      <lticm:property name="selection_width">690</lticm:property>
+      <lticm:property name="selection_height">530</lticm:property>
+      <lticm:property name="enabled">true</lticm:property>
+    </lticm:options>
+    <lticm:options name="resource_selection">
+      <lticm:property name="url">http://www.edu-apps.org/tool_redirect?id=youtube</lticm:property>
+      <lticm:property name="icon_url">http://www.edu-apps.org/tools/youtube/icon.png</lticm:property>
+      <lticm:property name="text">YouTube</lticm:property>
+      <lticm:property name="selection_width">690</lticm:property>
+      <lticm:property name="selection_height">530</lticm:property>
+      <lticm:property name="enabled">true</lticm:property>
+    </lticm:options>
+  </blti:extensions>
+  <cartridge_bundle identifierref="BLTI001_Bundle"/>
+  <cartridge_icon identifierref="BLTI001_Icon"/>
+</cartridge_basiclti_link>  
+EOS
+    cartridge = LtiAppConfiguration.xml_to_cartridge(xml)
+
+    cartridge.title.should == 'YouTube'
+    cartridge.launch_url.should == 'http://www.edu-apps.org/tool_redirect?id=youtube'
+    cartridge.tool_id.should == 'youtube'
+  end
+
   it ".xml_to_json" do
     xml = <<-EOS
 <?xml version="1.0" encoding="UTF-8"?>

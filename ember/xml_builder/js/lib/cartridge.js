@@ -51,9 +51,9 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
     this.set('modified_at', new Date());
   }.observes(
     'title', 'description', 'icon_url', 'launch_url', 'tool_id', 'default_link_text', 'default_width', 
-    'default_height', 'launch_privacy', 'domain', 'custom_fields.@each.modifiedAt', 'config_options.@each.modifiedAt', 
-    'editor_button.modifiedAt', 'resource_selection.modifiedAt', 'homework_submission.modifiedAt', 
-    'course_navigation.modifiedAt', 'account_navigation.modifiedAt', 'user_navigation.modifiedAt'),
+    'default_height', 'launch_privacy', 'domain', 'custom_fields.@each.modified_at', 'config_options.@each.modified_at', 
+    'editor_button.modified_at', 'resource_selection.modified_at', 'homework_submission.modified_at', 
+    'course_navigation.modified_at', 'account_navigation.modified_at', 'user_navigation.modified_at'),
   
   init: function() {
     this._super();
@@ -72,16 +72,16 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
 
     var _this = this;
 
-    this.set('title',           data.get('title'));
-    this.set('description',     data.get('description'));
-    this.set('icon_url',         data.get('icon_url'));
-    this.set('launch_url',       data.get('launch_url'));
-    this.set('tool_id',          data.get('tool_id'));
+    this.set('title',             data.get('title'));
+    this.set('description',       data.get('description'));
+    this.set('icon_url',          data.get('icon_url'));
+    this.set('launch_url',        data.get('launch_url'));
+    this.set('tool_id',           data.get('tool_id'));
     this.set('default_link_text', data.get('default_link_text'));
-    this.set('default_width',    data.get('default_width'));
-    this.set('default_height',   data.get('default_height'));
-    this.set('launch_privacy',   data.get('launch_privacy'));
-    this.set('domain',          data.get('domain'));
+    this.set('default_width',     data.get('default_width'));
+    this.set('default_height',    data.get('default_height'));
+    this.set('launch_privacy',    data.get('launch_privacy'));
+    this.set('domain',            data.get('domain'));
 
     this.get('editor_button').setProperties(data.get('editor_button'));
     this.get('resource_selection').setProperties(data.get('resource_selection'));

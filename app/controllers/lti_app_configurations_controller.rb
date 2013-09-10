@@ -79,7 +79,7 @@ class LtiAppConfigurationsController < ApplicationController
 
   def destroy
     uid = params[:lti_app_configuration][:uid]
-    lti_app_configuration = current_user.lti_app_configurations.where(uid: params[:uid]).first
+    lti_app_configuration = current_user.lti_app_configurations.where(uid: uid).first
     if lti_app_configuration
       lti_app_configuration.destroy
       head 200

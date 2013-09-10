@@ -7,11 +7,13 @@
 // --------------------------------------------------
 
 // Extra small screen / phone
-$screen-xsmall:              480px !default;
+// $screen-xsmall:              480px !default;
+$screen-xsmall:              1px !default;
 $screen-phone:               $screen-xsmall !default;
 
 // Small screen / tablet
-$screen-small:               768px !default;
+// $screen-small:               768px !default;
+$screen-small:               2px !default;
 $screen-tablet:              $screen-small !default;
 
 // Medium screen / desktop
@@ -23,7 +25,8 @@ $screen-small-max:           ($screen-medium - 1) !default;
 $screen-tablet-max:          $screen-small-max !default;
 
 // Large screen / wide desktop
-$screen-large:               1200px !default;
+// $screen-large:               1200px !default;
+$screen-large:               9999px !default;
 $screen-large-desktop:       $screen-large !default;
 
 
@@ -559,10 +562,12 @@ $component-offset-horizontal: 180px !default;
 // --------------------------------------------------
 
 // Small screen / tablet
-$container-tablet:          728px !default;
+$container-tablet:         940px !default;
+// $container-tablet:          728px !default;
 
 // Medium screen / desktop
 $container-desktop:         940px !default;
 
 // Large screen / wide desktop
-$container-large-desktop:   1170px !default;
+$container-large-desktop:         940px !default;
+// $container-large-desktop:   1170px !default;

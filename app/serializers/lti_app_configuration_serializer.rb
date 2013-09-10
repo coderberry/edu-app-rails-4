@@ -14,6 +14,6 @@ class LtiAppConfigurationSerializer < ActiveModel::Serializer
   end
 
   def icon
-    object.config['iconUrl']
+    object.config['icon_url']
   end
 end

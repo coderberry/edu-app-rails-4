@@ -3,16 +3,16 @@
 <fieldset>
   <legend>
     <label class="extension-checkbox pull-right">
-      {{input type="checkbox" checked=content.isEnabled}} Enabled?
+      {{input type="checkbox" checked=content.is_enabled}} Enabled?
     </label>
     Extension: {{displayName}}
   </legend>
   <div class="well well-small">
-    {{#if content.isEnabled}}
+    {{#if content.is_enabled}}
       <div class="form-group">
         <label>LTI Launch URL</label>
         {{input type="text" 
-                value=content.launchUrl 
+                value=content.launch_url 
                 class="form-control" 
                 placeholder="https://"
                 data-placement="bottom"
@@ -22,7 +22,7 @@
       <div class="form-group">
         <label>Link Text</label>
         {{input type="text" 
-                value=content.linkText 
+                value=content.link_text 
                 class="form-control" 
                 placeholder=""
                 data-placement="bottom"
@@ -41,7 +41,7 @@
         </div>
         <div class="checkbox">
           <label>
-            {{input type="checkbox" checked=content.enabledByDefault}}
+            {{input type="checkbox" checked=content.enabled_by_default}}
             Enabled by default?
           </label>
         </div>
@@ -49,7 +49,7 @@
       </div>
       <div class="checkbox">
         <label>
-          {{input type="checkbox" checked=content.isOptional}} Is this extension optional?
+          {{input type="checkbox" checked=content.is_optional}} Is this extension optional?
         </label>
       </div>
     {{else}}

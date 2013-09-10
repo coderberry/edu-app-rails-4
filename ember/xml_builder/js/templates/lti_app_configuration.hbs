@@ -9,30 +9,32 @@
             data-content="CONTENT NEEDED"}}
     <span class="help-block">{{cartridge.errors.title}}</span>
   {{/view}}
-  {{#view "App.FormGroupView" errorBinding=cartridge.errors.toolId}}
+  {{#view "App.FormGroupView" errorBinding=cartridge.errors.tool_id}}
     <small class="text-muted pull-right">lowercase letters + underscore</small>
     <label>Unique Identifier</label>
     {{input type="text" 
-            value=cartridge.toolId 
+            value=cartridge.tool_id 
             class="form-control" 
             data-placement="bottom"
             data-toggle="popover" 
             data-content='use underscore (_) for spaces and all lowercase, e.g. khan_academy'}}
-    <span class="help-block">{{cartridge.errors.toolId}}</span>
+    <span class="help-block">{{cartridge.errors.tool_id}}</span>
   {{/view}}
-  {{#view "App.FormGroupView" errorBinding=cartridge.errors.launchUrl}}
+  {{#view "App.FormGroupView" errorBinding=cartridge.errors.launch_url}}
     <label>LTI Launch URL</label>
     {{input type="text" 
-            value=cartridge.launchUrl 
+            value=cartridge.launch_url 
             class="form-control" 
             placeholder="https://" 
             data-placement="bottom"
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
-    <span class="help-block">{{cartridge.errors.launchUrl}}</span>
+    <span class="help-block">{{cartridge.errors.launch_url}}</span>
   {{/view}}
   <div class="form-group">
-    <small class="text-muted pull-right">250 char max</small>
+    <small class="text-muted pull-right">
+      {{remaining-characters body=cartridge.description max=250}}
+    </small>
     <label>Description</label>
     {{view Ember.TextArea 
             rows="3"
@@ -42,21 +44,21 @@
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
   </div>
-  {{#view "App.FormGroupView" errorBinding=cartridge.errors.iconUrl}}
+  {{#view "App.FormGroupView" errorBinding=cartridge.errors.icon_url}}
     <small class="text-muted pull-right">(16x16 PNG, GIF or JPG)</small>
     <label>Icon URL</label>
     {{input type="text" 
-            value=cartridge.iconUrl
+            value=cartridge.icon_url
             class="form-control" 
             data-placement="bottom"
             data-toggle="popover" 
             data-content="CONTENT NEEDED"}}
-    <span class="help-block">{{cartridge.errors.iconUrl}}</span>
+    <span class="help-block">{{cartridge.errors.icon_url}}</span>
   {{/view}}
   <div class="form-group">
     <label>Link Text</label>
     {{input type="text" 
-            value=cartridge.defaultLinkText
+            value=cartridge.default_link_text
             class="form-control" 
             placeholder="" 
             data-placement="bottom"
@@ -65,27 +67,27 @@
   </div>
   <div class="row">
     <div class="col-6">
-      {{#view "App.FormGroupView" errorBinding=cartridge.errors.defaultWidth}}
+      {{#view "App.FormGroupView" errorBinding=cartridge.errors.default_width}}
         <label>Default Width (px)</label>
         {{input type="text" 
-                value=cartridge.defaultWidth
+                value=cartridge.default_width
                 class="form-control" 
                 data-placement="bottom"
                 data-toggle="popover" 
                 data-content="CONTENT NEEDED"}}
-        <span class="help-block">{{cartridge.errors.defaultWidth}}</span>
+        <span class="help-block">{{cartridge.errors.default_width}}</span>
       {{/view}}
     </div>
     <div class="col-6">
-      {{#view "App.FormGroupView" errorBinding=cartridge.errors.defaultHeight}}
+      {{#view "App.FormGroupView" errorBinding=cartridge.errors.default_height}}
         <label>Default Height (px)</label>
         {{input type="text" 
-                value=cartridge.defaultHeight
+                value=cartridge.default_height
                 class="form-control" 
                 data-placement="bottom"
                 data-toggle="popover" 
                 data-content="CONTENT NEEDED"}}
-        <span class="help-block">{{cartridge.errors.defaultHeight}}</span>
+        <span class="help-block">{{cartridge.errors.default_height}}</span>
       {{/view}}
     </div>
   </div>
@@ -95,7 +97,7 @@
            contentBinding="App.launchPrivacy"
            optionValuePath="content.value"
            optionLabelPath="content.name"
-           valueBinding=cartridge.launchPrivacy
+           valueBinding=cartridge.launch_privacy
            class="form-control"
            data-placement="bottom"
            data-toggle="popover" 
@@ -118,7 +120,7 @@
       Config Options(s)
     </legend>
     <div class="form-group">
-      {{#each cartridge.configOptions}}
+      {{#each cartridge.config_options}}
         {{view "App.ConfigOptionView" contentBinding=this}}
       {{else}}
         <div class="text-center">There are no config options</div>
@@ -133,7 +135,7 @@
       Custom Field(s)
     </legend>
     <div class="form-group">
-      {{#each cartridge.customFields}}
+      {{#each cartridge.custom_fields}}
         {{view "App.CustomFieldView" contentBinding=this}}
       {{else}}
         <div class="text-center">There are no custom fields</div>
@@ -141,11 +143,11 @@
     </div>
   </fieldset>
 
-  {{view "App.CustomSelectionView" contentBinding=cartridge.editorButton}}
-  {{view "App.CustomSelectionView" contentBinding=cartridge.resourceSelection}}
-  {{view "App.CustomSelectionView" contentBinding=cartridge.homeworkSubmission}}
-  {{view "App.CustomNavigationView" contentBinding=cartridge.courseNav}}
-  {{view "App.CustomNavigationView" contentBinding=cartridge.accountNav}}
-  {{view "App.CustomNavigationView" contentBinding=cartridge.userNav}}
+  {{view "App.CustomSelectionView" contentBinding=cartridge.editor_button}}
+  {{view "App.CustomSelectionView" contentBinding=cartridge.resource_selection}}
+  {{view "App.CustomSelectionView" contentBinding=cartridge.homework_submission}}
+  {{view "App.CustomNavigationView" contentBinding=cartridge.course_navigation}}
+  {{view "App.CustomNavigationView" contentBinding=cartridge.account_navigation}}
+  {{view "App.CustomNavigationView" contentBinding=cartridge.user_navigation}}
 
 </form>

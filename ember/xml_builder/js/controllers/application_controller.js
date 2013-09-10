@@ -15,10 +15,12 @@ var ApplicationController = Ember.ArrayController.extend({
   }.property('controllers.lti_app_configuration.model'),
 
   xml: function() {
-    var raw_json = this.get('controllers.lti_app_configuration.cartridge').getJson();
-    var json = JSON.stringify(raw_json, null, 2);
-    return json;
-  }.property('controllers.lti_app_configuration.cartridge.modifiedAt'),
+    if (this.get('showForm')) {
+      var raw_json = this.get('controllers.lti_app_configuration.cartridge').getJson();
+      var json = JSON.stringify(raw_json, null, 2);
+      return json;
+    }
+  }.property('controllers.lti_app_configuration.cartridge.modified_at'),
 
   // functions ..................................................................................
 
