@@ -90,7 +90,7 @@ class Importer
     cartridge.text                = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
     cartridge.default_width       = data['width'].to_i if data['width'].present?
     cartridge.default_height      = data['height'].to_i if data['height'].present?
-    cartridge.launch_privacy      = data['privacy_level']
+    cartridge.privacy_level      = data['privacy_level']
     cartridge.domain              = data['domain']
     cartridge.editor_button       = EA::ModalExtension.new(name: 'editor_button')
     cartridge.resource_selection  = EA::ModalExtension.new(name: 'resource_selection')

@@ -13,7 +13,7 @@ describe LtiAppConfiguration do
   "text": "Click Me",
   "default_width": "500",
   "default_height": "500",
-  "launch_privacy": "name_only",
+  "privacy_level": "name_only",
   "domain": "example.com",
   "custom_fields": [
     {
@@ -264,7 +264,7 @@ EOS
     cartridge.text.should == 'Click Me'
     cartridge.default_width.should == '500'
     cartridge.default_height.should == '500'
-    cartridge.launch_privacy.should == 'name_only'
+    cartridge.privacy_level.should == 'name_only'
     cartridge.domain.should == 'example.com'
     cartridge.editor_button.is_enabled.should be_true
     cartridge.editor_button.icon_url.should == 'http://example.com/custom_icon.png'

@@ -14,7 +14,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   text                : null,
   default_width       : null,
   default_height      : null,
-  launch_privacy      : null,
+  privacy_level      : null,
   domain              : null,
   custom_fields       : null,
   config_options      : null,
@@ -51,7 +51,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
     this.set('modified_at', new Date());
   }.observes(
     'title', 'description', 'icon_url', 'launch_url', 'tool_id', 'text', 'default_width',
-    'default_height', 'launch_privacy', 'domain', 'custom_fields.@each.modified_at', 'config_options.@each.modified_at',
+    'default_height', 'privacy_level', 'domain', 'custom_fields.@each.modified_at', 'config_options.@each.modified_at',
     'editor_button.modified_at', 'resource_selection.modified_at', 'homework_submission.modified_at',
     'course_navigation.modified_at', 'account_navigation.modified_at', 'user_navigation.modified_at'),
   
@@ -80,7 +80,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
     this.set('text',              data.get('text'));
     this.set('default_width',     data.get('default_width'));
     this.set('default_height',    data.get('default_height'));
-    this.set('launch_privacy',    data.get('launch_privacy'));
+    this.set('privacy_level',    data.get('privacy_level'));
     this.set('domain',            data.get('domain'));
 
     this.get('editor_button').setProperties(data.get('editor_button'));
@@ -115,7 +115,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       text                : this.get('text'),
       default_width       : this.get('default_width'),
       default_height      : this.get('default_height'),
-      launch_privacy      : this.get('launch_privacy'),
+      privacy_level      : this.get('privacy_level'),
       domain              : this.get('domain'),
       custom_fields       : [],
       config_options      : [],

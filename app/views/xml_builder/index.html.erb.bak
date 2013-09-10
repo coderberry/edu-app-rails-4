@@ -58,7 +58,7 @@
                  contentBinding="App.launchPrivacy"
                  optionValuePath="content.value"
                  optionLabelPath="content.name"
-                 valueBinding=launch_privacy
+                 valueBinding=privacy_level
                  class="form-control"}}
         </div>
         <div class="form-group">
