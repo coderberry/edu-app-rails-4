@@ -19,3 +19,6 @@
 
 # Ignore config files
 /config/*.yml
+
+# Ignore ember build files
+/public/javascripts/*.js

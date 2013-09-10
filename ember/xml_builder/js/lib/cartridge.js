@@ -50,7 +50,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   changeObserver: function() {
     this.set('modified_at', new Date());
   }.observes(
-    'title', 'description', 'icon_url', 'launch_url', 'tool_id', 'default_link_text', 'default_width', 
+    'title', 'description', 'icon_url', 'launch_url', 'tool_id', 'default_link_text', 'default_width',
     'default_height', 'launch_privacy', 'domain', 'custom_fields.@each.modified_at', 'config_options.@each.modified_at', 
     'editor_button.modified_at', 'resource_selection.modified_at', 'homework_submission.modified_at', 
     'course_navigation.modified_at', 'account_navigation.modified_at', 'user_navigation.modified_at'),

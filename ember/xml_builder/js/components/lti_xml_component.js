@@ -1,13 +1,20 @@
+require('../vendor/vkbeautify.0.99.00.beta');
+
 //{{lti-xml config=model}}
 //Config should be a json object that contains all of the info necessary to create
 //configuration xml
 var LtiXmlComponent = Ember.Component.extend({
-  valid_options: [
+  validOptions: [
     "url", "icon_url", "text", "selection_width", "selection_height",
     "enabled", "visibility", "default"
   ],
 
-  xml: function() {
+  config: function() {
+    return JSON.parse(this.get('data'));
+  }.property('data'),
+
+  generateXml: function() {
+    var config = this.get('config');
     var configXML = $('<cartridge_basiclti_link>')
       .attr("xmlns", "http://www.imsglobal.org/xsd/imslticc_v1p0")
       .attr("xmlns:blti", 'http://www.imsglobal.org/xsd/imsbasiclti_v1p0')
@@ -23,31 +30,30 @@ var LtiXmlComponent = Ember.Component.extend({
     if(config.icon_url)
       configXML.append($('<blti:icon>').append(config.icon_url));
 
-    configXML.append(this.custom_fields());
+    configXML.append(this.customFields());
 
     configXML.append(
       $('<blti:extensions>').attr("platform", "canvas.instructure.com")
-        .append(this.ext_property("tool_id", config))
-        .append(this.ext_property("icon_url", config))
-        .append(this.ext_property("domain", config))
-        .append(this.ext_property("privacy_level", config))
-        .append(this.ext_property("selection_width", config))
-        .append(this.ext_property("selection_height", config))
-        .append(this.ext_property("text", config))
+        .append(this.extProperty("tool_id", config))
+        .append(this.extProperty("icon_url", config))
+        .append(this.extProperty("domain", config))
+        .append(this.extProperty("privacy_level", config))
+        .append(this.extProperty("selection_width", config))
+        .append(this.extProperty("selection_height", config))
+        .append(this.extProperty("text", config))
 
-        .append(this.ext_option("account_navigation"))
-        .append(this.ext_option("course_navigation"))
-        .append(this.ext_option("user_navigation"))
-        .append(this.ext_option("editor_button"))
-        .append(this.ext_option("resource_selection"))
-        .append(this.ext_option("homework_submission"))
+        .append(this.extOption("account_navigation"))
+        .append(this.extOption("course_navigation"))
+        .append(this.extOption("user_navigation"))
+        .append(this.extOption("editor_button"))
+        .append(this.extOption("resource_selection"))
+        .append(this.extOption("homework_submission"))
     );
 
-    return $('<div>').append(configXML).html();
+    this.set('xml', $('<div>').append(configXML).html());
+  }.observes('data'),
 
-  }.property('config'),
-
-  ext_property: function(property, params){
+  extProperty: function(property, params){
     if(params[property])
       return $('<lticm:property>')
         .append(params[property])
@@ -56,11 +62,12 @@ var LtiXmlComponent = Ember.Component.extend({
       return $();
   },
 
-  ext_option: function(name){
+  extOption: function(name){
+    var config = this.get('config');
     if(config[name]){
       var option = $('<lticm:options>').attr('name', name);
-      for (var i = 0; i < this.valid_options.length; i++) {
-        option.append(this.ext_property(this.valid_options[i], config[name]));
+      for (var i = 0; i < this.validOptions.length; i++) {
+        option.append(this.extProperty(this.validOptions[i], config[name]));
       }
       return option;
     } else {
@@ -68,7 +75,8 @@ var LtiXmlComponent = Ember.Component.extend({
     }
   },
 
-  custom_fields: function(){
+  customFields: function(){
+    var config = this.get('config');
     if(config.custom_fields){
       var custom = $('<blti:custom>');
       for (var i = 0; i < config.custom_fields.length; i++) {
@@ -82,7 +90,16 @@ var LtiXmlComponent = Ember.Component.extend({
     } else{
       return $();
     }
-  }
+  },
+
+  formattedCode: function() {
+    var brush = new SyntaxHighlighter.brushes.Xml()
+    brush.init({ toolbar: false });
+    var rawCode = vkbeautify.xml(this.get('xml'), 2);
+    if (!Ember.isEmpty(rawCode)) {
+      return new Handlebars.SafeString(brush.getHtml(rawCode));
+    }
+  }.property('xml')
 });
 
 module.exports = LtiXmlComponent;

@@ -6,6 +6,7 @@ var ApplicationController = Ember.ArrayController.extend({
   needs: ['lti_app_configuration'],
   importUrl: '',
   pastedXml: '',
+  xml: '',
 
   // computed properties ........................................................................
   
@@ -14,7 +15,7 @@ var ApplicationController = Ember.ArrayController.extend({
     return !Ember.isEmpty(ctrl.get('model'));
   }.property('controllers.lti_app_configuration.model'),
 
-  xml: function() {
+  config: function() {
     if (this.get('showForm')) {
       var raw_json = this.get('controllers.lti_app_configuration.cartridge').getJson();
       var json = JSON.stringify(raw_json, null, 2);
