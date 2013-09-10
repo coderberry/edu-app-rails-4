@@ -1,5 +1,8 @@
 EduApps::Application.routes.draw do
   
+
+  root "ember#app_list"
+
   get "lti_app_configurations/index"
   get "lti_app_configurations/show"
   get "/tools/xml_builder" => "xml_builder#index", as: :xml_builder
@@ -73,8 +76,6 @@ EduApps::Application.routes.draw do
   end
 
   resources :sessions
-
-  root "lti_apps#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

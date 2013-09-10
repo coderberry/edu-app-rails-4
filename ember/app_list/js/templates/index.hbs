@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default" id="filter-bar" role="navigation">
+  <ul class="nav navbar-nav">
+    {{bootstrap-dropdown-select value=category 
+                                options=categories
+                                noneLabel='All Categories'}}
+    {{bootstrap-dropdown-select value=education_level 
+                                options=education_levels
+                                noneLabel='All Grade Levels'}}
+    {{bootstrap-dropdown-select value=platform 
+                                options=platforms
+                                noneLabel='All Platforms'}}
+  </ul>
+  <form class="navbar-form" role="search" style="width: 400px; float: right;">
+    {{input type="text" value=filterText class="form-control" placeholder="filter by name"}}
+  </form>
+</nav>
+
+category: {{category}}<br/><br/>
+
+education_level: {{education_level}}<br/><br/>
+
+platform: {{platform}}<br/><br/>

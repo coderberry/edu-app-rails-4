@@ -1,3 +1,54 @@
+#home-banner-wrapper {
+  position: fixed;
+  top: 70px;
+  width: 100%;
+
+  h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 17px;
+    text-align: center;
+    padding: 15px;
+    width: 940px;
+    margin: 0 auto;
+    background-color: lighten($navbar-link-color, 41%);
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: $navbar-link-color;
+    strong {
+      color: #333;
+    }
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+#filter-bar {
+  background-color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ol {
   list-style: none;
   margin: 0px;

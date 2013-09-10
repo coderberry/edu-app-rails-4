@@ -1,0 +1,7 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{selectedOption}} <b class="caret"></b></a>
+<ul class="dropdown-menu" style="text-align: left;">
+  <li><a href="#" {{action "clear"}}>{{noneLabel}}</a></li>
+  {{#each opts}}
+  <li><a href="#" {{action "select" this}}>{{name}}</a></li>
+  {{/each}}
+</ul>
