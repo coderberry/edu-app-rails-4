@@ -11,7 +11,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   icon_url            : null,
   launch_url          : null,
   tool_id             : null,
-  default_link_text   : null,
+  text                : null,
   default_width       : null,
   default_height      : null,
   launch_privacy      : null,
@@ -50,9 +50,9 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   changeObserver: function() {
     this.set('modified_at', new Date());
   }.observes(
-    'title', 'description', 'icon_url', 'launch_url', 'tool_id', 'default_link_text', 'default_width',
-    'default_height', 'launch_privacy', 'domain', 'custom_fields.@each.modified_at', 'config_options.@each.modified_at', 
-    'editor_button.modified_at', 'resource_selection.modified_at', 'homework_submission.modified_at', 
+    'title', 'description', 'icon_url', 'launch_url', 'tool_id', 'text', 'default_width',
+    'default_height', 'launch_privacy', 'domain', 'custom_fields.@each.modified_at', 'config_options.@each.modified_at',
+    'editor_button.modified_at', 'resource_selection.modified_at', 'homework_submission.modified_at',
     'course_navigation.modified_at', 'account_navigation.modified_at', 'user_navigation.modified_at'),
   
   init: function() {
@@ -77,7 +77,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
     this.set('icon_url',          data.get('icon_url'));
     this.set('launch_url',        data.get('launch_url'));
     this.set('tool_id',           data.get('tool_id'));
-    this.set('default_link_text', data.get('default_link_text'));
+    this.set('text',              data.get('text'));
     this.set('default_width',     data.get('default_width'));
     this.set('default_height',    data.get('default_height'));
     this.set('launch_privacy',    data.get('launch_privacy'));
@@ -112,7 +112,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       icon_url            : this.get('icon_url'),
       launch_url          : this.get('launch_url'),
       tool_id             : this.get('tool_id'),
-      default_link_text   : this.get('default_link_text'),
+      text                : this.get('text'),
       default_width       : this.get('default_width'),
       default_height      : this.get('default_height'),
       launch_privacy      : this.get('launch_privacy'),

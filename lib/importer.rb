@@ -87,7 +87,7 @@ class Importer
     cartridge.icon_url            = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
     cartridge.launch_url          = edu_appify_link(data['open_launch_url'] || data['launch_url'])
     cartridge.tool_id             = data['id']
-    cartridge.default_link_text   = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
+    cartridge.text                = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
     cartridge.default_width       = data['width'].to_i if data['width'].present?
     cartridge.default_height      = data['height'].to_i if data['height'].present?
     cartridge.launch_privacy      = data['privacy_level']

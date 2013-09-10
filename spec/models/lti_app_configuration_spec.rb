@@ -10,7 +10,7 @@ describe LtiAppConfiguration do
   "icon_url": "http://photos4.meetupstatic.com/photos/event/6/f/7/4/global_245368532.jpeg",
   "launch_url": "https://example.com/kitchensink",
   "tool_id": "kitchen_sink",
-  "default_link_text": "Click Me",
+  "text": "Click Me",
   "default_width": "500",
   "default_height": "500",
   "launch_privacy": "name_only",
@@ -261,7 +261,7 @@ EOS
     cartridge.icon_url.should == 'http://example.com/custom_icon.png'
     cartridge.launch_url.should == 'https://example.com/kitchensink'
     cartridge.tool_id.should == 'kitchen_sink'
-    cartridge.default_link_text.should == 'Click Me'
+    cartridge.text.should == 'Click Me'
     cartridge.default_width.should == '500'
     cartridge.default_height.should == '500'
     cartridge.launch_privacy.should == 'name_only'

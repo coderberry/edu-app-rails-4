@@ -38,7 +38,7 @@ class LtiAppConfiguration < ActiveRecord::Base
     tool.set_ext_param(platform, 'tool_id', c['tool_id'])                          if c['tool_id'].present?
     tool.set_ext_param(platform, 'privacy_level', c['launch_privacy'])             if c['launch_privacy'].present?
     tool.set_ext_param(platform, 'domain', cot.sub(c['domain']))                   if c['domain'].present?
-    tool.set_ext_param(platform, 'link_text', cot.sub(c['default_link_text']))     if c['default_link_text'].present?
+    tool.set_ext_param(platform, 'link_text', cot.sub(c['text']))                  if c['text'].present?
     tool.set_ext_param(platform, 'selection_width', cot.sub(c['default_width']))   if c['default_width'].present?
     tool.set_ext_param(platform, 'selection_height', cot.sub(c['default_height'])) if c['default_height'].present?
 
@@ -110,7 +110,7 @@ class LtiAppConfiguration < ActiveRecord::Base
       cartridge.icon_url            = doc.root.xpath('//blti:extensions/lticm:options/lticm:property[@name="icon_url"]').first.try(:text)
       cartridge.launch_url          = doc.root.xpath('//blti:launch_url').text
       cartridge.tool_id             = doc.root.xpath('//blti:extensions/lticm:property[@name="tool_id"]').text
-      cartridge.default_link_text   = doc.root.xpath('//blti:extensions/lticm:property[@name="link_text"]').text
+      cartridge.text                = doc.root.xpath('//blti:extensions/lticm:property[@name="link_text"]').text
       cartridge.default_width       = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_width"]').text
       cartridge.default_height      = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_height"]').text
       cartridge.launch_privacy      = doc.root.xpath('//blti:extensions/lticm:property[@name="privacy_level"]').text
