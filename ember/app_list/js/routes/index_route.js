@@ -8,6 +8,10 @@ var IndexRoute = Ember.Route.extend({
     controller.set('platform', queryParams.platform);
     controller.set('filter', queryParams.filter);
     controller.set('filterText', queryParams.filter);
+    controller.set('sort', queryParams.sort);
+    if (!Em.isEmpty(queryParams.sort)) {
+      controller.setActiveSortField(queryParams.sort);
+    }
   }
 });
 

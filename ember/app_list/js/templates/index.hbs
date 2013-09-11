@@ -28,15 +28,14 @@
 <div class="row">
   <div class="col-4">
     <ul class="nav">
-      <li style="line-height: 32px;">{{length}} Apps</li>
+      <li style="line-height: 32px;">Showing {{length}} Apps</li>
     </ul>
   </div>
   <div class="col-8">
     <ul class="nav nav-pills pull-right">
-      <li class="active"><a href="#">Alphabetic</a></li>
-      <li><a href="#">Popular</a></li>
-      <li><a href="#">Recent</a></li>
-    </ul>
+    {{#each field in sortFields}}
+      <li {{bind-attr class="field.active:active"}}><a href="#" {{action "sort" field.key}}>{{field.value}}</a></li>
+    {{/each}}
   </div>
 </div>
 
