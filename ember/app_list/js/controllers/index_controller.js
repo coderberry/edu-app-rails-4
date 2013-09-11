@@ -16,10 +16,37 @@ var IndexController = Ember.ArrayController.extend({
       this.transitionToRoute({ queryParams: { 
         category: this.get('category'),
         education_level: this.get('education_level'),
-        platform: this.get('platform')
+        platform: this.get('platform'),
+        filter: this.get('filter')
       }});
     });
-  }.observes('category', 'education_level', 'platform')
+  }.observes('category', 'education_level', 'platform', 'filter'),
+
+  reset: function() {
+    this.setProperties({
+      filter: null,
+      category: null,
+      education_level: null,
+      platform: null,
+      filterText: null
+    });
+  },
+
+  actions: {
+    applyFilter: function() {
+      if (Em.isEmpty(this.get('filterText'))) {
+        this.set('filter', null);
+      } else {
+        this.set('filter', this.get('filterText'));
+      }
+    },
+
+    reset: function() {
+      Em.run.once(this, function() {
+        this.reset();
+      });
+    }
+  }
 });
 
 module.exports = IndexController;

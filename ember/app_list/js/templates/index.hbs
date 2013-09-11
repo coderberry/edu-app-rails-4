@@ -10,13 +10,34 @@
                                 options=platforms
                                 noneLabel='All Platforms'}}
   </ul>
-  <form class="navbar-form" role="search" style="width: 400px; float: right;">
-    {{input type="text" value=filterText class="form-control" placeholder="filter by name"}}
+
+  <ul class="nav navbar-nav navbar-right pull-right">
+    <li><a href="#" {{action "reset"}} class="pull-right btn btn-link">Reset</a></li>
+  </ul>
+
+  <form {{action "applyFilter" on="submit"}} class="navbar-form pull-right" role="search" style="width: 400px;">
+    <div class="input-group">
+      {{input type="text" value=filterText class="form-control" placeholder="filter by name"}}
+      <span class="input-group-btn">
+        <button class="btn btn-info" type="submit"><i class="icon-search"></i></button>
+      </span>
+    </div>
   </form>
 </nav>
 
-category: {{category}}<br/><br/>
+<div class="row">
+  <div class="col-4">
+    <ul class="nav">
+      <li style="line-height: 32px;">{{length}} Apps</li>
+    </ul>
+  </div>
+  <div class="col-8">
+    <ul class="nav nav-pills pull-right">
+      <li class="active"><a href="#">Alphabetic</a></li>
+      <li><a href="#">Popular</a></li>
+      <li><a href="#">Recent</a></li>
+    </ul>
+  </div>
+</div>
 
-education_level: {{education_level}}<br/><br/>
-
-platform: {{platform}}<br/><br/>
+{{view App.AppListView contentBinding="content"}}

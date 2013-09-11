@@ -1,5 +1,6 @@
 EduApps::Application.routes.draw do
-  
+
+  get 'old' => 'lti_apps#index'  
 
   root "ember#app_list"
 
@@ -13,29 +14,35 @@ EduApps::Application.routes.draw do
     end
   end
 
-  scope "api/v1" do
-    get "lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
-    get "lti_apps/:id" => "lti_apps#show", :defaults => { :format => "json" }
-    get "lti_apps/:lti_app_id/reviews" => "reviews#index", :defaults => { :format => "json" }
-    get "reviews" => "reviews#index", :defaults => { :format => "json" }
-    post "reviews" => "reviews#create", :defaults => { :format => "json" }
-
-    post "lti_app_configurations/import" => "lti_app_configurations#import"
-    post "lti_app_configurations/create_from_xml" => "lti_app_configurations#create_from_xml"
-    get "lti_app_configurations" => "lti_app_configurations#index", :defaults => { :format => "json" }
-    get "lti_app_configurations/:uid" => "lti_app_configurations#show", :defaults => { :format => "json" }
-    post "lti_app_configurations" => "lti_app_configurations#create"
-    post "lti_app_configurations/:uid" => "lti_app_configurations#update"
-    delete "lti_app_configurations" => "lti_app_configurations#destroy"
-
-    get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
-    get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }
-    post "cartridges" => "cartridges#create"
-    post "cartridges/import" => "cartridges#import"
-    post "cartridges/create_from_xml" => "cartridges#create_from_xml"
-    post "cartridges/:uid" => "cartridges#update"
-    delete "cartridges" => "cartridges#destroy"
+  namespace :api do
+    namespace :v1 do
+      resources :lti_apps
+    end
   end
+
+  # scope "api/v1" do
+  #   get "lti_apps" => "lti_apps#index", :defaults => { :format => "json" }
+  #   get "lti_apps/:id" => "lti_apps#show", :defaults => { :format => "json" }
+  #   get "lti_apps/:lti_app_id/reviews" => "reviews#index", :defaults => { :format => "json" }
+  #   get "reviews" => "reviews#index", :defaults => { :format => "json" }
+  #   post "reviews" => "reviews#create", :defaults => { :format => "json" }
+
+  #   post "lti_app_configurations/import" => "lti_app_configurations#import"
+  #   post "lti_app_configurations/create_from_xml" => "lti_app_configurations#create_from_xml"
+  #   get "lti_app_configurations" => "lti_app_configurations#index", :defaults => { :format => "json" }
+  #   get "lti_app_configurations/:uid" => "lti_app_configurations#show", :defaults => { :format => "json" }
+  #   post "lti_app_configurations" => "lti_app_configurations#create"
+  #   post "lti_app_configurations/:uid" => "lti_app_configurations#update"
+  #   delete "lti_app_configurations" => "lti_app_configurations#destroy"
+
+  #   get "cartridges" => "cartridges#index", :defaults => { :format => "json" }
+  #   get "cartridges/:uid" => "cartridges#show", :defaults => { :format => "json" }
+  #   post "cartridges" => "cartridges#create"
+  #   post "cartridges/import" => "cartridges#import"
+  #   post "cartridges/create_from_xml" => "cartridges#create_from_xml"
+  #   post "cartridges/:uid" => "cartridges#update"
+  #   delete "cartridges" => "cartridges#destroy"
+  # end
 
   resources :tags
 
