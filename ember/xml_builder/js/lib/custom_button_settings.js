@@ -2,29 +2,29 @@ var Jsonable = require('../mixins/jsonable');
 
 var CustomButtonSettings = Ember.Object.extend(Jsonable, {
   modified_at : new Date(),
-  is_enabled  : false,
+  enabled  : false,
   is_optional : false,
   name        : null,
-  launch_url  : null,
-  link_text   : null,
+  url         : null,
+  text        : null,
   icon_url    : null,
-  width       : null,
-  height      : null,
+  selection_width   : null,
+  selection_height  : null,
 
   changeObserver: function() {
     this.set('modified_at', new Date());
-  }.observes('is_enabled', 'is_optional', 'name', 'launch_url', 'link_text', 'icon_url', 'width', 'height'),
+  }.observes('enabled', 'is_optional', 'name', 'url', 'text', 'icon_url', 'selection_width', 'selection_height'),
 
   getJson: function() {
     return {
-      is_enabled  : this.get('is_enabled'),
+      enabled     : this.get('enabled'),
       is_optional : this.get('is_optional'),
       name        : this.get('name'),
-      launch_url  : this.get('launch_url'),
-      link_text   : this.get('link_text'),
+      url         : this.get('url'),
+      text        : this.get('text'),
       icon_url    : this.get('icon_url'),
-      width       : this.get('width'),
-      height      : this.get('height')
+      selection_width       : this.get('selection_width'),
+      selection_height      : this.get('selection_height')
     }
   }
 });

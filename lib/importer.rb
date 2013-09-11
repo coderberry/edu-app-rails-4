@@ -90,7 +90,7 @@ class Importer
     cartridge.text                = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
     cartridge.default_width       = data['width'].to_i if data['width'].present?
     cartridge.default_height      = data['height'].to_i if data['height'].present?
-    cartridge.privacy_level      = data['privacy_level']
+    cartridge.privacy_level       = data['privacy_level']
     cartridge.domain              = data['domain']
     cartridge.editor_button       = EA::ModalExtension.new(name: 'editor_button')
     cartridge.resource_selection  = EA::ModalExtension.new(name: 'resource_selection')
@@ -127,22 +127,22 @@ class Importer
     data['extensions'].each do |extension|
       case extension
         when 'editor_button'
-          cartridge.editor_button.is_enabled = true
+          cartridge.editor_button.enabled = true
           cartridge.editor_button.is_optional = (optional_extensions.include? extension)
         when 'resource_selection'
-          cartridge.resource_selection.is_enabled = true
+          cartridge.resource_selection.enabled = true
           cartridge.resource_selection.is_optional = (optional_extensions.include? extension)
         when 'homework_submission'
-          cartridge.homework_submission.is_enabled = true
+          cartridge.homework_submission.enabled = true
           cartridge.homework_submission.is_optional = (optional_extensions.include? extension)
         when 'course_nav'
-          cartridge.course_navigation.is_enabled = true
+          cartridge.course_navigation.enabled = true
           cartridge.course_navigation.is_optional = (optional_extensions.include? extension)
         when 'account_nav'
-          cartridge.account_navigation.is_enabled = true
+          cartridge.account_navigation.enabled = true
           cartridge.account_navigation.is_optional = (optional_extensions.include? extension)
         when 'user_nav'
-          cartridge.user_navigation.is_enabled = true
+          cartridge.user_navigation.enabled = true
           cartridge.user_navigation.is_optional = (optional_extensions.include? extension)
       end
     end if data['extensions'].present?

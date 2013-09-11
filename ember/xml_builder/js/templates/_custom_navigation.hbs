@@ -3,16 +3,16 @@
 <fieldset>
   <legend>
     <label class="extension-checkbox pull-right">
-      {{input type="checkbox" checked=content.is_enabled}} Enabled?
+      {{input type="checkbox" checked=content.enabled}} Enabled?
     </label>
     Extension: {{displayName}}
   </legend>
   <div class="well well-small">
-    {{#if content.is_enabled}}
+    {{#if content.enabled}}
       <div class="form-group">
         <label>LTI Launch URL</label>
         {{input type="text" 
-                value=content.launch_url 
+                value=content.url
                 class="form-control" 
                 placeholder="https://"
                 data-placement="bottom"

@@ -14,7 +14,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   text                : null,
   default_width       : null,
   default_height      : null,
-  privacy_level      : null,
+  privacy_level       : null,
   domain              : null,
   custom_fields       : null,
   config_options      : null,
@@ -24,6 +24,11 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
   course_navigation   : null,
   account_navigation  : null,
   user_navigation     : null,
+
+  launch_types: [
+    "editor_button", "resource_selection", "homework_submission",
+    "course_navigation", "account_navigation", "user_navigation"
+  ],
 
   // Validations
   validations: {
@@ -80,15 +85,13 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
     this.set('text',              data.get('text'));
     this.set('default_width',     data.get('default_width'));
     this.set('default_height',    data.get('default_height'));
-    this.set('privacy_level',    data.get('privacy_level'));
+    this.set('privacy_level',     data.get('privacy_level'));
     this.set('domain',            data.get('domain'));
 
-    this.get('editor_button').setProperties(data.get('editor_button'));
-    this.get('resource_selection').setProperties(data.get('resource_selection'));
-    this.get('homework_submission').setProperties(data.get('homework_submission'));
-    this.get('course_navigation').setProperties(data.get('course_navigation'));
-    this.get('account_navigation').setProperties(data.get('account_navigation'));
-    this.get('user_navigation').setProperties(data.get('user_navigation'));
+    var launch_types = data.get('launch_types');
+    for(var type in launch_types){
+      this.get(type).setProperties(launch_types[type])
+    }
 
     this.set('config_options', []);
     if (!Ember.isEmpty(data.get('config_options'))) {
@@ -115,17 +118,17 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       text                : this.get('text'),
       default_width       : this.get('default_width'),
       default_height      : this.get('default_height'),
-      privacy_level      : this.get('privacy_level'),
+      privacy_level       : this.get('privacy_level'),
       domain              : this.get('domain'),
       custom_fields       : [],
       config_options      : [],
-      editor_button       : this.get('editor_button').getJson(),
-      resource_selection  : this.get('resource_selection').getJson(),
-      homework_submission : this.get('homework_submission').getJson(),
-      course_navigation   : this.get('course_navigation').getJson(),
-      account_navigation  : this.get('account_navigation').getJson(),
-      user_navigation     : this.get('user_navigation').getJson()
+      launch_types        : {}
     };
+
+    for (var i = 0; i < this.launch_types.length; i++) {
+      if(this.get(this.launch_types[i]).enabled)
+        json.launch_types[this.launch_types[i]] = this.get(this.launch_types[i]).getJson()
+    }
 
     this.get('custom_fields').forEach(function(cf) {
       json['custom_fields'].push(cf.getJson());

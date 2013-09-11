@@ -59,62 +59,64 @@ describe LtiAppConfiguration do
       "is_required": false
     }
   ],
-  "editor_button": {
-    "is_enabled": true,
-    "is_optional": false,
-    "name": "editor_button",
-    "launch_url": "https://example.com/custom_launch",
-    "link_text": "Custom Launch Link",
-    "icon_url": "http://example.com/custom_icon.png",
-    "width": "600",
-    "height": "600"
-  },
-  "resource_selection": {
-    "is_enabled": true,
-    "is_optional": true,
-    "name": "resource_selection",
-    "launch_url": "",
-    "link_text": null,
-    "icon_url": null,
-    "width": null,
-    "height": null
-  },
-  "homework_submission": {
-    "is_enabled": true,
-    "is_optional": false,
-    "name": "homework_submission",
-    "launch_url": null,
-    "link_text": null,
-    "icon_url": null,
-    "width": null,
-    "height": null
-  },
-  "course_navigation": {
-    "is_enabled": true,
-    "is_optional": true,
-    "name": "course_navigation",
-    "launch_url": "https://example.com/kitchensink_override",
-    "link_text": "{{opt_wo_def}}",
-    "visibility": "admins",
-    "enabled_by_default": false
-  },
-  "account_navigation": {
-    "is_enabled": true,
-    "is_optional": false,
-    "name": "account_navigation",
-    "launch_url": null,
-    "link_text": null,
-    "visibility": "public",
-    "enabled_by_default": true
-  },
-  "user_navigation": {
-    "is_enabled": true,
-    "is_optional": true,
-    "name": "user_navigation",
-    "launch_url": "https://example.com/user_navigation",
-    "link_text": "THIS IS CUSTOM: {{opt_w_def}}",
-    "visibility": "public",
-    "enabled_by_default": true
+  "launch_types": {
+    "editor_button": {
+      "enabled": true,
+      "is_optional": false,
+      "name": "editor_button",
+      "url": "https://example.com/custom_launch",
+      "text": "Custom Launch Link",
+      "icon_url": "http://example.com/custom_icon.png",
+      "selection_width": "600",
+      "selection_height": "600"
+    },
+    "resource_selection": {
+      "enabled": true,
+      "is_optional": true,
+      "name": "resource_selection",
+      "url": "",
+      "text": null,
+      "icon_url": null,
+      "selection_width": null,
+      "selection_height": null
+    },
+    "homework_submission": {
+      "enabled": true,
+      "is_optional": false,
+      "name": "homework_submission",
+      "url": null,
+      "text": null,
+      "icon_url": null,
+      "selection_width": null,
+      "selection_height": null
+    },
+    "course_navigation": {
+      "enabled": true,
+      "is_optional": true,
+      "name": "course_navigation",
+      "url": "https://example.com/kitchensink_override",
+      "text": "{{opt_wo_def}}",
+      "visibility": "admins",
+      "enabled_by_default": false
+    },
+    "account_navigation": {
+      "enabled": true,
+      "is_optional": false,
+      "name": "account_navigation",
+      "url": null,
+      "text": null,
+      "visibility": "public",
+      "enabled_by_default": true
+    },
+    "user_navigation": {
+      "enabled": true,
+      "is_optional": true,
+      "name": "user_navigation",
+      "url": "https://example.com/user_navigation",
+      "text": "THIS IS CUSTOM: {{opt_w_def}}",
+      "visibility": "public",
+      "enabled_by_default": true
+    }
   }
 }
     EOS
@@ -266,18 +268,18 @@ EOS
     cartridge.default_height.should == '500'
     cartridge.privacy_level.should == 'name_only'
     cartridge.domain.should == 'example.com'
-    cartridge.editor_button.is_enabled.should be_true
+    cartridge.editor_button.enabled.should be_true
     cartridge.editor_button.icon_url.should == 'http://example.com/custom_icon.png'
-    cartridge.editor_button.width.should == '600'
-    cartridge.editor_button.height.should == '600'
-    cartridge.editor_button.link_text.should == 'Custom Launch Link'
-    cartridge.resource_selection.is_enabled.should be_true
-    cartridge.homework_submission.is_enabled.should be_true
-    cartridge.course_navigation.is_enabled.should be_true
-    cartridge.course_navigation.launch_url.should == 'https://example.com/kitchensink_override'
-    cartridge.account_navigation.is_enabled.should be_true
-    cartridge.user_navigation.is_enabled.should be_true
-    cartridge.user_navigation.link_text.should == 'THIS IS CUSTOM: Something Else'
-    cartridge.user_navigation.launch_url.should == 'https://example.com/user_nav'
+    cartridge.editor_button.selection_width.should == '600'
+    cartridge.editor_button.selection_height.should == '600'
+    cartridge.editor_button.text.should == 'Custom Launch Link'
+    cartridge.resource_selection.enabled.should be_true
+    cartridge.homework_submission.enabled.should be_true
+    cartridge.course_navigation.enabled.should be_true
+    cartridge.course_navigation.url.should == 'https://example.com/kitchensink_override'
+    cartridge.account_navigation.enabled.should be_true
+    cartridge.user_navigation.enabled.should be_true
+    cartridge.user_navigation.text.should == 'THIS IS CUSTOM: Something Else'
+    cartridge.user_navigation.url.should == 'https://example.com/user_nav'
   end
 end

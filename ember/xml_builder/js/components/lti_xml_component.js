@@ -47,12 +47,7 @@ var LtiXmlComponent = Ember.Component.extend({
         .append(this.extProperty("selection_height", config))
         .append(this.extProperty("text", config))
 
-        .append(this.extOption("account_navigation"))
-        .append(this.extOption("course_navigation"))
-        .append(this.extOption("user_navigation"))
-        .append(this.extOption("editor_button"))
-        .append(this.extOption("resource_selection"))
-        .append(this.extOption("homework_submission"))
+        .append(this.extOptions())
     );
 
     this.set('xml', $('<div>').append(configXML).html());
@@ -67,17 +62,17 @@ var LtiXmlComponent = Ember.Component.extend({
       return $();
   },
 
-  extOption: function(name){
-    var config = this.get('config');
-    if(config[name]){
+  extOptions: function(){
+    var launch_types = this.get('config').launch_types;
+    var element = $('<temp>');
+    for(var name in launch_types){
       var option = $('<lticm:options>').attr('name', name);
       for (var i = 0; i < this.validOptions.length; i++) {
-        option.append(this.extProperty(this.validOptions[i], config[name]));
+        option.append(this.extProperty(this.validOptions[i], launch_types[name]));
       }
-      return option;
-    } else {
-      return $();
+      element.append(option);
     }
+    return element.children();
   },
 
   customFields: function(){
