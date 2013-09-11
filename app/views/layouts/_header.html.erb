@@ -11,7 +11,7 @@
 
     <div class="nav-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav pull-right">
-        <li<% if controller_name == 'lti_apps' && @active_tab != 'admin' && !(['new', 'create', 'edit', 'my'].include? action_name) %> class="active"<% end %>><%= link_to "Apps", lti_apps_path %></li>
+        <li<% if ['lti_apps', 'ember'].include? controller_name && @active_tab != 'admin' && !(['new', 'create', 'edit', 'my'].include? action_name) %> class="active"<% end %>><%= link_to "Apps", root_url %></li>
         <li<% if controller_name == 'static' && action_name == 'tutorials' %> class="active"<% end %>>
           <%= link_to "Tutorials", tutorials_path("canvas") %></li>
         <li<% if controller_name == 'static' && action_name == 'docs' %> class="active"<% end %>>
