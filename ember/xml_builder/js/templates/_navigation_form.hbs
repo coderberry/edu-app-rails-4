@@ -1,7 +1,7 @@
 <div class="form-group">
   <label>LTI Launch URL</label>
   {{input type="text" 
-          value=launch_url 
+          value=url
           class="form-control" 
           placeholder="https://"
           data-placement="bottom"
@@ -11,7 +11,7 @@
 <div class="form-group">
   <label>Link Text</label>
   {{input type="text" 
-          value=link_text 
+          value=text
           class="form-control" 
           placeholder=""
           data-placement="bottom"
@@ -30,7 +30,7 @@
   </div>
   <div class="checkbox">
     <label>
-      {{input type="checkbox" checked=enabled_by_default}}
+      {{input type="checkbox" checked=default}}
       Enabled by default?
     </label>
   </div>

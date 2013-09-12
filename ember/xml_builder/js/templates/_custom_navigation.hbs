@@ -22,7 +22,7 @@
       <div class="form-group">
         <label>Link Text</label>
         {{input type="text" 
-                value=content.link_text 
+                value=content.text
                 class="form-control" 
                 placeholder=""
                 data-placement="bottom"
@@ -41,7 +41,7 @@
         </div>
         <div class="checkbox">
           <label>
-            {{input type="checkbox" checked=content.enabled_by_default}}
+            {{input type="checkbox" checked=content.default}}
             Enabled by default?
           </label>
         </div>

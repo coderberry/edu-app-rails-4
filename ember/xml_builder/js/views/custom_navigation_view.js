@@ -9,7 +9,7 @@ var CustomNavigationView = Ember.View.extend({
   }.property('content.name'),
 
   displayExtras: function() {
-    return (this.get('content.name') === 'course_nav');
+    return (this.get('content.name') === 'course_navigation');
   }.property('content.name')
 });
 
