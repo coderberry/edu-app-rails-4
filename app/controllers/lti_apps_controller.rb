@@ -87,9 +87,6 @@ class LtiAppsController < ApplicationController
   # PATCH/PUT /lti_apps/1
   def update
     if @lti_app.update(lti_app_params)
-
-      binding.pry
-
       redirect_to lti_app_path(@lti_app.short_name), notice: 'Lti app was successfully updated.'
     else
       render action: 'edit'

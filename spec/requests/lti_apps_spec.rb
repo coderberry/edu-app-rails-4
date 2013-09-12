@@ -10,7 +10,7 @@ describe "LtiApps" do
       get '/api/v1/lti_apps'
       response.status.should be(200)
       json = JSON.parse(response.body)
-      json['lti_apps'].size.should > 0
+      json.size.should > 0
     end
   end
 
@@ -22,7 +22,7 @@ describe "LtiApps" do
     it "gets list" do
       get "/api/v1/lti_apps/#{@lti_app.short_name}"
       json = JSON.parse(response.body)
-      json['lti_app']['id'].should eq(@lti_app.id)
+      json['id'].should eq(@lti_app.id)
     end
   end
 end

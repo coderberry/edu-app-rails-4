@@ -49,6 +49,11 @@ module Api
         lti_apps = lti_apps.order(sort).load
         render json: lti_apps, root: false
       end
+
+      def show
+        lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
+        render json: lti_app, root: false
+      end
     end
   end
 end

@@ -21,13 +21,13 @@ EduApps::Application.routes.draw do
   end
 
   scope "api/v1" do
-     post "lti_app_configurations/import" => "lti_app_configurations#import"
-     post "lti_app_configurations/create_from_xml" => "lti_app_configurations#create_from_xml"
-     get "lti_app_configurations" => "lti_app_configurations#index", :defaults => { :format => "json" }
-     get "lti_app_configurations/:uid" => "lti_app_configurations#show", :defaults => { :format => "json" }
-     post "lti_app_configurations" => "lti_app_configurations#create"
-     post "lti_app_configurations/:uid" => "lti_app_configurations#update"
-     delete "lti_app_configurations" => "lti_app_configurations#destroy"
+    post "lti_app_configurations/import" => "lti_app_configurations#import"
+    post "lti_app_configurations/create_from_xml" => "lti_app_configurations#create_from_xml"
+    get "lti_app_configurations" => "lti_app_configurations#index", :defaults => { :format => "json" }
+    get "lti_app_configurations/:uid" => "lti_app_configurations#show", :defaults => { :format => "json" }
+    post "lti_app_configurations" => "lti_app_configurations#create"
+    post "lti_app_configurations/:uid" => "lti_app_configurations#update"
+    delete "lti_app_configurations" => "lti_app_configurations#destroy"
   end
 
   resources :tags
@@ -68,6 +68,7 @@ EduApps::Application.routes.draw do
     end
   end
 
+  resources :reviews
   resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
