@@ -93,6 +93,11 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       this.get(type).setProperties(launch_types[type])
     }
 
+    debugger;
+    for (var i = 0; i < data.optional_launch_types.length; i++) {
+      this.get(data.optional_launch_types[i]).set('is_optional', true);
+    }
+
     this.set('config_options', []);
     if (!Ember.isEmpty(data.get('config_options'))) {
       Em.$.each(data.get('config_options'), function(idx, opt) {
@@ -110,24 +115,31 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
 
   getJson: function() {
     var json = {
-      title               : this.get('title'),
-      description         : this.get('description'),
-      icon_url            : this.get('icon_url'),
-      launch_url          : this.get('launch_url'),
-      tool_id             : this.get('tool_id'),
-      text                : this.get('text'),
-      default_width       : this.get('default_width'),
-      default_height      : this.get('default_height'),
-      privacy_level       : this.get('privacy_level'),
-      domain              : this.get('domain'),
-      custom_fields       : [],
-      config_options      : [],
-      launch_types        : {}
+      title                 : this.get('title'),
+      description           : this.get('description'),
+      icon_url              : this.get('icon_url'),
+      launch_url            : this.get('launch_url'),
+      tool_id               : this.get('tool_id'),
+      text                  : this.get('text'),
+      default_width         : this.get('default_width'),
+      default_height        : this.get('default_height'),
+      privacy_level         : this.get('privacy_level'),
+      domain                : this.get('domain'),
+      custom_fields         : [],
+      config_options        : [],
+      optional_launch_types : [],
+      launch_types          : {}
     };
 
     for (var i = 0; i < this.launch_types.length; i++) {
-      if(this.get(this.launch_types[i]).enabled)
-        json.launch_types[this.launch_types[i]] = this.get(this.launch_types[i]).getJson()
+      if(this.get(this.launch_types[i]).enabled){
+        var launch_type = this.get(this.launch_types[i]).getJson();
+        if(launch_type.is_optional){
+          delete launch_type.is_optional
+          json.optional_launch_types.push(this.launch_types[i])
+        }
+        json.launch_types[this.launch_types[i]] = launch_type;
+      }
     }
 
     this.get('custom_fields').forEach(function(cf) {

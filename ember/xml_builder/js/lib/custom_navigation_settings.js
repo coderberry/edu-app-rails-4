@@ -21,14 +21,16 @@ var CourseNavigationSettings = Ember.Object.extend(Jsonable, {
       url         : this.get('url'),
       text        : this.get('link_text'),
       visibility  : this.get('visibility'),
-      default     : this.get('default')
+      default     : (this.get('default') == true ? 'disabled' : null )
     }
   },
 
-  isCourseNav: function() {
-    binding.pry
-    return name == 'course_navigation'
-  }.property('name')
+  processDefault: function() {
+    if(this.get('default') == 'disabled'){
+      this.set('default', true)
+    }
+  }.observes('default')
+
 });
 
 module.exports = CourseNavigationSettings;
