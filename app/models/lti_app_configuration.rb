@@ -42,34 +42,42 @@ class LtiAppConfiguration < ActiveRecord::Base
     tool.set_ext_param(platform, 'selection_width', cot.sub(c['default_width']))   if c['default_width'].present?
     tool.set_ext_param(platform, 'selection_height', cot.sub(c['default_height'])) if c['default_height'].present?
 
-    ['editor_button', 'resource_selection', 'homework_submission'].each do |ext_name|
-      if c['launch_types'][ext_name]
-        ext = c['launch_types'][ext_name]
-        opts = {}
-        opts['enabled'] = ext['enabled']                  if ext['enabled'].present?
-        opts['url'] = cot.sub(ext['url'])                 if ext['url'].present?
-        opts['icon_url'] = cot.sub(ext['icon_url'])       if ext['icon_url'].present?
-        opts['text'] = cot.sub(ext['text'])               if ext['text'].present?
-        opts['selection_width'] = cot.sub(ext['selection_width'])   if ext['selection_width'].present?
-        opts['selection_height'] = cot.sub(ext['selection_height']) if ext['selection_height'].present?
-        tool.set_ext_param(platform, ext['name'], opts)
+    c['launch_types'].each do |name, ext|
+      opts = {}
+      ext.each do |key, value|
+        opts[key] = cot.sub(ext[key]) if ext[key].present?
       end
+      tool.set_ext_param(platform, name, opts)
     end
 
-    ['course_navigation', 'account_navigation', 'user_navigation'].each do |ext_name|
-      if c['launch_types'][ext_name]
-        ext = c['launch_types'][ext_name]
-        opts = {}
-        opts['enabled'] = true
-        opts['url'] = cot.sub(ext['url']) if ext['url'].present?
-        opts['text'] = cot.sub(ext['text']) if ext['text'].present?
-        if ext_name == 'course_navigation'
-          opts['visibility'] = ext['visibility'] if ext['visibility'].present?
-          #opts['default'] = ext['enabled_by_default'] ? 'enabled' : 'disabled'
-        end
-        tool.set_ext_param(platform, ext['name'], opts)
-      end
-    end
+    #['editor_button', 'resource_selection', 'homework_submission'].each do |ext_name|
+    #  if c['launch_types'][ext_name]
+    #    ext = c['launch_types'][ext_name]
+    #    opts = {}
+    #    opts['enabled'] = ext['enabled']                  if ext['enabled'].present?
+    #    opts['url'] = cot.sub(ext['url'])                 if ext['url'].present?
+    #    opts['icon_url'] = cot.sub(ext['icon_url'])       if ext['icon_url'].present?
+    #    opts['text'] = cot.sub(ext['text'])               if ext['text'].present?
+    #    opts['selection_width'] = cot.sub(ext['selection_width'])   if ext['selection_width'].present?
+    #    opts['selection_height'] = cot.sub(ext['selection_height']) if ext['selection_height'].present?
+    #    tool.set_ext_param(platform, ext['name'], opts)
+    #  end
+    #end
+    #
+    #['course_navigation', 'account_navigation', 'user_navigation'].each do |ext_name|
+    #  if c['launch_types'][ext_name]
+    #    ext = c['launch_types'][ext_name]
+    #    opts = {}
+    #    opts['enabled'] = true
+    #    opts['url'] = cot.sub(ext['url']) if ext['url'].present?
+    #    opts['text'] = cot.sub(ext['text']) if ext['text'].present?
+    #    if ext_name == 'course_navigation'
+    #      opts['visibility'] = ext['visibility'] if ext['visibility'].present?
+    #      #opts['default'] = ext['enabled_by_default'] ? 'enabled' : 'disabled'
+    #    end
+    #    tool.set_ext_param(platform, ext['name'], opts)
+    #  end
+    #end
 
     (c['custom_fields'] || []).each do |cf|
       tool.set_custom_param(cf['name'], cot.sub(cf['value']))

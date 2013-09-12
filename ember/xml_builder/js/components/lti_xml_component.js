@@ -4,11 +4,6 @@ require('../vendor/vkbeautify.0.99.00.beta');
 //Config should be a json object that contains all of the info necessary to create
 //configuration xml
 var LtiXmlComponent = Ember.Component.extend({
-  validOptions: [
-    "url", "icon_url", "text", "selection_width", "selection_height",
-    "enabled", "visibility", "default"
-  ],
-
   config: function() {
     return JSON.parse(this.get('data'));
   }.property('data'),
@@ -67,8 +62,8 @@ var LtiXmlComponent = Ember.Component.extend({
     var element = $('<temp>');
     for(var name in launch_types){
       var option = $('<lticm:options>').attr('name', name);
-      for (var i = 0; i < this.validOptions.length; i++) {
-        option.append(this.extProperty(this.validOptions[i], launch_types[name]));
+      for(var property in launch_types[name]){
+        option.append(this.extProperty(property, launch_types[name]));
       }
       element.append(option);
     }

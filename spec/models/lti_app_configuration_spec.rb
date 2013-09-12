@@ -63,7 +63,6 @@ describe LtiAppConfiguration do
     "editor_button": {
       "enabled": true,
       "is_optional": false,
-      "name": "editor_button",
       "url": "https://example.com/custom_launch",
       "text": "Custom Launch Link",
       "icon_url": "http://example.com/custom_icon.png",
@@ -73,7 +72,6 @@ describe LtiAppConfiguration do
     "resource_selection": {
       "enabled": true,
       "is_optional": true,
-      "name": "resource_selection",
       "url": "",
       "text": null,
       "icon_url": null,
@@ -83,7 +81,6 @@ describe LtiAppConfiguration do
     "homework_submission": {
       "enabled": true,
       "is_optional": false,
-      "name": "homework_submission",
       "url": null,
       "text": null,
       "icon_url": null,
@@ -93,7 +90,6 @@ describe LtiAppConfiguration do
     "course_navigation": {
       "enabled": true,
       "is_optional": true,
-      "name": "course_navigation",
       "url": "https://example.com/kitchensink_override",
       "text": "{{opt_wo_def}}",
       "visibility": "admins",
@@ -102,7 +98,6 @@ describe LtiAppConfiguration do
     "account_navigation": {
       "enabled": true,
       "is_optional": false,
-      "name": "account_navigation",
       "url": null,
       "text": null,
       "visibility": "public",
@@ -111,7 +106,6 @@ describe LtiAppConfiguration do
     "user_navigation": {
       "enabled": true,
       "is_optional": true,
-      "name": "user_navigation",
       "url": "https://example.com/user_navigation",
       "text": "THIS IS CUSTOM: {{opt_w_def}}",
       "visibility": "public",

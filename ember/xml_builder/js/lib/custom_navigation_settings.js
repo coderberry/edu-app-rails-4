@@ -18,7 +18,6 @@ var CourseNavigationSettings = Ember.Object.extend(Jsonable, {
     return {
       enabled            : this.get('enabled'),
       is_optional        : this.get('is_optional'),
-      name               : this.get('name'),
       url                : this.get('url'),
       link_text          : this.get('link_text'),
       visibility         : this.get('visibility'),

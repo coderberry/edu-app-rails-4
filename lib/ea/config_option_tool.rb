@@ -23,6 +23,7 @@ module EA
     end
 
     def sub(str)
+      return str unless str.class == String
       opts = self.options
       res = (str || '').gsub(/{{\s*escape:([\w_]+)\s*}}/) { |w| CGI.escape(opts[$1]) }
       res.gsub!(/{{\s*([\w_]+)\s*}}/) { |w| opts[$1] }

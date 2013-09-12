@@ -19,7 +19,6 @@ var CustomButtonSettings = Ember.Object.extend(Jsonable, {
     return {
       enabled     : this.get('enabled'),
       is_optional : this.get('is_optional'),
-      name        : this.get('name'),
       url         : this.get('url'),
       text        : this.get('text'),
       icon_url    : this.get('icon_url'),
