@@ -23,7 +23,12 @@ class LtiAppsController < ApplicationController
   end
 
   def my
-    @lti_apps = current_user.lti_apps.inclusive.include_rating.include_total_ratings.order(:name)
+    @active_tab = 'my_stuff'
+    if current_user.is_admin?
+      @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.order(:name)
+    else
+      @lti_apps = current_user.lti_apps.inclusive.include_rating.include_total_ratings.order(:name)
+    end
     respond_to do |format|
       format.html
       format.json { render json: @lti_apps }
@@ -37,11 +42,13 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps/new
   def new
+    @active_tab = 'my_stuff'
     @lti_app = LtiApp.new
   end
 
   # GET /lti_apps/1/edit
   def edit
+    @active_tab = 'my_stuff'
     # Inject permission check here
     @lti_app = LtiApp.where(short_name: params[:id]).first
   end

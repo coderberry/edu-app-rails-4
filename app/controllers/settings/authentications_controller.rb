@@ -1,4 +1,4 @@
-class Settings::AuthenticationsController < ApplicationController
+class Settings::AuthenticationsController < SettingsController
   before_filter :authorize
   layout "settings"
 

@@ -23,4 +23,10 @@ class Organization < ActiveRecord::Base
       :name, :created_at, :updated_at
     )
   end
+
+  def add_admin(user)
+    member = memberships.where(user_id: user.id).first_or_create
+    member.is_admin = true
+    member.save
+  end
 end

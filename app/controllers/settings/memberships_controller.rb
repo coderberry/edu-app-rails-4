@@ -1,7 +1,4 @@
-class Settings::MembershipsController < ApplicationController
-  before_filter :authorize
-  layout "settings"
-
+class Settings::MembershipsController < SettingsController
   def index
     @memberships = current_user.memberships.all
   end

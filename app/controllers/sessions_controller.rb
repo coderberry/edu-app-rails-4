@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       authentication = Authentication.from_omniauth(env["omniauth.auth"], email, current_user)
 
       if current_user.present?
-        redirect_to settings_authentications_path, notice: "Successfully linked account"
+        redirect_to authentications_path, notice: "Successfully linked account"
       else
         session[:user_id] = authentication.user.id
         redirect_to return_url, notice: "Logged in!"

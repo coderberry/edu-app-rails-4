@@ -1,6 +1,9 @@
 <div class="main-content">
   <div class="header clearfix">
-    <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_organization_path(@organization), class: "pull-right btn btn-info btn-xs" %>
+    <% if @can_manage %>
+      <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_organization_path(@organization), class: "pull-right btn btn-info btn-xs" %>
+      <%= link_to raw("<i class='icon-plus'></i> Add Member"), new_organization_membership_path(@organization), class: "pull-right btn btn-success btn-xs", style: "margin-right: 5px;" %>
+    <% end %>
     <h3 class="page-header">Organization: <%= @organization.name %></h3>
   </div>
 
@@ -9,19 +12,25 @@
     <li class="active"><%= @organization.name %></li>
   </ul>
 
-  <fieldset>
-    <legend>API Keys</legend>
-    <%= render partial: "/shared/api_keys_table", locals: { api_keys: @organization.api_keys } %>
-  </fieldset>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#" data-target="#tab-details" data-toggle="tab">Details</a></li>
+    <li><a href="#" data-target="#tab-apps" data-toggle="tab"><%= pluralize @organization.lti_apps.count, "App" %></a></li>
+    <li><a href="#" data-target="#tab-members" data-toggle="tab"><%= pluralize @organization.memberships.count, "Members" %></a></li>
+    <li><a href="#" data-target="#tab-api-keys" data-toggle="tab"><%= pluralize @organization.api_keys.count, "API Key" %></a></li>
+  </ul>
 
-  <fieldset>
-    <legend>Apps</legend>
-    <%= render partial: "/shared/apps_table", locals: { apps: @organization.lti_apps } %>
-  </fieldset>
-
-  <fieldset>
-    <legend>Members</legend>
-    <%= render partial: "/shared/memberships_table", locals: { memberships: @organization.memberships } %>
-  </fieldset>
-
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab-details">
+      <%= render partial: "/shared/details", locals: { details: @organization.details } %>
+    </div>
+    <div class="tab-pane" id="tab-apps">
+      <%= render partial: "/lti_apps/table", locals: { apps: @organization.lti_apps } %>
+    </div>
+    <div class="tab-pane" id="tab-members">
+      <%= render partial: "/memberships/table", locals: { memberships: @organization.memberships } %>
+    </div>
+    <div class="tab-pane" id="tab-api-keys">
+      <%= render partial: "/api_keys/table", locals: { api_keys: @organization.api_keys } %>
+    </div>
+  </div>
 </div>

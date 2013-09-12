@@ -4,41 +4,5 @@
     <h3 class="page-header">My Apps</h3>
   </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Rating</th>
-        <th># Reviews</th>
-        <th>Organization</th>
-        <th>Configuration</th>
-        <th>Status</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @lti_apps.each do |lti_app| %>
-      <tr>
-        <td><%= icon(lti_app.icon_url) %> <%= link_to lti_app.name, lti_app_path(lti_app.short_name) %></td>
-        <td><%= star_rating(lti_app.average_rating, "mini") %></td>
-        <td>
-          <% if lti_app.reviews.count > 0 %>
-            <i class="icon-comment text-info"></i> <%= lti_app.reviews.count %>
-          <% else %>
-            &nbsp;
-          <% end %>
-        <td><%= lti_app.organization.try(:name) %></td>
-        <% if lti_app.lti_app_configuration %>
-          <td><%= link_to lti_app.lti_app_configuration.uid, "/tools/xml_builder#/#{lti_app.lti_app_configuration.uid}" %></td>
-        <% else %>
-          <td>-</td>
-        <% end %>
-        <td><%=raw status_badge(lti_app.status) %></td>
-        <td>
-          <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_lti_app_path(lti_app.short_name), class: "pull-right btn btn-info btn-xs" %>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <%= render partial: "table", locals: { apps: @lti_apps } %>
 </div>

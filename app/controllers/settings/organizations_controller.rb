@@ -1,7 +1,4 @@
-class Settings::OrganizationsController < ApplicationController
-  before_filter :authorize
-  layout "settings"
-
+class Settings::OrganizationsController < SettingsController
   def index
     @organizations = current_user.organizations.all
   end

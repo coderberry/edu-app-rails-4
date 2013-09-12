@@ -2,6 +2,7 @@ class EmberController < ApplicationController
   layout 'ember'
   
   def app_list
+    @active_tab = 'apps'
     @env = {
       categories: Tag.categories.map {|c| { id: c.id, name: c.name }},
       education_levels: Tag.education_levels.map {|c| { id: c.id, name: c.name }},

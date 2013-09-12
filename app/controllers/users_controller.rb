@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_filter :authorize, only: [:edit]
-  layout :layout
 
   def new
     @user = User.new(is_registering: true)
@@ -27,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @active_tab = 'my_stuff'
     @user = current_user
     if code = @user.registration_codes.active.last
       @user.email = code.email
@@ -74,10 +74,12 @@ class UsersController < ApplicationController
   end
 
   def edit_password
+    @active_tab = 'my_stuff'
     @user = current_user
   end
 
   def update_password
+    @active_tab = 'my_stuff'
     @user = current_user
     @user.force_require_password = true
     @user.password = params[:user][:password]
@@ -94,14 +96,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def layout
-    if ['new', 'create'].include? action_name
-      "application"
-    else
-      "settings"
-    end
   end
 
   # Generates a registration code and sends the user an email
