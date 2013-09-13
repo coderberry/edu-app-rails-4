@@ -118,7 +118,7 @@ describe LtiAppConfiguration do
 
     it "should convert to a valid cartridge" do
       @lti_app_configuration.uid.should =~ /\S{15}/
-      tool = @lti_app_configuration.tool_config({ req_wo_def: 'From Param' })
+      tool = @lti_app_configuration.tool_config({ req_wo_def: 'From Param', course_navigation: 1, user_navigation: 1 })
       tool.title.should == 'Kitchen Sink'
       tool.description.should == 'This is an example LTI configuration which has every option selected for testing purposes.'
       tool.icon.should == 'http://photos4.meetupstatic.com/photos/event/6/f/7/4/global_245368532.jpeg'
@@ -141,7 +141,7 @@ describe LtiAppConfiguration do
       ext['editor_button']['selection_width'].should == '600'
       ext['editor_button']['selection_height'].should == '600'
       ext['editor_button']['text'].should == 'Custom Launch Link'
-      ext['resource_selection']['enabled'].should be_true
+      ext['resource_selection'].should be_nil
       ext['homework_submission']['enabled'].should be_true
       ext['course_navigation']['enabled'].should be_true
       ext['course_navigation']['url'].should == 'https://example.com/kitchensink_override'

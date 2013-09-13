@@ -36,13 +36,14 @@ class LtiAppConfiguration < ActiveRecord::Base
     tool.icon        = cot.sub(c['icon_url'])    if c['icon_url'].present?
 
     tool.set_ext_param(platform, 'tool_id', c['tool_id'])                          if c['tool_id'].present?
-    tool.set_ext_param(platform, 'privacy_level', c['privacy_level'])             if c['privacy_level'].present?
+    tool.set_ext_param(platform, 'privacy_level', c['privacy_level'])              if c['privacy_level'].present?
     tool.set_ext_param(platform, 'domain', cot.sub(c['domain']))                   if c['domain'].present?
     tool.set_ext_param(platform, 'link_text', cot.sub(c['text']))                  if c['text'].present?
     tool.set_ext_param(platform, 'selection_width', cot.sub(c['default_width']))   if c['default_width'].present?
     tool.set_ext_param(platform, 'selection_height', cot.sub(c['default_height'])) if c['default_height'].present?
 
     c['launch_types'].each do |name, ext|
+      next if c['optional_launch_types'].include?(name) && !params[name]
       opts = {}
       ext.each do |key, value|
         opts[key] = cot.sub(ext[key]) if ext[key].present?
