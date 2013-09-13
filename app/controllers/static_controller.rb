@@ -11,4 +11,8 @@ class StaticController < ApplicationController
     @page    = params[:page]    || "index"
   end
 
+  def suggest
+    @active_tab = 'suggest'
+  end
+
 end

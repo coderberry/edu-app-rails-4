@@ -32,6 +32,7 @@ EduApps::Application.routes.draw do
 
   resources :tags
 
+  get "/suggest" => "static#suggest", as: :suggest
   get "/tutorials/:page" => "static#tutorials", as: :tutorials
   get "/tutorials" => "static#tutorials"
   get "/docs/:section/:page" => "static#docs", as: :docs
