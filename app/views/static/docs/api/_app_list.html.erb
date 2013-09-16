@@ -17,44 +17,41 @@
   </tr></tbody>
 </table>
 
-<fieldset>
-  <legend>Example Code</legend>
+<legend>Example Code</legend>
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#ruby" data-toggle="tab">Ruby</a></li>
-    <li><a href="#python" data-toggle="tab">Python</a></li>
-    <li><a href="#curl" data-toggle="tab">Curl</a></li>
-    <li class="pull-right"><a href="<%= lti_apps_url %>" target="_blank">Example Response</a></li>
-  </ul>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#ruby" data-toggle="tab">Ruby</a></li>
+  <li><a href="#python" data-toggle="tab">Python</a></li>
+  <li><a href="#curl" data-toggle="tab">Curl</a></li>
+  <li class="pull-right"><a href="/api/v1/lti_apps" target="_blank">Example Response</a></li>
+</ul>
 
-  <div class="tab-content">
-    <div class="tab-pane active" id="ruby">
-      <pre class="brush: ruby">
+<div class="tab-content">
+  <div class="tab-pane active" id="ruby">
+    <pre class="brush: ruby">
 require 'net/http'
 
 url = "<%= lti_apps_url %>"
 uri = URI.parse(url)
 res = Net::HTTP.get_response(uri)
 body = res.body
-      </pre>
-    </div>
-    <div class="tab-pane" id="python">
-      <pre class="brush: python">
+    </pre>
+  </div>
+  <div class="tab-pane" id="python">
+    <pre class="brush: python">
 import urllib
 import urllib2
 
 url = '<%= lti_apps_url %>'
 response = urllib2.urlopen(url)
 body = response.read()
-      </pre>
-    </div>
-    <div class="tab-pane" id="curl">
-      <pre class="brush: bash">
-curl -i \
-     -H "Accept: applicaton/json" \
-     <%= lti_apps_url %>
-      </pre>
-    </div>
+    </pre>
   </div>
-
-</fieldset>
+  <div class="tab-pane" id="curl">
+    <pre class="brush: bash">
+curl -i \
+   -H "Accept: applicaton/json" \
+   <%= lti_apps_url %>
+    </pre>
+  </div>
+</div>

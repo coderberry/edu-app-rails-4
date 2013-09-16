@@ -1,9 +1,11 @@
 <div class="row padded">
-  <div class="col-sm-9">
+  <div class="col-sm-12">
     <div class="main-content" style="min-height: 550px;">
 
       <ul class="breadcrumb">
-        <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_lti_app_path(@lti_app.short_name), class: "pull-right btn btn-info btn-xs" %>
+        <% if current_user.can_edit?(@lti_app) %>
+          <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_lti_app_path(@lti_app.short_name), class: "pull-right btn btn-info btn-xs" %>
+        <% end %>
         <% if @lti_app.preview_url.present? %>
           <button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#preview-modal"><i class="icon-search"></i> Preview</button>
         <% end %>
@@ -72,8 +74,6 @@
         </div>
       </section>
     </div>
-  </div>
-  <div class="col-sm-3">
   </div>
 </div>
 

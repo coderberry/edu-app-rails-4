@@ -37,12 +37,11 @@
   Only one type of resultData should be sent, if multiple types are sent the tool consumer behavior is undefined and is implementation-specific.
 </p>
 
-<fieldset>
-  <legend>Text</legend>
-  <p>
-    Add a <code>resultData</code> node with a <code>text</code> node of plain text in the same encoding as the rest of the document within it like this:
-  </p>
-  <pre class="brush: xml">
+<legend>Text</legend>
+<p>
+  Add a <code>resultData</code> node with a <code>text</code> node of plain text in the same encoding as the rest of the document within it like this:
+</p>
+<pre class="brush: xml">
 <?xml version = "1.0" encoding = "UTF-8"?>
 <imsx_POXEnvelopeRequest xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0">
   <imsx_POXHeader>
@@ -72,38 +71,36 @@
   </imsx_POXBody>
 </imsx_POXEnvelopeRequest>
 </pre>
-</fieldset>
 
-<fieldset>
-  <legend>URL</legend>
-  <p>Add a <code>resultData</code> node with a <code>url</code> node within it like this:</p>
-  <pre class="brush: xml">
+<legend>URL</legend>
+<p>Add a <code>resultData</code> node with a <code>url</code> node within it like this:</p>
+<pre class="brush: xml">
 <?xml version = "1.0" encoding = "UTF-8"?>
 <imsx_POXEnvelopeRequest xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0">
-  <imsx_POXHeader>
-    <imsx_POXRequestHeaderInfo>
-      <imsx_version>V1.0</imsx_version>
-      <imsx_messageIdentifier>999999123</imsx_messageIdentifier>
-    </imsx_POXRequestHeaderInfo>
-  </imsx_POXHeader>
-  <imsx_POXBody>
-    <replaceResultRequest>
-      <resultRecord>
-        <sourcedGUID>
-          <sourcedId>3124567</sourcedId>
-        </sourcedGUID>
-        <result>
-          <resultScore>
-            <language>en</language>
-            <textString>0.92</textString>
-          </resultScore>
-          <!--      Added element      -->
-          <resultData>
-            <url>https://www.example.com/cool_lti_link_submission</url>
-          </resultData>
-        </result>
-      </resultRecord>
-    </replaceResultRequest>
-  </imsx_POXBody>
+<imsx_POXHeader>
+  <imsx_POXRequestHeaderInfo>
+    <imsx_version>V1.0</imsx_version>
+    <imsx_messageIdentifier>999999123</imsx_messageIdentifier>
+  </imsx_POXRequestHeaderInfo>
+</imsx_POXHeader>
+<imsx_POXBody>
+  <replaceResultRequest>
+    <resultRecord>
+      <sourcedGUID>
+        <sourcedId>3124567</sourcedId>
+      </sourcedGUID>
+      <result>
+        <resultScore>
+          <language>en</language>
+          <textString>0.92</textString>
+        </resultScore>
+        <!--      Added element      -->
+        <resultData>
+          <url>https://www.example.com/cool_lti_link_submission</url>
+        </resultData>
+      </result>
+    </resultRecord>
+  </replaceResultRequest>
+</imsx_POXBody>
 </imsx_POXEnvelopeRequest>
-  </pre>
+</pre>

@@ -46,7 +46,7 @@ module Api
           sort = 'created_at DESC'
         end
 
-        lti_apps = lti_apps.order(sort).load
+        lti_apps = lti_apps.public.active.order(sort).load
         render json: lti_apps, root: false
       end
 

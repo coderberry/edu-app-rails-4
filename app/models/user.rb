@@ -64,15 +64,18 @@ class User < ActiveRecord::Base
   def social_links
     ret = {}
     self.authentications.each do |auth|
-      case auth.provider
-        when "twitter"
-          ret[:twitter] = { icon: "icon-twitter-sign", url: auth.data["urls"]["Twitter"] }
-        when "facebook"
-          ret[:facebook] = { icon: "icon-facebook-sign", url: auth.data["urls"]["Facebook"] }
-        when "github"
-          ret[:github] = { icon: "icon-github", url: auth.data["urls"]["GitHub"] }
-        when "google_oauth2"
-          ret[:google_oauth2] = { icon: "icon-google-plus-sign", url: auth.data["urls"]["Google"] }
+      begin
+        case auth.provider
+          when "twitter"
+            ret[:twitter] = { icon: "icon-twitter-sign", url: auth.data["urls"]["Twitter"] }
+          when "facebook"
+            ret[:facebook] = { icon: "icon-facebook-sign", url: auth.data["urls"]["Facebook"] }
+          when "github"
+            ret[:github] = { icon: "icon-github", url: auth.data["urls"]["GitHub"] }
+          when "google_oauth2"
+            ret[:google_oauth2] = { icon: "icon-google-plus-sign", url: auth.data["urls"]["Google"] }
+        end
+      rescue => ex
       end
     end
     ret
@@ -93,6 +96,13 @@ class User < ActiveRecord::Base
 
   def is_member?(organization)
     !!memberships.where(organization_id: organization.id).exists?
+  end
+
+  def can_edit?(lti_app)
+    return true if lti_app.user_id == self.id
+    return true if self.is_admin?
+    return false unless lti_app.organization_id
+    return can_manage?(lti_app.organization)
   end
 
   def as_tiny_json

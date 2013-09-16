@@ -12,6 +12,10 @@
   line-height: 1.2em;
   text-align: center;
   padding: 20px 0;
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
 }
 #flash-view.notice #message {
   background-color: $brand-success;

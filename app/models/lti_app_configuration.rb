@@ -13,10 +13,11 @@ class LtiAppConfiguration < ActiveRecord::Base
   validates :user_id, presence: true
 
   # public instance methods ...................................................
-  def title;       self.config['title'];       end
-  def description; self.config['description']; end
-  def launch_url;  self.config['launchUrl'];   end
-  def icon_url;    self.config['iconUrl'];     end
+  def title;         self.config['title'];         end
+  def description;   self.config['description'];   end
+  def launch_url;    self.config['launch_url'];    end
+  def icon_url;      self.config['icon_url'];      end
+  def privacy_level; self.config['privacy_level']; end
 
   def tool_config(params={})
     params.stringify_keys!

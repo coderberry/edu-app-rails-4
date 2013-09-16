@@ -1,12 +1,12 @@
 <div class="main-content">
   <div class="header clearfix">
-    <h3 class="page-header">Edit Organization: <%= @organization.name %></h3>
+    <h3 class="page-header">Add Member to <%= @membership.organization.name %></h3>
   </div>
 
   <ul class="breadcrumb">
     <li><%= link_to "Organizations", organizations_url %></li>
     <li><%= link_to @organization, organization_path(@organization) %></li>
-    <li class="active">Edit</li>
+    <li class="active">Add Member</li>
   </ul>
 
   <%= render 'form' %>

@@ -21,23 +21,20 @@
   </tr></tbody>
 </table>
 
-<fieldset>
-  <legend>Required/Optional Parameters</legend>
-  <table class="table table-bordered table-striped">
-    <tbody><tr>
-      <td><code>lti_app_id</code></td>
-      <td><span class="label label-success">required</span></td>
-      <td>The is the <em>short name</em> of an LTI app which is used as an identifier. It can be found
-      in the URL when viewing any LTI app (e.g. twitter)</td>
-    </tr><tr>
-      <td><code>user_email</code></td>
-      <td><span class="label">optional</span></td>
-      <td>User's email address. If provided, the response will only include the review by the user with the email provided (if exists).</td>
-    </tr>
-  </tbody></table>
-</fieldset>
+<legend>Required/Optional Parameters</legend>
+<table class="table table-bordered table-striped">
+  <tbody><tr>
+    <td><code>lti_app_id</code></td>
+    <td><span class="label label-success">required</span></td>
+    <td>The is the <em>short name</em> of an LTI app which is used as an identifier. It can be found
+    in the URL when viewing any LTI app (e.g. twitter)</td>
+  </tr><tr>
+    <td><code>user_email</code></td>
+    <td><span class="label">optional</span></td>
+    <td>User's email address. If provided, the response will only include the review by the user with the email provided (if exists).</td>
+  </tr>
+</tbody></table>
 
-<fieldset>
   <legend>Example Code (collection)</legend>
 
   <ul class="nav nav-tabs">
@@ -102,24 +99,21 @@ curl -i \
     }
   ]
 }
-    </div>
   </div>
+</div>
 
-</fieldset>
+<legend>Example Code (individual)</legend>
 
-<fieldset>
-  <legend>Example Code (individual)</legend>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#ruby2" data-toggle="tab">Ruby</a></li>
+  <li><a href="#python2" data-toggle="tab">Python</a></li>
+  <li><a href="#curl2" data-toggle="tab">Curl</a></li>
+  <li class="pull-right"><a href="#json-response2" data-toggle="tab">Example Response</a></li>
+</ul>
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#ruby2" data-toggle="tab">Ruby</a></li>
-    <li><a href="#python2" data-toggle="tab">Python</a></li>
-    <li><a href="#curl2" data-toggle="tab">Curl</a></li>
-    <li class="pull-right"><a href="#json-response2" data-toggle="tab">Example Response</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div class="tab-pane active" id="ruby2">
-      <pre class="brush: ruby">
+<div class="tab-content">
+  <div class="tab-pane active" id="ruby2">
+    <pre class="brush: ruby">
 require 'net/http'
 
 url = "<%= reviews_url %>"
@@ -166,6 +160,5 @@ curl -i \
     }
   }
 }
-    </div>
   </div>
-</fieldset>
+</div>

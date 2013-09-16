@@ -1,0 +1,32 @@
+<%= simple_form_for [@organization, @membership], html: { role: 'form' } do |f| %>
+  <input type="hidden" name="redir" value="<%= @redir %>">
+
+  <%= render "/shared/error_explanation", obj: @membership %>
+
+  <div class="well well-small">
+    <table class="table borderless table-details">
+      <tbody>
+      <tr>
+        <th>Organization</th>
+        <td><%= link_to @organization.name, organization_path(@organization) %></td>
+      </tr>
+      <% if @membership.user.present? %>
+        <tr>
+          <th>User</th>
+          <td><%= link_to @membership.user.name, user_path(@membership.user) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% unless @membership.user %>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="text" name="email" class="form-control" placeholder="Add by email address" />
+    </div>
+  <% end %>
+  <%= f.input :remote_uid %>
+  <%= f.input :is_admin, label: "Checked if this member is an administrator of the organization" %>
+  <%= render "/shared/save_cancel", cancel_link: @redir %>
+<% end %>

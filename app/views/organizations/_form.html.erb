@@ -1,5 +1,7 @@
 <%= simple_form_for [@organization], html: { role: 'form' } do |f| %>
   <%= render "/shared/error_explanation", obj: @organization %>
   <%= f.input :name %>
+  <%= f.input :url, label: "Website", input_html: { placeholder: "http://" } %>
+  <%= f.input :is_list_apps_without_approval, label: "Show apps without having to pre-approve them" %>
   <%= render "/shared/save_cancel", cancel_link: organization_path(@organization) %>
 <% end %>

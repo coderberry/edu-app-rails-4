@@ -1,0 +1,32 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <h3 class="page-header">Linked Accounts</h3>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Provider</th>
+        <th>Account Name</th>
+        <th>Date Linked</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @authentications.each do |k, data| %>
+      <tr>
+        <td><i class="<%= data[:class_name] %> <%= k %> icon-large"></i> <%= data[:name] %></td>
+        <% if data[:authentication].present? %>
+          <td><%= data[:authentication].data['nickname'] || data[:authentication].data['email'] %></td>
+          <td><%= data[:authentication].created_at.strftime("%b %d, %Y") %></td>
+          <td><%= link_to raw("<i class='icon-unlock-alt'></i> Unlink"), delete_authentication_path(data[:authentication]), class: "btn btn-danger btn-xs pull-right" %></td>
+        <% else %>
+          <td>&nbsp;</td>
+          <td>- Not Linked -</td>
+          <td><%= link_to raw("<i class='icon-plus'></i> Link"), "/auth/#{k}", class: "btn btn-info btn-xs pull-right" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

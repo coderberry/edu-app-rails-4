@@ -1,0 +1,52 @@
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Rating</th>
+      <th># Reviews</th>
+      <th>Organization</th>
+      <th>Status</th>
+      <% if action_name == "deleted" %>
+      <th>Date Deleted</th>
+      <% end %>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% apps.each do |lti_app| %>
+    <tr>
+      <% if action_name == "deleted" %>
+      <td><%= icon(lti_app.icon_url) %> <%= lti_app.name %></td>
+      <% else %>
+      <td><%= icon(lti_app.icon_url) %> <%= link_to lti_app.name, lti_app_path(lti_app.short_name) %></td>
+      <% end %>
+      <td><%= star_rating(lti_app.try(:average_rating), "mini") %></td>
+      <td>
+        <% if lti_app.reviews.count > 0 %>
+          <i class="canvas-icon-peer-review text-info"></i> <%= lti_app.reviews.count %>
+        <% else %>
+          &nbsp;
+        <% end %>
+      <td><%= lti_app.organization.try(:name) %></td>
+      <td><%=raw status_badge(lti_app.status) %></td>
+      <% if action_name == "deleted" %>
+        <td><%= lti_app.deleted_at.strftime("%b %d, %Y") %></td>
+      <% end %>
+      <% if current_user.can_edit?(lti_app) %>
+        <td class="text-right">
+          <% if lti_app.deleted_at.present? %>
+            <%= link_to raw('<i class="icon-magic"></i> Restore'), restore_lti_app_path(lti_app.short_name), class: "pull-right btn btn-default btn-xs" %>
+          <% else %>
+            <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_lti_app_path(lti_app.short_name), class: "pull-right btn btn-info btn-xs" %>
+            <% if lti_app.lti_app_configuration %>
+              <%= link_to raw('<i class="icon-code"></i> Config'), "/tools/xml_builder#/#{lti_app.lti_app_configuration.uid}", class: "pull-right btn btn-default btn-xs", style: "margin-right: 5px;" %>
+            <% end %>
+          <% end %>
+        </td>
+      <% else %>
+        <td>&nbsp;</td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

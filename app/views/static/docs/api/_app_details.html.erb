@@ -20,64 +20,62 @@
 
 
 
-<fieldset>
-  <legend>Example Code</legend>
+<legend>Example Code</legend>
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#ruby" data-toggle="tab">Ruby</a></li>
-    <li><a href="#python" data-toggle="tab">Python</a></li>
-    <li><a href="#curl" data-toggle="tab">Curl</a></li>
-    <li class="pull-right"><a href="#json-response" data-toggle="tab">Example Response</a></li>
-  </ul>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#ruby" data-toggle="tab">Ruby</a></li>
+  <li><a href="#python" data-toggle="tab">Python</a></li>
+  <li><a href="#curl" data-toggle="tab">Curl</a></li>
+  <li class="pull-right"><a href="#json-response" data-toggle="tab">Example Response</a></li>
+</ul>
 
-  <div class="tab-content">
-    <div class="tab-pane active" id="ruby">
-      <pre class="brush: ruby">
+<div class="tab-content">
+  <div class="tab-pane active" id="ruby">
+    <pre class="brush: ruby">
 require 'net/http'
 
 url = "<%= root_url %>api/v1/lti_apps/twitter"
 uri = URI.parse(url)
 res = Net::HTTP.get_response(uri)
 body = res.body
-      </pre>
-    </div>
-    <div class="tab-pane" id="python">
-      <pre class="brush: python">
+    </pre>
+  </div>
+  <div class="tab-pane" id="python">
+    <pre class="brush: python">
 import urllib
 import urllib2
 
 url = '<%= root_url %>api/v1/lti_apps/twitter'
 response = urllib2.urlopen(url)
 body = response.read()
-      </pre>
-    </div>
-    <div class="tab-pane" id="curl">
-      <pre class="brush: bash">
-curl -i \
-     -H "Accept: applicaton/json" \
-     <%= root_url %>api/v1/lti_apps/twitter
-      </pre>
-    </div>
-    <div class="tab-pane" id="json-response">
-      <pre class="brush: js">
-{
-  lti_app: {
-    id: 1771,
-    short_name: "twitter",
-    name: "Twitter",
-    short_description: "Embed tweet streams",
-    status: "active",
-    is_public: false,
-    app_type: "open_launch",
-    preview_url: "http://www.edu-apps.org/tools/twitter/index.html",
-    banner_image_url: "http://www.edu-apps.org/tools/twitter/banner.png",
-    logo_image_url: "http://www.edu-apps.org/tools/twitter/logo.png",
-    icon_image_url: "http://www.edu-apps.org/tools/twitter/icon.png",
-    average_rating: 5,
-    total_ratings: 2
-  }
-} 
-      </pre>
-    </div>
+    </pre>
   </div>
-</fieldset>
+  <div class="tab-pane" id="curl">
+    <pre class="brush: bash">
+curl -i \
+   -H "Accept: applicaton/json" \
+   <%= root_url %>api/v1/lti_apps/twitter
+    </pre>
+  </div>
+  <div class="tab-pane" id="json-response">
+    <pre class="brush: js">
+{
+lti_app: {
+  id: 1771,
+  short_name: "twitter",
+  name: "Twitter",
+  short_description: "Embed tweet streams",
+  status: "active",
+  is_public: false,
+  app_type: "open_launch",
+  preview_url: "http://www.edu-apps.org/tools/twitter/index.html",
+  banner_image_url: "http://www.edu-apps.org/tools/twitter/banner.png",
+  logo_image_url: "http://www.edu-apps.org/tools/twitter/logo.png",
+  icon_image_url: "http://www.edu-apps.org/tools/twitter/icon.png",
+  average_rating: 5,
+  total_ratings: 2
+}
+} 
+    </pre>
+  </div>
+</div>

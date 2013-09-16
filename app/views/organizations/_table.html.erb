@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th># Members</th>
+      <th># Apps</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% organizations.each do |organization| %>
+    <tr>
+      <td><%= link_to organization.name, organization %></td>
+      <td><%= organization.memberships.count %></td>
+      <td><%= organization.lti_apps.count %></td>
+      <td>
+        <% if current_user.can_manage?(organization) %>
+          <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_organization_path(organization.id), class: "pull-right btn btn-info btn-xs" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -12,7 +12,7 @@
 <% [:notice, :error, :alert].each do |level| %>
   <% unless flash[level].blank? %>
     <div id="flash-view" class="<%= level %>">
-      <div id="message"><%= flash[level] %></div>
+      <div id="message"><%= raw Maruku.new(flash[level]).to_html %></div>
     </div>
   <% end %>
 <% end %>

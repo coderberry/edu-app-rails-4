@@ -1,0 +1,45 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <h3 class="page-header">Manage Whitelist</h3>
+  </div>
+
+  <ul class="breadcrumb">
+    <li><%= link_to "Organizations", organizations_url %></li>
+    <li><%= link_to @organization, organization_path(@organization) %></li>
+    <li class="active">Manage Whitelist</li>
+  </ul>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, accusantium, qui, ipsum magnam atque saepe nostrum omnis hic incidunt rerum porro eligendi natus commodi nihil quasi reiciendis est tenetur vero.</p>
+
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Organization</th>
+        <th>Privacy Level</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @whitelist.each do |lao| %>
+      <tr>
+        <td><%= icon(lao.lti_app.icon_url) %> <%= link_to lao.lti_app.name, lti_app_path(lao.lti_app.short_name) %></td>
+        <td><%= lao.lti_app.organization.try(:name) %></td>
+        <td><%= lao.lti_app.lti_app_configuration.privacy_level.try(:titleize) %></td>
+        <td class="text-right">
+          <a href="#" class="btn btn-xs btn-success" data-toggle="lao-visible"
+            style="<%= lao.is_visible? ? '' : 'display: none;' %>"
+            data-organization-id="<%= @organization.id %>"
+            data-lao-id="<%= lao.id %>"
+            id="btn-lao-toggle-visible-<%= lao.id %>"><i class="icon-eye-open"></i> Visible</a>
+          <a href="#" class="btn btn-xs btn-default" data-toggle="lao-visible"
+            style="<%= lao.is_visible? ? 'display: none;' : '' %>"
+            data-organization-id="<%= @organization.id %>"
+            data-lao-id="<%= lao.id %>"
+            id="btn-lao-toggle-hidden-<%= lao.id %>"><i class="icon-eye-close"></i> Hidden</a>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

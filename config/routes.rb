@@ -10,12 +10,18 @@ EduApps::Application.routes.draw do
   
   resources :lti_apps, path: '/apps' do
     collection do
-      get 'my', as: :my
+      get 'my'
+      get 'deleted'
+    end
+    member do
+      get 'restore'
     end
   end
 
   namespace :api do
     namespace :v1 do
+      get 'lti_apps/:lti_app_id/reviews' => 'reviews#index'
+      get 'reviews' => 'reviews#index'
       resources :lti_apps
     end
   end
@@ -76,8 +82,13 @@ EduApps::Application.routes.draw do
       get 'destroy', as: :delete # stink
     end
   end
+
+  post 'organizations/:id/toggle_whitelist_item/:lao_id' => 'organizations#toggle_whitelist_item'
   resources :organizations do
     resources :memberships
+    member do
+      get 'whitelist'
+    end
   end
 
 end

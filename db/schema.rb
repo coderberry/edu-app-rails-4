@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130904192609) do
+ActiveRecord::Schema.define(version: 20130916194117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20130904192609) do
     t.integer  "cartridge_id"
     t.text     "installation_instructions"
     t.integer  "lti_app_configuration_id"
+    t.datetime "deleted_at"
   end
 
   add_index "lti_apps", ["cartridge_id"], name: "index_lti_apps_on_cartridge_id", using: :btree
@@ -90,6 +91,14 @@ ActiveRecord::Schema.define(version: 20130904192609) do
   add_index "lti_apps", ["organization_id"], name: "index_lti_apps_on_organization_id", using: :btree
   add_index "lti_apps", ["short_name"], name: "index_lti_apps_on_short_name", unique: true, using: :btree
   add_index "lti_apps", ["user_id"], name: "index_lti_apps_on_user_id", using: :btree
+
+  create_table "lti_apps_organizations", force: true do |t|
+    t.integer "lti_app_id",      null: false
+    t.integer "organization_id", null: false
+    t.boolean "is_visible"
+  end
+
+  add_index "lti_apps_organizations", ["lti_app_id", "organization_id"], name: "index_lti_apps_organizations_on_lti_app_id_and_organization_id", unique: true, using: :btree
 
   create_table "lti_apps_tags", force: true do |t|
     t.integer "lti_app_id"
