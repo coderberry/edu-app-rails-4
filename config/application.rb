@@ -6,8 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-require 'dotenv'
-Dotenv.load
+unless Rails.env =~ /prod/
+  require 'dotenv'
+  Dotenv.load
+end
 
 module EduApps
   class Application < Rails::Application
