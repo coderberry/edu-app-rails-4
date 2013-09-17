@@ -21,4 +21,5 @@
 /config/*.yml
 
 # Ignore ember build files
-/public/javascripts/*.js
+/public/javascripts/app_list.js
+/public/javascripts/xml_builder.js
