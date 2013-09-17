@@ -1,4 +1,8 @@
 <% content_for :content do %>
   <div id="ember-app"></div>
+  <% if Rails.env =~ /prod/ -%>
+  <script type="text/javascript" src="/javascripts/xml_builder.dist.js"></script>
+  <% else -%>
   <script type="text/javascript" src="/javascripts/xml_builder.js"></script>
+  <% end -%>
 <% end %>

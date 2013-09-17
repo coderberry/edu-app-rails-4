@@ -12,4 +12,8 @@
   </div>
 </div>
 
+<% if Rails.env =~ /prod/ -%>
+<script type="text/javascript" src="/javascripts/app_list.dist.js"></script>
+<% else -%>
 <script type="text/javascript" src="/javascripts/app_list.js"></script>
+<% end -%>
