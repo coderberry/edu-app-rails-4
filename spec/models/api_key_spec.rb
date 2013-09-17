@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe ApiKey do
-  it { should belong_to(:tokenable) }
-
   describe "#user" do
     it "with the tokenable as a User" do
       user = FactoryGirl.create(:user)

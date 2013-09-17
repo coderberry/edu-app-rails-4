@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.0.0"
 
 gem 'rails', '4.0.0'
 gem 'pg'
@@ -44,7 +45,6 @@ group :development do
 end
 
 group :test do
-   gem 'shoulda-matchers', git: 'git@github.com:thoughtbot/shoulda-matchers.git', branch: 'dp-rails-four'
    gem 'capybara'
 end
 

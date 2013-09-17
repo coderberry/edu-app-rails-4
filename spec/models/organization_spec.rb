@@ -4,14 +4,6 @@ describe Organization do
 
   subject { Organization.create(name: "Acme") }
 
-  # relationships .............................................................
-  it { should have_many(:memberships) }
-  it { should have_many(:users).through(:memberships) }
-  it { should have_many(:api_keys) }
-
-  # validations ...............................................................
-  it { should validate_presence_of(:name) }
-
   # public instance methods ...................................................
   it "#current_api_key" do
     subject.api_keys.count.should == 0
