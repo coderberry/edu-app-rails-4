@@ -31,6 +31,7 @@ gem 'will_paginate-bootstrap'
 gem 'paranoia', '~> 2.0'
 gem 'paranoia_uniqueness_validator', '1.0.0'
 
+gem 'reverse_markdown'
 gem 'rails_12factor', group: :production
 
 group :doc do
@@ -42,7 +43,6 @@ group :development do
   gem 'guard-rspec'
   gem 'quiet_assets'
   gem 'guard-embertools', '~> 0.2.1'
-  gem 'reverse_markdown'
 end
 
 group :test do
