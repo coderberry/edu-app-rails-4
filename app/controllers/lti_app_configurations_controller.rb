@@ -64,7 +64,11 @@ class LtiAppConfigurationsController < ApplicationController
 
   def update
     config = JSON.parse(params[:config])
-    lti_app_configuration = current_user.lti_app_configurations.where(uid: params[:uid]).first
+    if current_user.is_admin?
+      lti_app_configuration = LtiAppConfiguration.where(uid: params[:uid]).first
+    else
+      lti_app_configuration = current_user.lti_app_configurations.where(uid: params[:uid]).first
+    end
     if lti_app_configuration
       lti_app_configuration.config = config
       if lti_app_configuration.save

@@ -1,9 +1,16 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "configurator" %>
+  <script>
+    window.CONFIGURATOR_DATA = <%=raw @configurator_data.to_json %>;
+  </script>
+<% end %>
+
 <div class="row padded">
   <div class="col-sm-12">
     <div class="main-content" style="min-height: 550px;">
 
       <ul class="breadcrumb">
-        <% if current_user.can_edit?(@lti_app) %>
+        <% if current_user && current_user.can_edit?(@lti_app) %>
           <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_lti_app_path(@lti_app.short_name), class: "pull-right btn btn-info btn-xs" %>
         <% end %>
         <% if @lti_app.preview_url.present? %>
@@ -38,13 +45,42 @@
         
         <hr class="dotted">
 
-        <div class="configuration-content">
-          <label>Configuration URL:</label>
+        <div class="configuration-content" ng-controller="ConfigCtrl">
+          <div id="config-options-form" ng-show="configOptions.length > 0 || optionalLaunchTypes.length > 0">
+            <legend>Config Options</legend>
+            <form class="form-horizontal" role="form">
+              <div class="form-group" ng-repeat="co in configOptions">
+                <label class="col-sm-3 control-label">
+                  <div ng-show="co.type != 'checkbox'">
+                    <abbr title="required" ng-show="co.is_required" class="ng-hide">*</abbr>
+                    {{co.description}}
+                  </div>
+                </label>
+                <div class="col-lg-9">
+                  <label ng-show="co.type == 'checkbox'" ng-switch on="isCheckbox(co)">
+                    <input type="checkbox" ng-model="co.is_checked"> {{co.description||co.name | inflector:humanize}} (checked value is <strong><em>{{co.default_value}}</em></strong>)
+                  </label>
+                  <input ng-show="co.type != 'checkbox'" type="text" ng-model="co.default_value" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group" ng-show="hasOptionalLaunchTypes()" class="ng-hide">
+                <label class="col-sm-3 control-label">Optional Extensions:</label>
+                <div class="col-lg-9">
+                  <div class="checkbox" ng-repeat="opt in optionalLaunchTypes">
+                    <label>
+                      <input type="checkbox" ng-model="opt.is_checked" value="1"> Enable <strong><em>{{opt.name | inflector:humanize}}</em></strong>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <legend>Configuration URL:</legend>
           <div class="input-group">
-            <input class="form-control" value="<%= lti_app_configuration_xml_url(@lti_app.lti_app_configuration.try(:uid)) %>" />
+            <input class="form-control" ng-model="configUrl" />
             <span class="input-group-btn">
-              <button class="copy-button btn" data-clipboard-text="<%= lti_app_configuration_xml_url(@lti_app.lti_app_configuration.try(:uid)) %>"
-                  title="Copy to clipboard"><i class="icon-copy"></i></button>
+              <button class="copy-button btn" data-clipboard-text="{{configUrl}}" title="Copy to clipboard"><i class="icon-copy"></i></button>
             </span>
           </div><!-- /input-group -->
         </div>

@@ -29,11 +29,13 @@ class Importer
   end
 
   def wipeout
+    ApiKey.destroy_all
+    Authentication.destroy_all
     Tag.destroy_all
     Organization.destroy_all
     User.destroy_all
     LtiAppConfiguration.destroy_all
-    LtiApp.destroy_all
+    LtiApp.all.each { |a| a.destroy! }
     Review.destroy_all
     RegistrationCode.destroy_all
   end
@@ -92,19 +94,13 @@ class Importer
     cartridge.default_height      = data['height'].to_i if data['height'].present?
     cartridge.privacy_level       = data['privacy_level']
     cartridge.domain              = data['domain']
-    cartridge.editor_button       = EA::ModalExtension.new(name: 'editor_button')
-    cartridge.resource_selection  = EA::ModalExtension.new(name: 'resource_selection')
-    cartridge.homework_submission = EA::ModalExtension.new(name: 'homework_submission')
-    cartridge.course_navigation   = EA::NavigationExtension.new(name: 'course_navigation')
-    cartridge.account_navigation  = EA::NavigationExtension.new(name: 'account_navigation')
-    cartridge.user_navigation     = EA::NavigationExtension.new(name: 'user_navigation')
 
     # Custom Fields
     data['custom_fields'].each do |k, v|
       cartridge.custom_fields << EA::CustomField.new( name: k, value: v )
     end if data['custom_fields'].present?
 
-    optional_extensions = []
+    cartridge.optional_launch_types = []
 
     # Config Options
     data['config_options'].each do |opt|
@@ -113,7 +109,7 @@ class Importer
         name = 'course_navigation' if name == 'course_nav'
         name = 'account_navigation' if name == 'account_nav'
         name = 'user_navigation' if name == 'user_nav'
-        optional_extensions << name
+        cartridge.optional_launch_types << name
       else
         cartridge.config_options << EA::ConfigOption.new( name:          name,
                                                           default_value: opt['value'],
@@ -127,23 +123,17 @@ class Importer
     data['extensions'].each do |extension|
       case extension
         when 'editor_button'
-          cartridge.editor_button.enabled = true
-          cartridge.editor_button.is_optional = (optional_extensions.include? extension)
+          cartridge.editor_button = EA::ModalExtension.new(name: 'editor_button', enabled: true)
         when 'resource_selection'
-          cartridge.resource_selection.enabled = true
-          cartridge.resource_selection.is_optional = (optional_extensions.include? extension)
+          cartridge.resource_selection = EA::ModalExtension.new(name: 'resource_selection', enabled: true)
         when 'homework_submission'
-          cartridge.homework_submission.enabled = true
-          cartridge.homework_submission.is_optional = (optional_extensions.include? extension)
+          cartridge.homework_submission = EA::ModalExtension.new(name: 'homework_submission', enabled: true)
         when 'course_nav'
-          cartridge.course_navigation.enabled = true
-          cartridge.course_navigation.is_optional = (optional_extensions.include? extension)
+          cartridge.course_navigation = EA::NavigationExtension.new(name: 'course_navigation', enabled: true)
         when 'account_nav'
-          cartridge.account_navigation.enabled = true
-          cartridge.account_navigation.is_optional = (optional_extensions.include? extension)
+          cartridge.account_navigation = EA::NavigationExtension.new(name: 'account_navigation', enabled: true)
         when 'user_nav'
-          cartridge.user_navigation.enabled = true
-          cartridge.user_navigation.is_optional = (optional_extensions.include? extension)
+          cartridge.user_navigation = EA::NavigationExtension.new(name: 'user_navigation', enabled: true)
       end
     end if data['extensions'].present?
 
@@ -162,7 +152,7 @@ class Importer
     app.user_id                  = user.id
     app.name                     = data['name']
     app.status                   = data['pending'] == true ? 'pending' : 'active'
-    app.short_name               = data['id']
+    app.short_name               = data['id'].strip
     app.short_description        = ReverseMarkdown.parse(data['short_description'])
     app.description              = ReverseMarkdown.parse(data['description'])
     app.testing_instructions     = data['test_instructions']
@@ -174,6 +164,7 @@ class Importer
     app.preview_url              = edu_appify_link(data['preview'] ? data['preview']['url'] : nil)
     app.banner_image_url         = edu_appify_link(data['banner_url'])
     app.logo_image_url           = edu_appify_link(data['logo_url'])
+    app.is_public                = true
     
     if app.save
       @map = maps

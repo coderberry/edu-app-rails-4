@@ -18,6 +18,8 @@ class LtiAppConfiguration < ActiveRecord::Base
   def launch_url;    self.config['launch_url'];    end
   def icon_url;      self.config['icon_url'];      end
   def privacy_level; self.config['privacy_level']; end
+  def config_options;        (self.config['config_options'] || []); end
+  def optional_launch_types; (self.config['optional_launch_types'] || []); end
 
   def tool_config(params={})
     params.stringify_keys!
@@ -94,7 +96,7 @@ class LtiAppConfiguration < ActiveRecord::Base
       cartridge.text                = doc.root.xpath('//blti:extensions/lticm:property[@name="link_text"]').text
       cartridge.default_width       = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_width"]').text
       cartridge.default_height      = doc.root.xpath('//blti:extensions/lticm:property[@name="selection_height"]').text
-      cartridge.privacy_level      = doc.root.xpath('//blti:extensions/lticm:property[@name="privacy_level"]').text
+      cartridge.privacy_level       = doc.root.xpath('//blti:extensions/lticm:property[@name="privacy_level"]').text
       cartridge.domain              = doc.root.xpath('//blti:extensions/lticm:property[@name="domain"]').text
       cartridge.editor_button       = EA::ModalExtension.new(name: 'editor_button')
       cartridge.resource_selection  = EA::ModalExtension.new(name: 'resource_selection')

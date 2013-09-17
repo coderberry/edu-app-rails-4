@@ -73,6 +73,7 @@
           font-size: 14px;
           text-align: center;
           border-bottom: 1px dotted #efefef;
+          height: 40px;
         }
         p.short-description {
           font-size: 12px;
@@ -139,8 +140,13 @@
   transform: skew(8deg) rotate(3deg);
 }
 
-
-
+#config-options-form {
+  legend {
+  }
+  form {
+    margin: 10px 0;
+  }
+}
 
 
 

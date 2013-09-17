@@ -200,7 +200,7 @@ EOS
     cartridge.tool_id.should == 'youtube'
   end
 
-  it ".xml_to_json" do
+  it ".xml_to_cartridge" do
     xml = <<-EOS
 <?xml version="1.0" encoding="UTF-8"?>
 <cartridge_basiclti_link xmlns="http://www.imsglobal.org/xsd/imslticc_v1p0" xmlns:blti="http://www.imsglobal.org/xsd/imsbasiclti_v1p0" xmlns:lticm="http://www.imsglobal.org/xsd/imslticm_v1p0" xmlns:lticp="http://www.imsglobal.org/xsd/imslticp_v1p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imslticc_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticc_v1p0.xsd http://www.imsglobal.org/xsd/imsbasiclti_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0p1.xsd http://www.imsglobal.org/xsd/imslticm_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd http://www.imsglobal.org/xsd/imslticp_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
@@ -274,5 +274,11 @@ EOS
     cartridge.user_navigation.enabled.should be_true
     cartridge.user_navigation.text.should == 'THIS IS CUSTOM: Something Else'
     cartridge.user_navigation.url.should == 'https://example.com/user_nav'
+
+    # Not make sure the json is correct
+    json = cartridge.as_json
+    json['launch_types']['editor_button']['text'].should == 'Custom Launch Link'
+    json['launch_types']['course_navigation']['url'].should == 'https://example.com/kitchensink_override'
+    json['launch_types']['user_navigation']['text'].should == 'THIS IS CUSTOM: Something Else'
   end
 end

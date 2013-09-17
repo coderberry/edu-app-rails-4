@@ -6,5 +6,6 @@ FactoryGirl.define do
     sequence(:short_name) {|n| "vimeo#{rand(10000)}" }
     name "Long App Name"
     status "active"
+    is_public true
   end
 end

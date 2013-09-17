@@ -93,9 +93,10 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       this.get(type).setProperties(launch_types[type])
     }
 
-    debugger;
-    for (var i = 0; i < data.optional_launch_types.length; i++) {
-      this.get(data.optional_launch_types[i]).set('is_optional', true);
+    if (!Em.isEmpty(data.optional_launch_types)) {
+      for (var i = 0; i < data.optional_launch_types.length; i++) {
+        this.get(data.optional_launch_types[i]).set('is_optional', true);
+      }
     }
 
     this.set('config_options', []);

@@ -15,6 +15,21 @@ class LtiAppsController < ApplicationController
   # GET /lti_apps/1
   def show
     @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
+    @ng_app = "configurator"
+    config_options = []
+    @lti_app.lti_app_configuration.config_options.each do |co|
+      co['is_checked'] = false
+      config_options << co
+    end
+    optional_launch_types = []
+    @lti_app.lti_app_configuration.optional_launch_types.each do |olt|
+      optional_launch_types << { name: olt, is_checked: false }
+    end
+    @configurator_data = {
+      config_options: config_options,
+      optional_launch_types: optional_launch_types,
+      config_url_base: lti_app_configuration_xml_url(@lti_app.lti_app_configuration.try(:uid))
+    }
     respond_to do |format|
       format.html
       format.xml  { render xml: @lti_app.cartridge.to_xml }

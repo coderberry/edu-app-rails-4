@@ -27,6 +27,7 @@ gem 'omniauth-google-oauth2'
 # gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 gem 'paranoia', '~> 2.0'
+gem 'paranoia_uniqueness_validator', '1.0.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

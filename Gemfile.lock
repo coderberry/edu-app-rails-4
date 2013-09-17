@@ -164,6 +164,8 @@ GEM
       omniauth-oauth (~> 1.0)
     paranoia (2.0.0)
       activerecord (~> 4.0)
+    paranoia_uniqueness_validator (1.0.0)
+      activerecord (~> 4.0.0.rc1)
     pg (0.16.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -281,6 +283,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-twitter
   paranoia (~> 2.0)
+  paranoia_uniqueness_validator (= 1.0.0)
   pg
   pry-debugger
   quiet_assets
