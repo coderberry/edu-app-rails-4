@@ -1,9 +1,9 @@
 //= require underscore-min
 //= require_self
 
-var appPanels = angular.module('appPanels', ['ui.inflector']);
+var app = angular.module('app', ['ui.inflector']);
 
-function AppPanelCtrl($scope) {
+app.controller('AppPanelCtrl', ['$scope', function($scope) {
   $scope.categories = window.ENV['categories'];
   $scope.educationLevels = window.ENV['education_levels'];
   $scope.platforms = window.ENV['platforms'];
@@ -12,6 +12,7 @@ function AppPanelCtrl($scope) {
   $scope.currentEducationLevel = null;
   $scope.currentPlatform = null;
   $scope.filterText = '';
+  $scope.sort = 'name';
 
   $scope.selectCategory = function(category) {
     if (category === undefined) {
@@ -40,11 +41,15 @@ function AppPanelCtrl($scope) {
     $scope.currentPlatform = null;
     $scope.filterText = '';
   }
-
+  $scope.sortBy = function(srt) {
+    $scope.sort = srt;
+  }
   $scope.hasFilters = function() {
     return (($scope.appliedFilterIds().length > 0) || ($scope.filterText != ''));
   }
-
+  $scope.submitForm = function() {
+    // console.log("HI");
+  }
   $scope.appliedFilterIds = function() {
     var f = [];
     if ($scope.currentCategory) { f.push($scope.currentCategory.id) }
@@ -73,10 +78,4 @@ function AppPanelCtrl($scope) {
       return app;
     }
   }
-
-  $scope.$watch('[currentCategory, currentEducationLevel, currentPlatform]', function() {
-    console.log("CHANGED");
-  }, true);
-
-  window.scope = $scope;
-}
+}]);

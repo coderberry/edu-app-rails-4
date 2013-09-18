@@ -189,33 +189,25 @@
     </div>
   </div>
 
-  <!--
-
-  <div class="form-group">
-    <%= f.label :logo_image_url, "Logo Image URL", class: "col-lg-3 control-label" %>
-    <div class="col-lg-9">
-      <%= f.text_field :logo_image_url, class: "form-control", placeholder: "https://" %>
-      <span class="help-block">75x75 pixels. Either gif, png or jpg.</span>
+  <% ['category', 'education_level', 'platform'].each do |tag_category| %>
+    <div class="form-group">
+      <label class="col-lg-3 control-label"><%= pluralize(2, tag_category.humanize.titleize).split(' ')[1..-1].join(' ') %></label>
+      <div class="col-lg-9">
+        <% Tag.where(context: tag_category).each do |tag| %>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="<%= tag.id %>" name="tag_ids[]" <% if @lti_app.tag_ids.include? tag.id %>checked="checked"<% end %>> <%= tag.name %>
+            </label>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
-  <div class="form-group">
-    <%= f.label :icon_image_url, "Icon Image URL", class: "col-lg-3 control-label" %>
-    <div class="col-lg-9">
-      <%= f.text_field :icon_image_url, class: "form-control", placeholder: "https://" %>
-      <span class="help-block">16x16 pixels. Either gif, png or jpg.</span>
-    </div>
-  </div>
-
-  -->
+  <hr>
 
   <div class="form-group">
     <div class="col-lg-offset-3 col-lg-9">
-      <% unless @lti_app.new_record? %>
-        <%= button_to @lti_app, :method => :delete, data: { confirm: 'Are you sure?' }, class: "pull-right btn btn-danger" do %>
-          <i class='icon-trash'></i> Delete App
-        <% end %>
-      <% end %>
       <button type="submit" class="btn btn-primary">Save Changes</button>
       <%= link_to "Cancel", my_lti_apps_path, class: "btn btn-link" %>
     </div>

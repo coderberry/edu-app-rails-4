@@ -6,18 +6,13 @@ class LtiAppsController < ApplicationController
   # GET /lti_apps
   def index
     @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.active.order(:name).load.map(&:limited)
-    @ng_app = "appPanels"
+    @ng_app = "app"
     @active_tab = 'apps'
     @env = {
       apps: @lti_apps,
       categories: Tag.categories.map {|c| { id: c.id, name: c.name }},
       education_levels: Tag.education_levels.map {|c| { id: c.id, name: c.name }},
-      platforms: [
-        { id: 'canvas', name: 'Canvas' },
-        { id: 'blackboard', name: 'Blackboard' },
-        { id: 'desire2learn', name: 'Desire2Learn' },
-        { id: 'other', name: 'Other Platform' }
-      ]
+      platforms: Tag.platforms.map {|c| { id: c.id, name: c.name }}
     }
     
     respond_to do |format|
@@ -29,7 +24,7 @@ class LtiAppsController < ApplicationController
   # GET /lti_apps/1
   def show
     @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
-    @ng_app = "configurator"
+    @ng_app = "app"
     config_options = []
     @lti_app.lti_app_configuration.config_options.each do |co|
       co['is_checked'] = false
@@ -115,6 +110,7 @@ class LtiAppsController < ApplicationController
     @lti_app.lti_app_configuration = lti_app_configuration
 
     if @lti_app.save
+      @lti_app.tag_ids = params[:tag_ids]
       redirect_to lti_app_path(@lti_app.short_name), notice: 'LTI App was successfully created.'
     else
       render action: 'new'
@@ -124,6 +120,7 @@ class LtiAppsController < ApplicationController
   # PATCH/PUT /lti_apps/1
   def update
     if @lti_app.update(lti_app_params)
+      @lti_app.tag_ids = params[:tag_ids]
       redirect_to lti_app_path(@lti_app.short_name), notice: 'LTI App was successfully updated.'
     else
       render action: 'edit'

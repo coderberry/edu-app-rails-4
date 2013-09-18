@@ -5,7 +5,7 @@ class SeedHelper
       data = JSON.parse(File.read("#{Rails.root}/data/seed_data.json"))
 
       data['tags'].each do |tag|
-        Tag.create(name: tag["name"], short_name: tag["short_name"], context: tag["context"])
+        Tag.where(name: tag["name"], short_name: tag["short_name"], context: tag["context"]).first_or_create
       end
     end
     

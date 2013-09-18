@@ -48,13 +48,29 @@
           <li><a href="#" ng-click="reset()" class="pull-right btn btn-link">Reset</a></li>
         </ul>
 
-        <form {{action "applyFilter" on="submit"}} class="navbar-form pull-right" role="search" style="width: 400px;">
+        <form ng-submit="submitForm()" class="navbar-form pull-right" role="search" style="width: 400px;">
           <input type="text" ng-model="filterText" class="form-control" placeholder="filter by name"/>
         </form>
       </nav>
 
+      <div class="row">
+        <div class="col-4">
+          <ul class="nav">
+            <li style="line-height: 32px;">Showing {{(apps | filter:customCriteriaFilter).length}} Apps</li>
+          </ul>
+        </div>
+        <div class="col-8">
+          <ul class="nav nav-pills pull-right">
+            <li ng-class="{active: sort == 'name'}"><a href="#" ng-click="sortBy('name')">Alphabetic</a></li>
+            <li ng-class="{active: sort == '-average_rating'}"><a href="#" ng-click="sortBy('-average_rating')">Highest Rated</a></li>
+            <li ng-class="{active: sort == '-total_ratings'}"><a href="#" ng-click="sortBy('-total_ratings')">Most Reviews</a></li>
+            <li ng-class="{active: sort == '-created_at'}"><a href="#" ng-click="sortBy('-created_at')">Most Recent</a></li>
+          </ul>
+        </div>
+      </div>
+
       <div id="apps-container">
-        <div class="app-item col-3" ng-repeat="app in apps | filter:customCriteriaFilter">
+        <div class="app-item col-3" ng-repeat="app in apps | filter:customCriteriaFilter | orderBy:sort">
           <div class="app-contents">
             <a ng-href="/apps/{{app.short_name}}">
               <div class="banner">

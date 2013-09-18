@@ -8,4 +8,5 @@ class Tag < ActiveRecord::Base
   scope :education_levels,  -> { where(context: 'education_level') }
   scope :privacy_levels,    -> { where(context: 'privacy_level') }
   scope :app_types,         -> { where(context: 'app_type') }
+  scope :platforms,         -> { where(context: 'platform') }
 end

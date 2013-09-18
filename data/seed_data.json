@@ -26,6 +26,12 @@
     { "short_name": "email_only",          "name": "Email Only",          "context": "privacy_level" },
     { "short_name": "anonymous",           "name": "Anonymous",           "context": "privacy_level" },
     { "short_name": "open_launch",         "name": "Open Launch",         "context": "app_type" },
-    { "short_name": "data",                "name": "Data",                "context": "app_type" }
+    { "short_name": "data",                "name": "Data",                "context": "app_type" },
+    { "short_name": "canvas",              "name": "Canvas",              "context": "platform" },
+    { "short_name": "blackboard",          "name": "Blackboard",          "context": "platform" },
+    { "short_name": "desire2learn",        "name": "Desire2Learn",        "context": "platform" },
+    { "short_name": "moodle",              "name": "Moodle",              "context": "platform" },
+    { "short_name": "sakai",               "name": "Sakai",               "context": "platform" },
+    { "short_name": "other",               "name": "Other",               "context": "platform" }
   ]
 }

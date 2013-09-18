@@ -165,6 +165,10 @@ class Importer
     app.banner_image_url         = edu_appify_link(data['banner_url'])
     app.logo_image_url           = edu_appify_link(data['logo_url'])
     app.is_public                = true
+
+    if app.name == 'Twitter'
+      
+    end
     
     if app.save
       @map = maps
@@ -179,6 +183,12 @@ class Importer
         data['levels'].each do |val|
           puts "LVL: #{val}"
           app.tags << @map[:education_levels][val]
+        end
+      end
+
+      if data['only_works'].is_a? Array
+        data['only_works'].each do |val|
+          app.tags << @map[:platforms][val.gsub('canvas','Canvas')]
         end
       end
 
@@ -255,9 +265,15 @@ class Importer
       education_level_map[t.name] = t
     end
 
+    platform_map = {}
+    Tag.platforms.each do |t|
+      platform_map[t.name] = t
+    end
+
     return {
       categories: category_map,
-      education_levels: education_level_map
+      education_levels: education_level_map,
+      platforms: platform_map
     }
   end
 

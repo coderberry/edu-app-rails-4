@@ -1,8 +1,8 @@
 //= require_self
 
-var configurator = angular.module('configurator', ['ui.inflector']);
+var app = angular.module('app', ['ui.inflector']);
 
-function ConfigCtrl ($scope) {
+app.controller('ConfigCtrl', ['$scope', function($scope) {
   $scope.configUrlBase       = window.CONFIGURATOR_DATA['config_url_base'];
   $scope.configOptions       = window.CONFIGURATOR_DATA['config_options'];
   $scope.optionalLaunchTypes = window.CONFIGURATOR_DATA['optional_launch_types'];
@@ -42,4 +42,4 @@ function ConfigCtrl ($scope) {
   $scope.$watch('[configOptions, optionalLaunchTypes]', $scope.rebuildConfigUrl, true);
 
   $scope.rebuildConfigUrl();
-}
+}]);
