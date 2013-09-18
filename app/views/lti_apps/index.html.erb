@@ -1,40 +1,82 @@
-<div class="row padded">
-  <div class="col-sm-9">
-    <div class="main-content" style="min-height: 550px;">
-      <div id="app-sort-filters" class="row">
-        <div class="col-8">
-          <input type="search" id="lti-app-filter" class="form-control col-6 pull-left" placeholder="Filter Results..." />
-        </div>
-        <div class="col-4 text-right">
-          <a href="#" data-display="details" class="btn btn-link"><i class="icon-list icon-large"></i></a>
-          <a href="#" data-display="list" class="btn btn-link selected"><i class="icon-th icon-large"></i></a>
+<%= content_for :head do %>
+  <%=raw js_env(@env) %>
+  <%= javascript_include_tag "app_panels" %>
+<% end %>
+
+<div class="bg-light-gray">
+  <div class="container">
+    <div id="home-banner-wrapper">
+      <h1>
+        <strong>An open LTI app collection.</strong>
+        Browse apps below or <a href="#">learn more</a>
+      </h1>
+    </div>
+
+    <div ng-controller="AppPanelCtrl">
+      <nav class="navbar navbar-default" id="filter-bar" role="navigation">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentCategory.name||'All Categories'}} <b class="caret"></b></a>
+            <ul class="dropdown-menu" style="text-align: left;">
+              <li><a href="#" ng-click="selectCategory()">All Categories</a></li>
+              <li ng-repeat="item in categories">
+                <a href="#" ng-click="selectCategory(item)">{{item.name}}</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentEducationLevel.name||'All Grade Levels'}} <b class="caret"></b></a>
+            <ul class="dropdown-menu" style="text-align: left;">
+              <li><a href="#" ng-click="selectEducationLevel()">All Grade Levels</a></li>
+              <li ng-repeat="item in educationLevels">
+                <a href="#" ng-click="selectEducationLevel(item)">{{item.name}}</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentPlatform.name||'All Platforms'}} <b class="caret"></b></a>
+            <ul class="dropdown-menu" style="text-align: left;">
+              <li><a href="#" ng-click="selectPlatform()">All Platforms</a></li>
+              <li ng-repeat="item in platforms">
+                <a href="#" ng-click="selectPlatform(item)">{{item.name}}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right pull-right">
+          <li><a href="#" ng-click="reset()" class="pull-right btn btn-link">Reset</a></li>
+        </ul>
+
+        <form {{action "applyFilter" on="submit"}} class="navbar-form pull-right" role="search" style="width: 400px;">
+          <input type="text" ng-model="filterText" class="form-control" placeholder="filter by name"/>
+        </form>
+      </nav>
+
+      <div id="apps-container">
+        <div class="app-item col-3" ng-repeat="app in apps | filter:customCriteriaFilter">
+          <div class="app-contents">
+            <a ng-href="/apps/{{app.short_name}}">
+              <div class="banner">
+                <img src="{{app.banner_image_url}}" class="img-thumbnail" />
+              </div>
+              <div class="details">
+                <h4 class="name">{{app.name}}</h4>
+                <p class="short-description">{{app.short_description}}</p>
+                <div class="meta">
+                  <div class="pull-right">
+                    <span class="comment-count">{{app.total_ratings}}</span>
+                  </div>
+                  <span class="stars">
+                    <span style="width: {{app.average_rating * 16}}px;"></span>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-      
-      <ol id="lti-apps-container" class="clearfix">
-        <%= render @lti_apps %>
-      </ol>
+
     </div>
-  </div>
-  <div class="col-sm-3">
-    <form action="#" id="filters">
-      <ul class="nav" id="alt-nav">
-        <li><h4>Extensions</h4>
-          <ul class="nav sub-nav"><%= render partial: "tag", collection: Tag.lms_extensions.order(:name) %></ul>
-        </li>
-        <li><h4>Categories</h4>
-          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.categories.order(:name) %></ul>
-        </li>
-        <li><h4>Education Levels</h4>
-          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.education_levels.order(:name) %></ul>
-        </li>
-        <li><h4>Privacy</h4>
-          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.privacy_levels.order(:name) %></ul>
-        </li>
-        <li><h4>App Type</h4>
-          <ul class="nav sub-nav"><%= render partial: "tag", collection:  Tag.app_types.order(:name) %></ul>
-        </li>
-      </ul>
-    </form>
   </div>
 </div>

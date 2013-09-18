@@ -1,8 +1,5 @@
 EduApps::Application.routes.draw do
-
-  get 'old' => 'lti_apps#index'  
-
-  root "ember#app_list"
+  root "lti_apps#index"
 
   get "lti_app_configurations/index"
   get "lti_app_configurations/show"

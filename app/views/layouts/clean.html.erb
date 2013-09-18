@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html <% if @ng_app %>ng-app="<%= @ng_app %>"<% end %>>
 <head>
   <title>Edu Apps</title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
+  <%= yield :head %>
 </head>
-<body id="ember-body">
+<body id="clean-body">
 
 <%= render partial: "/layouts/header" %>
 

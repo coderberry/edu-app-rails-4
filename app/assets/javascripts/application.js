@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery-2.0.3.min
 //= require jquery.cookie
 //= require twitter/bootstrap/transition.js
 //= require twitter/bootstrap/button.js
@@ -21,3 +21,5 @@
 //= require shBrushPython
 //= require shBrushBash
 //= require shBrushXml
+//= require angular.min
+//= require ./angular_shared/inflector

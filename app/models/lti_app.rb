@@ -47,4 +47,28 @@ class LtiApp < ActiveRecord::Base
     self.status == 'active'
   end
 
+  def limited
+    {
+      id:                self.id,
+      short_name:        self.short_name,
+      name:              self.name,
+      short_description: self.short_description.present? ? self.short_description : trancate(self.description, 80),
+      status:            self.status,
+      is_public:         self.is_public,
+      app_type:          self.app_type,
+      preview_url:       self.preview_url,
+      banner_image_url:  self.banner_image_url,
+      average_rating:    self.average_rating.try(:to_f) || 0.0,
+      total_ratings:     self.total_ratings,
+      tag_ids:           self.tag_ids
+    }
+  end
+
+  private
+
+  def trancate(str, length = 20)
+    return str if str.blank?
+    str.size > length+5 ? str[0,length] + "..." : str
+  end
+
 end

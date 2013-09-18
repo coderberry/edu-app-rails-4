@@ -1,5 +1,3 @@
-//= require angular.min
-//= require ./configurator/inflector
 //= require_self
 
 var configurator = angular.module('configurator', ['ui.inflector']);

@@ -5,9 +5,23 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps
   def index
-    @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.active.order(:name).load
+    @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.active.order(:name).load.map(&:limited)
+    @ng_app = "appPanels"
+    @active_tab = 'apps'
+    @env = {
+      apps: @lti_apps,
+      categories: Tag.categories.map {|c| { id: c.id, name: c.name }},
+      education_levels: Tag.education_levels.map {|c| { id: c.id, name: c.name }},
+      platforms: [
+        { id: 'canvas', name: 'Canvas' },
+        { id: 'blackboard', name: 'Blackboard' },
+        { id: 'desire2learn', name: 'Desire2Learn' },
+        { id: 'other', name: 'Other Platform' }
+      ]
+    }
+    
     respond_to do |format|
-      format.html
+      format.html { render layout: 'clean' }
       format.json { render json: @lti_apps }
     end
   end
