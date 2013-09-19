@@ -27,6 +27,10 @@ class ApiKey < ActiveRecord::Base
     end
   end
 
+  def renew
+    update_attribute(:expired_at, 1.year.from_now)
+  end
+
   # protected instance methods ................................................
   # private instance methods ..................................................
 

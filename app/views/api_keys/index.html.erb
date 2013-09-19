@@ -1,0 +1,14 @@
+<div class="main-content">
+  <div class="header clearfix">
+    <%= link_to raw("<i class='icon-plus'></i> Create New Token"), create_token_organization_api_keys_path(@organization), class: "pull-right btn btn-success btn-xs" %>
+    <h3 class="page-header">API Keys for <%= @organization.name %></h3>
+  </div>
+
+  <ul class="breadcrumb">
+    <li><%= link_to "Organizations", organizations_url %></li>
+    <li><%= link_to @organization, organization_path(@organization) %></li>
+    <li class="active">API Keys</li>
+  </ul>
+
+  <%= render partial: "table", locals: { api_keys: @api_keys } %>
+</div>

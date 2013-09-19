@@ -1,12 +1,16 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :edit, :update, :destroy, :whitelist, :toggle_whitelist_item]
+  before_action :set_organization, only: [:show, :edit, :update, :destroy, :whitelist, :toggle_whitelist_item, :toggle_whitelist]
   before_action :authorize
   before_action :set_active_tab
   skip_before_filter :verify_authenticity_token, :only => :toggle_whitelist_item
 
   # GET /organizations
   def index
-    @organizations = current_user.organizations
+    if current_user.is_admin?
+      @organizations = Organization.all.order("created_at desc")
+    else
+      @organizations = current_user.organizations
+    end
   end
 
   # GET /organizations/1
@@ -53,6 +57,12 @@ class OrganizationsController < ApplicationController
     @whitelist = @organization.whitelist
   end
 
+  def toggle_whitelist
+    visible = params[:visible].to_i == 1
+    @organization.lti_apps_organizations.each { |lao| lao.update_attribute(:is_visible, visible) }
+    redirect_to whitelist_organization_path(@organization), notice: "Successfully flagged all app as #{visible ? 'visible' : 'hidden'}"
+  end
+
   def toggle_whitelist_item
     lao = @organization.lti_apps_organizations.where(id: params[:lao_id]).first
     lao.update_attribute(:is_visible, !lao.is_visible)
@@ -62,7 +72,12 @@ class OrganizationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = current_user.organizations.where(id: params[:id]).first
+      if current_user.is_admin?
+        @organization = Organization.where(id: params[:id]).first
+      else
+        @organization = current_user.organizations.where(id: params[:id]).first
+      end
+      
     end
 
     # Only allow a trusted parameter "white list" through.

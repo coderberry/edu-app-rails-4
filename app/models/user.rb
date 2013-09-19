@@ -91,6 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def can_manage?(organization)
+    return true if self.is_admin?
     !!memberships.where(organization_id: organization.id).where(is_admin: true).exists?
   end
 

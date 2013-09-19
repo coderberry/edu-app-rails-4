@@ -1,3 +1,7 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "syntax_highlighter" %>
+<% end %>
+
 <% content_for :content do %>
   <div id="ember-app"></div>
   <% if Rails.env =~ /prod/ -%>

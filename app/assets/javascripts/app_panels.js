@@ -1,4 +1,6 @@
 //= require underscore-min
+//= require angular.min
+//= require ./angular_shared/inflector
 //= require_self
 
 var app = angular.module('app', ['ui.inflector']);

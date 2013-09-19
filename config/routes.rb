@@ -1,4 +1,5 @@
 EduApps::Application.routes.draw do
+  get "api_keys/index"
   root "lti_apps#index"
 
   get "lti_app_configurations/index"
@@ -82,9 +83,19 @@ EduApps::Application.routes.draw do
 
   post 'organizations/:id/toggle_whitelist_item/:lao_id' => 'organizations#toggle_whitelist_item'
   resources :organizations do
+    resources :api_keys do
+      collection do
+        get 'create_token'
+      end
+      member do
+        get 'renew_token'
+        get 'expire_token'
+      end
+    end
     resources :memberships
     member do
       get 'whitelist'
+      get 'toggle_whitelist'
     end
   end
 

@@ -4,15 +4,5 @@ $(function() {
     flash.delay(3000).fadeToggle(1000);
   }
 
-  try {
-    var clip = new ZeroClipboard($(".copy-button"), { moviePath: "<%= asset_path('ZeroClipboard.swf') %>" });
-    clip.on('complete', function(client, args) {
-      alert("Copied!");
-    });
-  } catch(e) {
-  }
-
   $('*[data-toggle="tooltip"]').tooltip({});
-
-  SyntaxHighlighter.all();
 })

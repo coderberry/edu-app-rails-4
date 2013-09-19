@@ -1,4 +1,5 @@
 class MembershipsController < ApplicationController
+  before_filter :authorize
   before_action :set_data
 
   def new

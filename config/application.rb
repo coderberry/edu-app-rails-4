@@ -28,6 +28,6 @@ module EduApps
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.precompile += %w( configurator.js app_panels.js )
+    config.assets.precompile += %w( configurator.js app_panels.js syntax_highlighter.js )
   end
 end

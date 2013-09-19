@@ -3,6 +3,7 @@
     <% if @can_manage %>
       <%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_organization_path(@organization), class: "pull-right btn btn-info btn-xs" %>
       <%= link_to raw("<i class='icon-plus'></i> Add Member"), new_organization_membership_path(@organization), class: "pull-right btn btn-success btn-xs", style: "margin-right: 5px;" %>
+      <%= link_to raw("<i class='icon-key'></i> Manage Keys"), organization_api_keys_path(@organization), class: "pull-right btn btn-warning btn-xs", style: "margin-right: 5px;" %>
       <%= link_to raw("<i class='canvas-icon-standards'></i> Manage Whitelist"), whitelist_organization_path(@organization), class: "pull-right btn btn-default btn-xs", style: "margin-right: 5px;" %>
     <% end %>
     <h3 class="page-header">Organization: <%= @organization.name %></h3>

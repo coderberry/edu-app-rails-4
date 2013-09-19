@@ -1,5 +1,6 @@
 $(function() {
-  $('a[data-toggle="lao-visible"]').click(function() {
+  $('a[data-toggle="lao-visible"]').click(function(e) {
+    e.preventDefault();
     var organizationId = $(this).data('organization-id');
     var laoId = $(this).data('lao-id');
     var visibleBtn = $('#btn-lao-toggle-visible-' + laoId);
