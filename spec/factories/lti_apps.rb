@@ -7,5 +7,6 @@ FactoryGirl.define do
     name "Long App Name"
     status "active"
     is_public true
+    config_xml_url "http://something.com/foo.xml"
   end
 end

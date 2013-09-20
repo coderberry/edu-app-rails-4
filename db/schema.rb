@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130917151346) do
+ActiveRecord::Schema.define(version: 20130920172155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20130917151346) do
     t.text     "installation_instructions"
     t.integer  "lti_app_configuration_id"
     t.datetime "deleted_at"
+    t.string   "config_xml_url",            limit: 1000
   end
 
   add_index "lti_apps", ["cartridge_id"], name: "index_lti_apps_on_cartridge_id", using: :btree

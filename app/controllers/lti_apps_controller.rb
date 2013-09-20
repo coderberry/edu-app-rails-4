@@ -26,18 +26,25 @@ class LtiAppsController < ApplicationController
     @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
     @ng_app = "app"
     config_options = []
-    @lti_app.lti_app_configuration.config_options.each do |co|
-      co['is_checked'] = false
-      config_options << co
-    end
     optional_launch_types = []
-    @lti_app.lti_app_configuration.optional_launch_types.each do |olt|
-      optional_launch_types << { name: olt, is_checked: false }
+    if @lti_app.lti_app_configuration.present?
+      @lti_app.lti_app_configuration.config_options.each do |co|
+        co['is_checked'] = false
+        config_options << co
+      end
+      @lti_app.lti_app_configuration.optional_launch_types.each do |olt|
+        optional_launch_types << { name: olt, is_checked: false }
+      end
     end
+    url = if @lti_app.lti_app_configuration.present? 
+            lti_app_configuration_xml_url(@lti_app.lti_app_configuration.try(:uid))
+          else
+            @lti_app.config_xml_url
+          end
     @configurator_data = {
       config_options: config_options,
       optional_launch_types: optional_launch_types,
-      config_url_base: lti_app_configuration_xml_url(@lti_app.lti_app_configuration.try(:uid))
+      config_url_base: url
     }
     respond_to do |format|
       format.html
@@ -98,11 +105,14 @@ class LtiAppsController < ApplicationController
       if !lti_app_configuration
         flash.now[:error] = "Invalid XML"
       end
+    when 'external'
+      lti_app_configuration = nil
+      @lti_app.valid?
     else
       flash.now[:error] = "You must enter/select an App Configuration"
     end
 
-    unless lti_app_configuration
+    if @lti_app.config_xml_url.blank? && lti_app_configuration.blank?
       render action: 'new'
       return
     end
@@ -155,7 +165,7 @@ class LtiAppsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def lti_app_params
       params.require(:lti_app).permit(
-        :user_id, :short_name, :name, :description, :status, :testing_instructions, :support_url, 
+        :user_id, :short_name, :name, :description, :status, :testing_instructions, :support_url, :config_xml_url,
         :author_name, :is_public, :app_type, :ims_cert_url, :preview_url, :config_url, :data_url, 
         :lti_app_configuration_id, :banner_image_url, :logo_image_url, :short_description, :organization_id)
     end
