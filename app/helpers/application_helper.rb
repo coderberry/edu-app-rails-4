@@ -58,4 +58,15 @@ module ApplicationHelper
     "<span class=\"label label-#{status_map[status.to_sym]}\">#{status.capitalize}</span>"
   end
 
+  def js_env(env)
+    if env.present?
+      ret = "<script type=\"text/javascript\">ENV = {"
+      env.each do |k, v|
+        ret += "'#{k}':#{v.to_json},"
+      end
+      ret += "};</script>"
+      ret
+    end
+  end
+
 end
