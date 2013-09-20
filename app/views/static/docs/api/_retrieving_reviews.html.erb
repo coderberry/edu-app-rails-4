@@ -13,10 +13,6 @@
   </tr><tr>
     <td>Endpoint</td>
     <td>
-      <div class="clearfix">
-        <a href="<%= root_url %>api/v1/reviews?lti_app_id=twitter" target="_blank" class=" pull-right btn btn-xs btn-info">Try It</a>
-        <code><%= root_url %>api/v1/reviews?lti_app_id=[:lti_app_id]</code>
-      </div>
       <div class="clearfix" style="margin-top: 10px;">
         <a href="<%= root_url %>api/v1/lti_apps/twitter/reviews" target="_blank" class=" pull-right btn btn-xs btn-info">Try It</a>
         <code><%= root_url %>api/v1/lti_apps/:lti_app_id/reviews</code>
@@ -53,7 +49,7 @@
       <pre class="brush: ruby">
 require 'net/http'
 
-url = "<%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>"
+url = "<%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews"
 uri = URI.parse(url)
 res = Net::HTTP.get_response(uri)
 body = res.body
@@ -64,7 +60,7 @@ body = res.body
 import urllib
 import urllib2
 
-response = urllib2.urlopen('<%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>')
+response = urllib2.urlopen('<%= root_url %>api/v1/lti_apps/:short_name/reviews')
 body = response.read()
       </pre>
     </div>
@@ -72,7 +68,7 @@ body = response.read()
       <pre class="brush: bash">
 curl -i \
      -H "Accept: applicaton/json" \
-     <%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>
+     <%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews
       </pre>
     </div>
     <div class="tab-pane" id="json-response">
@@ -120,9 +116,8 @@ curl -i \
     <pre class="brush: ruby">
 require 'net/http'
 
-url = "<%= reviews_url %>"
-url << "?lti_app_id=<%= LtiApp.first.short_name %>"
-url << "&user_email=jon.smith@example.com"
+url = "<%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews"
+url << "?user_email=jon.smith@example.com"
 
 uri = URI.parse(url)
 res = Net::HTTP.get_response(uri)
@@ -134,9 +129,8 @@ body = res.body
 import urllib
 import urllib2
 
-url = "<%= reviews_url %>"
-url += "?lti_app_id=<%= LtiApp.first.short_name %>"
-url += "&user_email=jon.smith@example.com"
+url = "<%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews"
+url += "?user_email=jon.smith@example.com"
 
 response = urllib2.urlopen(url)
 body = response.read()
@@ -146,7 +140,7 @@ body = response.read()
       <pre class="brush: bash">
 curl -i \
      -H "Accept: applicaton/json" \
-     <%= reviews_url %>?lti_app_id=<%= LtiApp.first.short_name %>&user_email=jon.smith@example.com
+     <%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews?user_email=jon.smith@example.com
       </pre>
     </div>
     <div class="tab-pane" id="json-response2">

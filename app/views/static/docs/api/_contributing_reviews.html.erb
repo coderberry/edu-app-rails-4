@@ -16,9 +16,12 @@
     <td><code>POST</code></td>
   </tr><tr>
     <td>Endpoint</td>
-    <td><code><%= reviews_url %></code></td>
+    <td><code><%= root_url %>api/v1/reviews</code></td>
   </tr></tbody>
 </table>
+
+<legend>Auth via OAuth2</legend>
+<p>This action requires authenticating with the organization's access token. This is read by either the parameter <code>access_token</code> or through a header <code>Authentication: Bearer ACCESS_TOKEN</code>.</p>
 
 <legend>Required/Optional Parameters</legend>
 <table class="table table-bordered table-striped">
@@ -26,13 +29,13 @@
     <td><code>lti_app_id</code></td>
     <td><span class="label label-success">required</span></td>
     <td>The is the <em>short name</em> of an LTI app which is used as an identifier. It can be found
-    in the URL when viewing any LTI app (e.g. twitter)</td>
+    in the URL when viewing any LTI app (e.g. twitter). This is mean to appear in the endpoint URL.</td>
   </tr><tr>
     <td><code>access_token</code></td>
     <td><span class="label label-success">required</span></td>
     <td>The access token which is tied to either an organization or user. This should be kept secret
     (i.e. server-side only -- don't put it in your JavaScript), otherwise anyone can post comments and 
-    ratings as if they were your platform/app.
+    ratings as if they were your platform/app. See <em>Auth via OAuth2</em> above.
     </td>
   </tr><tr>
     <td><code>rating</code></td>
@@ -88,7 +91,7 @@ data = { lti_app_id: '<%= LtiApp.first.short_name %>',
        user_avatar_url: 'http://example.com/user/avatar/50x50.png',
        comments: 'This is a really great app!' }
 
-uri = URI('<%= reviews_url %>')
+uri = URI('<%= root_url %>api/v1/reviews')
 res = Net::HTTP.post_form(uri, data)
 body = res.body
     </pre>
@@ -98,7 +101,7 @@ body = res.body
 import urllib
 import urllib2
 
-url = '<%= reviews_url %>'
+url = '<%= root_url %>api/v1/reviews'
 values = { 'lti_app_id': '<%= LtiApp.first.short_name %>',
          'access_token': 'YOUR_ACCESS_TOKEN_HERE',
          'rating': 5,
@@ -120,7 +123,7 @@ curl -i \
    -X POST \
    -H "Accept: applicaton/json" \
    -d "lti_app_id=<%= LtiApp.first.short_name %>& \
-       access_token=YOUR_ACCESS_TOKEN_HERE& \
+       access_token=YOUR_API_TOKEN_HERE& \
        rating=5& \
        user_name=Jon Smith& \
        user_email=jon.smith@example.com& \
@@ -128,7 +131,7 @@ curl -i \
        user_url=http://example.com/user& \
        user_avatar_url=http://example.com/user/avatar/50x50.png& \
        comments=This is a really great app" \
-   <%= reviews_url %>
+   <%= root_url %>api/v1/reviews
     </pre>
   </div>
   <div class="tab-pane" id="json-response">

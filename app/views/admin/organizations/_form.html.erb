@@ -1,5 +1,0 @@
-<%= simple_form_for [:admin, @organization], html: { role: 'form' } do |f| %>
-  <%= render "/admin/shared/error_explanation", obj: @organization %>
-  <%= f.input :name %>
-  <%= render "/admin/shared/save_cancel", cancel_link: admin_organizations_path %>
-<% end %>

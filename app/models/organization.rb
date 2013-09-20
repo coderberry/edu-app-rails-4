@@ -60,6 +60,10 @@ class Organization < ActiveRecord::Base
     lti_apps_organizations.includes(:lti_app).order('lti_apps.name')
   end
 
+  def approved_app_ids
+    lti_apps_organizations.where(is_visible: true).pluck(:lti_app_id)
+  end
+
   def to_s
     name
   end

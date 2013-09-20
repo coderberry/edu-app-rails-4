@@ -22,8 +22,6 @@
   </tr></tbody>
 </table>
 
-
-
 <legend>Example Code</legend>
 
 <ul class="nav nav-tabs">
@@ -83,3 +81,5 @@ lti_app: {
     </pre>
   </div>
 </div>
+
+<p>If you pass the API Token as a header it will filter the response to only the apps which are approved for the organization. If the app exists but the organization does not have it on the approved list, a <code>404</code> will be returned.</p>

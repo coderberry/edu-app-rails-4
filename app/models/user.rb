@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :lti_apps
   has_many :lti_app_configurations
-  has_many :cartridges, dependent: :destroy
   has_many :registration_codes, dependent: :destroy
 
   # security (i.e. attr_accessible) ...........................................

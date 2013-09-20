@@ -1,8 +1,4 @@
 class LtiAppSerializer < ActiveModel::Serializer
-  # attributes :id, :user_id, :short_name, :name, :short_description, :description, :status, 
-  #            :testing_instructions, :support_url, :author_name, :is_public, :app_type, 
-  #            :ims_cert_url, :preview_url, :config_url, :data_url, :banner_image_url, 
-  #            :logo_image_url, :icon_image_url, :average_rating, :total_ratings
   attributes :id, :short_name, :name, :short_description, :status, :is_public, :app_type, 
              :preview_url, :banner_image_url, :logo_image_url, :icon_image_url, :average_rating, 
              :total_ratings

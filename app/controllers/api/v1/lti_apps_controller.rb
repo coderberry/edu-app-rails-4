@@ -1,6 +1,6 @@
 module Api
   module V1
-    class LtiAppsController < ApplicationController
+    class LtiAppsController < BaseController
       def index
         # Get a list of lti apps for the tags
         lti_app_ids = []
@@ -30,9 +30,21 @@ module Api
           lti_apps = lti_apps.where("name ilike ?", "%#{filter}%")
         end
 
-        if lti_app_ids.present?
-          lti_apps = lti_apps.where("id in (?)", lti_app_ids.flatten.uniq)
+        # Remove any apps that are not whitelisted in the organization (if present)
+        whitelisted_ids = []
+        @organization = organization
+        if @organization
+          whitelisted_ids = @organization.approved_app_ids
         end
+
+        if whitelisted_ids.present? && lti_app_ids.present?
+          lti_apps = lti_apps.where("id in (?)", (whitelisted_ids & lti_app_ids))
+        elsif lti_app_ids.present?
+          lti_apps = lti_apps.where("id in (?)", lti_app_ids)
+        elsif whitelisted_ids.present?
+          lti_apps = lti_apps.where("id in (?)", whitelisted_ids)
+        end
+
         lti_apps = lti_apps.inclusive.include_rating.include_total_ratings.include_tag_id_array
 
         case params[:sort]
@@ -51,8 +63,21 @@ module Api
       end
 
       def show
-        lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
-        render json: lti_app, root: false
+        whitelisted_ids = []
+        @organization = organization
+        if @organization
+          whitelisted_ids = @organization.approved_app_ids
+        end
+        if whitelisted_ids.present?
+          lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where("id in (?)", whitelisted_ids).where(short_name: params[:id]).first
+        else
+          lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
+        end
+        if lti_app
+          render json: lti_app, root: false
+        else
+          head 404
+        end
       end
     end
   end

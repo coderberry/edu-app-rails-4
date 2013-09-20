@@ -35,7 +35,7 @@
     <pre class="brush: ruby">
 require 'net/http'
 
-url = "<%= lti_apps_url %>"
+url = "<%= root_url %>api/v1/lti_apps"
 uri = URI.parse(url)
 res = Net::HTTP.get_response(uri)
 body = res.body
@@ -46,7 +46,7 @@ body = res.body
 import urllib
 import urllib2
 
-url = '<%= lti_apps_url %>'
+url = '<%= root_url %>api/v1/lti_apps'
 response = urllib2.urlopen(url)
 body = response.read()
     </pre>
@@ -55,7 +55,16 @@ body = response.read()
     <pre class="brush: bash">
 curl -i \
    -H "Accept: applicaton/json" \
-   <%= lti_apps_url %>
+   <%= root_url %>api/v1/lti_apps
     </pre>
   </div>
 </div>
+
+<p>You are also able to pass along your API Token in the header in order to get the <em>whitelisted</em> list of application.</p>
+
+<pre class="brush: bash">
+curl -i \
+   -H "Accept: applicaton/json" \
+   -H "Authorization: Bearer YOUR_API_TOKEN_HERE" \
+   <%= root_url %>api/v1/lti_apps
+</pre>

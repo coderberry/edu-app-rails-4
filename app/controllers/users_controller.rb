@@ -1,5 +1,15 @@
 class UsersController < ApplicationController
   before_filter :authorize, only: [:edit]
+  before_filter :authorize_admin, only: [:index, :show]
+
+  def index
+    @active_tab = 'admin'
+    @users = User.page(params[:page]).order('name ASC')
+  end
+
+  def show
+    @user = User.find(params[:id])
+  end
 
   def new
     @user = User.new(is_registering: true)
@@ -27,7 +37,11 @@ class UsersController < ApplicationController
 
   def edit
     @active_tab = 'my_stuff'
-    @user = current_user
+    if params[:id].present? && current_user.is_admin?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
     if code = @user.registration_codes.active.last
       @user.email = code.email
       @confirmation_required = true
@@ -35,7 +49,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
+    if params[:id].present? && current_user.is_admin?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
 
     if params["user"]["code"] && !params["user"]["code"].empty?
       if user = update_email_from_code(params["user"]["code"])
@@ -59,7 +77,11 @@ class UsersController < ApplicationController
         return redirect_to edit_profile_path, alert: 'An email has been sent to you new address for confirmation'
       end
 
-      redirect_to edit_profile_path, notice: 'Your profile has been updated successfully'
+      if current_user.is_admin?
+        redirect_to edit_user_path(@user), notice: 'User account was updated successfully'
+      else
+        redirect_to edit_profile_path, notice: 'Your profile has been updated successfully'
+      end
     else
       flash.now[:error] = "Invalid data"
       render action: 'edit'
@@ -75,17 +97,30 @@ class UsersController < ApplicationController
 
   def edit_password
     @active_tab = 'my_stuff'
-    @user = current_user
+    if params[:id].present? && current_user.is_admin?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def update_password
     @active_tab = 'my_stuff'
-    @user = current_user
+    if params[:id].present? && current_user.is_admin?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
     @user.force_require_password = true
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
-      redirect_to edit_password_path, notice: 'Your password has been changed successfully'
+      if current_user.is_admin?
+        redirect_to edit_user_path(@user), notice: 'User account was updated successfully'
+      else
+        redirect_to edit_password_path, notice: 'Your password has been changed successfully'
+      end
+      
     else
       flash.now[:error] = "Please fix the errors below and try again"
       render action: 'edit_password'

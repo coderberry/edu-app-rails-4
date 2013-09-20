@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :organization do
     name "MyString"
+    is_list_apps_without_approval true
   end
 end
