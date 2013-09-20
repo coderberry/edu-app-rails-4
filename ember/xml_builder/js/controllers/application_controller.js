@@ -89,6 +89,8 @@ var ApplicationController = Ember.ArrayController.extend({
     delete: function(record) {
       if (!confirm("Are you sure?")) return;
 
+      _this = this;
+
       var ctrl = this.get('controllers.lti_app_configuration');
       var lti_app_configuration = ctrl.get('model');
       var isCurrentRecord = false;
@@ -96,14 +98,23 @@ var ApplicationController = Ember.ArrayController.extend({
         isCurrentRecord = (lti_app_configuration.get('id') === record.get('uid'));
       }
 
-      record.deleteRecord();
-      App.FlashQueue.pushFlash('notice', 'Configuration has been deleted');
-
-      this.get('model').reload();
-      if (isCurrentRecord) {
-        ctrl.set('model', null);
-        this.transitionToRoute('/');
-      }
+      Ember.$.ajax({
+        url: '/api/v1/lti_app_configurations/' + record.get('uid'),
+        dataType: 'json',
+        type: 'DELETE'
+      }).done(
+        function(data) {
+          _this.get('model').reload();
+          if (isCurrentRecord) {
+            ctrl.set('model', null);
+            _this.transitionToRoute('/');
+          }
+        }
+      ).fail(
+        function(err) {
+          App.FlashQueue.pushFlash('error', 'Unable to delete configuration');
+        }
+      );
     },
   },
 

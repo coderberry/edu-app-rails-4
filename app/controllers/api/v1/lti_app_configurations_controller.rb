@@ -12,10 +12,10 @@ module Api
       end
 
       def show
-        if params[:uid] == 'new'
+        if params[:id] == 'new'
           render json: {}, status: 200
         else
-          lti_app_configuration = LtiAppConfiguration.where(uid: params[:uid]).first
+          lti_app_configuration = LtiAppConfiguration.where(uid: params[:id]).first
           if lti_app_configuration
             render json: lti_app_configuration
           else
@@ -65,9 +65,9 @@ module Api
       def update
         config = JSON.parse(params[:config])
         if current_user.is_admin?
-          lti_app_configuration = LtiAppConfiguration.where(uid: params[:uid]).first
+          lti_app_configuration = LtiAppConfiguration.where(uid: params[:id]).first
         else
-          lti_app_configuration = current_user.lti_app_configurations.where(uid: params[:uid]).first
+          lti_app_configuration = current_user.lti_app_configurations.where(uid: params[:id]).first
         end
         if lti_app_configuration
           lti_app_configuration.config = config
@@ -82,12 +82,13 @@ module Api
       end
 
       def destroy
-        uid = params[:lti_app_configuration][:uid]
+        uid = params[:id]
         lti_app_configuration = current_user.lti_app_configurations.where(uid: uid).first
         if lti_app_configuration
           lti_app_configuration.destroy
-          head 200
+          render json: {}, status: 200
         else
+          binding.pry
           head 404
         end
       end
