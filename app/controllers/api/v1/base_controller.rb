@@ -1,6 +1,8 @@
 module Api
   module V1
     class BaseController < ApplicationController
+      skip_before_filter :verify_authenticity_token
+      
       protected
 
       # Parses the access token from the header
