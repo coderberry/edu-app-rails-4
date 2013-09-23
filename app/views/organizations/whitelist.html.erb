@@ -18,7 +18,6 @@
       <tr>
         <th>Name</th>
         <th>Organization</th>
-        <th>Privacy Level</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -27,7 +26,6 @@
       <tr>
         <td><%= icon(lao.lti_app.icon_url) %> <%= link_to lao.lti_app.name, lti_app_path(lao.lti_app.short_name) %></td>
         <td><%= lao.lti_app.organization.try(:name) %></td>
-        <td><%= lao.lti_app.lti_app_configuration.privacy_level.try(:titleize) %></td>
         <td class="text-right">
           <a href="#" class="btn btn-xs btn-success" data-toggle="lao-visible"
             style="<%= lao.is_visible? ? '' : 'display: none;' %>"
