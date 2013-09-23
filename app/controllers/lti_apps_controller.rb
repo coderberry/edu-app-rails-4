@@ -23,6 +23,7 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps/1
   def show
+    @active_tab = 'apps'
     @lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
     @ng_app = "app"
     config_options = []
