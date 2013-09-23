@@ -1,6 +1,11 @@
 class SessionsController < ApplicationController
 
+  def new
+    @active_tab = 'login'
+  end
+
   def create
+    @active_tab = 'login'
     if params[:provider]
       email = parse_email(env["omniauth.auth"], params[:provider])
       authentication = Authentication.from_omniauth(env["omniauth.auth"], email, current_user)

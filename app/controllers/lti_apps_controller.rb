@@ -166,7 +166,7 @@ class LtiAppsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def lti_app_params
       params.require(:lti_app).permit(
-        :user_id, :short_name, :name, :description, :status, :testing_instructions, :support_url, :config_xml_url,
+        :user_id, :short_name, :name, :description, :status, :installation_instructions, :testing_instructions, :support_url, :config_xml_url,
         :author_name, :is_public, :app_type, :ims_cert_url, :preview_url, :config_url, :data_url, 
         :lti_app_configuration_id, :banner_image_url, :logo_image_url, :short_description, :organization_id)
     end

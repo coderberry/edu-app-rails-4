@@ -34,7 +34,7 @@
           </li>
           <li><%= link_to "Logout", logout_path %></li>
         <% else %>
-          <li<% if controller_name == 'session' %> class="active"<% end %>><%= link_to "Login", new_session_path %></li>
+          <li<% if @active_tab == 'login' %> class="active"<% end %>><%= link_to "Login", new_session_path %></li>
         <% end %>
       </ul>
     </div>

@@ -41,13 +41,17 @@
             <%= render partial: "tag_cloud", locals: { tags: @tags, tag_ids: @lti_app.tag_ids } %>
           </div>
         </div>
-        <div class="row">
-          <div class="description col-12">
-            <%= raw Maruku.new(@lti_app.description).to_html %>
-          </div>
+        <div class="description">
+          <%= raw Maruku.new(@lti_app.description).to_html %>
         </div>
+
         
-        <hr class="dotted">
+        <% if @lti_app.installation_instructions.present? %>
+          <div class="description">
+            <legend>Installation Instructions</legend>
+            <%= raw Maruku.new(@lti_app.installation_instructions).to_html %>
+          </div>
+        <% end %>
 
         <div class="configuration-content" ng-controller="ConfigCtrl">
           <div id="config-options-form" ng-show="configOptions.length > 0 || optionalLaunchTypes.length > 0">
@@ -103,7 +107,7 @@
               </div>
             <% end %>
             <% if @lti_app.reviews.count == 0 %>
-                <h5 class="text-center">No reviews</h5>
+              <h5 class="text-center">No reviews</h5>
             <% end %>
           </div>
         </div>

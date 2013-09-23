@@ -9,6 +9,16 @@
   </div>
 
   <%= form_for @user do |f| %>
+    <% if current_user.is_admin? %>
+      <div class="well well-sm">
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :is_admin %> Is this user a system administrator?
+          </label>
+        </div>
+      </div>
+    <% end %>
+
     <div class="form-group <% if @user.errors.include? :name %>has-error<% end %>">
       <%= f.label :name, "Full Name", class: "control-label" %>
       <%= f.text_field :name, placeholder: "Full Name", class: "form-control" %>

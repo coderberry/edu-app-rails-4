@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :authorize_admin, only: [:index, :show]
 
   def index
-    @active_tab = 'admin'
+    @active_tab = 'my_stuff'
     @users = User.page(params[:page]).order('name ASC')
   end
 
@@ -53,6 +53,10 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     else
       @user = current_user
+    end
+
+    if params[:user][:is_admin].present? && current_user.is_admin?
+      @user.is_admin = params[:user][:is_admin]
     end
 
     if params["user"]["code"] && !params["user"]["code"].empty?
