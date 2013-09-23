@@ -228,8 +228,8 @@ $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2
 $navbar-link-color:                #777 !default;
 $navbar-link-hover-color:          #333 !default;
 $navbar-link-hover-bg:             transparent !default;
-$navbar-link-active-color:         #555 !default;
-$navbar-link-active-bg:            darken($navbar-bg, 10%) !default;
+$navbar-link-active-color:         $brand-danger !default; // #555 !default;
+$navbar-link-active-bg:            transparent !default; // darken($navbar-bg, 10%) !default;
 $navbar-link-disabled-color:       #ccc !default;
 $navbar-link-disabled-bg:          transparent !default;
 

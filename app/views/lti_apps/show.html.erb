@@ -31,6 +31,10 @@
             }} %>
           </div>
           <div class="col-sm-8">
+            <% if @lti_app.ims_cert_url.present? %>
+              <%= link_to image_tag("imscertifiedsm.png", class: "pull-right", style: "margin-left: 20px;"), @lti_app.ims_cert_url %>
+            <% end %>
+            
             <h2><%= @lti_app.name %></h2>
             <%= star_rating(@lti_app.average_rating, "mini") %>
             <div class="author">by <%= @lti_app.author_name %></div>
@@ -76,8 +80,8 @@
             </form>
           </div>
 
-          <legend>Configuration URL:</legend>
-          <span class="form-control">{{configUrl}}</span>
+          <legend>Configuration URL: <small class="pull-right">(paste this URL into your LMS)</small></legend>
+          <input type="text" onclick="this.select();" class="form-control" value="{{configUrl}}" />
         </div>
       </div>
         
@@ -86,7 +90,7 @@
       <section class="app-reviews">
         <div class="well well-small">
           <div id="app-reviews">
-            <% @lti_app.reviews.each do |review| %>
+            <% @lti_app.reviews.with_content.each do |review| %>
               <div class="app-review media">
                 <a href="#" class="pull-left">
                   <%= image_tag review.user.profile_image_url, style: "width: 50px; height: 50px; margin-bottom: 5px;" %>

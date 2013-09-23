@@ -1,6 +1,6 @@
 class Importer
   def initialize
-    @json = JSON.parse(File.read("#{Rails.root}/data/dump.json"))
+    @json = JSON.parse(File.read("#{Rails.root}/data/lti_examples-2013-09-20T22:25:22Z.json"))
   end
 
   def run
@@ -11,12 +11,12 @@ class Importer
     user = User.where(twitter_nickname: "whitmer").first
 
     @json['apps'].each do |data|
-      configuration = self.import_lti_app_configuration(user, data)
-      puts "CONFIG: #{configuration.id}"
-      unless configuration.new_record?
-        app = self.import_lti_app(user, configuration, data)
-        puts "APP: #{app.id}"
+      if data['cartridge'].present?
+        configuration = self.import_lti_app_configuration(user, data)
+        puts "CONFIG: #{configuration.id}"
       end
+      app = self.import_lti_app(user, configuration, data)
+      puts "APP: #{app.id}"
     end
 
     @json['app_review'].each do |data|
@@ -81,74 +81,79 @@ class Importer
   end
 
   def import_lti_app_configuration(user, data)
-    lti_app_configuration = LtiAppConfiguration.new(user_id: user.id)
+    lti_app_configuration = LtiAppConfiguration.create_from_xml(user.id, data['cartridge'])
 
-    cartridge = EA::Cartridge.new
-    cartridge.title               = data['name']
-    cartridge.description         = ReverseMarkdown.parse(data['short_description'].present? ? data['short_description'] : data['description'])
-    cartridge.icon_url            = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
-    cartridge.launch_url          = edu_appify_link(data['open_launch_url'] || data['launch_url'])
-    cartridge.tool_id             = data['id']
-    cartridge.text                = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
-    cartridge.default_width       = data['width'].to_i if data['width'].present?
-    cartridge.default_height      = data['height'].to_i if data['height'].present?
-    cartridge.privacy_level       = data['privacy_level']
-    cartridge.domain              = data['domain']
+    unless lti_app_configuration
+      lti_app_configuration = LtiAppConfiguration.new(user_id: user.id)
 
-    # Custom Fields
-    data['custom_fields'].each do |k, v|
-      cartridge.custom_fields << EA::CustomField.new( name: k, value: v )
-    end if data['custom_fields'].present?
+      cartridge = EA::Cartridge.new
+      cartridge.title               = data['name']
+      cartridge.description         = ReverseMarkdown.parse(data['short_description'].present? ? data['short_description'] : data['description'])
+      cartridge.icon_url            = edu_appify_link(data['icon_url'].is_a?(Array) ? data['icon_url'].first : data['icon_url'])
+      cartridge.launch_url          = edu_appify_link(data['open_launch_url'] || data['launch_url'])
+      cartridge.tool_id             = data['id']
+      cartridge.text                = data['course_nav_link_text'] || data['user_nav_link_text'] || data['account_nav_link_text']
+      cartridge.default_width       = data['width'].to_i if data['width'].present?
+      cartridge.default_height      = data['height'].to_i if data['height'].present?
+      cartridge.privacy_level       = data['privacy_level']
+      cartridge.domain              = data['domain']
 
-    cartridge.optional_launch_types = []
+      # Custom Fields
+      data['custom_fields'].each do |k, v|
+        cartridge.custom_fields << EA::CustomField.new( name: k, value: v )
+      end if data['custom_fields'].present?
 
-    # Config Options
-    data['config_options'].each do |opt|
-      name = opt['name']
-      if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav', 'course_navigation', 'account_navigation', 'user_navigation'].include? name
-        name = 'course_navigation' if name == 'course_nav'
-        name = 'account_navigation' if name == 'account_nav'
-        name = 'user_navigation' if name == 'user_nav'
-        cartridge.optional_launch_types << name
-      else
-        cartridge.config_options << EA::ConfigOption.new( name:          name,
-                                                          default_value: opt['value'],
-                                                          is_required:   opt['required'],
-                                                          description:   ReverseMarkdown.parse(opt['description']),
-                                                          type:          opt['type'] )
+      cartridge.optional_launch_types = []
+
+      # Config Options
+      data['config_options'].each do |opt|
+        name = opt['name']
+        if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav', 'course_navigation', 'account_navigation', 'user_navigation'].include? name
+          name = 'course_navigation' if name == 'course_nav'
+          name = 'account_navigation' if name == 'account_nav'
+          name = 'user_navigation' if name == 'user_nav'
+          cartridge.optional_launch_types << name
+        else
+          cartridge.config_options << EA::ConfigOption.new( name:          name,
+                                                            default_value: opt['value'],
+                                                            is_required:   opt['required'],
+                                                            description:   ReverseMarkdown.parse(opt['description']),
+                                                            type:          opt['type'] )
+        end
+      end if data['config_options'].present?
+
+      # Canvas Extensions
+      data['extensions'].each do |extension|
+        case extension
+          when 'editor_button'
+            cartridge.editor_button = EA::ModalExtension.new(name: 'editor_button', enabled: true)
+          when 'resource_selection'
+            cartridge.resource_selection = EA::ModalExtension.new(name: 'resource_selection', enabled: true)
+          when 'homework_submission'
+            cartridge.homework_submission = EA::ModalExtension.new(name: 'homework_submission', enabled: true)
+          when 'course_nav'
+            cartridge.course_navigation = EA::NavigationExtension.new(name: 'course_navigation', enabled: true)
+          when 'account_nav'
+            cartridge.account_navigation = EA::NavigationExtension.new(name: 'account_navigation', enabled: true)
+          when 'user_nav'
+            cartridge.user_navigation = EA::NavigationExtension.new(name: 'user_navigation', enabled: true)
+        end
+      end if data['extensions'].present?
+
+      puts cartridge.as_json
+
+      lti_app_configuration.config = cartridge.as_json
+      unless lti_app_configuration.save
+        puts lti_app_configuration.errors.inspect
       end
-    end if data['config_options'].present?
-
-    # Canvas Extensions
-    data['extensions'].each do |extension|
-      case extension
-        when 'editor_button'
-          cartridge.editor_button = EA::ModalExtension.new(name: 'editor_button', enabled: true)
-        when 'resource_selection'
-          cartridge.resource_selection = EA::ModalExtension.new(name: 'resource_selection', enabled: true)
-        when 'homework_submission'
-          cartridge.homework_submission = EA::ModalExtension.new(name: 'homework_submission', enabled: true)
-        when 'course_nav'
-          cartridge.course_navigation = EA::NavigationExtension.new(name: 'course_navigation', enabled: true)
-        when 'account_nav'
-          cartridge.account_navigation = EA::NavigationExtension.new(name: 'account_navigation', enabled: true)
-        when 'user_nav'
-          cartridge.user_navigation = EA::NavigationExtension.new(name: 'user_navigation', enabled: true)
-      end
-    end if data['extensions'].present?
-
-    puts cartridge.as_json
-
-    lti_app_configuration.config = cartridge.as_json
-    unless lti_app_configuration.save
-      puts lti_app_configuration.errors.inspect
     end
 
     return lti_app_configuration
   end
 
   def import_lti_app(user, configuration, data)
-    app = LtiApp.new(lti_app_configuration_id: configuration.id)
+    app = LtiApp.new(lti_app_configuration_id: configuration.try(:id))
+    app.config_xml_url           = configuration.try(:id) ? nil : data['config_url']
     app.user_id                  = user.id
     app.name                     = data['name']
     app.status                   = data['pending'] == true ? 'pending' : 'active'
@@ -165,10 +170,6 @@ class Importer
     app.banner_image_url         = edu_appify_link(data['banner_url'])
     app.logo_image_url           = edu_appify_link(data['logo_url'])
     app.is_public                = true
-
-    if app.name == 'Twitter'
-      
-    end
     
     if app.save
       @map = maps
@@ -210,28 +211,33 @@ class Importer
     }
 
     app = LtiApp.where(short_name: data["tool_id"]).first
-    user = User.where(twitter_nickname: data["user_id"]).first_or_create({
-        name: data["user_id"],
-        is_omniauthing: true
-    })
-    membership = Membership.where(organization_id: organizations[data["external_access_token_id"]], user_id: user.id).first_or_create({
-      is_admin: true
-    })
 
-    review = app.reviews.build({
-      rating: data["rating"],
-      comments: data["comments"],
-      lti_app_id: app.id,
-      user_id: user.id,
-      membership_id: membership.id
-    })
+    if app
+      user = User.where(twitter_nickname: data["user_id"]).first_or_create({
+          name: data["user_id"],
+          is_omniauthing: true
+      })
+      membership = Membership.where(organization_id: organizations[data["external_access_token_id"]], user_id: user.id).first_or_create({
+        is_admin: true
+      })
 
-    if review.save
-      puts "REVIEW: #{review.id}"
+      review = app.reviews.build({
+        rating: data["rating"],
+        comments: data["comments"],
+        lti_app_id: app.id,
+        user_id: user.id,
+        membership_id: membership.id
+      })
+
+      if review.save
+        puts "REVIEW: #{review.id}"
+      else
+        puts "ERROR: #{data['tool_id']} - #{review.errors.full_messages.inspect}"
+      end
+      review
     else
-      puts "ERROR: #{data['tool_id']} - #{review.errors.full_messages.inspect}"
+      puts "App does not exist: #{data['tool_id']}"
     end
-    review
   end
 
   def reassign_lti_apps

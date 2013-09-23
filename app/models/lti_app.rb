@@ -59,6 +59,7 @@ class LtiApp < ActiveRecord::Base
       app_type:          self.app_type,
       preview_url:       self.preview_url,
       banner_image_url:  self.banner_image_url,
+      is_certified:      self.ims_cert_url.present?,
       average_rating:    self.average_rating.try(:to_f) || 0.0,
       total_ratings:     self.total_ratings,
       tag_ids:           self.tag_ids,

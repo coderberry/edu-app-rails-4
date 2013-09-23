@@ -72,6 +72,7 @@
       <div id="apps-container">
         <div class="app-item col-3" ng-repeat="app in apps | filter:customCriteriaFilter | orderBy:sort">
           <div class="app-contents">
+            <img class="ims-ribbon" ng-show="app.is_certified" src="<%= asset_path("ims-ribbon.png") %>" alt="IMS Certified">
             <a ng-href="/apps/{{app.short_name}}">
               <div class="banner">
                 <img src="{{app.banner_image_url}}" class="img-thumbnail" />

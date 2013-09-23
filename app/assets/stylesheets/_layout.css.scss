@@ -92,3 +92,10 @@ footer#footer {
   width: 200px;
   height: 50px;
 }
+
+ul.navbar-nav li.active {
+  border-top: 2px solid $brand-danger;
+  a {
+    line-height: 16px;
+  }
+}

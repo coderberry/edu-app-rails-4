@@ -10,4 +10,7 @@ class Review < ActiveRecord::Base
   validates :lti_app_id, presence: true
   validates :user_id, presence: true, uniqueness: { scope: :lti_app_id, message: "has already submitted a review for this app" }
   validates :rating, presence: true, inclusion: { in: 1..5 }
+
+  # scopes ....................................................................
+  scope :with_content, -> { where("comments IS NOT NULL").where("char_length(comments) > 0") }
 end
