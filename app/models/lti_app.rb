@@ -48,6 +48,19 @@ class LtiApp < ActiveRecord::Base
     self.status == 'active'
   end
 
+  def platform_tag_ids
+    pids = tags.platforms.map(&:id)
+    pids.empty? ? Tag.platforms.map(&:id) : pids
+  end
+
+  def all_platforms?
+    platform_tag_ids.length == Tag.platforms.count
+  end
+
+  def all_tag_ids
+    [self.tag_ids + self.platform_tag_ids].flatten.uniq
+  end
+
   def limited
     {
       id:                self.id,
@@ -62,7 +75,7 @@ class LtiApp < ActiveRecord::Base
       is_certified:      self.ims_cert_url.present?,
       average_rating:    self.average_rating.try(:to_f) || 0.0,
       total_ratings:     self.total_ratings,
-      tag_ids:           self.tag_ids,
+      tag_ids:           self.all_tag_ids,
       created_at:        self.created_at.to_i
     }
   end

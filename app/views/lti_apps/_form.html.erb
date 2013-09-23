@@ -199,7 +199,35 @@
     </div>
   </div>
 
-  <% ['category', 'education_level', 'platform'].each do |tag_category| %>
+  <div class="form-group">
+    <label class="col-lg-3 control-label">Supported Platforms</label>
+    <div class="col-lg-9">
+      <div class="radio">
+        <label>
+          <input type="radio" name="supported_platforms" id="supported_platforms_all" value="all"
+          <% if @lti_app.all_platforms? %>checked="checked"<% end %>>
+          This app is supported by all platforms.
+        </label>
+        <label style="margin-bottom: 5px;">
+          <input type="radio" name="supported_platforms" id="supported_platforms_some" value="some"
+          <% if !@lti_app.all_platforms? %>checked="checked"<% end %>>
+          This app is only supported by the following platforms:
+        </label>
+        <% Tag.where(context: 'platform').each do |tag| %>
+          <label>
+            <input type="checkbox" data-collection="checkbox-platforms" value="<%= tag.id %>" name="tag_ids[]" 
+              <% if @lti_app.platform_tag_ids.include?(tag.id) || @lti_app.all_platforms? %>
+                checked="checked"
+              <% end %>
+              <% if @lti_app.all_platforms? %>disabled="disabled"<% end %>
+            > <%= tag.name %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% ['category', 'education_level', 'extension'].each do |tag_category| %>
     <div class="form-group">
       <label class="col-lg-3 control-label"><%= pluralize(2, tag_category.humanize.titleize).split(' ')[1..-1].join(' ') %></label>
       <div class="col-lg-9">

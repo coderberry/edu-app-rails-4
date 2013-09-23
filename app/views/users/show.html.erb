@@ -13,7 +13,6 @@
     <li class="active"><a href="#" data-target="#tab-details" data-toggle="tab">Details</a></li>
     <li><a href="#" data-target="#tab-apps" data-toggle="tab"><%= pluralize @user.lti_apps.count, "App" %></a></li>
     <li><a href="#" data-target="#tab-memberships" data-toggle="tab"><%= pluralize @user.memberships.count, "Membership" %></a></li>
-    <li><a href="#" data-target="#tab-api-keys" data-toggle="tab"><%= pluralize @user.api_keys.count, "API Key" %></a></li>
     <li><a href="#" data-target="#tab-reviews" data-toggle="tab"><%= pluralize @user.reviews.count, "Review" %></a></li>
   </ul>
 
@@ -26,9 +25,6 @@
     </div>
     <div class="tab-pane" id="tab-memberships">
       <%= render partial: "/memberships/table", locals: { memberships: @user.memberships } %>
-    </div>
-    <div class="tab-pane" id="tab-api-keys">
-      <%= render partial: "/api_keys/table", locals: { api_keys: @user.api_keys } %>
     </div>
     <div class="tab-pane" id="tab-reviews">
       <%= render partial: "/reviews/table", locals: { reviews: @user.reviews } %>

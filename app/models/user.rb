@@ -35,6 +35,9 @@ class User < ActiveRecord::Base
               presence: true,
               if: :require_password?
 
+  # scopes ....................................................................
+  scope :authenticated, -> { where("password_digest IS NOT NULL OR ( SELECT COUNT(authentications.id) FROM authentications WHERE authentications.user_id = users.id ) > 0") }
+
   # additional config .........................................................
   has_secure_password :validations => false
 

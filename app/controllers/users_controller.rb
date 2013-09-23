@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @active_tab = 'my_stuff'
-    @users = User.page(params[:page]).order('name ASC')
+    @users = User.authenticated.page(params[:page]).order('is_admin desc, name')
   end
 
   def show

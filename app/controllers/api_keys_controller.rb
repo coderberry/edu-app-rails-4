@@ -8,19 +8,19 @@ class ApiKeysController < ApplicationController
 
   def create_token
     @organization.api_keys.create
-    redirect_to organization_api_keys_path(@organization), notice: "Created API Key successfully"
+    redirect_to organization_api_keys_path(@organization), notice: "Created App Center Token successfully"
   end
 
   def renew_token
     @token = @organization.api_keys.find(params[:id])
     @token.renew
-    redirect_to organization_api_keys_path(@organization), notice: "Renewed API Key successfully"
+    redirect_to organization_api_keys_path(@organization), notice: "Renewed App Center Token successfully"
   end
 
   def expire_token
     @token = @organization.api_keys.find(params[:id])
     @token.expire
-    redirect_to organization_api_keys_path(@organization), notice: "Expired API Key successfully"
+    redirect_to organization_api_keys_path(@organization), notice: "Expired App Center Token successfully"
   end
 
   private

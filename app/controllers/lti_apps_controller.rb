@@ -74,7 +74,7 @@ class LtiAppsController < ApplicationController
 
   # GET /lti_apps/new
   def new
-    @active_tab = 'my_stuff'
+    @active_tab = 'submit'
     @lti_app = LtiApp.new
   end
 
