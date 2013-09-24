@@ -4,5 +4,26 @@
     <h3 class="page-header">Organizations</h3>
   </div>
 
+  <div id="filters-container">
+    <h3 data-toggle="collapse" href="#filters"><i class="icon-filter"></i> Filters</h3>
+    <div id="filters" class="panel-collapse collapse
+    <% if @q.keys.count > 0 %>in<% end %>">
+      <%= search_form_for @search, url: organizations_path, html: { class: "form-horizontal", role: "form" } do |f| %>
+        <div class="form-group">
+          <label for="q_name_cont" class="col-lg-2 control-label">Name</label>
+          <div class="col-lg-10">
+            <%= f.text_field :name_cont, class: "form-control", placeholder: "Name" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-offset-2 col-lg-10">
+            <button type="submit" class="btn btn-success">Apply Filters</button>
+            <%= link_to "Reset", organizations_path, class: "btn btn-link" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <%= render partial: "table", locals: { organizations: @organizations } %>
 </div>

@@ -1,15 +1,19 @@
 <table class="table table-striped table-condensed">
   <thead>
     <tr>
-      <th>Name</th>
+      <% if @search %>
+        <th><%= sort_link @search, :name, "Name" rescue "Name" %></th>
+      <% else %>
+        <th>Name</th>
+      <% end %>
       <th class="text-center" style="width: 50px;">
-        <i class="canvas-icon-standards"></i>
+        <i class="canvas-icon-standards" data-toggle="tooltip" title="Apps"></i>
       </th>
       <th class="text-center" style="width: 50px;">
-        <i class="canvas-icon-user"></i>
+        <i class="canvas-icon-user" data-toggle="tooltip" title="Members"></i>
       </th>
       <th class="text-center" style="width: 50px;">
-        <i class="icon-key"></i>
+        <i class="icon-key" data-toggle="tooltip" title="App Center Tokens"></i>
       </th>
       <th class="text-center" >Created</th>
       <th>&nbsp;</th>
@@ -19,16 +23,23 @@
   <% organizations.each do |organization| %>
     <tr>
       <td><%= link_to organization.name, organization %></td>
-      <td class="text-center"><%= organization.memberships.count %></td>
-      <td class="text-center"><%= organization.lti_apps.count %></td>
-      <td class="text-center"><%= organization.api_keys.active.count %></td>
-      <td class="text-center" ><%= organization.created_at.strftime("%b %d, %Y") %></td>
-      <td>
+      <td class="text-center"><span data-toggle="tooltip" title="Apps"><%= organization.lti_apps.count %></span></td>
+      <td class="text-center"><span data-toggle="tooltip" title="Members"><%= organization.memberships.count %></span></td>
+      <td class="text-center"><span data-toggle="tooltip" title="App Center Tokens"><%= organization.api_keys.active.count %></span></td>
+      <td class="text-center"><%= organization.created_at.strftime("%b %d, %Y") %></td>
+      <td class="text-right">
         <% if current_user.can_manage?(organization) %>
-          <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_organization_path(organization.id), class: "pull-right btn btn-info btn-xs" %>
+          <%= link_to raw('<i class="icon-pencil"></i>'), edit_organization_path(organization.id), class: "btn btn-info btn-xs", data: { toggle: "tooltip", title: "Edit Organization" } %>
         <% end %>
+        <%= link_to raw('<i class="icon-eye-open"></i>'), organization, class: "btn btn-success btn-xs", data: { toggle: "tooltip", title: "View Organization" } %>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<% if organizations.respond_to?(:total_pages) %>
+  <div class="text-center">
+    <%= will_paginate organizations, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+  </div>
+<% end %>

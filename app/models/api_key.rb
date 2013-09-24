@@ -28,7 +28,7 @@ class ApiKey < ActiveRecord::Base
   end
 
   def renew
-    update_attribute(:expired_at, 1.year.from_now)
+    update_attribute(:expired_at, 100.years.from_now)
   end
 
   # protected instance methods ................................................
@@ -37,7 +37,7 @@ class ApiKey < ActiveRecord::Base
   private
 
   def set_expiry_date
-    self.expired_at = 1.year.from_now
+    self.expired_at = 100.years.from_now
   end
 
   def generate_access_token

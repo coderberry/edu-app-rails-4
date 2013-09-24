@@ -62,3 +62,8 @@
 // Utility classes
 @import "twitter/bootstrap/utilities"; // Has to be last to override when necessary
 @import "twitter/bootstrap/responsive-utilities";
+
+.well {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}

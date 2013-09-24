@@ -26,7 +26,6 @@
       <input type="text" name="email" class="form-control" placeholder="Add by email address" />
     </div>
   <% end %>
-  <%= f.input :remote_uid %>
   <%= f.input :is_admin, label: "Checked if this member is an administrator of the organization" %>
   <%= render "/shared/save_cancel", cancel_link: @redir %>
 <% end %>

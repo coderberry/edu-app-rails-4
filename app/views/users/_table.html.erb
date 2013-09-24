@@ -32,8 +32,9 @@
       <td class="text-center"><%= user.lti_apps.count %></td>
       <td class="text-center"><%= user.reviews.count %></td>
       <td class="text-center"><%= user.api_keys.count %></td>
-      <td>
-        <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_user_path(user.id), class: "pull-right btn btn-info btn-xs" %>
+      <td class="text-right">
+        <%= link_to raw('<i class="icon-pencil"></i>'), edit_user_path(user.id), class: "btn btn-info btn-xs", data: { toggle: "tooltip", title: "Edit User" } %>
+        <%= link_to raw('<i class="icon-eye-open"></i>'), user, class: "btn btn-success btn-xs", data: { toggle: "tooltip", title: "View User" } %>
       </td>
     </tr>
   <% end %>
@@ -41,5 +42,5 @@
 </table>
 
 <div class="text-center">
-  <%= will_paginate @users, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+  <%= will_paginate users, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
 </div>

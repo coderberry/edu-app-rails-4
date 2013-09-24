@@ -11,35 +11,15 @@
     <li class="active">Manage Whitelist</li>
   </ul>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, accusantium, qui, ipsum magnam atque saepe nostrum omnis hic incidunt rerum porro eligendi natus commodi nihil quasi reiciendis est tenetur vero.</p>
+  <p style="text-decoration: line-through;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, accusantium, qui, ipsum magnam atque saepe nostrum omnis hic incidunt rerum porro eligendi natus commodi nihil quasi reiciendis est tenetur vero.</p>
 
-  <table class="table table-condensed table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Organization</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @whitelist.each do |lao| %>
-      <tr>
-        <td><%= icon(lao.lti_app.icon_url) %> <%= link_to lao.lti_app.name, lti_app_path(lao.lti_app.short_name) %></td>
-        <td><%= lao.lti_app.organization.try(:name) %></td>
-        <td class="text-right">
-          <a href="#" class="btn btn-xs btn-success" data-toggle="lao-visible"
-            style="<%= lao.is_visible? ? '' : 'display: none;' %>"
-            data-organization-id="<%= @organization.id %>"
-            data-lao-id="<%= lao.id %>"
-            id="btn-lao-toggle-visible-<%= lao.id %>"><i class="icon-eye-open"></i> Visible</a>
-          <a href="#" class="btn btn-xs btn-default" data-toggle="lao-visible"
-            style="<%= lao.is_visible? ? 'display: none;' : '' %>"
-            data-organization-id="<%= @organization.id %>"
-            data-lao-id="<%= lao.id %>"
-            id="btn-lao-toggle-hidden-<%= lao.id %>"><i class="icon-eye-close"></i> Hidden</a>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <fieldset>
+    <legend>Our Apps</legend>
+    <%= render partial: "whitelist_table", locals: { whitelist: @whitelist[:ours], organization_id: @organization.id } %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Other Apps</legend>
+    <%= render partial: "whitelist_table", locals: { whitelist: @whitelist[:theirs], organization_id: @organization.id } %>
+  </fieldset>
 </div>

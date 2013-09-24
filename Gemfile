@@ -13,6 +13,7 @@ gem 'maruku'
 gem 'ims-lti'
 gem 'simple_form', '~> 3.0.0.beta1'
 gem 'nokogiri'
+gem 'ransack'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

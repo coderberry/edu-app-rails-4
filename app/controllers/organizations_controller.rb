@@ -6,11 +6,14 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations
   def index
+    @q = params[:q] || {}
     if current_user.is_admin?
-      @organizations = Organization.all.order("created_at desc")
+      @search = Organization.search(@q)
     else
-      @organizations = current_user.organizations
+      @search = current_user.organizations.search(@q)
     end
+    @search.sorts = 'name asc' if @search.sorts.empty?
+    @organizations = @search.result(distinct: true).paginate(page: params[:page])
   end
 
   # GET /organizations/1
@@ -54,7 +57,7 @@ class OrganizationsController < ApplicationController
   end
 
   def whitelist
-    @whitelist = @organization.whitelist
+    @whitelist = @organization.separated_whitelist
   end
 
   def toggle_whitelist

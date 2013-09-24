@@ -1,0 +1,26 @@
+<% if whitelist.count > 0 %>
+  <table class="table table-condensed table-striped">
+    <tbody>
+    <% whitelist.each do |lao| %>
+      <tr>
+        <td><%= icon(lao.lti_app.icon_url) %> <%= link_to lao.lti_app.name, lti_app_path(lao.lti_app.short_name) %></td>
+        <td><%= lao.lti_app.author_name %></td>
+        <td class="text-right">
+          <a href="#" class="btn btn-xs btn-success" data-toggle="lao-visible"
+            style="<%= lao.is_visible? ? '' : 'display: none;' %>"
+            data-organization-id="<%= organization_id %>"
+            data-lao-id="<%= lao.id %>"
+            id="btn-lao-toggle-visible-<%= lao.id %>"><i class="icon-eye-open"></i> Visible</a>
+          <a href="#" class="btn btn-xs btn-default" data-toggle="lao-visible"
+            style="<%= lao.is_visible? ? 'display: none;' : '' %>"
+            data-organization-id="<%= organization_id %>"
+            data-lao-id="<%= lao.id %>"
+            id="btn-lao-toggle-hidden-<%= lao.id %>"><i class="icon-eye-close"></i> Hidden</a>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info text-center">None</div>
+<% end %>

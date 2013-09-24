@@ -1,10 +1,15 @@
 <table class="table table-condensed table-striped">
   <thead>
     <tr>
-      <th>Name</th>
+      <% if @search %>
+        <th><%= sort_link @search, :name, "Name" %></th>
+        <th><%= sort_link @search, :author_name, "Author" %></th>
+      <% else %>
+        <th>Name</th>
+        <th>Author</th>
+      <% end %>
       <th>Rating</th>
-      <th># Reviews</th>
-      <th>Organization</th>
+      <th>Reviews</th>
       <th>Status</th>
       <% if action_name == "deleted" %>
       <th>Date Deleted</th>
@@ -20,6 +25,7 @@
       <% else %>
       <td><%= icon(lti_app.icon_url) %> <%= link_to lti_app.name, lti_app_path(lti_app.short_name) %></td>
       <% end %>
+      <td><%= lti_app.author_name %></td>
       <td><%= star_rating(lti_app.try(:average_rating), "mini") %></td>
       <td>
         <% if lti_app.reviews.count > 0 %>
@@ -27,26 +33,30 @@
         <% else %>
           &nbsp;
         <% end %>
-      <td><%= lti_app.organization.try(:name) %></td>
       <td><%=raw status_badge(lti_app.status) %></td>
       <% if action_name == "deleted" %>
         <td><%= lti_app.deleted_at.strftime("%b %d, %Y") %></td>
       <% end %>
-      <% if current_user.can_edit?(lti_app) %>
-        <td class="text-right">
+      <td class="text-right">
+        <% if current_user.can_edit?(lti_app) %>
           <% if lti_app.deleted_at.present? %>
-            <%= link_to raw('<i class="icon-magic"></i> Restore'), restore_lti_app_path(lti_app.short_name), class: "pull-right btn btn-default btn-xs" %>
+            <%= link_to raw('<i class="icon-magic"></i>'), restore_lti_app_path(lti_app.short_name), class: "btn btn-default btn-xs", data: { toggle: "tooltip", title: "Restore App" } %>
           <% else %>
-            <%= link_to raw('<i class="icon-pencil"></i> Edit'), edit_lti_app_path(lti_app.short_name), class: "pull-right btn btn-info btn-xs" %>
             <% if lti_app.lti_app_configuration %>
-              <%= link_to raw('<i class="icon-code"></i> Config'), "/tools/xml_builder#/#{lti_app.lti_app_configuration.uid}", class: "pull-right btn btn-default btn-xs", style: "margin-right: 5px;" %>
+              <%= link_to raw('<i class="icon-code"></i>'), "/tools/xml_builder#/#{lti_app.lti_app_configuration.uid}", class: "btn btn-default btn-xs", data: { toggle: "tooltip", title: "Edit App Configuration" } %>
             <% end %>
+            <%= link_to raw('<i class="icon-pencil"></i>'), edit_lti_app_path(lti_app.short_name), class: "btn btn-info btn-xs", data: { toggle: "tooltip", title: "Edit App" } %>
           <% end %>
-        </td>
-      <% else %>
-        <td>&nbsp;</td>
-      <% end %>
+        <% end %>
+        <%= link_to raw('<i class="icon-eye-open"></i>'), lti_app_path(lti_app.short_name), class: "btn btn-success btn-xs", data: { toggle: "tooltip", title: "View App" } %>
+      </td>
     </tr>
   <% end %>
   </tbody>
 </table>
+
+<% if apps.respond_to?(:total_pages) %>
+  <div class="text-center">
+    <%= will_paginate apps, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+  </div>
+<% end %>

@@ -56,15 +56,14 @@ class LtiAppsController < ApplicationController
 
   def my
     @active_tab = 'my_stuff'
+    @q = params[:q] || {}
     if current_user.is_admin?
-      @lti_apps = LtiApp.inclusive.include_rating.include_total_ratings.order(:name)
+      @search = LtiApp.inclusive.include_rating.include_total_ratings.search(@q)
     else
-      @lti_apps = current_user.lti_apps.inclusive.include_rating.include_total_ratings.order(:name)
+      @search = current_user.lti_apps.inclusive.include_rating.include_total_ratings.search(@q)
     end
-    respond_to do |format|
-      format.html
-      format.json { render json: @lti_apps }
-    end
+    @search.sorts = 'name asc' if @search.sorts.empty?
+    @lti_apps = @search.result(distinct: true).paginate(page: params[:page])
   end
 
   def export_as_json
