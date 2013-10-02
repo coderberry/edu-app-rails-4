@@ -21,7 +21,7 @@ describe ApiKey do
 
     api_key = ApiKey.new
     api_key.send(:set_expiry_date)
-    api_key.expired_at.should eq(time_now + 1.year)
+    api_key.expired_at.should eq(time_now + 100.year)
   end
 
   it "#generate_access_token" do
