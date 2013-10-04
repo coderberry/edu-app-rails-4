@@ -59,7 +59,7 @@ module Api
         end
 
         lti_apps = lti_apps.public.active.order(sort).load
-        render json: lti_apps, root: false
+        render json: lti_apps
       end
 
       def show

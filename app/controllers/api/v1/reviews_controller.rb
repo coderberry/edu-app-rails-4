@@ -84,7 +84,8 @@ module Api
     private
 
       def load_lti_app
-        @lti_app = LtiApp.where(short_name: params[:lti_app_id]).first
+        @lti_app = LtiApp.where(id: params[:lti_app_id]).first ||
+            LtiApp.where(short_name: params[:lti_app_id]).first
         unless @lti_app
           render json: {}, status: 404
         end
