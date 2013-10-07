@@ -181,6 +181,13 @@ class Importer
         end
       end
 
+      if data['extensions'].is_a? Array
+        data['extensions'].each do |val|
+          # puts "EXT: #{val}"
+          app.tags << @map[:extensions][val]
+        end
+      end
+
       if data['only_works'].is_a? Array
         data['only_works'].each do |val|
           app.tags << @map[:platforms][val.gsub('canvas','Canvas')]
@@ -208,7 +215,9 @@ class Importer
 
     if app
       user = User.where(twitter_nickname: data["user_id"]).first_or_create({
-          name: data["user_id"],
+          name: data["user_name"],
+          avatar_url: data["user_avatar_url"],
+          url: data["url"],
           is_omniauthing: true
       })
       membership = Membership.where(organization_id: organizations[data["external_access_token_id"]], user_id: user.id).first_or_create({
@@ -270,10 +279,16 @@ class Importer
       platform_map[t.name] = t
     end
 
+    extension_map = {}
+    Tag.lms_extensions.each do |t|
+      extension_map[t.short_name] = t
+    end
+
     return {
       categories: category_map,
       education_levels: education_level_map,
-      platforms: platform_map
+      platforms: platform_map,
+      extensions: extension_map
     }
   end
 

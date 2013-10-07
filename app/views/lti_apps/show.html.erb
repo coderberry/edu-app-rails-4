@@ -97,7 +97,7 @@
             <% @lti_app.reviews.with_content.each do |review| %>
               <div class="app-review media">
                 <a href="#" class="pull-left">
-                  <%= image_tag review.user.profile_image_url, style: "width: 50px; height: 50px; margin-bottom: 5px;" %>
+                  <%= image_tag review.user.profile_image_url, onerror: "imgError(this);", style: "width: 50px; height: 50px; margin-bottom: 5px;" %>
                   <%= star_rating(review.rating, "mini-stars") %>
                 </a>
                 <div class="media-body">
