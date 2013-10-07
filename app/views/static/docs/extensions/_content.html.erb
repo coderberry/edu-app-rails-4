@@ -144,7 +144,9 @@
   If the <code>launch_presentation_return_url</code> were <code><a href="http://www.example.com/done">http://example.com/done</a></code>, possible return URLs could include:
 </p>
 <ul>
-  <li>http://example.com/done?<strong>return_type</strong>=url&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2file.pdf&amp;<strong>text</strong>=file.pdf</li>
+  <li><pre><code>http://example.com/done?return_type=url
+                       &amp;url=https%3A%2F%2Fothersite.com%2file.pdf
+                       &amp;text=file.pdf</code></pre></li>
 </ul>
 
 <legend>image_url</legend>
@@ -191,8 +193,16 @@
   If the <code>launch_presentation_return_url</code> were <code><a href="http://www.example.com/done">http://example.com/done</a></code>, possible return URLs could include:
 </p>
 <ul>
-  <li>http://example.com/done?<strong>return_type</strong>=image_url&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2Fimage.gif&amp;<strong>alt</strong>=good+picture&amp;<strong>width</strong>=30&amp;<strong>height</strong>=50</li>
-  <li>http://example.com/done?<strong>return_type</strong>=image_url&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2Fimage2.gif&amp;<strong>alt</strong>=&amp;<strong>width</strong>=300&amp;<strong>height</strong>=500</li>
+  <li><pre><code>http://example.com/done?return_type=image_url
+                       &amp;url=https%3A%2F%2Fothersite.com%2Fimage.gif
+                       &amp;alt=good+picture
+                       &amp;width=30
+                       &amp;height=50</code></pre></li>
+  <li><pre><code>http://example.com/done?return_type=image_url
+                       &amp;url=https%3A%2F%2Fothersite.com%2Fimage2.gif
+                       &amp;alt=
+                       &amp;width=300
+                       &amp;height=500</code></pre></li>
 </ul>
 
 <legend>iframe</legend>
@@ -239,8 +249,11 @@
   If the <code>launch_presentation_return_url</code> were <code><a href="http://www.example.com/done">http://example.com/done</a></code>, possible return URLs could include:
 </p>
 <ul>
-  <li>http://example.com/done?<strong>return_type</strong>=iframe&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2link</li>
-  <li>http://example.com/done?<strong>return_type</strong>=iframe&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2link&amp;<strong>title</strong>=great%20content</li>
+  <li><pre><code>http://example.com/done?return_type=iframe
+                       &amp;url=https%3A%2F%2Fothersite.com%2link</code></pre></li>
+  <li><pre><code>http://example.com/done?return_type=iframe
+                       &amp;url=https%3A%2F%2Fothersite.com%2link
+                       &amp;title=great%20content</code></pre></li>
 </ul>
 
 <legend>lti_launch_url</legend>
@@ -282,9 +295,13 @@
   If the <code>launch_presentation_return_url</code> were <code><a href="http://www.example.com/done">http://example.com/done</a></code>, possible return URLs could include:
 </p>
 <ul>
-  <li>http://example.com/done?<strong>return_type</strong>=lti_launch_url&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2lti_link</li>
-  <li>http://example.com/done?<strong>return_type</strong>=lti_launch_url&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2Flti_link%3Fkey%3Dval%26key2%3Dval2</li>
-  <li>http://example.com/done?<strong>return_type</strong>=lti_launch_url&amp;<strong>url</strong>=https%3A%2F%2Fothersite.com%2lti_link&amp;<strong>title</strong>=hey%20there</li>
+  <li><pre><code>http://example.com/done?return_type=lti_launch_url
+          &amp;url=https%3A%2F%2Fothersite.com%2lti_link</code></pre></li>
+  <li><pre><code>http://example.com/done?return_type=lti_launch_url
+          &amp;url=https%3A%2F%2Fothersite.com%2Flti_link%3Fkey%3Dval%26key2%3Dval2</code></pre></li>
+  <li><pre><code>http://example.com/done?return_type=lti_launch_url
+          &amp;url=https%3A%2F%2Fothersite.com%2lti_link
+          &amp;title=hey%20there</code></pre></li>
 </ul>
 
 <legend>oembed</legend>
@@ -323,6 +340,10 @@
   If the <code>launch_presentation_return_url</code> were <code><a href="http://www.example.com/done">http://example.com/done</a></code>, possible return URLs could include:
 </p>
 <ul>
-  <li>http://www.example.com/done?return_type=oembed&amp;endpoint=https%3A%2F%2Fothersite.com%2Foembed&amp;url=https%3A%2F%2Fothersite.com%2Fresources%2Fimage1</li>
-  <li>http://www.example.com/done?return_type=oembed&amp;endpoint=http%3A%2F%2Fwww.flickr.com%2Fservices%2Foembed%2F&amp;url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fbees%2F2341623661%2F</li>
+  <li><pre><code>http://www.example.com/done?return_type=oembed
+                       &amp;endpoint=https%3A%2F%2Fothersite.com%2Foembed
+                       &amp;url=https%3A%2F%2Fothersite.com%2Fresources%2Fimage1</code></pre></li>
+  <li><pre><code>http://www.example.com/done?return_type=oembed
+                       &amp;endpoint=http%3A%2F%2Fwww.flickr.com%2Fservices%2Foembed%2F
+                       &amp;url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fbees%2F2341623661%2F</code></pre></li>
 </ul>
