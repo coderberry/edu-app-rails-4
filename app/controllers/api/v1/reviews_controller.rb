@@ -48,30 +48,43 @@ module Api
       def create
         @organization = organization
         if @organization
-          user = User.where("lower(email) = lower(?)", params[:user_email]).first_or_create(
-              name: params[:user_name], 
-              email: params[:user_email].downcase,
-              avatar_url: params[:user_avatar_url],
-              url: params[:user_url]
+          membership = organization.memberships.where(remote_uid: params['user_id']).first()
+          unless membership
+            #create the user, membership, and review
+            user = User.where("lower(email) = lower(?)", params[:user_email]).first_or_create(
+                name: params[:user_name],
+                email: ( params[:user_email] ? params[:user_email].downcase : nil ),
+                avatar_url: params[:user_avatar_url],
+                url: params[:user_url]
+            )
+
+            return render json: {user: user.errors.messages}, status: 422 if user.invalid?
+
+            membership = organization.memberships.where(user_id: user.id).first_or_create(
+                organization_id: organization.id,
+                user_id: user.id,
+                remote_uid: params[:user_id],
+                is_admin: false
+            )
+
+            return render json: {membership: membership.errors.messages}, status: 422 if membership.invalid?
+          end
+
+          binding.pry
+
+          review = Review.where(user_id: membership.user_id).first_or_create(
+              lti_app_id: @lti_app.id,
+              membership_id: membership.id,
+              user_id: membership.user_id
           )
 
-          membership = organization.memberships.where(user_id: user.id).first_or_create(
-            organization_id: organization.id, 
-            user_id: user.id, 
-            remote_uid: params[:user_id], 
-            is_admin: false
+          review.update(
+              rating: params[:rating],
+              comments: params[:comments]
           )
 
-          review = Review.create(
-            lti_app_id: @lti_app.id,
-            membership_id: membership.id,
-            user_id: user.id,
-            rating: params[:rating],
-            comments: params[:comments]
-          )
-
-          if review.new_record?
-            render json: { errors: review.errors.messages }, status: 422
+          if review.invalid?
+            render json: {review: { errors: review.errors.messages }}, status: 422 if review.invalid?
           else
             render json: review, status: 201
           end
