@@ -36,11 +36,18 @@ var LtiAppConfiguration = Ember.Model.extend({
       function() {
         var url = '/api/v1/lti_app_configurations';
         var uid = _this.get('uid');
+        var mthd = 'POST';
         if (!Ember.isEmpty(uid) && (uid !== 'new')) {
           url = '/api/v1/lti_app_configurations/' + uid;
+          mthd = 'PUT';
         }
         var configStr = JSON.stringify(_this.get('cartridge').getJson());
-        Ember.$.post(url, { config: configStr })
+
+        Ember.$.ajax({
+          url: url,
+          type: mthd,
+          data: { config: configStr }
+        })
         .done(function(data) {
           if (data['lti_app_configuration']) {
             _this.set('uid',        data['lti_app_configuration']['uid']);
