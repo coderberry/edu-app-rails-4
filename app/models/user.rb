@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
 
   # scopes ....................................................................
   scope :authenticated, -> { where("password_digest IS NOT NULL OR ( SELECT COUNT(authentications.id) FROM authentications WHERE authentications.user_id = users.id ) > 0") }
+  scope :where_remote_uid, ->(remote_uid) { joins(:memberships).where("memberships.remote_uid=?", remote_uid) }
 
   # additional config .........................................................
   has_secure_password :validations => false

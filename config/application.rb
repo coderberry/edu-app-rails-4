@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+Ick::Maybe.belongs_to Object
+
 unless Rails.env =~ /prod/
   require 'dotenv'
   Dotenv.load

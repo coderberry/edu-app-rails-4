@@ -4,20 +4,30 @@ module Api
       before_action :load_lti_app
 
       # GET /api/v1/lti_apps/:short_name/reviews
+      # Public: Create a review for an LTI App
+      #
+      # organization[access_token]  - Limit reviews to this organization
+      # membership[remote_uid]      - Looks up a review by remote_uid; requires organization[access_token].
+      # user[email]                 - Looks up review by user.
       def index
-        email = params[:user_email]
-        if email.present?
-          user = User.where(email: email).first
-          if user
-            review = @lti_app.reviews.where(user_id: user.id).first
-            if review
-              render json: review
-            else
-              render json: { errors: "There are no reviews on this app by this user" }, status: 404
-            end
-          else
-            render json: { errors: "User does not exist" }, status: 404
-          end
+        if params[:organization].maybe[:access_token]
+          organization = Organization.where_access_token(params[:organization][:access_token]).first
+          return render json: {errors: "Invalid access token"}, status: 422 unless organization
+        end
+
+        if organization && params[:membership].maybe[:remote_uid]
+          user = organization.users.where_remote_uid(params[:membership][:remote_uid]).first
+          return render json: {errors: "User does not exist"}, status: 422 unless organization
+        elsif params[:user].maybe[:email]
+          binding.pry
+          user = User.where(email: params[:user][:email]).first
+          return render json: {errors: "User does not exist"}, status: 422 unless user
+        end
+
+        if user
+          render json: user.reviews.where(lti_app_id: @lti_app.id)
+        elsif organization
+          render json: organization.reviews.where(lti_app_id: @lti_app.id)
         else
           render json: @lti_app.reviews
         end
@@ -53,7 +63,7 @@ module Api
             #create the user, membership, and review
             user = User.where("lower(email) = lower(?)", params[:user_email]).first_or_create(
                 name: params[:user_name],
-                email: ( params[:user_email] ? params[:user_email].downcase : nil ),
+                email: (params[:user_email] ? params[:user_email].downcase : nil),
                 avatar_url: params[:user_avatar_url],
                 url: params[:user_url]
             )
@@ -70,8 +80,6 @@ module Api
             return render json: {membership: membership.errors.messages}, status: 422 if membership.invalid?
           end
 
-          binding.pry
-
           review = Review.where(user_id: membership.user_id).first_or_create(
               lti_app_id: @lti_app.id,
               membership_id: membership.id,
@@ -84,17 +92,17 @@ module Api
           )
 
           if review.invalid?
-            render json: {review: { errors: review.errors.messages }}, status: 422 if review.invalid?
+            render json: {review: {errors: review.errors.messages}}, status: 422 if review.invalid?
           else
             render json: review, status: 201
           end
 
         else
-          render json: { error: 'Missing access token' }, status: 422
+          render json: {error: 'Missing access token'}, status: 422
         end
       end
 
-    private
+      private
 
       def load_lti_app
         @lti_app = LtiApp.where(id: params[:lti_app_id]).first ||

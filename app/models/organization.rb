@@ -5,9 +5,12 @@ class Organization < ActiveRecord::Base
   has_many :api_keys, as: :tokenable
   has_many :lti_apps
   has_many :lti_apps_organizations
+  has_many :reviews, through: :memberships
 
   # validations ...............................................................
   validates :name, presence: true
+
+  scope :where_access_token, ->(access_token) { joins(:api_keys).where('api_keys.access_token=?', access_token) }
 
   # public instance methods ...................................................
   def regenerate_api_key
