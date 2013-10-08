@@ -200,6 +200,36 @@
   </div>
 
   <div class="form-group">
+    <label class="col-lg-3 control-label">Config Options</label>
+    <div class="col-lg-9">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Type</td>
+            <td>Default Value</td>
+            <td>Description</td>
+            <td class="text-right">Req?</td>
+            <td>&nbsp;</td>
+          </tr>
+        </thead>
+        <tbody class="fields">
+          <%= f.fields_for :lti_app_config_options do |builder| %>
+            <%= render 'lti_app_config_option_fields', f: builder %>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">
+              <%= link_to_add_fields raw('<i class="icon-plus"></i> Add Config Option'), f, :lti_app_config_options %>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="form-group">
     <label class="col-lg-3 control-label">Supported Platforms</label>
     <div class="col-lg-9">
       <div class="radio">

@@ -127,7 +127,7 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       privacy_level         : this.get('privacy_level'),
       domain                : this.get('domain'),
       custom_fields         : [],
-      config_options        : [],
+      // config_options        : [],
       optional_launch_types : [],
       launch_types          : {}
     };
@@ -147,9 +147,9 @@ var Cartridge = Ember.Object.extend(Ember.Validations.Mixin, {
       json['custom_fields'].push(cf.getJson());
     });
 
-    this.get('config_options').forEach(function(co) {
-      json['config_options'].push(co.getJson());
-    });
+    // this.get('config_options').forEach(function(co) {
+    //   json['config_options'].push(co.getJson());
+    // });
 
     return json;
   }

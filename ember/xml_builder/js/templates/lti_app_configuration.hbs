@@ -116,21 +116,6 @@
 
   <fieldset>
     <legend>
-      <a href="#" {{action "addConfigOption"}} class="btn btn-xs btn-link pull-right"><i class="icon-plus"></i> Add Config Option</a>
-      Config Options(s)
-    </legend>
-    <div class="form-group">
-      {{#each cartridge.config_options}}
-        {{view "App.ConfigOptionView" contentBinding=this}}
-      {{else}}
-        <div class="text-center">There are no config options</div>
-      {{/each}}
-    </div>
-  </fieldset>
-
-
-  <fieldset>
-    <legend>
       <a href="#" {{action "addCustomField"}} class="btn btn-xs btn-link pull-right"><i class="icon-plus"></i> Add Custom Field</a>
       Custom Field(s)
     </legend>

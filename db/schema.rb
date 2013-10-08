@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131003204912) do
+ActiveRecord::Schema.define(version: 20131007210204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 20131003204912) do
 
   add_index "cartridges", ["uid"], name: "index_cartridges_on_uid", unique: true, using: :btree
   add_index "cartridges", ["user_id"], name: "index_cartridges_on_user_id", using: :btree
+
+  create_table "lti_app_config_options", force: true do |t|
+    t.integer  "lti_app_id"
+    t.string   "name",          null: false
+    t.string   "param_type"
+    t.string   "default_value"
+    t.string   "description"
+    t.boolean  "is_required"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lti_app_config_options", ["lti_app_id"], name: "index_lti_app_config_options_on_lti_app_id", using: :btree
 
   create_table "lti_app_configurations", force: true do |t|
     t.string   "uid",        null: false

@@ -111,11 +111,11 @@ class Importer
         name = 'user_navigation' if name == 'user_nav'
         cartridge.optional_launch_types << name
       else
-        cartridge.config_options << EA::ConfigOption.new( name:          name,
-                                                          default_value: opt['value'],
-                                                          is_required:   opt['required'],
-                                                          description:   ReverseMarkdown.parse(opt['description']),
-                                                          type:          opt['type'] )
+        # cartridge.config_options << EA::ConfigOption.new( name:          name,
+        #                                                   default_value: opt['value'],
+        #                                                   is_required:   opt['required'],
+        #                                                   description:   ReverseMarkdown.parse(opt['description']),
+        #                                                   type:          opt['type'] )
       end
     end if data['config_options'].present?
 
@@ -198,6 +198,25 @@ class Importer
         app.tags << @map[:categories]['Beta']
       end
 
+      # Config Options
+      data['config_options'].each do |opt|
+        name = opt['name']
+        if ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav', 'course_navigation', 'account_navigation', 'user_navigation'].include? name
+          # name = 'course_navigation' if name == 'course_nav'
+          # name = 'account_navigation' if name == 'account_nav'
+          # name = 'user_navigation' if name == 'user_nav'
+          # cartridge.optional_launch_types << name
+        else
+          app.lti_app_config_options.create(
+            name:          name,
+            default_value: opt['value'],
+            is_required:   opt['required'],
+            description:   ReverseMarkdown.parse(opt['description']),
+            param_type:    opt['type']
+          )
+        end
+      end if data['config_options'].present?
+
     else
       puts "ERROR: #{data['name']} - #{app.errors.full_messages.inspect}"
     end
@@ -229,7 +248,8 @@ class Importer
         comments: data["comments"],
         lti_app_id: app.id,
         user_id: user.id,
-        membership_id: membership.id
+        membership_id: membership.id,
+        created_at: Date.parse(data["created_at"])
       })
 
       if review.save
