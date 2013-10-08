@@ -10,6 +10,15 @@
   border-bottom: 1px solid #d5d5d5;
 }
 
+.navbar-brand {
+  padding: 0px;
+  margin-left: 0px;
+  img {
+    height: 40px;
+    margin-top: 12px;
+  }
+}
+
 .navbar-inner {
   box-shadow:           none;
   -moz-box-shadow:      none;
