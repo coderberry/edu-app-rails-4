@@ -34,7 +34,7 @@ class Authentication < ActiveRecord::Base
     user ||= User.where(email: email).first if email
     user ||= User.create!(
       is_omniauthing: true,
-      name: omniauth["info"]["name"],
+      name: omniauth["info"]["name"] || omniauth["info"]["nickname"],
       avatar_url: omniauth["info"]["image"],
       email: email
     )
