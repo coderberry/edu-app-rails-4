@@ -80,7 +80,7 @@ module Api
             return render json: {membership: membership.errors.messages}, status: 422 if membership.invalid?
           end
 
-          review = Review.where(user_id: membership.user_id).first_or_create(
+          review = @lti_app.reviews.where(user_id: membership.user_id).first_or_create(
               lti_app_id: @lti_app.id,
               membership_id: membership.id,
               user_id: membership.user_id

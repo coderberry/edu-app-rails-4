@@ -22,7 +22,7 @@ module Api
         end
 
         # Stub the sql
-        lti_apps = LtiApp.where("1 = 1")
+        lti_apps = LtiApp.all
 
         # Apply text filter
         filter = params[:filter]
