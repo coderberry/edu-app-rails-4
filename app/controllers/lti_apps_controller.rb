@@ -179,7 +179,7 @@ class LtiAppsController < ApplicationController
       params.require(:lti_app).permit(
         :user_id, :short_name, :name, :description, :status, :installation_instructions, :testing_instructions, :support_url, :config_xml_url,
         :author_name, :is_public, :app_type, :ims_cert_url, :preview_url, :config_url, :data_url, 
-        :lti_app_configuration_id, :banner_image_url, :logo_image_url, :short_description, :organization_id, 
+        :lti_app_configuration_id, :banner_image_url, :logo_image_url, :short_description, :organization_id, :requires_secret, 
         lti_app_config_options_attributes: [:id, :name, :param_type, :default_value, :description, :is_required, :_destroy] )
     end
 

@@ -159,6 +159,7 @@ class Importer
     app.app_type                 = data['app_type']
     app.support_url              = data['support_link']
     app.ims_cert_url             = data['ims_link']
+    app.requires_secret          = data['any_key'].present? ? !!data['any_key'] : false
     app.config_url               = edu_appify_link(data['config_url'])
     app.preview_url              = edu_appify_link(data['preview'] ? data['preview']['url'] : nil)
     app.banner_image_url         = edu_appify_link(data['banner_url'])
