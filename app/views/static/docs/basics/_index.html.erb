@@ -3,17 +3,17 @@
 </div>
 
 <p>
-  The main thing with LTI is the identity assertion. LTI is a way for one system (the tool <span class="label label-warning">consumer</span>, typically an LMS) to send a user to another system (the tool <span class="label label-info">provider</span>, some service that integrates withthe LMS -- sorry, I know the names are confusing. I've tried using colors tohelp make things clearer, but that may just make it worse...) in a trusted way. The mostcommon reason for the trust assertion is to allow the user to be automatically signed in and directed to a specific course or module when the <span class="label label-info">provider</span> renders content.
+  The main thing with LTI is the identity assertion. LTI is a way for one system (the tool <span class="label label-warning">consumer</span>, typically an LMS) to send a user to another system (the tool <span class="label label-info">provider</span>, some service that integrates with the LMS) in a trusted way. The most common reason for the trust assertion is to allow the user to be automatically signed in and directed to a specific course or module when the <span class="label label-info">provider</span> renders content.
 </p>
 
 <%= image_tag "tool_launch.png", class: "image", style: "float: left; margin: 20px 20px 20px 0;" %>
 
 <p>
-  The <span class="label label-warning">consumer</span> and <span class="label label-info">provider</span> have some predefined relationship via a consumer key and shared secret that are used to sign any messages passed between systems. All messages are <a href="http://oauth.googlecode.com/svn/code/javascript/example/signature.html">signed with an OAuth signature</a> that can be verified by either party. For the most part information only travels one way, from the <span class="label label-warning">consumer</span> to the <span class="label label-info">provider</span>.
+  The <span class="label label-warning">consumer</span> and <span class="label label-info">provider</span> have a predefined relationship via a consumer key and shared secret which are used to sign any messages passed between systems. All messages are <a href="http://oauth.googlecode.com/svn/code/javascript/example/signature.html">signed with an OAuth signature</a> that can be verified by either party. Generally information only travels one way, from the <span class="label label-warning">consumer</span> to the <span class="label label-info">provider</span>.
 </p>
 <p>
-  The identity assertion happens through an HTTP POST request from the <span class="label label-warning">consumer</span> to the <span class="label label-info">provider</span>. The POST request must happen in the user's browser, which means it needs to be  launched by submitting a form. Most of the time the form is submitted via JavaScript to an iframe rendered on a page within the <span class="label label-warning">consumer</span>, so the user doesn't have an extra step when trying to launch an app.
+  The identity assertion happens through an HTTP POST request from the <span class="label label-warning">consumer</span> to the <span class="label label-info">provider</span>. The POST request must happen in the user's browser, which means it needs to be launched by submitting a form. Generally the form is submitted via JavaScript to an iframe rendered on a page within the <span class="label label-warning">consumer</span>, so the user does not have an extra step when trying to launch an app.
 </p>
 <p>
-  {{#linkTo 'basics.post_parameters'}}Here is a list of parameters{{/linkTo}} that can be sent as part of the POST request. Some are required, some are optional. Most apps shouldn't need more than the first set of parameters and can probably just ignore the rest.
+  {{#linkTo 'basics.post_parameters'}}Here is a list of parameters{{/linkTo}} that can be sent as part of the POST request. Some are required, some are optional. Most apps should not need more than the first set of parameters and most likely will ignore the rest.
 </p>
