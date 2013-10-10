@@ -71,8 +71,17 @@ class Organization < ActiveRecord::Base
     }
   end
 
-  def approved_app_ids
-    lti_apps_organizations.where(is_visible: true).pluck(:lti_app_id)
+  def allowed_apps(scope = nil)
+    scope ||= LtiApp.all
+    scope = scope.joins('LEFT OUTER JOIN lti_apps_organizations ON lti_apps_organizations.lti_app_id = lti_apps.id').
+        where('lti_apps_organizations.organization_id = ?', id)
+
+    if is_list_apps_without_approval?
+      scope = scope.where('lti_apps_organizations.id IS NULL || lti_apps_organizations.is_visible')
+    else
+      scope = scope.where('lti_apps_organizations.is_visible')
+    end
+    scope
   end
 
   def to_s

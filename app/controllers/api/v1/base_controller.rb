@@ -7,6 +7,7 @@ module Api
 
       # Parses the access token from the header
       def organization
+        return @organization if @organization
         token = params[:access_token]
         unless token.present?
           bearer = request.headers["HTTP_AUTHORIZATION"]
@@ -22,7 +23,7 @@ module Api
         if token.present?
           api_key = ApiKey.active.where(access_token: token).first
           if api_key
-            return api_key.organization
+            return @organization = api_key.organization
           end
         else
           nil

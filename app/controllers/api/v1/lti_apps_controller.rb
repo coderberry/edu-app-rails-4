@@ -31,18 +31,12 @@ module Api
         end
 
         # Remove any apps that are not whitelisted in the organization (if present)
-        whitelisted_ids = []
-        @organization = organization
-        if @organization
-          whitelisted_ids = @organization.approved_app_ids
+        if organization
+          lti_apps = organization.allowed_apps(lti_apps)
         end
 
-        if whitelisted_ids.present? && lti_app_ids.present?
-          lti_apps = lti_apps.where("id in (?)", (whitelisted_ids & lti_app_ids))
-        elsif lti_app_ids.present?
+        if lti_app_ids.present?
           lti_apps = lti_apps.where("id in (?)", lti_app_ids)
-        elsif whitelisted_ids.present?
-          lti_apps = lti_apps.where("id in (?)", whitelisted_ids)
         end
 
         lti_apps = lti_apps.inclusive.include_rating.include_total_ratings.include_tag_id_array
