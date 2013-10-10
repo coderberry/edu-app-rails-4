@@ -78,6 +78,7 @@ class LtiApp < ActiveRecord::Base
       average_rating:    self.average_rating.try(:to_f) || 0.0,
       total_ratings:     self.total_ratings,
       tag_ids:           self.all_tag_ids,
+      requires_secret:   self.requires_secret,
       created_at:        self.created_at.to_i
     }
   end

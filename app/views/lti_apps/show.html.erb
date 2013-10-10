@@ -39,6 +39,11 @@
             <%= star_rating(@lti_app.average_rating, "mini") %>
             <div class="author">by <%= @lti_app.author_name %></div>
             <%= render partial: "tag_cloud", locals: { tags: @tags, tag_ids: @lti_app.all_tag_ids } %>
+            <% if @lti_app.requires_secret %>
+              <em>
+                <i class="icon-key text-warning"></i> Requires Consumer Key and Secret
+              </em>
+            <% end %>
           </div>
         </div>
         <div class="description">

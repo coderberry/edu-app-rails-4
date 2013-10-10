@@ -12,7 +12,11 @@ class LtiAppsController < ApplicationController
       apps: @lti_apps,
       categories: Tag.categories.map {|c| { id: c.id, name: c.name }},
       education_levels: Tag.education_levels.map {|c| { id: c.id, name: c.name }},
-      platforms: Tag.platforms.map {|c| { id: c.id, name: c.name }}
+      platforms: Tag.platforms.map {|c| { id: c.id, name: c.name }},
+      accesses: [
+        { id: 'open', name: 'Open Access' },
+        { id: 'oauth', name: 'Authenticated' }
+      ]
     }
     
     respond_to do |format|

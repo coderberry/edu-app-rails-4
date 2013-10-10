@@ -42,13 +42,22 @@
               </li>
             </ul>
           </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentAccess.name||'All Access'}} <b class="caret"></b></a>
+            <ul class="dropdown-menu" style="text-align: left;">
+              <li><a href="#" ng-click="selectAccess()">All Access</a></li>
+              <li ng-repeat="item in accesses">
+                <a href="#" ng-click="selectAccess(item)">{{item.name}}</a>
+              </li>
+            </ul>
+          </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right pull-right">
           <li><a href="#" ng-click="reset()" class="pull-right btn btn-link">Reset</a></li>
         </ul>
 
-        <form ng-submit="submitForm()" class="navbar-form pull-right" role="search" style="width: 400px;">
+        <form ng-submit="submitForm()" class="navbar-form pull-right" role="search" style="width: 280px;">
           <input type="text" ng-model="filterText" class="form-control" placeholder="filter by name"/>
         </form>
       </nav>
@@ -84,6 +93,7 @@
                   <div class="pull-right">
                     <span class="comment-count">{{app.total_ratings}}</span>
                   </div>
+                  <i class="icon-key text-warning pull-right" style="margin-right: 5px;" ng-show="app.requires_secret"></i>
                   <span class="stars">
                     <span style="width: {{app.average_rating * 16}}px;"></span>
                   </span>
