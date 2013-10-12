@@ -24,7 +24,7 @@ class LtiApp < ActiveRecord::Base
 
   # validations ...............................................................
   validates :name, presence: true
-  validates :short_name, presence: true, uniqueness_without_deleted: true, format: { with: /\A[a-zA-Z0-9_]+\Z/, message: "is not valid. Only letters and underscores" }
+  validates :short_name, presence: true, uniqueness_without_deleted: true, format: { with: /\A[a-zA-Z0-9_\.]+\Z/, message: "is not valid. Only letters and underscores" }
   validates :status, presence: true, inclusion: { in: ["pending", "active", "disabled"] }
   validates :config_xml_url, presence: true, if: Proc.new { |a| a.lti_app_configuration_id.blank? }
 
