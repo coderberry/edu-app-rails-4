@@ -45,7 +45,7 @@ class LtiAppConfiguration < ActiveRecord::Base
     tool.set_ext_param(platform, 'selection_width', cot.sub(c['default_width']))   if c['default_width'].present?
     tool.set_ext_param(platform, 'selection_height', cot.sub(c['default_height'])) if c['default_height'].present?
 
-    c['launch_types'].each do |name, ext|
+    (c['launch_types'] || []).each do |name, ext|
       next if c['optional_launch_types'].include?(name) && !params[name]
       opts = {}
       ext.each do |key, value|

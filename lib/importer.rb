@@ -162,7 +162,8 @@ class Importer
   def import_lti_app(user, configuration, data)
     app = LtiApp.new()
     app.lti_app_configuration_id = configuration.id if configuration
-    app.config_xml_url           = configuration ? configuration.id : data['config_url']
+    #app.config_xml_url           = configuration ? "/configurations/#{configuration.uid}" : data['config_url']
+    app.config_xml_url           = data['config_url'] unless configuration
     app.user_id                  = user.id
     app.name                     = data['name']
     app.status                   = data['pending'] == true ? 'pending' : 'active'
@@ -174,7 +175,7 @@ class Importer
     app.app_type                 = data['app_type']
     app.support_url              = data['support_link']
     app.ims_cert_url             = data['ims_link']
-    app.requires_secret          = data['any_key'].present? ? !data['any_key'] : false
+    app.requires_secret          = !data['any_key']
     app.config_url               = edu_appify_link(data['config_url'])
     app.preview_url              = edu_appify_link(data['preview'] ? data['preview']['url'] : nil)
     app.banner_image_url         = edu_appify_link(data['banner_url'])
@@ -230,7 +231,6 @@ class Importer
       end if data['config_options'].present?
 
     else
-      binding.pry
       puts "ERROR: #{data['name']} - #{app.errors.full_messages.inspect}"
     end
 

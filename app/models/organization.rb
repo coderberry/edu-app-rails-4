@@ -73,11 +73,13 @@ class Organization < ActiveRecord::Base
 
   def allowed_apps(scope = nil)
     scope ||= LtiApp.all
-    scope = scope.joins('LEFT OUTER JOIN lti_apps_organizations ON lti_apps_organizations.lti_app_id = lti_apps.id').
-        where('lti_apps_organizations.organization_id = ?', id)
+    scope = scope.joins(ActiveRecord::Base.send(:sanitize_sql_array, (
+        ['LEFT OUTER JOIN lti_apps_organizations
+            ON lti_apps_organizations.lti_app_id = lti_apps.id
+            AND lti_apps_organizations.organization_id = ?', id])))
 
     if is_list_apps_without_approval?
-      scope = scope.where('lti_apps_organizations.id IS NULL || lti_apps_organizations.is_visible')
+      scope = scope.where('lti_apps_organizations.id IS NULL OR lti_apps_organizations.is_visible')
     else
       scope = scope.where('lti_apps_organizations.is_visible')
     end

@@ -19,7 +19,6 @@ module Api
           user = organization.users.where_remote_uid(params[:membership][:remote_uid]).first
           return render json: {errors: "User does not exist"}, status: 422 unless organization
         elsif params[:user].maybe[:email]
-          binding.pry
           user = User.where(email: params[:user][:email]).first
           return render json: {errors: "User does not exist"}, status: 422 unless user
         end

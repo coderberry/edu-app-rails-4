@@ -88,7 +88,6 @@ module Api
           lti_app_configuration.destroy
           render json: {}, status: 200
         else
-          binding.pry
           head 404
         end
       end
