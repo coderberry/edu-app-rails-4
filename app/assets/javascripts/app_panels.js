@@ -71,12 +71,16 @@ app.controller('AppPanelCtrl', ['$scope', function($scope) {
   }
 
   $scope.hideBasedOnAccess = function(app) {
-    if (($scope.currentAccess.id === 'open') && (app.requires_secret === false)) {
-      return false;
-    } else if (($scope.currentAccess.id === 'oauth') && (app.requires_secret === true)) {
-      return false;
-    } else if ($scope.currentAccess != null) {
-      return true;
+    if ($scope.currentAccess) {
+      if (($scope.currentAccess.id === 'open') && (app.requires_secret === false)) {
+        return false;
+      } else if (($scope.currentAccess.id === 'oauth') && (app.requires_secret === true)) {
+        return false;
+      } else if ($scope.currentAccess != null) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
