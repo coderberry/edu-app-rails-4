@@ -34,7 +34,6 @@ class LtiAppsController < ApplicationController
     optional_launch_types = []
     if @lti_app.lti_app_configuration.present?
       @lti_app.lti_app_configuration.config_options.each do |co|
-        co['is_checked'] = false
         config_options << co
       end
       @lti_app.lti_app_configuration.optional_launch_types.each do |olt|
