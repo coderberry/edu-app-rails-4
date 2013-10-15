@@ -1,21 +1,23 @@
 module EA
   class ConfigOptionTool
-    attr_accessor :config_options, :params, :errors
+    attr_accessor :config_options, :options, :errors
 
     def initialize(opts, params={})
       opts ||= []
       @config_options = []
       @errors = {}
-      @params = params
-      opts.each do |opt|
-        @config_options << ConfigOption.new(opt)
-      end
+      @config_options = opts
+
+      @options = {}
+      @config_options.each {|co| @options[co.name] = co.default_value }
+      params.each {|k,v| @options[k] = v }
+
     end
 
     def is_valid?
       @errors = {}
       required_params.each do |param_name|
-        unless @params[param_name].present?
+        unless @options[param_name].present?
           @errors[param_name] = 'must be present'
         end
       end
@@ -24,23 +26,13 @@ module EA
 
     def sub(str)
       return str unless str.class == String
-      opts = self.options
-      res = (str || '').gsub(/{{\s*escape:([\w_]+)\s*}}/) { |w| CGI.escape(opts[$1]) }
-      res.gsub!(/{{\s*([\w_]+)\s*}}/) { |w| opts[$1] }
+      res = (str || '').gsub(/{{\s*escape:([\w_]+)\s*}}/) { |w| CGI.escape(@options[$1]) }
+      res.gsub!(/{{\s*([\w_]+)\s*}}/) { |w| @options[$1] }
       res
     end
 
     def required_params
       @config_options.select {|co| co.is_required && co.default_value.blank? }.map(&:name)
-    end
-
-    def options
-      opts = {}
-      @config_options.each {|co| opts[co.name] = co.default_value }
-      opts.each do |k,v|
-        opts[k] = @params[k] if @params[k].present?
-      end
-      opts
     end
   end
 

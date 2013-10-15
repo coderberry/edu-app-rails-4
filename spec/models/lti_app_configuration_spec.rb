@@ -29,36 +29,6 @@ describe LtiAppConfiguration do
       "value": "WHOOP!"
     }
   ],
-  "config_options": [
-    {
-      "name": "req_w_def",
-      "description": "This is a required field that has a default value",
-      "type": "text",
-      "default_value": "Something",
-      "is_required": true
-    },
-    {
-      "name": "req_wo_def",
-      "description": "This is a required field that does NOT have a default value",
-      "type": "text",
-      "default_value": "",
-      "is_required": true
-    },
-    {
-      "name": "opt_w_def",
-      "description": "This is an optional field with a default value",
-      "type": "text",
-      "default_value": "Something Else",
-      "is_required": false
-    },
-    {
-      "name": "opt_wo_def",
-      "description": "This is an optional field that does NOT have a default value",
-      "type": "text",
-      "default_value": "",
-      "is_required": false
-    }
-  ],
   "optional_launch_types": [
     "resource_selection",
     "course_navigation",
@@ -113,7 +83,14 @@ describe LtiAppConfiguration do
   }
 }
     EOS
+
       @lti_app_configuration = LtiAppConfiguration.create(user_id: 1, config: JSON.parse(raw_json))
+      @lti_app = LtiApp.create(name: "Kitchen Sink", short_name: "kitchen_sink", status: 'active', lti_app_configuration: @lti_app_configuration)
+      @lti_app.config_options << LtiAppConfigOption.create(name: "req_w_def", param_type: "text", is_required: true, default_value: "Something", description: "This is a required field that has a default value")
+      @lti_app.config_options << LtiAppConfigOption.create(name: "req_wo_def", param_type: "text", is_required: true, description: "This is a required field that does NOT have a default value")
+      @lti_app.config_options << LtiAppConfigOption.create(name: "opt_w_def", param_type: "text", is_required: false, default_value: "Something Else", description: "This is an optional field with a default value")
+      @lti_app.config_options << LtiAppConfigOption.create(name: "opt_wo_def", param_type: "text", is_required: false, description: "This is an optional field that does NOT have a default value")
+      @lti_app_configuration.lti_app = @lti_app
     end
 
     it "should convert to a valid cartridge" do
@@ -207,16 +184,17 @@ EOS
   <blti:title>Kitchen Sink</blti:title>
   <blti:description>This is an example LTI configuration which has every option selected for testing purposes.</blti:description>
   <blti:launch_url>https://example.com/kitchensink</blti:launch_url>
+  <blti:icon>https://example.com/icon.ico</blti:icon>
   <blti:custom>
     <lticm:property name="another_custom_field">WHOOP!</lticm:property>
     <lticm:property name="req_w_def">Something</lticm:property>
     <lticm:property name="req_wo_def">REQ_WO_DEF</lticm:property>
   </blti:custom>
   <blti:extensions platform="canvas.instructure.com">
-    <lticm:options name="account_nav">
+    <lticm:options name="account_navigation">
       <lticm:property name="enabled">true</lticm:property>
     </lticm:options>
-    <lticm:options name="course_nav">
+    <lticm:options name="course_navigation">
       <lticm:property name="enabled">true</lticm:property>
       <lticm:property name="text"/>
       <lticm:property name="url">https://example.com/kitchensink_override</lticm:property>
@@ -240,7 +218,7 @@ EOS
     <lticm:property name="selection_height">500</lticm:property>
     <lticm:property name="selection_width">500</lticm:property>
     <lticm:property name="tool_id">kitchen_sink</lticm:property>
-    <lticm:options name="user_nav">
+    <lticm:options name="user_navigation">
       <lticm:property name="enabled">true</lticm:property>
       <lticm:property name="text">THIS IS CUSTOM: Something Else</lticm:property>
       <lticm:property name="url">https://example.com/user_nav</lticm:property>
@@ -253,7 +231,7 @@ EOS
 
     cartridge.title.should == 'Kitchen Sink'
     cartridge.description.should == 'This is an example LTI configuration which has every option selected for testing purposes.'
-    cartridge.icon_url.should == 'http://example.com/custom_icon.png'
+    cartridge.icon_url.should == 'https://example.com/icon.ico'
     cartridge.launch_url.should == 'https://example.com/kitchensink'
     cartridge.tool_id.should == 'kitchen_sink'
     cartridge.text.should == 'Click Me'

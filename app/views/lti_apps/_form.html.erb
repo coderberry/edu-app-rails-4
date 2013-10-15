@@ -223,14 +223,14 @@
           </tr>
         </thead>
         <tbody class="fields">
-          <%= f.fields_for :lti_app_config_options do |builder| %>
-            <%= render 'lti_app_config_option_fields', f: builder %>
+          <%= f.fields_for :config_options do |builder| %>
+            <%= render 'config_option_fields', f: builder %>
           <% end %>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="6">
-              <%= link_to_add_fields raw('<i class="icon-plus"></i> Add Config Option'), f, :lti_app_config_options %>
+              <%= link_to_add_fields raw('<i class="icon-plus"></i> Add Config Option'), f, :config_options %>
             </td>
           </tr>
         </tfoot>

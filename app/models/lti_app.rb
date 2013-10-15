@@ -19,8 +19,8 @@ class LtiApp < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :reviews, dependent: :destroy
   has_many :lti_apps_organizations
-  has_many :lti_app_config_options
-  accepts_nested_attributes_for :lti_app_config_options, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
+  has_many :config_options, foreign_key: 'lti_app_id', class_name: 'LtiAppConfigOption'
+  accepts_nested_attributes_for :config_options, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
 
   # validations ...............................................................
   validates :name, presence: true

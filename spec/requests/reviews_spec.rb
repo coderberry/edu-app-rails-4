@@ -65,24 +65,24 @@ describe "Reviews" do
 
       it "get one" do
         user = @lti_app.reviews.first.user
-        get api_v1_lti_app_reviews_path(@lti_app.short_name, { user_email: user.email })
+        get api_v1_lti_app_reviews_path(@lti_app.short_name, { user: {email: user.email }})
         json = JSON.parse(response.body)
-        json['review']['user']['name'].should == user.name
+        json['reviews'].first['user']['name'].should == user.name
       end
 
       it "get one (with no reviews)" do
-        get api_v1_lti_app_reviews_path(@lti_app.short_name, { user_email: "thisdoesnotexist@example.com" })
+        get api_v1_lti_app_reviews_path(@lti_app.short_name, { user: {email: "thisdoesnotexist@example.com" }})
         json = JSON.parse(response.body)
-        response.status.should be(404)
-        json['errors'].should match /does not exist/
+        response.status.should be(422)
+        json['errors'].should match /User does not exist/
       end
 
       it "get one (with no reviews)" do
         user = FactoryGirl.create(:user)
-        get api_v1_lti_app_reviews_path(@lti_app.short_name, { user_email: user.email })
+        get api_v1_lti_app_reviews_path(@lti_app.short_name, { user: {email: user.email }})
         json = JSON.parse(response.body)
-        response.status.should be(404)
-        json['errors'].should match /no reviews/
+        response.status.should be(200)
+        json['reviews'].length.should == 0
       end
     end
   end

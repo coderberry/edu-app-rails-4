@@ -42,7 +42,7 @@ class LtiAppsController < ApplicationController
       end
     end
 
-    @lti_app.lti_app_config_options.each do |laco|
+    @lti_app.config_options.each do |laco|
       config_options << {
         name: laco.name,
         description: laco.description,
@@ -184,7 +184,7 @@ class LtiAppsController < ApplicationController
         :user_id, :short_name, :name, :description, :status, :installation_instructions, :testing_instructions, :support_url, :config_xml_url,
         :author_name, :is_public, :app_type, :ims_cert_url, :preview_url, :config_url, :data_url, 
         :lti_app_configuration_id, :banner_image_url, :logo_image_url, :short_description, :organization_id, :requires_secret, 
-        lti_app_config_options_attributes: [:id, :name, :param_type, :default_value, :description, :is_required, :_destroy] )
+        config_options: [:id, :name, :param_type, :default_value, :description, :is_required, :_destroy] )
     end
 
     def build_tag_list

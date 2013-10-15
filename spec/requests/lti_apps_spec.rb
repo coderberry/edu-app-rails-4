@@ -17,7 +17,7 @@ describe "LtiApps" do
         get '/api/v1/lti_apps'
         response.status.should be(200)
         json = JSON.parse(response.body)
-        json.size.should == 3
+        json['lti_apps'].size.should == 3
       end
     end
 

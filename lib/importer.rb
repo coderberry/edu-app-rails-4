@@ -162,7 +162,6 @@ class Importer
   def import_lti_app(user, configuration, data)
     app = LtiApp.new()
     app.lti_app_configuration_id = configuration.id if configuration
-    #app.config_xml_url           = configuration ? "/configurations/#{configuration.uid}" : data['config_url']
     app.config_xml_url           = data['config_url'] unless configuration
     app.user_id                  = user.id
     app.name                     = data['name']
@@ -220,7 +219,7 @@ class Importer
       data['config_options'].each do |opt|
         name = opt['name']
         unless ['editor_button', 'resource_selection', 'homework_submission', 'course_nav', 'account_nav', 'user_nav'].include? name
-          app.lti_app_config_options.create(
+          app.config_options.create(
             name:          name,
             default_value: opt['value'],
             is_required:   opt['required'],

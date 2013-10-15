@@ -4,6 +4,7 @@ class LtiAppSerializer < ActiveModel::Serializer
              :total_ratings, :is_certified, :config_xml_url, :requires_secret, :tags
 
   has_many :tags
+  has_many :config_options
 
   def short_description
     object.short_description.blank? ? truncate(object.description, 160) : object.short_description

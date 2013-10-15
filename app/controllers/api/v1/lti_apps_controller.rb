@@ -57,16 +57,14 @@ module Api
       end
 
       def show
-        whitelisted_ids = []
-        @organization = organization
-        if @organization
-          whitelisted_ids = @organization.approved_app_ids
+        scope = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id])
+
+        if organization
+          scope = organization.allowed_apps(scope)
         end
-        if whitelisted_ids.present?
-          lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where("id in (?)", whitelisted_ids).where(short_name: params[:id]).first
-        else
-          lti_app = LtiApp.inclusive.include_rating.include_total_ratings.include_tag_id_array.where(short_name: params[:id]).first
-        end
+
+        lti_app = scope.first
+
         if lti_app
           render json: lti_app, root: false
         else

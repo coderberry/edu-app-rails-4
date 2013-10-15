@@ -18,8 +18,8 @@ class LtiAppConfiguration < ActiveRecord::Base
   def launch_url;    self.config['launch_url'];    end
   def icon_url;      self.config['icon_url'];      end
   def privacy_level; self.config['privacy_level']; end
-  def config_options;        (self.config['config_options'] || []); end
   def optional_launch_types; (self.config['optional_launch_types'] || []); end
+  def config_options; (lti_app ? lti_app.config_options : []); end
 
   def tool_config(params={})
     params.stringify_keys!
@@ -27,7 +27,7 @@ class LtiAppConfiguration < ActiveRecord::Base
     tool = IMS::LTI::ToolConfig.new
     platform = 'canvas.instructure.com'
 
-    cot = EA::ConfigOptionTool.new(c['config_options'], params)
+    cot = EA::ConfigOptionTool.new(config_options, params)
     unless cot.is_valid?
       puts cot.errors.inspect
       raise EA::MissingConfigOptionsError.new("Missing required parameters", cot.errors)
@@ -36,6 +36,7 @@ class LtiAppConfiguration < ActiveRecord::Base
     tool.title       = cot.sub(c['title'])       if c['title'].present?
     tool.description = cot.sub(c['description']) if c['description'].present?
     tool.launch_url  = cot.sub(c['launch_url'])  if c['launch_url'].present?
+    tool.icon        = cot.sub(c['icon_url'])    if c['icon_url'].present?
 
     tool.set_ext_param(platform, 'icon_url', c['icon_url'])                        if c['icon_url'].present?
     tool.set_ext_param(platform, 'tool_id', c['tool_id'])                          if c['tool_id'].present?
