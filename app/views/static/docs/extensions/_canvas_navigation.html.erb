@@ -1,3 +1,7 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "syntax_highlighter" %>
+<% end %>
+
 <div class="header clearfix">
   <h3 class="page-header">Canvas: Navigation Extension</h3>
 </div>
@@ -21,7 +25,7 @@
         the app is enabled by default for all applicable courses, or if
         it needs to be configured manually for each course.
     </p>
-    <a class="label label-info" href="/config/course_navigation.xml">xml
+    <a class="label label-info" data-toggle="modal" href="#course-navigation-modal">xml
         configuration</a>
     <a class="label" href="https://canvas.instructure.com/doc/api/navigation_tools.html#course_navigation">more
         information</a>
@@ -30,6 +34,35 @@
     <%= image_tag "course_navigation_example.png", class: "preview img-thumbnail" %>
   </span>
 </div>
+
+<div class="modal fade" id="course-navigation-modal">
+  <div class="modal-dialog modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Course Navigation XML Configuration Example</h4>
+      </div>
+      <div class="modal-body">
+        <pre class="brush: xml">
+          <blti:title>Course Wanda Fish</blti:title>
+          <blti:description>This tool adds a course navigation link to a page on a fish called "Wanda"</blti:description>
+          <blti:extensions platform="canvas.instructure.com">
+            <lticm:property name="tool_id">course_navigation</lticm:property>
+            <lticm:property name="privacy_level">anonymous</lticm:property>
+            <lticm:options name="course_navigation">
+              <lticm:property name="url"><%= root_url %>tool_redirect?url=<%= CGI.escape('/images.html?custom_fish_name=wanda') %></lticm:property>
+              <lticm:property name="text">Course Wanda Fish</lticm:property>
+            </lticm:options>
+          </blti:extensions>
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <hr>
 <h3>Account Navigation Demo</h3>
 <div class="row">
@@ -43,7 +76,7 @@
         account-level links should always include at least the admin role,
         <code>urn:lti:instrole:ims/lis/Administrator</code>.
     </p>
-    <a class="label label-info" href="/config/account_navigation.xml">xml
+    <a class="label label-info" data-toggle="modal" href="#account-navigation-modal">xml
         configuration</a>
     <a class="label" href="https://canvas.instructure.com/doc/api/navigation_tools.html#account_navigation">more
         information</a>
@@ -51,6 +84,34 @@
   <span class="col-sm-4">
   </span>
 </div>
+
+<div class="modal fade" id="account-navigation-modal">
+  <div class="modal-dialog modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Account Navigation XML Configuration Example</h4>
+      </div>
+      <div class="modal-body">
+        <pre class="brush: xml">
+          <blti:title>Account Phil Fish</blti:title>
+          <blti:description>This tool adds an account navigation link to a page on a fish named "Phil"</blti:description>
+          <blti:extensions platform="canvas.instructure.com">
+            <lticm:property name="privacy_level">anonymous</lticm:property>
+            <lticm:options name="account_navigation">
+              <lticm:property name="url"><%= root_url %>tool_redirect?url=<%= CGI.escape('/images.html?custom_fish_name=phil') %></lticm:property>
+              <lticm:property name="text">Account Phil Fish</lticm:property>
+            </lticm:options>
+          </blti:extensions>
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <hr>
 <h3>User Navigation Demo</h3>
 <div class="row">
@@ -62,7 +123,7 @@
           the institution, and will appear as a navigation item whey they
           click their profile or user information link.
       </p>
-    <a class="label label-info" href="/config/user_navigation.xml">xml
+    <a class="label label-info" data-toggle="modal" href="#user-navigation-modal">xml
         configuration</a>
     <a class="label" href="https://canvas.instructure.com/doc/api/navigation_tools.html#user_navigation">more
         information</a>
@@ -71,3 +132,32 @@
     <%= image_tag "user_navigation_example.png", class: "preview img-thumbnail" %>
   </span>
 </div>
+
+<div class="modal fade" id="user-navigation-modal">
+  <div class="modal-dialog modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">User Navigation XML Configuration Example</h4>
+      </div>
+      <div class="modal-body">
+        <pre class="brush: xml">
+          <blti:title>User Alexander Fish</blti:title>
+          <blti:description>This tool adds a user navigation link (in a user's profile) to a page on a fish called "Alexander"</blti:description>
+          <blti:extensions platform="canvas.instructure.com">
+            <lticm:property name="tool_id">account_navigation</lticm:property>
+            <lticm:property name="privacy_level">anonymous</lticm:property>
+            <lticm:options name="user_navigation">
+              <lticm:property name="url"><%= root_url %>/tool_redirect?url=<%= CGI.escape('/images.html?custom_fish_name=alexander') %></lticm:property>
+              <lticm:property name="text">User Alexander Fish</lticm:property>
+            </lticm:options>
+          </blti:extensions>
+          <blti:icon><%= root_url %>fish_icon.png</blti:icon>
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

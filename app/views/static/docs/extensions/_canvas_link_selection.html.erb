@@ -1,3 +1,7 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "syntax_highlighter" %>
+<% end %>
+
 <div class="header clearfix">
   <h3 class="page-header">Canvas: Link Selection Extension</h3>
 </div>
@@ -33,7 +37,7 @@
           If the app is configured at the account level,
           then it will be available for any courses within that account.
       </p>
-    <a class="label label-info" href="/config/resource_selection.xml">xml
+    <a class="label label-info" data-toggle="modal" href="#links-modal">xml
         configuration</a>
     <a class="label" href="https://canvas.instructure.com/doc/api/link_selection_tools.html">more
         information</a>
@@ -42,6 +46,36 @@
     <%= image_tag "resource_selection_example.png", class: "preview img-thumbnail" %>
   </span>
 </div>
+
+<div class="modal fade" id="links-modal">
+  <div class="modal-dialog modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Editor Button Configuration Example</h4>
+      </div>
+      <div class="modal-body">
+        <pre class="brush: xml">
+          <blti:title>I Like Fish</blti:title>
+          <blti:description>I'm a big fan of fish, and I want to share the love</blti:description>
+          <blti:extensions platform="canvas.instructure.com">
+            <lticm:property name="tool_id">resource_selection</lticm:property>
+            <lticm:property name="privacy_level">anonymous</lticm:property>
+            <lticm:options name="resource_selection">
+              <lticm:property name="url"><%= root_url %>tool_redirect?url=<%= CGI.escape('/name.html') %></lticm:property>
+              <lticm:property name="text">Pick a Fish Name</lticm:property>
+              <lticm:property name="selection_width">500</lticm:property>
+              <lticm:property name="selection_height">300</lticm:property>
+            </lticm:options>
+          </blti:extensions>
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <hr>
 
@@ -56,7 +90,7 @@
           to
           course modules.
       </p>
-    <a class="label label-info" href="/config/editor_button_and_resource_selection.xml">xml
+    <a class="label label-info" data-toggle="modal" href="#editor-button-links-modal">xml
         configuration</a>
     <a class="label" href="https://canvas.instructure.com/doc/api/tools_xml.html">more
         information</a>
@@ -64,3 +98,40 @@
   <span class="col-sm-4">
   </span>
 </div>
+
+<div class="modal fade" id="editor-button-links-modal">
+  <div class="modal-dialog modal-wide">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Editor Button &amp; Module Links Example</h4>
+      </div>
+      <div class="modal-body">
+        <pre class="brush: xml">
+          <blti:title>I Like Fish</blti:title>
+          <blti:description>I'm a big fan of fish, and I want to share the love</blti:description>
+          <blti:extensions platform="canvas.instructure.com">
+            <lticm:property name="tool_id">editor_button_and_resource_selection</lticm:property>
+            <lticm:property name="privacy_level">anonymous</lticm:property>
+            <lticm:options name="editor_button">
+              <lticm:property name="url"><%= root_url %>tool_redirect?url=<%= CGI.escape('/images.html') %></lticm:property>
+              <lticm:property name="icon_url"><%= root_url %>examples/fish_icon.png</lticm:property>
+              <lticm:property name="text">Pick a Fish</lticm:property>
+              <lticm:property name="selection_width">500</lticm:property>
+              <lticm:property name="selection_height">300</lticm:property>
+            </lticm:options>
+            <lticm:options name="resource_selection">
+              <lticm:property name="url"><%= root_url %>tool_redirect?url=<%= CGI.escape('/name.html') %></lticm:property>
+              <lticm:property name="text">Pick a Fish Name</lticm:property>
+              <lticm:property name="selection_width">500</lticm:property>
+              <lticm:property name="selection_height">300</lticm:property>
+            </lticm:options>
+          </blti:extensions>
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
