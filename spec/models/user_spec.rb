@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe User do
 
+  describe "validations" do
+    it "should limit the username length to 50 chars" do
+      user = User.new(name: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
+      user.should_not be_valid
+      puts user.errors.full_messages.should include 'Name is too long (maximum is 50 characters)'
+    end
+  end
+
   it "#with_access_token" do
     user = User.create!(name: 'Foo Bar', email: 'foo@example.com')
     api_key = user.current_api_key

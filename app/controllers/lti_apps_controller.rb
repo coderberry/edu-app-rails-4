@@ -33,9 +33,6 @@ class LtiAppsController < ApplicationController
     config_options = []
     optional_launch_types = []
     if @lti_app.lti_app_configuration.present?
-      @lti_app.lti_app_configuration.config_options.each do |co|
-        config_options << co
-      end
       @lti_app.lti_app_configuration.optional_launch_types.each do |olt|
         optional_launch_types << { name: olt, is_checked: false }
       end
@@ -111,12 +108,12 @@ class LtiAppsController < ApplicationController
         flash.now[:error] = "You must select an app configuration"
       end
     when 'url'
-      lti_app_configuration = current_user.lti_app_configurations.create_from_url(params[:config_url])
+      lti_app_configuration = LtiAppConfiguration.create_from_url(current_user.id, params[:config_url])
       if !lti_app_configuration
         flash.now[:error] = "Invalid XML from URL"
       end
     when 'xml'
-      lti_app_configuration = current_user.lti_app_configurations.create_from_xml(params[:xml])
+      lti_app_configuration = LtiAppConfiguration.create_from_xml(current_user.id, params[:xml])
       if !lti_app_configuration
         flash.now[:error] = "Invalid XML"
       end
@@ -180,10 +177,14 @@ class LtiAppsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def lti_app_params
       params.require(:lti_app).permit(
-        :user_id, :short_name, :name, :description, :status, :installation_instructions, :testing_instructions, :support_url, :config_xml_url,
-        :author_name, :is_public, :app_type, :ims_cert_url, :preview_url, :config_url, :data_url, 
-        :lti_app_configuration_id, :banner_image_url, :logo_image_url, :short_description, :organization_id, :requires_secret, 
-        config_options: [:id, :name, :param_type, :default_value, :description, :is_required, :_destroy] )
+        :user_id, :short_name, :name, :description, :status, :installation_instructions, :testing_instructions, 
+        :support_url, :config_xml_url, :author_name, :is_public, :app_type, :ims_cert_url, :preview_url, 
+        :config_url, :data_url, :lti_app_configuration_id, :banner_image_url, :logo_image_url, :short_description, 
+        :organization_id, :requires_secret, 
+        config_options_attributes: [
+          :id, :name, :param_type, :default_value, :description, :is_required, :_destroy
+        ]
+      )
     end
 
     def build_tag_list

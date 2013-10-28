@@ -76,9 +76,15 @@ class UsersController < ApplicationController
       if @user.email == params["user"]["email"]
         @user.registration_codes.clear
       elsif !params["user"]["email"].to_s.empty?
-        @user.registration_codes.clear
-        generate_registration_code(@user, params["user"]["email"])
-        return redirect_to edit_profile_path, alert: 'An email has been sent to you new address for confirmation'
+        new_email = params["user"]["email"]
+        # Ensure that the email address is valid
+        if /.+@.+\..+/.match(new_email)
+          @user.registration_codes.clear
+          generate_registration_code(@user, params["user"]["email"])
+          return redirect_to edit_profile_path, alert: 'An email has been sent to you new address for confirmation'
+        else
+          return redirect_to edit_profile_path, alert: 'Email address is invalid. Please try again.'
+        end
       end
 
       if current_user.is_admin?

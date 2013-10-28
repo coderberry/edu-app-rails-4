@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
               if: :require_email?
 
   validates :name,
-              presence: true
+              presence: true,
+              length: { maximum: 50 }
 
   validates :password,
               presence: true,

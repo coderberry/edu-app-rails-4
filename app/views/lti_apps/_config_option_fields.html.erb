@@ -1,0 +1,13 @@
+<tr>
+  <td><%= f.text_field :name, class: "form-control", rel: 'name' %></td>
+  <td><%= f.select :param_type, [['Text', 'texxt'], ['Checkbox', 'checkbox']], {}, class: "form-control", rel: 'param_type' %></td>
+  <td><%= f.text_field :default_value, class: "form-control", rel: 'default_value' %></td>
+  <td><%= f.text_field :description, class: "form-control", rel: 'description' %></td>
+  <td class="text-center"><%= f.check_box :is_required, rel: 'is_required' %></td>
+  <td class="text-right">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to "#", class: "remove_fields btn btn-xs btn-danger" do %>
+      <i class="icon-remove"></i>
+    <% end %>
+  </td>
+</tr>

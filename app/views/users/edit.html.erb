@@ -39,7 +39,7 @@
       <div class="col-lg-<%= @confirmation_required ? '6' : '12' %>">
         <div class="form-group <% if @user.errors.include? :email %>has-error<% end %>">
           <%= f.label :email, "Email Address", class: "control-label" %>
-          <%= f.text_field :email, placeholder: "http://", class: "form-control" %>
+          <%= f.text_field :email, placeholder: "", class: "form-control" %>
           <% if @user.errors.include? :email %>
             <small class="help-block"><%= @user.errors.full_messages_for(:email).first %></small>
           <% end %>

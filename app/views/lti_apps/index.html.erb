@@ -84,7 +84,7 @@
             <img class="ims-ribbon" ng-show="app.is_certified" src="<%= asset_path("ims-ribbon.png") %>" alt="IMS Certified">
             <a ng-href="/apps/{{app.short_name}}">
               <div class="banner">
-                <img src="{{app.banner_image_url}}" class="img-thumbnail" />
+                <img ng-src="{{app.banner_image_url}}" class="img-thumbnail" />
               </div>
               <div class="details">
                 <h4 class="name">{{app.name}}</h4>
