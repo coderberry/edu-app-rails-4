@@ -12,6 +12,6 @@ class Review < ActiveRecord::Base
   validates :rating, presence: true, inclusion: { in: 1..5 }
 
   # scopes ....................................................................
-  default_scope order('created_at DESC')
+  default_scope { order('created_at DESC') }
   scope :with_content, -> { where("comments IS NOT NULL").where("char_length(comments) > 0") }
 end

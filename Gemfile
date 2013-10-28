@@ -35,6 +35,8 @@ gem 'paranoia_uniqueness_validator', '1.0.0'
 gem 'reverse_markdown'
 gem 'rails_12factor', group: :production
 
+gem 'newrelic_rpm'
+
 gem 'ick'
 
 group :doc do
@@ -49,7 +51,9 @@ group :development do
 end
 
 group :test do
-   gem 'capybara'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'poltergeist'
 end
 
 group :development, :test do
