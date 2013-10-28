@@ -224,7 +224,7 @@
         </thead>
         <tbody class="fields">
           <%= f.fields_for :config_options do |builder| %>
-            <%= render '_config_option_fields', f: builder %>
+            <%= render 'config_option_fields', f: builder %>
           <% end %>
         </tbody>
         <tfoot>
