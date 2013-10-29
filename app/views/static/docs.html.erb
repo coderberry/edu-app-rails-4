@@ -9,7 +9,7 @@
       
       <li class="<% if @section == "basics" %>active<% end %>">
         <h4><%= link_to "Basics", docs_path("basics", "index") %></h4>
-        <ul class="nav sub-nav">
+        <ul class="nav sub-nav" rel="basics">
           <li<% if @section == "basics" && @page == "index" %> class="active"<% end %>>
             <%= link_to "Introduction", docs_path({section: "basics", page: "index"}) %></li>
           <li<% if @section == "basics" && @page == "building_an_lti_app" %> class="active"<% end %>>
@@ -23,7 +23,7 @@
 
       <li class="<% if @section == "extensions" %>active<% end %>">
         <h4><%= link_to "Extensions", docs_path("extensions", "index") %></h4>
-        <ul class="nav sub-nav">
+        <ul class="nav sub-nav" rel="extensions">
           <li<% if @section == "extensions" && @page == "index" %> class="active"<% end %>>
             <%= link_to "Introduction", docs_path({section: "extensions", page: "index"}) %></li>
           <li<% if @section == "extensions" && @page == "content" %> class="active"<% end %>>
@@ -44,7 +44,7 @@
       <li class="<% if @section == "api" %>active<% end %>">
         <h4><%= link_to "API", docs_path("api", "index") %></h4>
 
-        <ul class="nav sub-nav">
+        <ul class="nav sub-nav" rel="api">
           <li<% if @section == "api" && @page == "index" %> class="active"<% end %>>
             <%= link_to "Introduction", docs_path({section: "api", page: "index"}) %></li>
           <li<% if @section == "api" && @page == "app_list" %> class="active"<% end %>>

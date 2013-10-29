@@ -3,7 +3,7 @@ class ApiKeysController < ApplicationController
   before_action :set_organization
 
   def index
-    @api_keys = @organization.api_keys
+    @api_keys = @organization.api_keys.active
   end
 
   def create_token

@@ -72,6 +72,9 @@ class LtiAppConfiguration < ActiveRecord::Base
       rescue Errno::ENOENT => ex
         # Not a valid URL
         nil
+      rescue SocketError => ex
+        # Not a valid URL
+        nil
       end
     end
 

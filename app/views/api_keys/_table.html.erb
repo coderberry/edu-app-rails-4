@@ -16,6 +16,11 @@
       <% end %>
       <td><code><%= api_key.access_token %></code></td>
       <td><%= api_key.created_at.strftime("%b %d, %Y") %></td>
+      <td class="text-right">
+        <%= link_to expire_token_organization_api_key_path(api_key.organization.id, api_key.id), class: "btn btn-danger btn-xs" do %>
+          <i class="icon-remove"></i> Delete
+        <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>

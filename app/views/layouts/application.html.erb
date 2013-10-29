@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html <% if @ng_app %>ng-app="<%= @ng_app %>"<% end %>>
 <head>
-  <title>Edu Apps</title>
+  <title>Edu App Center<%= content_for?(:title) ? " - #{yield(:title)}" : "" %></title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= yield :head %>

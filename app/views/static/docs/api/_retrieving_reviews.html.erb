@@ -1,6 +1,5 @@
-<%= content_for :head do %>
-  <%= javascript_include_tag "syntax_highlighter" %>
-<% end %>
+<% content_for :head, javascript_include_tag("syntax_highlighter") %>
+<% content_for :title, "API - Retrieving Reviews" %>
 
 <div class="header clearfix">
   <h3 class="page-header">Retrieving Reviews</h3>
@@ -49,7 +48,7 @@
       <pre class="brush: ruby">
 require 'net/http'
 
-url = "<%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews"
+url = "<%= root_url %>api/v1/lti_apps/twitter/reviews"
 uri = URI.parse(url)
 res = Net::HTTP.get_response(uri)
 body = res.body
@@ -60,7 +59,7 @@ body = res.body
 import urllib
 import urllib2
 
-response = urllib2.urlopen('<%= root_url %>api/v1/lti_apps/:short_name/reviews')
+response = urllib2.urlopen('<%= root_url %>api/v1/lti_apps/twitter/reviews')
 body = response.read()
       </pre>
     </div>
@@ -68,7 +67,7 @@ body = response.read()
       <pre class="brush: bash">
 curl -i \
      -H "Accept: applicaton/json" \
-     <%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews
+     <%= root_url %>api/v1/lti_apps/twitter/reviews
       </pre>
     </div>
     <div class="tab-pane" id="json-response">
@@ -116,7 +115,7 @@ curl -i \
     <pre class="brush: ruby">
 require 'net/http'
 
-url = "<%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews"
+url = "<%= root_url %>api/v1/lti_apps/twitter/reviews"
 url << "?user_email=jon.smith@example.com"
 
 uri = URI.parse(url)
@@ -129,7 +128,7 @@ body = res.body
 import urllib
 import urllib2
 
-url = "<%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews"
+url = "<%= root_url %>api/v1/lti_apps/twitter/reviews"
 url += "?user_email=jon.smith@example.com"
 
 response = urllib2.urlopen(url)
@@ -140,7 +139,7 @@ body = response.read()
       <pre class="brush: bash">
 curl -i \
      -H "Accept: applicaton/json" \
-     <%= root_url %>api/v1/lti_apps/<%= LtiApp.first.short_name %>/reviews?user_email=jon.smith@example.com
+     <%= root_url %>api/v1/lti_apps/twitter/reviews?user_email=jon.smith@example.com
       </pre>
     </div>
     <div class="tab-pane" id="json-response2">

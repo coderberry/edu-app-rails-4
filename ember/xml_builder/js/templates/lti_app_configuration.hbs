@@ -1,7 +1,8 @@
 <form {{action "buildXml" on="submit"}}>
   {{#view "App.FormGroupView" errorBinding=cartridge.errors.title}}
     <label>Name</label>
-    {{input type="text" 
+    {{input type="text"
+            name="name"
             value=cartridge.title
             class="form-control" 
             data-placement="bottom"
@@ -12,7 +13,8 @@
   {{#view "App.FormGroupView" errorBinding=cartridge.errors.tool_id}}
     <small class="text-muted pull-right">lowercase letters + underscore</small>
     <label>Unique Identifier</label>
-    {{input type="text" 
+    {{input type="text"
+            name="tool_id"
             value=cartridge.tool_id 
             class="form-control" 
             data-placement="bottom"
@@ -22,7 +24,8 @@
   {{/view}}
   {{#view "App.FormGroupView" errorBinding=cartridge.errors.launch_url}}
     <label>LTI Launch URL</label>
-    {{input type="text" 
+    {{input type="text"
+            name="launch_url"
             value=cartridge.launch_url 
             class="form-control" 
             placeholder="https://" 
@@ -37,6 +40,7 @@
     </small>
     <label>Description</label>
     {{view Ember.TextArea 
+            name="description"
             rows="3"
             valueBinding=cartridge.description 
             class="form-control" 
@@ -47,7 +51,8 @@
   {{#view "App.FormGroupView" errorBinding=cartridge.errors.icon_url}}
     <small class="text-muted pull-right">(16x16 PNG, GIF or JPG)</small>
     <label>Icon URL</label>
-    {{input type="text" 
+    {{input type="text"
+            name="icon_url"
             value=cartridge.icon_url
             class="form-control" 
             data-placement="bottom"
@@ -57,7 +62,8 @@
   {{/view}}
   <div class="form-group">
     <label>Link Text</label>
-    {{input type="text" 
+    {{input type="text"
+            name="text"
             value=cartridge.text
             class="form-control" 
             placeholder="" 
@@ -70,6 +76,7 @@
       {{#view "App.FormGroupView" errorBinding=cartridge.errors.default_width}}
         <label>Default Width (px)</label>
         {{input type="text" 
+                name="default_width"
                 value=cartridge.default_width
                 class="form-control" 
                 data-placement="bottom"
@@ -81,7 +88,8 @@
     <div class="col-6">
       {{#view "App.FormGroupView" errorBinding=cartridge.errors.default_height}}
         <label>Default Height (px)</label>
-        {{input type="text" 
+        {{input type="text"
+                name="default_height"
                 value=cartridge.default_height
                 class="form-control" 
                 data-placement="bottom"
@@ -94,6 +102,7 @@
   <div class="form-group">
     <label>Launch Privacy</label>
     {{view Ember.Select
+           name="launch_privacy"
            contentBinding="App.launchPrivacy"
            optionValuePath="content.value"
            optionLabelPath="content.name"
@@ -106,6 +115,7 @@
   <div class="form-group">
     <label>Domain</label>
     {{input type="text" 
+            name="domain"
             value=cartridge.domain 
             class="form-control" 
             placeholder="my.domain.com" 

@@ -1,6 +1,5 @@
-<%= content_for :head do %>
-  <%= javascript_include_tag "syntax_highlighter" %>
-<% end %>
+<% content_for :head, javascript_include_tag("syntax_highlighter") %>
+<% content_for :title, "API - Contributing Reviews" %>
 
 <div class="header clearfix">
   <h3 class="page-header">Contributing Reviews</h3>
@@ -81,7 +80,7 @@
     <pre class="brush: ruby">
 require 'net/http'
 
-data = { lti_app_id: '<%= LtiApp.first.short_name %>',
+data = { lti_app_id: 'twitter',
        access_token: 'YOUR_ACCESS_TOKEN_HERE',
        rating: 5,
        user_name: 'Jon Smith',
@@ -102,7 +101,7 @@ import urllib
 import urllib2
 
 url = '<%= root_url %>api/v1/reviews'
-values = { 'lti_app_id': '<%= LtiApp.first.short_name %>',
+values = { 'lti_app_id': 'twitter',
          'access_token': 'YOUR_ACCESS_TOKEN_HERE',
          'rating': 5,
          'user_name': 'Jon Smith',
@@ -122,7 +121,7 @@ body = response.read()
 curl -i \
    -X POST \
    -H "Accept: applicaton/json" \
-   -d "lti_app_id=<%= LtiApp.first.short_name %>& \
+   -d "lti_app_id=twitter& \
        access_token=YOUR_API_TOKEN_HERE& \
        rating=5& \
        user_name=Jon Smith& \

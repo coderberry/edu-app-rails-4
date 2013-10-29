@@ -29,7 +29,7 @@
         <form {{action "import" on="submit"}} style="margin: 10px 0 0 0;">
           <div class="row">
             <div class="col-9">
-              {{input type="text" class="form-control" value=importUrl placeholder="https://"}}
+              {{input type="text" name="import_url" class="form-control" value=importUrl placeholder="https://"}}
             </div>
             <div class="col-3">
               <button type="submit" class="btn btn-primary btn-block pull-right" style="margin-left: 5px;">Import</button>
@@ -46,7 +46,7 @@
           Create from XML
         </h3>
         <form {{action "createFromXml" on="submit"}} style="margin: 10px 0 0 0;">
-          {{view Ember.TextArea valueBinding="pastedXml" class="form-control" rows="10"}}
+          {{view Ember.TextArea name="pasted_xml" valueBinding="pastedXml" class="form-control" rows="10"}}
           <button type="submit" class="btn btn-primary pull-right" style="margin-top: 5px;">Create</button>
         </form>
       </div>

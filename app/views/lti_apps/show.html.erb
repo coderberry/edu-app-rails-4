@@ -1,4 +1,4 @@
-<%= content_for :head do %>
+<% content_for :head do %>
   <%= javascript_include_tag "configurator" %>
   <script>
     window.CONFIGURATOR_DATA = <%=raw @configurator_data.to_json %>;
@@ -100,12 +100,17 @@
         <div class="well well-small">
           <div id="app-reviews">
             <% @lti_app.reviews.with_content.each do |review| %>
-              <div class="app-review media">
+              <div class="app-review media" id="review-<%= review.id %>">
                 <a href="#" class="pull-left">
                   <%= image_tag review.user.profile_image_url, onerror: "imgError(this);", style: "width: 50px; height: 50px; margin-bottom: 5px;" %>
                   <%= star_rating(review.rating, "mini-stars") %>
                 </a>
                 <div class="media-body">
+                  <% if current_user.is_admin? %>
+                    <div class="pull-right">
+                      <a href="#" data-action="deleteReview" data-lti-app-id="<%= @lti_app.id %>" data-review-id="<%= review.id %>" class="text-danger"><i class="icon-remove"></i> remove</a>
+                    </div>
+                  <% end %>
                   <div class="small"><span><%= review.user.name %></span> on <span><%= review.created_at.strftime("%b %d, %Y") %></span></div>
                   <%= review.comments %>
                 </div>

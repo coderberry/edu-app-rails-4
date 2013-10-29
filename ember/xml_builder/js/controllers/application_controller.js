@@ -31,12 +31,15 @@ var ApplicationController = Ember.ArrayController.extend({
 
   import: function() {
     _this = this;
-    Ember.$.post('/api/v1/lti_app_configurations/import', { url: this.get('importUrl') }).then(function(data) {
-      _this.get('model').reload();
-      App.FlashQueue.pushFlash('notice', 'Successfully created configuration');
-      _this.transitionToRoute('/' + data['lti_app_configuration']['uid']);
-      _this.hideImportForm();
-    });
+    Ember.$.post('/api/v1/lti_app_configurations/import', { url: this.get('importUrl') }).then(
+      function(data) {
+        _this.get('model').reload();
+        App.FlashQueue.pushFlash('notice', 'Successfully created configuration');
+        _this.transitionToRoute('/' + data['lti_app_configuration']['uid']);
+        _this.hideImportForm();
+      }, function(err) {
+        App.FlashQueue.pushFlash('error', 'URL does not point to valid XML');
+      });
   },
 
   createFromXml: function() {

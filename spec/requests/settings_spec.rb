@@ -9,7 +9,7 @@ describe "Settings" do
       password: 'secret',
       password_confirmation: 'secret')
   end
-
+  
   describe "/settings/profile", type: :feature do
     before :each do 
       visit login_path
@@ -39,6 +39,10 @@ describe "Settings" do
       fill_in 'Email Address', with: 'bar@example.com'
       click_button 'Save Changes'
       expect(page).to have_content 'An email has been sent to you new address for confirmation'
+
+      fill_in 'user_code', with: 'BAD CODE'
+      click_button 'Save Changes'
+      expect(page).to have_content 'Invalid confirmation code'
 
       code = @user.registration_codes.last.code
       fill_in 'user_code', with: code

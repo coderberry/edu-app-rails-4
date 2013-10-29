@@ -101,6 +101,16 @@ module Api
         end
       end
 
+      def destroy
+        review = Review.find(params[:id])
+        if review && current_user.is_admin?
+          review.destroy
+          render json: {}, status: 200
+        else
+          render json: {}, status: 500
+        end
+      end
+
       private
 
       def load_lti_app
