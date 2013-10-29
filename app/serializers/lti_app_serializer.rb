@@ -34,7 +34,7 @@ class LtiAppSerializer < ActiveModel::Serializer
   end
 
   def config_xml_url
-    return object.config_xml_url if object.config_xml_url
+    return object.config_xml_url unless object.config_xml_url.blank?
 
     lti_app_configuration_xml_url(object.lti_app_configuration.uid)
   end
